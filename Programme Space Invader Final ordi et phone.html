@@ -18,203 +18,202 @@ _______________________________________
      Initial settings
 _______________________________________
 -->
+<style>
+  /* ---------------------------------------------
+     STYLES GÉNÉRAUX – valables pour tous les écrans
+  --------------------------------------------- */
 
-
-
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      color: black;
-      font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-    }
-
-
-
-#game {
-  width: 50vw;
-  height: 100vh;
-
-  background: url('https://img.freepik.com/photos-gratuite/ciel-bleu-blanc-etoile-nuit_417767-124.jpg?ga=GA1.1.2094066082.1747902471&semt=ais_hybrid&w=740') no-repeat center;
-  background-size: cover;
-
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto; /* Centre horizontalement */
-  border: solid 1px black;
-  background-color: #E5E4E2; /* S'utilise uniquement si l'image ne se charge pas */
-}
-
-
-#intro {
-  width: 60%;
-  height: 60%;
-  background: url('https://st4.depositphotos.com/15647494/27003/i/450/depositphotos_270039212-stock-photo-single-space-astronaut-with-black.jpg') no-repeat bottom center;
-  background-size: contain;
-
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centre parfaitement */
-text-align:center;
-}
-
-
-
-
-.player {
-  width: 120px;
-  height: 120px;
-  background: url('https://cdn.pixabay.com/photo/2023/06/29/18/16/space-8096886_1280.png') no-repeat center;
-  background-size: contain;
-  position: absolute;
-  top : 80%;
-  left: 0;
-  transform: translateX(-50%);
-}
-
-
-    .answer {
-      width: 100px;
-      height: 40px;
-      background: #f06;
-      color: black;// #fff;
-border:solid 1px white;
-      text-align: center;
-      line-height: 40px;
-      position: absolute;
-      border-radius: 20px;
-      font-weight: bold;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  box-shadow: 0 5px 15px rgba(255, 75, 43, 0.6);
-
-  transition: transform 0.3s ease-in-out;
-}
-
-    .question-label {
-      position: absolute;
-      font-size: 14px;
-      text-align: center;
-      color: white;
-      width: 100%;
-      top: 50px;
-    }
-
-    .bullet {
-      width: 4px;
-      height: 10px;
-      background: red;//#ff0;
-      position: absolute;
-    }
-
-    #limitLine {
-      position: absolute;
-      top: 85%;		/* à reporter dans le script */
-      width: 100%;
-      height: 0px;
-      background: red;
-    }
-
- #scoreBox {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 30px;
-  color: white;
-  text-align: center;
-}
-
-    .timer-bar {
-      position: absolute;
-      height: 5px;
-      background: lime;
-      top: 60px;
-      transition: width 3s linear;
-    }
-
-@keyframes shrinkHeight {
-  from { height:600px; }
-  to { height: 0px; }
-}
-
-@keyframes fillCircle {
-  from {
-    stroke-dashoffset: 0;
+  * {
+    box-sizing: border-box;
   }
-  to {
-    stroke-dashoffset: 113; /* ≈ circumference of circle radius 6 */
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    color: black;
+    font-family: sans-serif;
+    background-color: #000; /* si image absente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-}
 
-.circular-timer {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-}
-
-.circular-timer svg {
-  transform: rotate(-90deg);
-}
-
-.circular-timer circle {
-  fill: none;
-  stroke: lime;
-  stroke-width: 3;
-  stroke-dasharray: 113;
-  stroke-dashoffset: 0;
-  animation: fillCircle 10s linear forwards;			// temps de réponse est de 10 secondes
-}
-
-@keyframes explosion {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(2.5);
-    opacity: 0.75;
-  }
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
-}
-
-.explosion-effect {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background: radial-gradient(circle, red, orange, yellow, transparent);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: explosion 0.6s ease-out forwards;
-  z-index: 9999;
-}
-
-@media (max-width: 600px) {
   #game {
-    width: 100vw;
+    width: 50vw;
     height: 100vh;
+    max-width: 600px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    border: solid 1px black;
+    background: url('https://img.freepik.com/photos-gratuite/ciel-bleu-blanc-etoile-nuit_417767-124.jpg') no-repeat center;
+    background-size: cover;
+    background-color: #E5E4E2;
+    touch-action: none;
+  }
+
+  #intro {
+    width: 60%;
+    height: 60%;
+    background: url('https://st4.depositphotos.com/15647494/27003/i/450/depositphotos_270039212-stock-photo-single-space-astronaut-with-black.jpg') no-repeat bottom center;
+    background-size: contain;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
   }
 
   .player {
-    width: 80px;
-    height: 80px;
-    top: 85%;
+    width: 120px;
+    height: 120px;
+    background: url('https://cdn.pixabay.com/photo/2023/06/29/18/16/space-8096886_1280.png') no-repeat center;
+    background-size: contain;
+    position: absolute;
+    top: 80%;
+    left: 0;
+    transform: translateX(-50%);
   }
 
   .answer {
-    width: 80px;
-    height: 35px;
-    font-size: 12px;
+    width: 100px;
+    height: 40px;
+    background: #f06;
+    color: black; /* ancien : black;// #fff */
+    border: solid 1px white;
+    text-align: center;
+    line-height: 40px;
+    position: absolute;
+    border-radius: 20px;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-shadow: 0 5px 15px rgba(255, 75, 43, 0.6);
+    transition: transform 0.3s ease-in-out;
   }
+
+  .question-label {
+    position: absolute;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    width: 100%;
+    top: 50px;
+  }
+
+  .bullet {
+    width: 4px;
+    height: 10px;
+    background: red;
+    position: absolute;
+  }
+
+  #limitLine {
+    position: absolute;
+    top: 85%;
+    width: 100%;
+    height: 0px;
+    background: red;
+  }
+
+  #scoreBox {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: white;
+    text-align: center;
+  }
+
+  .timer-bar {
+    position: absolute;
+    height: 5px;
+    background: lime;
+    top: 60px;
+    transition: width 3s linear;
+  }
+
+  @keyframes shrinkHeight {
+    from { height: 600px; }
+    to { height: 0px; }
+  }
+
+  @keyframes fillCircle {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 113; }
+  }
+
+  .circular-timer {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+  }
+
+  .circular-timer svg {
+    transform: rotate(-90deg);
+  }
+
+  .circular-timer circle {
+    fill: none;
+    stroke: lime;
+    stroke-width: 3;
+    stroke-dasharray: 113;
+    stroke-dashoffset: 0;
+    animation: fillCircle 10s linear forwards;
+  }
+
+  @keyframes explosion {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(2.5); opacity: 0.75; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+
+  .explosion-effect {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, red, orange, yellow, transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: explosion 0.6s ease-out forwards;
+    z-index: 9999;
+  }
+
+  /* ---------------------------------------------
+     ADAPTATION MOBILE – max-width: 600px
+  --------------------------------------------- */
+  @media (max-width: 600px) {
+    #game {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .player {
+      width: 80px;
+      height: 80px;
+      top: 85%;
+    }
+
+.answer {
+  max-width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-  </style>
+    #scoreBox {
+      font-size: 20px;
+    }
+
+    .question-label {
+      font-size: 12px;
+    }
+  }
+</style>
+
+
+
+
 </head>
 <body>
   <div id="game">
@@ -431,8 +430,12 @@ ligne de question avec ses réponses à l'écran dans ton jeu Space Invader Quiz
 -------------------------------------------------------------------------------*/
     function spawnRow(q, rowIndex, insertTop = false) {
       const row = [];							// stocke les éléments de réponse créés
-      const spacing = 120;						// spacing : distance horizontale entre chaque réponse.
-      const startX = 100;						// startX : position de départ sur l’axe horizontal.
+const spacing = game.offsetWidth / 6; // espacement relatif (par exemple, 5 réponses + marges)
+const startX = spacing / 2; // pour centrer
+
+
+
+
       const yOffset = insertTop ? -60 : rowIndex * 70;			// si true, on place cette ligne au-dessus des autres 70 ok
       const y =100 + yOffset;						// y : coordonnée verticale de la ligne de réponses. 80px d'écart
       const colors = ['#f06', '#0cf', '#fc0', '#6f6', '#f90'];		// colors : Les 5 couleurs utilisées pour distinguer visuellement les réponses.
@@ -451,7 +454,8 @@ ligne de question avec ses réponses à l'écran dans ton jeu Space Invader Quiz
         el.classList.add('answer');					// on lui donne la classe "answer" de la feuille de style
         el.innerText = answer;						// on lui donne le texte answer
         el.id = `reponse${q.id}.${i + 1}`;				// on lui donne id de la question
-        el.style.left = `${startX + i * spacing}px`;
+el.style.left = `${startX + i * spacing}px`;
+
         el.style.top = `${y}px`;
         el.style.backgroundColor = colors[i % colors.length];
         el.dataset.answer = answer;
