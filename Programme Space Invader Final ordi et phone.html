@@ -27,32 +27,10 @@ _______________________________________
       overflow: hidden;
       color: black;
       font-family: sans-serif;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
     }
-
-
-@media (max-width: 600px) {
-  #game {
-    width: 100vw;
-    height: 100vh;
-  }
-
-  .player {
-    width: 80px;
-    height: 80px;
-    top: 85%;
-  }
-
-  .answer {
-    width: 80px;
-    height: 35px;
-    font-size: 12px;
-  }
-}
-
-
-
-
 
 
 
@@ -217,7 +195,24 @@ border:solid 1px white;
   z-index: 9999;
 }
 
+@media (max-width: 600px) {
+  #game {
+    width: 100vw;
+    height: 100vh;
+  }
 
+  .player {
+    width: 80px;
+    height: 80px;
+    top: 85%;
+  }
+
+  .answer {
+    width: 80px;
+    height: 35px;
+    font-size: 12px;
+  }
+}
 
   </style>
 </head>
