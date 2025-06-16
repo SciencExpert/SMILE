@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Space Invader Quiz Astronomy</title>
+<link rel="icon" type="image/png" href=" https://payhip.com/cdn-cgi/image/format=auto/https://pe56d.s3.amazonaws.com/o_1ii1lfm4etaa1kdeki17lo1c2sc.png"/>
+<!--
+_______________________________________
+    Space Invader Quiz Astronomy
+---------------------------------------
+  Design by SciencExpert
+  Version 9-03 // June 2025
+  For computers & mobile
+  SciencExpert Edition 2025
+  Author : Gérard Bacquet
+  Contact@sciencexpert.fr 
+_______________________________________
+     Initial settings
+_______________________________________
+-->
+
+
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      color: black;
+      font-family: sans-serif;
+
+    }
+
+
+@media (max-width: 600px) {
+  #game {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .player {
+    width: 80px;
+    height: 80px;
+    top: 85%;
+  }
+
+  .answer {
+    width: 80px;
+    height: 35px;
+    font-size: 12px;
+  }
+}
+
+
+
+
+
+
+
+#game {
+  width: 50vw;
+  height: 100vh;
+
+  background: url('https://img.freepik.com/photos-gratuite/ciel-bleu-blanc-etoile-nuit_417767-124.jpg?ga=GA1.1.2094066082.1747902471&semt=ais_hybrid&w=740') no-repeat center;
+  background-size: cover;
+
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto; /* Centre horizontalement */
+  border: solid 1px black;
+  background-color: #E5E4E2; /* S'utilise uniquement si l'image ne se charge pas */
+}
+
+
+#intro {
+  width: 60%;
+  height: 60%;
+  background: url('https://st4.depositphotos.com/15647494/27003/i/450/depositphotos_270039212-stock-photo-single-space-astronaut-with-black.jpg') no-repeat bottom center;
+  background-size: contain;
+
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centre parfaitement */
+text-align:center;
+}
+
+
+
+
+.player {
+  width: 120px;
+  height: 120px;
+  background: url('https://cdn.pixabay.com/photo/2023/06/29/18/16/space-8096886_1280.png') no-repeat center;
+  background-size: contain;
+  position: absolute;
+  top : 80%;
+  left: 0;
+  transform: translateX(-50%);
+}
+
+
+    .answer {
+      width: 100px;
+      height: 40px;
+      background: #f06;
+      color: black;// #fff;
+border:solid 1px white;
+      text-align: center;
+      line-height: 40px;
+      position: absolute;
+      border-radius: 20px;
+      font-weight: bold;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  box-shadow: 0 5px 15px rgba(255, 75, 43, 0.6);
+
+  transition: transform 0.3s ease-in-out;
+}
+
+    .question-label {
+      position: absolute;
+      font-size: 14px;
+      text-align: center;
+      color: white;
+      width: 100%;
+      top: 50px;
+    }
+
+    .bullet {
+      width: 4px;
+      height: 10px;
+      background: red;//#ff0;
+      position: absolute;
+    }
+
+    #limitLine {
+      position: absolute;
+      top: 85%;		/* à reporter dans le script */
+      width: 100%;
+      height: 0px;
+      background: red;
+    }
+
+ #scoreBox {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: white;
+  text-align: center;
+}
+
+    .timer-bar {
+      position: absolute;
+      height: 5px;
+      background: lime;
+      top: 60px;
+      transition: width 3s linear;
+    }
+
+@keyframes shrinkHeight {
+  from { height:600px; }
+  to { height: 0px; }
+}
+
+@keyframes fillCircle {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 113; /* ≈ circumference of circle radius 6 */
+  }
+}
+
+.circular-timer {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.circular-timer svg {
+  transform: rotate(-90deg);
+}
+
+.circular-timer circle {
+  fill: none;
+  stroke: lime;
+  stroke-width: 3;
+  stroke-dasharray: 113;
+  stroke-dashoffset: 0;
+  animation: fillCircle 10s linear forwards;			// temps de réponse est de 10 secondes
+}
+
+@keyframes explosion {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2.5);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.explosion-effect {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, red, orange, yellow, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: explosion 0.6s ease-out forwards;
+  z-index: 9999;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div id="game">
+
+    <div id="limitLine"></div>
+    <div class="player" id="player"></div>
+    <div id="scoreBox">Bonnes: 0 | Mauvaises: 0</div>
+
+<div onclick="this.style.display='none'" id="intro" style="background-color:white; opacity: 0.8">
+<h1> <u>ASTRONOME</u></h1>Hello, ici Houston ! 👨‍🚀<br>
+Votre mission : revenir sur la planète 🌍 Terre.<br>
+💥 Détruisez toutes les météorites pour réussir.<br>
+🎯 Visez une bonne question et vous détruisez toute une rangée de météorites !<br>
+🔥 À vous de jouer ! 
+<div  style="margin: 0 auto; width: 200px; height:20px;  justify-content: center;text-align: center; border:solid 1px black;
+ border-radius: 10px; background-color:green; color:white"> Cliquez pour commencer</div>
+
+  </div>
+
+<div id="SE" style="position:absolute; top:95%; left:1%; z-index:1000; padding:10px; font-size:1em; color:white">
+  Concu par <a href="https://payhip.com/SciencExpert/sciencexpert">SciencExpert</a>
+</div>
+<button id="resetButton" style="position:absolute; top:95%; right:0%; z-index:1000; padding:10px; font-size:16px;">
+  🔄 Recommencer
+</button>
+
+
+  <script>
+/* Les questions sur l'astronomie*/
+    const questions = [
+  { id: 1, question: "Quelle est l’étoile la plus proche de la Terre ?", answers: ["Soleil", "Mars", "Lune", "Vénus", "Sirius"] },
+  { id: 2, question: "Quelle planète est rouge ?", answers: ["Mars", "Terre", "Neptune", "Vénus", "Saturne"] },
+  { id: 3, question: "Quelle est la forme de la Terre ?", answers: ["Ronde", "Plate", "Carrée", "Creuse", "Triangle"] },
+  { id: 4, question: "Combien de lunes a la Terre ?", answers: ["Une", "Deux", "Zéro", "Cinq", "Trois"] },
+  { id: 5, question: "Quelle planète est la plus grande ?", answers: ["Jupiter", "Mars", "Vénus", "Mercure", "Terre"] },
+  { id: 6, question: "Combien de planètes dans le Système solaire ?", answers: ["Huit", "Dix", "Sept", "Neuf", "Onze"] },
+  { id: 7, question: "Quelle planète est connue pour ses anneaux ?", answers: ["Saturne", "Mars", "Neptune", "Vénus", "Terre"] },
+  { id: 8, question: "Quelle planète est la plus proche du Soleil ?", answers: ["Mercure", "Mars", "Jupiter", "Terre", "Neptune"] },
+  { id: 9, question: "Comment s'appelle notre galaxie ?", answers: ["Voielactée", "Andromède", "Orion", "Sagittaire", "Pegase"] },
+  { id: 10, question: "Quel est le satellite naturel de la Terre ?", answers: ["Lune", "Mars", "Europa", "Titan", "Pluton"] },
+  
+  { id: 11, question: "Quel gaz compose majoritairement le Soleil ?", answers: ["Hydrogène", "Oxygène", "Hélium", "Azote", "Carbone"] },
+  { id: 12, question: "Quelle planète a des tempêtes géantes ?", answers: ["Jupiter", "Mars", "Saturne", "Uranus", "Vénus"] },
+  { id: 13, question: "Quel objet gravite autour d'une planète ?", answers: ["Lune", "Étoile", "Soleil", "Comète", "Astéroïde"] },
+  { id: 14, question: "Quelle planète est surnommée la planète bleue ?", answers: ["Terre", "Uranus", "Neptune", "Vénus", "Saturne"] },
+  { id: 15, question: "Quel est l’astre le plus brillant la nuit ?", answers: ["Lune", "Sirius", "Mars", "Vénus", "Jupiter"] },
+  { id: 16, question: "Combien de temps met la Terre pour faire un tour ?", answers: ["Jour", "Semaine", "Heure", "Lune", "Mois"] },
+  { id: 17, question: "Qu’est-ce qu’un astéroïde ?", answers: ["Roche", "Gaz", "Étoile", "Nuage", "Bulle"] },
+  { id: 18, question: "Quelle planète est inclinée sur le côté ?", answers: ["Uranus", "Saturne", "Mars", "Jupiter", "Vénus"] },
+  { id: 19, question: "Quel est le nom de la mission lunaire de 1969 ?", answers: ["Apollo1", "Mercury", "Voyager", "Orion", "Skylab"] },
+  { id: 20, question: "Que voit-on tomber en étoile filante ?", answers: ["Météore", "Comète", "Satellite", "Avion", "Pluie"] },
+  
+  { id: 21, question: "Quel est le nom de notre satellite artificiel ?", answers: ["ISS", "Hubble", "GPS", "Spoutnik", "Gaïa"] },
+  { id: 22, question: "Quelle planète est la plus froide ?", answers: ["Uranus", "Neptune", "Mars", "Saturne", "Mercure"] },
+  { id: 23, question: "Quel est l’effet des marées ?", answers: ["Lune", "Soleil", "Mars", "Vents", "Étoiles"] },
+  { id: 24, question: "Comment s’appelle un groupe d’étoiles ?", answers: ["Constel", "Comète", "Planète", "Astéroïde", "Nuage"] },
+  { id: 25, question: "Que contient principalement une nébuleuse ?", answers: ["Gaz", "Roche", "Feu", "Glace", "Lumière"] },
+  { id: 26, question: "Quelle est la durée d’un jour sur Mars ?", answers: ["24h40m", "12h", "48h", "20h", "36h"] },
+  { id: 27, question: "Quelle planète tourne à l’envers ?", answers: ["Vénus", "Terre", "Mars", "Uranus", "Mercure"] },
+  { id: 28, question: "Comment s’appelle une étoile mourante ?", answers: ["Naine", "Soleil", "Comète", "Rouge", "Pulsar"] },
+  { id: 29, question: "Que détecte un radiotélescope ?", answers: ["Ondes", "Lumière", "Chaleur", "Vent", "Sons"] },
+  { id: 30, question: "Quelle est la planète la plus dense ?", answers: ["Terre", "Mars", "Jupiter", "Uranus", "Saturne"] },
+
+  { id: 31, question: "Quelle est la durée d'une année sur Neptune ?", answers: ["165ans", "1an", "12ans", "29ans", "84ans"] },
+  { id: 32, question: "Comment s'appelle l'effet de lumière autour du Soleil ?", answers: ["Corona", "Halo", "Rayon", "Flare", "Lentille"] },
+  { id: 33, question: "Que reste-t-il après une supernova ?", answers: ["Pulsar", "Trounoir", "Planète", "Étoile", "Rien"] },
+  { id: 34, question: "Quelle sonde a quitté le Système solaire ?", answers: ["Voyager", "Hubble", "Apollo", "Curiosity", "Kepler"] },
+  { id: 35, question: "Quelle galaxie est la plus proche de la nôtre ?", answers: ["Andromede", "Orion", "Draco", "Pegase", "Sagitta"] },
+  { id: 36, question: "Quel phénomène déforme l’espace-temps ?", answers: ["Gravité", "Vent", "Magnétisme", "Lumière", "Chaleur"] },
+  { id: 37, question: "Quel type d'étoile peut exploser ?", answers: ["Supernov1", "Naine", "Rouge", "Bleue", "Plasma"] },
+  { id: 38, question: "Quelle unité mesure les distances spatiales ?", answers: ["Alumière", "Kilomètre", "Mètre", "Parsec", "Seconde"] },
+  { id: 39, question: "Comment nomme-t-on un trou dans l’espace ?", answers: ["Trou noir", "Vortex", "Comète", "Faille", "Lune"] },
+  { id: 40, question: "Combien de temps met la lumière du Soleil à arriver sur Terre ?", answers: ["8min", "1s", "1h", "1j", "60s"] }
+];
+
+
+    let unansweredQuestions = [...questions];
+    let activeRows = [];
+    let player = document.getElementById('player');
+    let game = document.getElementById('game');
+    let scoreBox = document.getElementById('scoreBox');
+    let score = { good: 0, bad: 0 };
+    let direction = 1;
+let fire=0;
+let timeReponse=10000; //10 secondes
+
+const limitLine = document.getElementById('limitLine');
+const limitY = limitLine.offsetTop; // en pixels par rapport à son conteneur positionné
+const soundLASER = 'https://lasonotheque.org/UPLOAD/ogg/1758.ogg';
+const soundBOUM = 'https://lasonotheque.org/UPLOAD/mp3/1023.mp3';
+const soundBADABOUM = 'https://www.sound-fishing.net/SF-bruitages/explosion/sf_explosion_01.mp3';
+
+/*---------------------------------------------------------------------------
+Le code suivant permet de déplacer le vaiseau
+---------------------------------------------------------------------------*/
+game.addEventListener('mousemove', (e) => {
+  const gameRect = game.getBoundingClientRect(); // Position du jeu dans la page
+  let x = e.clientX - gameRect.left - player.offsetWidth / 2;
+
+  // Empêche le vaisseau de sortir de la zone de jeu
+  x = Math.max(player.offsetWidth/2, Math.min(x, game.offsetWidth - player.offsetWidth/2));
+
+  player.style.left = `${x}px`;
+});
+
+/* le meme code pour les écrans tactiles*/
+game.addEventListener('touchmove', (e) => {
+  e.preventDefault(); // Empêche le scroll pendant le jeu
+
+  const touch = e.touches[0];
+  const gameRect = game.getBoundingClientRect();
+  let x = touch.clientX - gameRect.left - player.offsetWidth / 2;
+
+  x = Math.max(player.offsetWidth/2, Math.min(x, game.offsetWidth - player.offsetWidth/2));
+
+  player.style.left = `${x}px`;
+}, { passive: false });
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------------
+Le scoring du jeu
+---------------------------------------------------------------------------*/
+
+    function updateScore() {
+      scoreBox.innerText = `Bonnes: ${score.good} | Mauvaises: ${score.bad}`;
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+//----------------------------------------------------------------------
+
+let timerRunning = false; // à mettre en dehors de ta fonction
+
+function startTimer() {
+  if (timerRunning) return; // évite plusieurs appels
+  timerRunning = true;
+
+  let maxTop = -Infinity;
+  let lowestRowIndex = null;
+
+  activeRows.forEach((row, i) => {
+    if (!row) return;
+    const lastAnswer = row.elements[row.elements.length - 1];
+    const topPos = parseInt(lastAnswer.style.top);
+    if (topPos > maxTop) {
+      maxTop = topPos;
+      lowestRowIndex = i;
+    }
+  });
+
+  if (lowestRowIndex === null) {
+    timerRunning = false;
+    return;
+  }
+
+  const row = activeRows[lowestRowIndex];
+  const topPos = parseInt(row.elements[row.elements.length - 1].style.top);
+  const leftPos = Math.min(...row.elements.map(el => parseInt(el.style.left))) - 25;
+
+  const timer = document.createElement('div');
+  timer.className = 'circular-timer';
+  timer.style.top = '5%';
+  timer.style.left = '5%';
+
+  timer.innerHTML = `
+    <svg viewBox="0 0 40 40">
+      <circle r="18" cx="20" cy="20" />
+    </svg>
+  `;
+
+  game.appendChild(timer);
+
+setTimeout(() => {
+  activeRows.forEach((row, index) => {
+    if (!row) return;
+
+    row.elements.forEach(el => {
+      const currentTop = parseInt(el.style.top);
+      el.style.top = `${currentTop + 30}px`;
+      if (currentTop + 10 >= limitY) {
+        endGame("Une ligne a atteint la limite rouge ! Jeu terminé.");
+      }
+    });
+
+    // Déplacer le label de la question aussi
+    row.label.style.top = `${parseInt(row.label.style.top) + 30}px`;
+  });
+
+  //score.bad++;
+  updateScore();
+
+  timer.remove();
+  timerRunning = false; // autorise une prochaine exécution
+  startTimer(); // relance proprement le timer pour la prochaine descente
+}, timeReponse); // par exemple 10_000 ms
+}
+
+
+
+/*---------------------------------------------------------------------------
+La fonction spawnRow(q, rowIndex, insertTop = false) sert à afficher une nouvelle 
+ligne de question avec ses réponses à l'écran dans ton jeu Space Invader Quiz.
+-------------------------------------------------------------------------------*/
+    function spawnRow(q, rowIndex, insertTop = false) {
+      const row = [];							// stocke les éléments de réponse créés
+      const spacing = 120;						// spacing : distance horizontale entre chaque réponse.
+      const startX = 100;						// startX : position de départ sur l’axe horizontal.
+      const yOffset = insertTop ? -60 : rowIndex * 70;			// si true, on place cette ligne au-dessus des autres 70 ok
+      const y =100 + yOffset;						// y : coordonnée verticale de la ligne de réponses. 80px d'écart
+      const colors = ['#f06', '#0cf', '#fc0', '#6f6', '#f90'];		// colors : Les 5 couleurs utilisées pour distinguer visuellement les réponses.
+
+      const label = document.createElement('div');			// On crée une étiquette de question
+      label.classList.add('question-label');				// On lui assigne la classe de style 'question-label'
+      label.innerText = q.question;					// la div affiche la question q
+      label.style.top = `${y - 20}px`;					// décalage de 20px au top
+      label.dataset.row = rowIndex;
+      game.appendChild(label);						// La div "label" est un enfant de la div "game"
+
+      const shuffledAnswers = shuffle([...q.answers]);			// Mélange les réponses pour éviter qu'elles soient toujours dans le même ordre
+
+      shuffledAnswers.forEach((answer, i) => {
+        const el = document.createElement('div');			// on crée la div "el"
+        el.classList.add('answer');					// on lui donne la classe "answer" de la feuille de style
+        el.innerText = answer;						// on lui donne le texte answer
+        el.id = `reponse${q.id}.${i + 1}`;				// on lui donne id de la question
+        el.style.left = `${startX + i * spacing}px`;
+        el.style.top = `${y}px`;
+        el.style.backgroundColor = colors[i % colors.length];
+        el.dataset.answer = answer;
+        el.dataset.correct = q.answers[0];
+        el.dataset.row = rowIndex;
+        game.appendChild(el);
+        row.push(el);
+      });
+      activeRows[rowIndex] = { question: q, elements: row, label };
+      
+
+
+startTimer(rowIndex);
+
+
+
+
+//
+
+activeRows[rowIndex] = {
+  question: q,
+  elements: row,
+  label,
+  direction: rowIndex % 2 === 0 ? 1 : -1 // ligne paire → droite, impaire → gauche
+}
+    }
+
+/*-----------------------------------------------------------------------------------------
+La fonction fait rebondir horizontalement toutes les réponses du jeu en inversant la direction 
+à chaque appel (déplacement de 20 px à gauche ou à droite), et vérifie si un élément a franchi la 
+limite verticale (ligne rouge) pour terminer la partie.
+--------------------------------------------------------------------------------------------------*/
+function shiftInvaders() {
+  activeRows.forEach((row, rowIndex) => {
+    if (!row) return;
+
+    // Initialisation
+    if (row.baseLeft === undefined) {
+      const firstEl = row.elements[0];
+      row.baseLeft = parseInt(firstEl.style.left);
+      row.step = 0;
+      row.spacing = 120;
+      row.shiftAmount = 40;
+      row.cycle = rowIndex % 2 === 0 ? [-1, 0, 1, 0] : [1, 0, -1, 0];
+    }
+
+    // Décalage temporaire avec transform (visuel uniquement)
+    const offset = row.cycle[row.step] * row.shiftAmount;
+
+    // Appliquer uniquement aux réponses (pas au label/question)
+    row.elements.forEach((el, i) => {
+      el.style.transform = `translateX(${offset}px)`;
+    });
+
+    // Réinitialiser le transform après un petit délai
+    setTimeout(() => {
+      row.elements.forEach(el => {
+        el.style.transform = `translateX(0)`;
+      });
+    }, 500); // durée de l’oscillation
+
+    row.step = (row.step + 1) % row.cycle.length;
+
+    // Vérification si une réponse touche la limite rouge
+    const currentTop = parseInt(row.elements[0].style.top);
+    if (currentTop >= limitLine.offsetTop) {
+      endGame("Une météore a atteint votre vaisseau ! Jeu terminé.");
+    }
+  });
+}
+
+
+/*-----------------------------------------------------------------------------------------------
+Cette fonction crée un "tir" (une balle) qui part du joueur vers le haut et gère la détection 
+des collisions avec les réponses, ainsi que les conséquences de ces collisions 
+(score, suppression des lignes, fin de jeu)
+------------------------------------------------------------------------------------------------*/
+
+    function fireBullet() {
+  if (fire++ === 0) return; // Si intro est visible, ne rien faire
+    const audio = new Audio(soundLASER);
+      audio.play();	
+      const bullet = document.createElement('div');
+      bullet.classList.add('bullet');
+      //bullet.style.left = `${player.offsetLeft - player.offsetWidth/2}px`;
+      bullet.style.left = `${player.offsetLeft}px`;
+      bullet.style.top = `${player.offsetTop}px`;
+      game.appendChild(bullet);
+
+      let interval = setInterval(() => {
+        bullet.style.top = `${bullet.offsetTop - 5}px`;
+        const bulletRect = bullet.getBoundingClientRect();
+
+        document.querySelectorAll('.answer').forEach(answer => {
+          const rect = answer.getBoundingClientRect();
+          if (
+            bulletRect.left < rect.right &&
+            bulletRect.right > rect.left &&
+            bulletRect.top < rect.bottom &&
+            bulletRect.bottom > rect.top
+          ) {
+            const rowIndex = parseInt(answer.dataset.row);
+            if (answer.dataset.answer === answer.dataset.correct) {
+              score.good++;
+    const audio = new Audio(soundBADABOUM);
+      audio.play();
+activeRows[rowIndex].elements.forEach(el => {
+  const r = el.getBoundingClientRect();
+  createExplosion(r.left + r.width / 2, r.top + r.height / 2);
+  el.remove();
+});
+              updateScore();
+
+/*---------------------------
+
+  activeRows[rowIndex].elements.forEach(el => {
+    el.className = 'boum';
+  });
+
+  // Pause de 100ms
+  await sleep(100);
+-----------------------------*/
+
+
+
+
+
+
+              activeRows[rowIndex].elements.forEach(el => el.remove());
+              activeRows[rowIndex].label.remove();
+              document.querySelectorAll(`.timer-bar[data-row='${rowIndex}']`).forEach(t => t.remove());
+              activeRows[rowIndex] = null;
+              if (unansweredQuestions.length > 0) {
+                activeRows.forEach(r => {
+                  if (r) {
+                    r.elements.forEach(el => el.style.top = `${parseInt(el.style.top) + 60}px`);
+                    r.label.style.top = `${parseInt(r.label.style.top) + 60}px`;
+                  }
+                });
+                spawnRow(unansweredQuestions.shift(), activeRows.length, true);
+              } else if (activeRows.every(r => r === null)) {
+                endGame("Félicitations, <br>Vous êtes arrivé sur la planète Terre !");
+              }
+            } else {
+
+              score.bad++;
+const audio = new Audio(soundBOUM);
+      audio.play();
+createExplosion(rect.left + rect.width/2, rect.top + rect.height/2);
+              updateScore();
+// Supprimer la réponse touchée
+answer.remove();
+
+
+// descendre la ligne de 30px si la réponse est fause
+if (activeRows[rowIndex]) {
+  activeRows[rowIndex].elements.forEach(el => {
+    let currentTop = parseInt(el.style.top);
+    el.style.top = `${currentTop + 30}px`;
+    // Si un élément dépasse la limite rouge, fin du jeu
+    if (currentTop + 30 >= limitLine.offsetTop) endGame("Une ligne a atteint la limite rouge ! Jeu terminé.");
+  });
+  // Descendre aussi le label de la question
+  let labelTop = parseInt(activeRows[rowIndex].label.style.top);
+  activeRows[rowIndex].label.style.top = `${labelTop + 30}px`;
+}
+              let currentTop = parseInt(answer.style.top);
+              answer.style.top = `${currentTop + 60}px`;
+              if (currentTop + 60 >= limitLine.offsetTop) endGame("Une ligne a atteint la limite rouge ! Jeu terminé.");
+}
+
+            bullet.remove();
+            clearInterval(interval);
+          }
+        });
+
+        if (bullet.offsetTop < 0) {
+          bullet.remove();
+          clearInterval(interval);
+        }
+      }, 10);
+    }
+
+
+
+
+/* Pour les téléphones mobile et écran tactile*/
+document.addEventListener('touchstart', (e) => {
+  e.preventDefault();  // pour éviter des comportements inattendus
+  fireBullet();
+});
+
+//----------------------------------------------------------------------------------
+function endGame(message) {
+  game.style.backgroundImage = "url('https://www.blind-magazine.com/wp-content/uploads/2022/12/Bille-bleue-1.jpg')";
+
+  const introDiv = document.getElementById('intro');
+  const answer = document.getElementById('answer');
+  
+  // Affiche le message de fin
+  introDiv.style.display = 'block';
+
+
+introDiv.innerHTML = `
+  ${message}<br>
+  <span style="font-size: 18px;">
+    Vous voulez votre jeu ? Contactez 
+    <a href="https://payhip.com/SciencExpert/education-games" target="_blank" style="color: yellow; font-weight: bold;">
+      SciencExpert
+    </a>.
+  </span>
+`;
+
+
+
+
+  introDiv.style.opacity = "1";
+  introDiv.style.background = "url('https://example.com/ton-image.jpg') no-repeat center";
+  introDiv.style.backgroundSize = 'cover';
+  introDiv.style.fontSize = "60px";
+  introDiv.style.color = "white";
+  introDiv.style.textShadow = "2px 2px 4px rgba(0,0,0,0.5)";
+
+  // Masque la div principale des réponses (si elle existe)
+  if (answer) {
+    answer.style.display = 'none';
+  }
+
+  // Supprime ou masque toutes les lignes et éléments actifs
+  activeRows.forEach(row => {
+    if (!row) return;
+    row.elements.forEach(el => el.style.display = 'none'); // Masquer chaque réponse
+    if (row.label) row.label.style.display = 'none';       // Masquer la question
+  });
+
+  // Supprime tous les timers restants si nécessaire
+  const timers = document.querySelectorAll('.circular-timer, .timer-bar');
+  timers.forEach(timer => timer.remove());
+
+  // Arrête le jeu
+  clearInterval(moveInterval);
+  document.removeEventListener('click', fireBullet);
+}
+
+
+/*-------------------------------------------------------------------------------
+Le code crée jusqu’à 3 lignes de questions au début du jeu, à condition 
+qu’il y ait encore des questions disponibles dans le tableau unansweredQuestions.
+-----------------------------------------------------------------------------------*/
+    for (let i = 0; i < 3 && unansweredQuestions.length > 0; i++) {
+      spawnRow(unansweredQuestions.shift(), i);
+    }
+
+    document.addEventListener('click', fireBullet);
+    //let moveInterval = setInterval(shiftInvaders, 1000);
+setInterval(shiftInvaders, 800); // toutes les 800 ms
+
+/*-------------------------------------------------------------------------------
+Reset.
+-----------------------------------------------------------------------------------*/
+document.getElementById('resetButton').addEventListener('click', () => {
+  // Réinitialiser les variables
+  unansweredQuestions = [...questions];
+  activeRows.forEach(row => {
+    if (!row) return;
+    row.elements.forEach(el => el.remove());
+    if (row.label) row.label.remove();
+  });
+  activeRows = [];
+  score = { good: 0, bad: 0 };
+  updateScore();
+  fire = 0;
+
+  // Réinitialiser l'état visuel
+  document.getElementById('intro').style.display = 'none';
+  game.style.backgroundImage = "url('https://img.freepik.com/photos-gratuite/ciel-bleu-blanc-etoile-nuit_417767-124.jpg?ga=GA1.1.2094066082.1747902471&semt=ais_hybrid&w=740')";
+
+  // Supprimer tous les éléments de réponse, labels et timers restants
+  document.querySelectorAll('.answer, .question-label, .timer-bar, .circular-timer, .bullet').forEach(el => el.remove());
+
+  // Recréer 3 lignes de départ
+  for (let i = 0; i < 3 && unansweredQuestions.length > 0; i++) {
+    spawnRow(unansweredQuestions.shift(), i);
+  }
+
+  document.addEventListener('click', fireBullet);
+});
+//---------------------------pause
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+//-------------------------simule l'explosion
+function createExplosion(x, y) {
+  const explosion = document.createElement('div');
+  explosion.className = 'explosion-effect';
+
+  // Convertir coordonnées absolues (viewport) -> relatives à #game
+  const gameRect = game.getBoundingClientRect();
+  explosion.style.left = `${x - gameRect.left - 30}px`;
+  explosion.style.top = `${y - gameRect.top - 30}px`;
+
+  game.appendChild(explosion);
+
+  setTimeout(() => explosion.remove(), 700);
+}
+//---------------------------------------------
+  </script>
+</body>
+</html>
