@@ -1,2 +1,2 @@
 # SMILE
-https://github.com/SciencExpert/SMILE/blob/main/QUIZ1/index.html
+https://github.com/SciencExpert/SMILE/blob/main/Picture/Sciencexpert%20logo.jpg
