@@ -4,7 +4,7 @@ https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.3.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.4.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.5.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.6.png
-https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.7.png
+https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.7.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.1.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.2.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.3.png
@@ -41,3 +41,65 @@ https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.4.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.5.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.6.png
 https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.7.png
+Code pour programme : 
+
+const image = [
+  // Logo (index 0)
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Seven_Families_Logo.png/320px-Seven_Families_Logo.png',
+
+  // Famille 1 Automobiles (indices 1 à 6)
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.1.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.1.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card3.1.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card4.1.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card5.1.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.1.png',
+
+  // Famille 2 Robotique (indices 7 à 12)
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.2.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.2.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card3.2.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card4.2.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card5.2.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.2.png',
+
+  // Famille 3 Sport (indices 13 à 18)
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.3.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.3.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card3.3.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card4.3.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card5.3.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.3.png',
+
+  // Famille 4 Santé (indices 19 à 24)
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.4.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.4.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card3.4.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card4.4.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card5.4.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.4.png',
+
+  // Famille 5 BTP (indices 25 à 30) *attention ici, tu as 6 cartes par famille donc indices 25 à 30 (pas 31)
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.5.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.5.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card3.5.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card4.5.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card5.5.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.5.png',
+
+  // Famille 6 Aerospace (indices 31 à 36)
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.6.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.6.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card3.6.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card4.6.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card5.6.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.6.png',
+
+  // Famille 7 Alimentaire (indices 37 à 42)
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card1.7.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card2.7.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card3.7.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card4.7b.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card5.7.png',
+'https://sciencexpert.github.io/SMILE/Picture/Rubber_card/card6.7.png'
+];
