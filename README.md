@@ -7,3 +7,4 @@ Trivial Cinema : https://sciencexpert.github.io/SMILE/Trivial Cinema/Trivial Cin
 Bataille navale : https://sciencexpert.github.io/SMILE/Bataille Navale/Quiz Bataille Navale.html
 jeu de l'oie :  https://sciencexpert.github.io/SMILE/jeu de l'oie/Jeu de l'oie Mayotte.html
 RH : https://sciencexpert.github.io/SMILE/Quiz Ma Clef RH/Quiz Ma clef RH.html
+MBTI : https://sciencexpert.github.io/SMILE/MBTI/MBTI.html
