@@ -19,3 +19,4 @@ MBTI : https://sciencexpert.github.io/SMILE/MBTI/MBTI.html
 
 Process com : https://sciencexpert.github.io/SMILE/Process Com/Process com.html
 
+QVGM Chromato : QVGM_Chromato
