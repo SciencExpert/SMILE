@@ -6,3 +6,4 @@ Space Invader : https://sciencexpert.github.io/SMILE/Programme Space Invader Fin
 Trivial Cinema : https://sciencexpert.github.io/SMILE/Trivial Cinema/Trivial Cinema.html
 Bataille navale : https://sciencexpert.github.io/SMILE/Bataille Navale/Quiz Bataille Navale.html
 jeu de l'oie :  https://sciencexpert.github.io/SMILE/jeu de l'oie/Jeu de l'oie Mayotte.html
+RH : https://sciencexpert.github.io/SMILE/Quiz Ma Clef RH/Quiz Ma clef RH.html
