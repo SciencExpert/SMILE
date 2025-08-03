@@ -1,0 +1,7572 @@
+[
+    {
+        "name": "ACETALDEHYDE",
+        "d": 14.7,
+        "p": 8,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "75-07-0",
+        "risk": "⚠️",
+        "comment": "CMR"
+    },
+    {
+        "name": "ACETALDOXIME",
+        "d": 16.3,
+        "p": 4,
+        "h": 20.2,
+        "status": "unknown",
+        "cas": "107-29-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETAMIDE",
+        "d": 17.3,
+        "p": 18.7,
+        "h": 22.4,
+        "status": "unknown",
+        "cas": "60-35-5",
+        "risk": "⚠️",
+        "comment": "CMR"
+    },
+    {
+        "name": "ACETANILIDE",
+        "d": 20.6,
+        "p": 13.3,
+        "h": 12.4,
+        "status": "unknown",
+        "cas": "103-84-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETIC ACID",
+        "d": 14.5,
+        "p": 8,
+        "h": 13.5,
+        "status": "unknown",
+        "cas": "64-19-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETIC ANHYDRIDE",
+        "d": 16,
+        "p": 11.7,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "108-24-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETONE",
+        "d": 15.5,
+        "p": 10.4,
+        "h": 7,
+        "status": "unknown",
+        "cas": "67-64-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETONECYANHYDRIN",
+        "d": 16.6,
+        "p": 12.2,
+        "h": 15.5,
+        "status": "unknown",
+        "cas": "75-86-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETONEMETHYLOXIME",
+        "d": 14.7,
+        "p": 4.6,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "137-39-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETONITRILE",
+        "d": 15.3,
+        "p": 18,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "75-05-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETOPHENONE",
+        "d": 19.6,
+        "p": 8.6,
+        "h": 3.7,
+        "status": "unknown",
+        "cas": "98-86-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETOXIME",
+        "d": 16.3,
+        "p": 3.7,
+        "h": 10.9,
+        "status": "unknown",
+        "cas": "127-06-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-ACETOXY-1,3-BUTADIENE",
+        "d": 16.1,
+        "p": 4.4,
+        "h": 8.3,
+        "status": "unknown",
+        "cas": "928-50-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-ACETYL CAPROLACTAM",
+        "d": 18.9,
+        "p": 8.7,
+        "h": 4.8,
+        "status": "unknown",
+        "cas": "105-60-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-ACETYL MORPHOLINE",
+        "d": 18.3,
+        "p": 5.3,
+        "h": 7.8,
+        "status": "unknown",
+        "cas": "1696-20-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-ACETYL PIPERIDINE",
+        "d": 18.5,
+        "p": 10,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "620-08-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-ACETYL PYRROLIDONE",
+        "d": 17.8,
+        "p": 13.1,
+        "h": 8.3,
+        "status": "unknown",
+        "cas": "2687-91-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-ACETYL THIOPHENE",
+        "d": 19.1,
+        "p": 12.2,
+        "h": 9.3,
+        "status": "unknown",
+        "cas": "88-15-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETYLACETONE",
+        "d": 16.1,
+        "p": 11.2,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "123-54-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETYLBROMIDE",
+        "d": 16.7,
+        "p": 10.6,
+        "h": 5.2,
+        "status": "unknown",
+        "cas": "506-96-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETYLCHLORIDE",
+        "d": 16.2,
+        "p": 11.2,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "75-36-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETYLENE (ETHYNE)",
+        "d": 14.4,
+        "p": 4.2,
+        "h": 11.9,
+        "status": "unknown",
+        "cas": "74-86-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACETYLFLUORIDE",
+        "d": 14.7,
+        "p": 14,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "557-99-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACROLEIN",
+        "d": 15,
+        "p": 7.2,
+        "h": 7.8,
+        "status": "unknown",
+        "cas": "107-02-8",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "ACRYLAMIDE",
+        "d": 15.8,
+        "p": 12.1,
+        "h": 12.8,
+        "status": "unknown",
+        "cas": "79-06-1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène"
+    },
+    {
+        "name": "ACRYLIC ACID",
+        "d": 17.7,
+        "p": 6.4,
+        "h": 14.9,
+        "status": "unknown",
+        "cas": "79-10-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ACRYLONITRILE",
+        "d": 16,
+        "p": 12.8,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "107-13-1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène)"
+    },
+    {
+        "name": "ACRYLYLCHLORIDE",
+        "d": 16.2,
+        "p": 11.6,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "814-68-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ACETATE",
+        "d": 15.7,
+        "p": 4.5,
+        "h": 8,
+        "status": "unknown",
+        "cas": "591-87-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ACETIC ACID",
+        "d": 16.7,
+        "p": 4.7,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "5912-79-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ACETOACETATE",
+        "d": 15.9,
+        "p": 6.9,
+        "h": 8.6,
+        "status": "unknown",
+        "cas": "20844-98-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ACETONITRILE (4-PENTENENITRILE)",
+        "d": 16.3,
+        "p": 11.2,
+        "h": 5,
+        "status": "unknown",
+        "cas": "591-87-7 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ALCOHOL",
+        "d": 16.2,
+        "p": 10.8,
+        "h": 16.8,
+        "status": "unknown",
+        "cas": "107-18-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL AMINE",
+        "d": 15.5,
+        "p": 5.7,
+        "h": 10.6,
+        "status": "unknown",
+        "cas": "107-11-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL BROMIDE (3-BROMOPRENE)",
+        "d": 16.5,
+        "p": 7.3,
+        "h": 4.9,
+        "status": "unknown",
+        "cas": "106-95-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL CHLORIDE",
+        "d": 17,
+        "p": 6.2,
+        "h": 2.3,
+        "status": "unknown",
+        "cas": "107-05-1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "ALLYL CYANIDE",
+        "d": 16,
+        "p": 14.3,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "107-97-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ETHYLETHER",
+        "d": 15,
+        "p": 4.8,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "928-92-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL FLUORIDE",
+        "d": 14.9,
+        "p": 6.4,
+        "h": 1,
+        "status": "unknown",
+        "cas": "372-19-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL FORMATE",
+        "d": 15.7,
+        "p": 5.4,
+        "h": 8.8,
+        "status": "unknown",
+        "cas": "762-92-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL IODIDE",
+        "d": 17.4,
+        "p": 6.4,
+        "h": 3.3,
+        "status": "unknown",
+        "cas": "556-56-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ISOCYANIDE",
+        "d": 16.1,
+        "p": 13,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "3956-52-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL ISOTHIOCYANATE",
+        "d": 17,
+        "p": 11.3,
+        "h": 8.5,
+        "status": "unknown",
+        "cas": "57-06-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL MERCAPTAN",
+        "d": 17.5,
+        "p": 5.2,
+        "h": 9.3,
+        "status": "unknown",
+        "cas": "594-45-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL MERCAPTAN",
+        "d": 16.4,
+        "p": 6.2,
+        "h": 7.9,
+        "status": "unknown",
+        "cas": "594-45-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ALLYL METHYLETHER",
+        "d": 15,
+        "p": 4.3,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "557-17-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "AMMONIA",
+        "d": 13.7,
+        "p": 15.7,
+        "h": 17.8,
+        "status": "unknown",
+        "cas": "7664-41-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "AMYL ACETATE",
+        "d": 15.8,
+        "p": 3.3,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "628-63-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ANETHOLE (TRANS)",
+        "d": 19,
+        "p": 4.3,
+        "h": 8.7,
+        "status": "unknown",
+        "cas": "104-46-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ANILINE",
+        "d": 19.4,
+        "p": 5.1,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "62-53-3",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "p-ANISIDINE (METHOXY ANILINE)",
+        "d": 19.9,
+        "p": 6.5,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "104-94-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ANISOLE",
+        "d": 17.8,
+        "p": 4.1,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "100-66-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "AZIDOETHANE",
+        "d": 15.9,
+        "p": 8.9,
+        "h": 12.9,
+        "status": "unknown",
+        "cas": "7574-16-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-AZIDOPROPENE",
+        "d": 16.8,
+        "p": 7.7,
+        "h": 13.4,
+        "status": "unknown",
+        "cas": "2780-91-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZALDEHYDE",
+        "d": 19.4,
+        "p": 7.4,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "100-52-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZENE",
+        "d": 18.4,
+        "p": 0,
+        "h": 2,
+        "status": "unknown",
+        "cas": "71-43-2",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1A – Cancérogène"
+    },
+    {
+        "name": "1,3-BENZENEDIOL",
+        "d": 18,
+        "p": 8.4,
+        "h": 21,
+        "status": "unknown",
+        "cas": "108-46-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZOIC ACID",
+        "d": 18.2,
+        "p": 6.9,
+        "h": 9.8,
+        "status": "unknown",
+        "cas": "65-85-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZONITRILE",
+        "d": 17.4,
+        "p": 9,
+        "h": 3.3,
+        "status": "unknown",
+        "cas": "100-47-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZOPHENONE",
+        "d": 13.6,
+        "p": 8.6,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "119-61-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZOYL CHLORIDE",
+        "d": 20.7,
+        "p": 8.2,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "98-88-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZYL ALCOHOL",
+        "d": 18.4,
+        "p": 6.3,
+        "h": 13.7,
+        "status": "unknown",
+        "cas": "100-51-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BENZYL BUTYL PHTHALATE",
+        "d": 19,
+        "p": 11.2,
+        "h": 3.1,
+        "status": "unknown",
+        "cas": "85-68-7",
+        "risk": "⚠️",
+        "comment": "CMR (Reprotoxique Cat 1B)"
+    },
+    {
+        "name": "BENZYL CHLORIDE",
+        "d": 18.8,
+        "p": 7.1,
+        "h": 2.6,
+        "status": "unknown",
+        "cas": "100-44-7",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "BENZYL METHACRYLATE",
+        "d": 16.8,
+        "p": 4.1,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "2495-37-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-BENZYL PYRROLIDONE",
+        "d": 18.2,
+        "p": 6.1,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "4396-68-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BIPHENYL",
+        "d": 21.4,
+        "p": 1,
+        "h": 2,
+        "status": "unknown",
+        "cas": "92-52-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BORINECARBONYL",
+        "d": 17,
+        "p": 10.2,
+        "h": 6.9,
+        "status": "unknown",
+        "cas": "555-99-3 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BROMO ALLYL ALCOHOL",
+        "d": 17.1,
+        "p": 9.9,
+        "h": 16.2,
+        "status": "unknown",
+        "cas": "871-47-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BROMO PROPENE",
+        "d": 16.1,
+        "p": 6,
+        "h": 4.9,
+        "status": "unknown",
+        "cas": "563-76-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-BROMO PROPENE (CIS)",
+        "d": 16.3,
+        "p": 6.4,
+        "h": 5,
+        "status": "unknown",
+        "cas": "590-70-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-BROMO-1-BUTANE",
+        "d": 16.5,
+        "p": 6,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "110-53-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-BROMO-1, 2-BUTADIENE",
+        "d": 17,
+        "p": 6.5,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "928-50-7 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "5-BROMO-2-NITROBENZOTRIFLUORIDE",
+        "d": 20,
+        "p": 6,
+        "h": 4.9,
+        "status": "unknown",
+        "cas": "328-75-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-BROMO-4-ETHOXY BENZENE",
+        "d": 19.5,
+        "p": 7.7,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "104-92-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOACETYLENE",
+        "d": 15.7,
+        "p": 9.9,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "593-61-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-BROMOANISOLE",
+        "d": 19.8,
+        "p": 8.4,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "578-57-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOBENZENE",
+        "d": 20.5,
+        "p": 5.5,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "108-86-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-BROMOBENZONITRILE",
+        "d": 20.4,
+        "p": 9.3,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "623-00-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-BROMOBENZOYL CHLORIDE",
+        "d": 20.2,
+        "p": 6.5,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "586-77-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BROMOBUTANE",
+        "d": 16.3,
+        "p": 7.7,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "78-76-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-BROMOCHLOROBENZENE",
+        "d": 20.3,
+        "p": 7.7,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "615-60-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOCHLOROMETHANE",
+        "d": 17.3,
+        "p": 5.7,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "74-97-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOETHYLENE",
+        "d": 16.1,
+        "p": 6.3,
+        "h": 2.3,
+        "status": "unknown",
+        "cas": "593-60-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOFORM",
+        "d": 21.4,
+        "p": 4.1,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "75-25-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOMETHYL METHYL ETHER",
+        "d": 16.9,
+        "p": 8.5,
+        "h": 7,
+        "status": "unknown",
+        "cas": "1609-45-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène)"
+    },
+    {
+        "name": "1-BROMONAPHTALENE",
+        "d": 20.3,
+        "p": 3.1,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "90-11-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-BROMONITROBENZENE",
+        "d": 20.9,
+        "p": 9.9,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "586-78-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOPRENE",
+        "d": 16.9,
+        "p": 6.4,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "106-96-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-BROMOPROPYNE",
+        "d": 18.1,
+        "p": 6.5,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "106-96-7 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-BROMOSTYRENE",
+        "d": 19.5,
+        "p": 5.2,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "636-68-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BROMOTHIOPHENE",
+        "d": 20.1,
+        "p": 5.2,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "1003-09-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-BROMOTOLUENE",
+        "d": 19.3,
+        "p": 5,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "95-46-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-BROMOTOLUENE",
+        "d": 19.3,
+        "p": 6.8,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "106-38-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOTRICHLORO METHANE #1",
+        "d": 18.3,
+        "p": 0.8,
+        "h": 0,
+        "status": "unknown",
+        "cas": "75-62-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOTRICHLORO METHANE #2-GC",
+        "d": 18.3,
+        "p": 8.1,
+        "h": 6,
+        "status": "unknown",
+        "cas": "75-62-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOTRICHLORO METHANE #3",
+        "d": 18.3,
+        "p": 8.1,
+        "h": 0,
+        "status": "unknown",
+        "cas": "75-62-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BROMOTRIFLUOROMETHANE (FREON 1381)",
+        "d": 9.6,
+        "p": 2.4,
+        "h": 0,
+        "status": "unknown",
+        "cas": "75-63-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-BUTADIENE",
+        "d": 14.7,
+        "p": 1.7,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "106-99-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,3-BUTADIENE",
+        "d": 14.8,
+        "p": 2.8,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "106-99-0",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1A – Cancérogène"
+    },
+    {
+        "name": "1,3-BUTADIENE-1-CHLORO",
+        "d": 15.6,
+        "p": 8.5,
+        "h": 2,
+        "status": "unknown",
+        "cas": "109-70-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-BUTADIENE-1-OL",
+        "d": 16.2,
+        "p": 6.6,
+        "h": 16.8,
+        "status": "unknown",
+        "cas": "13969-46-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,3-BUTADIENE-1, 2-DI-CHLORO",
+        "d": 17,
+        "p": 10.7,
+        "h": 2.8,
+        "status": "unknown",
+        "cas": "3303-38-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTADIENE-4-CYANO",
+        "d": 16.2,
+        "p": 11.7,
+        "h": 5.2,
+        "status": "unknown",
+        "cas": "109-75-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTADIENEDIOXIDE",
+        "d": 18.3,
+        "p": 14.4,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "110-71-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTADIONE",
+        "d": 15.7,
+        "p": 5.1,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "431-03-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,4-BUTANDIOL DIACRYLATE",
+        "d": 16.8,
+        "p": 9.1,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "1070-70-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTANE",
+        "d": 14.1,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "106-97-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,3-BUTANEDIOL",
+        "d": 16.6,
+        "p": 10,
+        "h": 21.5,
+        "status": "unknown",
+        "cas": "107-88-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,4-BUTANEDIOL",
+        "d": 16.6,
+        "p": 15.3,
+        "h": 21.7,
+        "status": "unknown",
+        "cas": "110-63-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-BUTANETHIOL",
+        "d": 16.3,
+        "p": 5.3,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "109-79-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-BUTANOL",
+        "d": 16,
+        "p": 5.7,
+        "h": 15.8,
+        "status": "unknown",
+        "cas": "71-36-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BUTANOL",
+        "d": 15.8,
+        "p": 5.7,
+        "h": 14.5,
+        "status": "unknown",
+        "cas": "78-92-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-BUTENE",
+        "d": 13.2,
+        "p": 1.3,
+        "h": 3.9,
+        "status": "unknown",
+        "cas": "106-98-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BUTENE (CIS)",
+        "d": 14.7,
+        "p": 1.3,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "590-18-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BUTENE (TRANS)",
+        "d": 14.6,
+        "p": 0,
+        "h": 2.9,
+        "status": "unknown",
+        "cas": "624-64-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-BUTENENITRILE",
+        "d": 16.2,
+        "p": 14.3,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "109-74-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-BUTENYL METHYL ETHER (CIS)",
+        "d": 15.1,
+        "p": 5.3,
+        "h": 5.2,
+        "status": "unknown",
+        "cas": "6627-94-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTENYL METHYL ETHER (CIS)",
+        "d": 15.2,
+        "p": 3.4,
+        "h": 5,
+        "status": "unknown",
+        "cas": "6627-94-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BUTENYL METHYL ETHER (TRANS)",
+        "d": 15.3,
+        "p": 4.4,
+        "h": 4.3,
+        "status": "unknown",
+        "cas": "6627-94-1 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTOXY ETHOXY PROPANOL",
+        "d": 15.5,
+        "p": 6.5,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "1569-01-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-BUTOXYBUTANOL",
+        "d": 15.9,
+        "p": 5.5,
+        "h": 10.6,
+        "status": "unknown",
+        "cas": "53616-08-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL ACETATE",
+        "d": 15.8,
+        "p": 3.7,
+        "h": 6.3,
+        "status": "unknown",
+        "cas": "123-86-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SEC-BUTYL ACETATE",
+        "d": 15,
+        "p": 3.7,
+        "h": 7.6,
+        "status": "unknown",
+        "cas": "105-46-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL ACETO ACETATE",
+        "d": 16.6,
+        "p": 5.8,
+        "h": 7.3,
+        "status": "unknown",
+        "cas": "541-62-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL ACRYLATE",
+        "d": 15.6,
+        "p": 6.2,
+        "h": 4.9,
+        "status": "unknown",
+        "cas": "141-32-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "t-BUTYL ALCOHOL",
+        "d": 15.2,
+        "p": 5.1,
+        "h": 14.7,
+        "status": "unknown",
+        "cas": "75-65-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL AMINE",
+        "d": 16.2,
+        "p": 4.5,
+        "h": 8,
+        "status": "unknown",
+        "cas": "109-73-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYL BENZOATE",
+        "d": 18.3,
+        "p": 2.9,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "136-60-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL BUTYRATE",
+        "d": 15.6,
+        "p": 2.9,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "109-21-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL CYCLOHEXANE",
+        "d": 16.2,
+        "p": 0,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "1678-24-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL CYCLOPENTANE",
+        "d": 16.4,
+        "p": 0,
+        "h": 1,
+        "status": "unknown",
+        "cas": "1678-23-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYL ISOPROPENYL ETHER",
+        "d": 14.8,
+        "p": 5.3,
+        "h": 5,
+        "status": "unknown",
+        "cas": "556-56-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYL LACTATE",
+        "d": 15.8,
+        "p": 6.5,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "138-22-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL METHACRYLATE",
+        "d": 15.6,
+        "p": 6.4,
+        "h": 6.6,
+        "status": "unknown",
+        "cas": "97-88-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BUTYL OCTANOL",
+        "d": 16.1,
+        "p": 3.6,
+        "h": 9.3,
+        "status": "unknown",
+        "cas": "735273",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-n-BUTYL PYRROLIDONE",
+        "d": 17.5,
+        "p": 9.9,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "3470-98-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYL SALICYLATE",
+        "d": 17.9,
+        "p": 4.8,
+        "h": 11.7,
+        "status": "unknown",
+        "cas": "17489-29-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-n-BUTYL TOLUENE",
+        "d": 17.4,
+        "p": 0.1,
+        "h": 1,
+        "status": "unknown",
+        "cas": "539-52-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYL-6-METHYL-3-CYCLOHEXENE CARBOLYATE",
+        "d": 16.1,
+        "p": 2.5,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "104-82-5 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-BUTYLBENZENE",
+        "d": 17.4,
+        "p": 0.1,
+        "h": 1.1,
+        "status": "unknown",
+        "cas": "104-51-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-BUTYLENE CARBONATE",
+        "d": 18,
+        "p": 16.8,
+        "h": 3.1,
+        "status": "unknown",
+        "cas": "542-75-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYLENEOXIDE",
+        "d": 16.3,
+        "p": 6.2,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "106-88-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-n-BUTYLTOLUENE",
+        "d": 17.6,
+        "p": 0.1,
+        "h": 1,
+        "status": "unknown",
+        "cas": "529-28-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-n-BUTYLTOLUENE",
+        "d": 17.4,
+        "p": 0.1,
+        "h": 1,
+        "status": "unknown",
+        "cas": "620-14-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-BUTYNEDINITRILE",
+        "d": 15.2,
+        "p": 16.2,
+        "h": 8,
+        "status": "unknown",
+        "cas": "460-93-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYRALDEHYDE",
+        "d": 14.7,
+        "p": 5.3,
+        "h": 7,
+        "status": "unknown",
+        "cas": "123-72-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYRIC ACID",
+        "d": 14.9,
+        "p": 4.1,
+        "h": 10.6,
+        "status": "unknown",
+        "cas": "107-92-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYRIC ANHYDRIDE",
+        "d": 16,
+        "p": 6.3,
+        "h": 7.7,
+        "status": "unknown",
+        "cas": "106-31-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "GAMMA-BUTYROLACTONE",
+        "d": 19,
+        "p": 16.6,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "96-48-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYRONITRILE",
+        "d": 15.3,
+        "p": 12.4,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "109-74-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "BUTYRYLCHLORIDE",
+        "d": 16.8,
+        "p": 9.4,
+        "h": 4.8,
+        "status": "unknown",
+        "cas": "109-68-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CAPROLACTONE (EPSILON)",
+        "d": 19.7,
+        "p": 15,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "502-44-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CARBON DIOXIDE",
+        "d": 15.3,
+        "p": 6.9,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "124-38-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CARBON DISULFIDE",
+        "d": 20.5,
+        "p": 0,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "75-15-0",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Reprotoxique)"
+    },
+    {
+        "name": "CARBON DISULFIDE-2",
+        "d": 19.9,
+        "p": 5.8,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "75-15-0",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Reprotoxique)"
+    },
+    {
+        "name": "CARBON TETRACHLORIDE",
+        "d": 17.8,
+        "p": 0,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "56-23-5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "CARBONYL SULFIDE",
+        "d": 17.4,
+        "p": 3.7,
+        "h": 0,
+        "status": "unknown",
+        "cas": "463-58-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CARBONYLCYANIDE",
+        "d": 15,
+        "p": 6.3,
+        "h": 8,
+        "status": "unknown",
+        "cas": "506-68-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLORAL",
+        "d": 17.2,
+        "p": 7.4,
+        "h": 7.6,
+        "status": "unknown",
+        "cas": "75-87-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLORINE",
+        "d": 17.3,
+        "p": 10,
+        "h": 0,
+        "status": "unknown",
+        "cas": "7782-50-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-1-FLUORO ETHYLENE",
+        "d": 16,
+        "p": 6.9,
+        "h": 4,
+        "status": "unknown",
+        "cas": "359-10-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLORO ACETALDEHYDE",
+        "d": 16.2,
+        "p": 16.1,
+        "h": 9,
+        "status": "unknown",
+        "cas": "107-20-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLORO ACETIC ACID",
+        "d": 17.7,
+        "p": 10.4,
+        "h": 12.3,
+        "status": "unknown",
+        "cas": "79-11-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLORO ACETOPHENONE",
+        "d": 19.6,
+        "p": 7.6,
+        "h": 4,
+        "status": "unknown",
+        "cas": "99-99-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-CHLORO ALLYL ALCOHOL",
+        "d": 17.2,
+        "p": 10.3,
+        "h": 16.5,
+        "status": "unknown",
+        "cas": "627-30-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLORO ALLYL ALCOHOL",
+        "d": 17.1,
+        "p": 10.2,
+        "h": 16.4,
+        "status": "unknown",
+        "cas": "598-29-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO METHYL ACRYLATE",
+        "d": 15.9,
+        "p": 7.3,
+        "h": 8.5,
+        "status": "unknown",
+        "cas": "920-46-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLORO PROPENE (ISOPROPENYL CHLORIDE)",
+        "d": 15.5,
+        "p": 6.7,
+        "h": 2.2,
+        "status": "unknown",
+        "cas": "563-47-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO VINYL ETHYL ETHER",
+        "d": 16.8,
+        "p": 6.5,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "107-30-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-1-NITROETHANE",
+        "d": 16.8,
+        "p": 13.5,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "598-77-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-CHLORO-1-PROPANOL",
+        "d": 17.5,
+        "p": 5.7,
+        "h": 14.7,
+        "status": "unknown",
+        "cas": "627-30-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLORO-1,2-BUTADIENE",
+        "d": 16.6,
+        "p": 8,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "928-49-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-2-BUTENE",
+        "d": 16.2,
+        "p": 7.7,
+        "h": 2,
+        "status": "unknown",
+        "cas": "590-21-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-2-ETHOXY BENZENE",
+        "d": 19.2,
+        "p": 8.1,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "1725-61-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-CHLORO-2-METHYL PROPENE",
+        "d": 16.2,
+        "p": 5.6,
+        "h": 2,
+        "status": "unknown",
+        "cas": "563-47-3 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-2-METHYL PROPENE",
+        "d": 16.1,
+        "p": 7.1,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "513-37-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "6-CHLORO-2-NITROTOLUENE",
+        "d": 20.3,
+        "p": 9.6,
+        "h": 3.8,
+        "status": "unknown",
+        "cas": "83-72-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLORO-2-NITROTOLUENE",
+        "d": 19.9,
+        "p": 11.8,
+        "h": 3.8,
+        "status": "unknown",
+        "cas": "89-60-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-4-ETHOXY BENZENE",
+        "d": 19.3,
+        "p": 6.3,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "637-49-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROACETONE",
+        "d": 16.8,
+        "p": 9.6,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "78-95-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROACETONITRILE",
+        "d": 17.4,
+        "p": 13.6,
+        "h": 2,
+        "status": "unknown",
+        "cas": "107-14-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROACETYLCHLORIDE",
+        "d": 17.5,
+        "p": 9.2,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "79-04-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROACETYLENE",
+        "d": 16.2,
+        "p": 2.1,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "593-61-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROALLYLIDENE DIACETATE",
+        "d": 16.7,
+        "p": 7.3,
+        "h": 8.8,
+        "status": "unknown",
+        "cas": "593-61-3 (à valider)",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROANISOLE",
+        "d": 19.6,
+        "p": 7.8,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "104-92-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROBENZALDEHYDE",
+        "d": 19.9,
+        "p": 7.2,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "104-88-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROBENZENE",
+        "d": 19,
+        "p": 4.3,
+        "h": 2,
+        "status": "unknown",
+        "cas": "108-90-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROBENZONITRILE",
+        "d": 19.5,
+        "p": 8,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "104-47-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROBENZOTRICHLORIDE",
+        "d": 20.3,
+        "p": 5.5,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "5216-25-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLOROBENZOYL CHLORIDE",
+        "d": 19.9,
+        "p": 6.7,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "122-01-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROBENZYL ALCOHOL",
+        "d": 19.6,
+        "p": 7.5,
+        "h": 13,
+        "status": "unknown",
+        "cas": "873-76-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-CHLOROBENZYLCHLORIDE",
+        "d": 19.9,
+        "p": 9.3,
+        "h": 2.6,
+        "status": "unknown",
+        "cas": "620-22-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-CHLOROBROMOETHYLENE",
+        "d": 17.2,
+        "p": 6.6,
+        "h": 2.3,
+        "status": "unknown",
+        "cas": "75-96-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLOROBUTANE",
+        "d": 16.2,
+        "p": 5.5,
+        "h": 2,
+        "status": "unknown",
+        "cas": "109-69-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROBUTANE",
+        "d": 15.8,
+        "p": 7.6,
+        "h": 2,
+        "status": "unknown",
+        "cas": "78-86-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROCYCLOHEXANONE",
+        "d": 18.5,
+        "p": 13,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "822-63-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROCYCLOPROPANE",
+        "d": 17.6,
+        "p": 7.2,
+        "h": 2.2,
+        "status": "unknown",
+        "cas": "930-16-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLORODIFLUOROMETHANE (FREON 22)",
+        "d": 12.3,
+        "p": 6.3,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "75-45-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-CHLORODIMETHYLAMINE",
+        "d": 16,
+        "p": 7.8,
+        "h": 7.9,
+        "status": "unknown",
+        "cas": "993-16-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROETHYL ACETATE",
+        "d": 16.7,
+        "p": 9.6,
+        "h": 8.8,
+        "status": "unknown",
+        "cas": "111-39-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROETHYL ETHYL ETHER",
+        "d": 16.3,
+        "p": 7.9,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "111-44-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROETHYL ETHYL SULFIDE",
+        "d": 17.2,
+        "p": 5,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "63918-89-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-CHLOROFLUOROBENZENE",
+        "d": 19.4,
+        "p": 8.7,
+        "h": 2,
+        "status": "unknown",
+        "cas": "307-41-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROFORM",
+        "d": 17.8,
+        "p": 3.1,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "67-66-3",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "BIS(CHLOROMETHYL) ETHER",
+        "d": 17.2,
+        "p": 4.9,
+        "h": 6.6,
+        "status": "unknown",
+        "cas": "542-88-1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène)"
+    },
+    {
+        "name": "CHLOROMETHYLSULFIDE",
+        "d": 16.6,
+        "p": 6.4,
+        "h": 2,
+        "status": "unknown",
+        "cas": "2365-56-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLORONITROBENZENE",
+        "d": 20.4,
+        "p": 9.6,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "100-00-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLORONITROMETHANE",
+        "d": 17.4,
+        "p": 13.5,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "593-96-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROPHENOL",
+        "d": 20.3,
+        "p": 5.5,
+        "h": 13.9,
+        "status": "unknown",
+        "cas": "95-57-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLORPRENE",
+        "d": 16.1,
+        "p": 5.4,
+        "h": 2.1,
+        "status": "unknown",
+        "cas": "126-99-8",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "2-CHLOROPROPENAL",
+        "d": 17.1,
+        "p": 12.9,
+        "h": 8.1,
+        "status": "unknown",
+        "cas": "16086-35-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROPROPENE",
+        "d": 15.3,
+        "p": 6.9,
+        "h": 2.2,
+        "status": "unknown",
+        "cas": "557-98-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROPROPENOIC ACID",
+        "d": 19.1,
+        "p": 9.4,
+        "h": 12.4,
+        "status": "unknown",
+        "cas": "79-10-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-CHLOROPROPIONALDEHYDE",
+        "d": 17,
+        "p": 13.3,
+        "h": 8.2,
+        "status": "unknown",
+        "cas": "925-52-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROPROPIONITRILE",
+        "d": 17.3,
+        "p": 15.9,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "920-36-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-CHLOROPROPYNE",
+        "d": 16.7,
+        "p": 7.4,
+        "h": 2.3,
+        "status": "unknown",
+        "cas": "624-65-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLOROSTYRENE",
+        "d": 18.7,
+        "p": 4.3,
+        "h": 3.9,
+        "status": "unknown",
+        "cas": "2039-87-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-CHLOROSTYRENE",
+        "d": 18.7,
+        "p": 4.7,
+        "h": 3.9,
+        "status": "unknown",
+        "cas": "1335-88-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROTHIOPHENOL",
+        "d": 20.8,
+        "p": 8.6,
+        "h": 10.6,
+        "status": "unknown",
+        "cas": "1067-07-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-CHLOROTHIOPHENOL",
+        "d": 20.2,
+        "p": 7,
+        "h": 10,
+        "status": "unknown",
+        "cas": "632-22-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLOROTOLUENE",
+        "d": 19.1,
+        "p": 6.2,
+        "h": 2.6,
+        "status": "unknown",
+        "cas": "106-43-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CHLOROTRIFLUOROETHYLENE (CTFE)",
+        "d": 15.3,
+        "p": 6.3,
+        "h": 0,
+        "status": "unknown",
+        "cas": "79-38-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "m-CRESOL",
+        "d": 18,
+        "p": 5.1,
+        "h": 12.9,
+        "status": "unknown",
+        "cas": "108-39-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CROTONALDEHYDE",
+        "d": 16.2,
+        "p": 14.9,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "4170-30-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CROTONIC ACID",
+        "d": 16.8,
+        "p": 8.7,
+        "h": 12,
+        "status": "unknown",
+        "cas": "3724-65-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CROTONLACTONE",
+        "d": 19,
+        "p": 19.8,
+        "h": 9.6,
+        "status": "unknown",
+        "cas": "4360-63-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRANS-CROTONONITRILE",
+        "d": 16.4,
+        "p": 18.8,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "10035-87-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYANAMID (CARBAMONITRILE)",
+        "d": 15.5,
+        "p": 17.6,
+        "h": 16.8,
+        "status": "unknown",
+        "cas": "506-85-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYANOGEN",
+        "d": 15.1,
+        "p": 11.8,
+        "h": 0,
+        "status": "unknown",
+        "cas": "460-19-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYANOGEN BROMIDE",
+        "d": 18.3,
+        "p": 15.2,
+        "h": 0,
+        "status": "unknown",
+        "cas": "506-68-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYANOGEN CHLORIDE",
+        "d": 15.6,
+        "p": 14.5,
+        "h": 0,
+        "status": "unknown",
+        "cas": "506-77-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOBUTANONE",
+        "d": 18.3,
+        "p": 11.4,
+        "h": 5.2,
+        "status": "unknown",
+        "cas": "1191-95-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLODECANONE",
+        "d": 16.8,
+        "p": 8,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "502-53-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOHEPTANONE",
+        "d": 17.2,
+        "p": 10.6,
+        "h": 4.8,
+        "status": "unknown",
+        "cas": "502-42-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOHEXANE",
+        "d": 16.8,
+        "p": 0,
+        "h": 0.2,
+        "status": "unknown",
+        "cas": "110-82-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOHEXANOL",
+        "d": 17.4,
+        "p": 4.1,
+        "h": 13.5,
+        "status": "unknown",
+        "cas": "108-93-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOHEXANONE",
+        "d": 17.8,
+        "p": 6.3,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "108-94-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOHEXYLAMINE",
+        "d": 17.2,
+        "p": 3.1,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "108-91-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOHEXYLCHLORIDE",
+        "d": 17.3,
+        "p": 5.5,
+        "h": 2,
+        "status": "unknown",
+        "cas": "542-18-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOOCTANONE",
+        "d": 17,
+        "p": 9.6,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "502-49-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOPENTANE",
+        "d": 16.4,
+        "p": 0,
+        "h": 1.8,
+        "status": "unknown",
+        "cas": "287-92-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOPENTANONE",
+        "d": 17.9,
+        "p": 11.9,
+        "h": 5.2,
+        "status": "unknown",
+        "cas": "120-92-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOPENTENE",
+        "d": 16.7,
+        "p": 3.8,
+        "h": 1.7,
+        "status": "unknown",
+        "cas": "142-29-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CYCLOPENTENYL ALCOHOL",
+        "d": 18.1,
+        "p": 7.6,
+        "h": 15.6,
+        "status": "unknown",
+        "cas": "1721-33-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOPRENE",
+        "d": 17.2,
+        "p": 2.4,
+        "h": 2,
+        "status": "unknown",
+        "cas": "600-35-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOPROPANE",
+        "d": 17.6,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "75-19-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOPROPYLMETHYLKETONE",
+        "d": 17,
+        "p": 11.1,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "765-43-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CYCLOPROPYLNITRILE",
+        "d": 18.6,
+        "p": 16.2,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "628-74-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "CIS-DECAHYDRONAPHTHALENE",
+        "d": 18.8,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "493-01-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRANS-DECAHYDRONAPHTHALENE",
+        "d": 18,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "493-02-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DECANE",
+        "d": 15.7,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "124-18-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-DECANOL",
+        "d": 17.5,
+        "p": 2.6,
+        "h": 10,
+        "status": "unknown",
+        "cas": "112-30-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-DECANOL",
+        "d": 15.8,
+        "p": 3.9,
+        "h": 10,
+        "status": "unknown",
+        "cas": "112-36-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-DECENE",
+        "d": 15.8,
+        "p": 1,
+        "h": 2.2,
+        "status": "unknown",
+        "cas": "872-05-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-(2-CHLOROETHOXY) METHANE",
+        "d": 17.1,
+        "p": 10.2,
+        "h": 7.1,
+        "status": "unknown",
+        "cas": "1558-95-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIBUTYL ETHER",
+        "d": 15.3,
+        "p": 3.4,
+        "h": 3.3,
+        "status": "unknown",
+        "cas": "142-96-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIBUTYL FUMARATE",
+        "d": 16.7,
+        "p": 3,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "105-75-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOBUTYL SULFOXIDE",
+        "d": 16.3,
+        "p": 10.5,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "55309-85-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOPROPYL SULFOXIDE",
+        "d": 17,
+        "p": 11.5,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "3858-56-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-n-BUTYL ETHER",
+        "d": 15.2,
+        "p": 3.4,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "142-96-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-n-BUTYL SULFOXIDE",
+        "d": 16.4,
+        "p": 10.5,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "6091-84-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-n-PROPYL SULFOXIDE",
+        "d": 17,
+        "p": 13,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "159.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-(2-METHOXYETHYL) ETHER",
+        "d": 15.7,
+        "p": 6.1,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "142.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOBUTYL KETONE",
+        "d": 16,
+        "p": 3.7,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "177.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-(2-CHLORO-ISOPROPYL) ETHER",
+        "d": 19,
+        "p": 8.2,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "146.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-2-ETHYL HEXYL AMINE",
+        "d": 15.6,
+        "p": 0.8,
+        "h": 3.2,
+        "status": "unknown",
+        "cas": "301.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,3-DICHLORO-2-BUTENE",
+        "d": 16.9,
+        "p": 7.8,
+        "h": 2.7,
+        "status": "unknown",
+        "cas": "107.7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,4-DICHLORO-2-BUTYNE",
+        "d": 17.8,
+        "p": 7.6,
+        "h": 2,
+        "status": "unknown",
+        "cas": "97.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOBUTYL CARBINOL",
+        "d": 14.9,
+        "p": 3.1,
+        "h": 10.8,
+        "status": "unknown",
+        "cas": "177.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIACETONE ALCOHOL",
+        "d": 15.8,
+        "p": 8.2,
+        "h": 10.8,
+        "status": "unknown",
+        "cas": "124.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIALLYL AMINE",
+        "d": 15.6,
+        "p": 4.5,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "124.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIALLYL ETHER",
+        "d": 15.3,
+        "p": 4.4,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "118.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIAZOMETHANE",
+        "d": 14.7,
+        "p": 6.1,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "78.1",
+        "risk": "⚠️",
+        "comment": "CMR"
+    },
+    {
+        "name": "DIBENZYL ETHER",
+        "d": 17.3,
+        "p": 3.7,
+        "h": 7.3,
+        "status": "unknown",
+        "cas": "192.7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DIBROMO ETHYLENE",
+        "d": 15.1,
+        "p": 4.8,
+        "h": 7,
+        "status": "unknown",
+        "cas": "85.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIBROMO METHANE",
+        "d": 17.8,
+        "p": 6.4,
+        "h": 7,
+        "status": "unknown",
+        "cas": "69.8",
+        "risk": "⚠️",
+        "comment": "CMR"
+    },
+    {
+        "name": "1,1-DIBROMOETHANE",
+        "d": 18.5,
+        "p": 8.4,
+        "h": 8.8,
+        "status": "unknown",
+        "cas": "91.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-DIBROMOETHYLENE",
+        "d": 18,
+        "p": 4.9,
+        "h": 3,
+        "status": "unknown",
+        "cas": "82.7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-DIBROMOPRENE",
+        "d": 17.7,
+        "p": 11.8,
+        "h": 6.4,
+        "status": "unknown",
+        "cas": "103.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-n-BUTYL ETHER",
+        "d": 15.2,
+        "p": 3.4,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "142-96-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N,N-DIBUTYL FORMAMIDE",
+        "d": 15.5,
+        "p": 8.9,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "182.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIBUTYL PHTHALATE",
+        "d": 17.8,
+        "p": 8.6,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "266.0",
+        "risk": "⚠️",
+        "comment": "CMR (Reprotoxique Cat 1B)"
+    },
+    {
+        "name": "DIBUTYL SEBACATE",
+        "d": 13.9,
+        "p": 4.5,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "339.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIBUTYL STEARATE",
+        "d": 14.5,
+        "p": 3.7,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "382.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-DICHLOROETHYLENE (CIS)",
+        "d": 17,
+        "p": 8,
+        "h": 3.2,
+        "status": "unknown",
+        "cas": "75.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N,N-DICHLOROMETHYL AMINE",
+        "d": 16.5,
+        "p": 7.5,
+        "h": 8,
+        "status": "unknown",
+        "cas": "90.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-DICHLOROPROPENE",
+        "d": 16.2,
+        "p": 7.8,
+        "h": 3,
+        "status": "unknown",
+        "cas": "91.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-DICHLOROPROPENE (CIS)",
+        "d": 17,
+        "p": 8.5,
+        "h": 2.9,
+        "status": "unknown",
+        "cas": "93.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-DICHLOROVINYL ETHYL ETHER",
+        "d": 16.9,
+        "p": 10.5,
+        "h": 6,
+        "status": "unknown",
+        "cas": "117.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-DICHLORO-1,3-BUTADIENE",
+        "d": 17.1,
+        "p": 2.3,
+        "h": 2.8,
+        "status": "unknown",
+        "cas": "104.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DICHLOROACETALDEHYDE",
+        "d": 16.7,
+        "p": 9.1,
+        "h": 7.5,
+        "status": "unknown",
+        "cas": "94.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DICHLOROACETONE",
+        "d": 17.1,
+        "p": 7.6,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "97.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DICHLOROACETONITRILE",
+        "d": 17.4,
+        "p": 9.4,
+        "h": 6.4,
+        "status": "unknown",
+        "cas": "80.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,6-DICHLOROANISOLE",
+        "d": 19.8,
+        "p": 8.4,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "137.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-DICHLOROBENZENE",
+        "d": 19.2,
+        "p": 6.3,
+        "h": 3.3,
+        "status": "unknown",
+        "cas": "112.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,2-DICHLORODIETHYL ETHER",
+        "d": 18.8,
+        "p": 9,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "117.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DICHLORODIFLUOROMETHANE (FREON 12)",
+        "d": 12.3,
+        "p": 2,
+        "h": 0,
+        "status": "unknown",
+        "cas": "92.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DICHLOROETHANE",
+        "d": 16.5,
+        "p": 7.8,
+        "h": 3,
+        "status": "unknown",
+        "cas": "84.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N,N-DICHLOROETHYL AMINE",
+        "d": 16.8,
+        "p": 7.6,
+        "h": 7.7,
+        "status": "unknown",
+        "cas": "98.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DICHLOROETHYLENE",
+        "d": 16.4,
+        "p": 5.2,
+        "h": 2.4,
+        "status": "unknown",
+        "cas": "79.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-DICHLOROETHYLENE (CIS)",
+        "d": 17,
+        "p": 8,
+        "h": 3.2,
+        "status": "unknown",
+        "cas": "75.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DICHLOROMETHYL METHYL ETHER",
+        "d": 17.1,
+        "p": 12.9,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "90.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DICHLOROMONOFLUOROMETHANE (FREON 21)",
+        "d": 15.8,
+        "p": 3.1,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "75.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-DICHLORONITROBENZENE",
+        "d": 19.7,
+        "p": 12.6,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "132.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,5-DICHLOROPHENOL",
+        "d": 20,
+        "p": 6.3,
+        "h": 12.1,
+        "status": "unknown",
+        "cas": "119.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DICHLOROPROPANE",
+        "d": 16.1,
+        "p": 7.8,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "98.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DICHLOROPROPENE",
+        "d": 16.9,
+        "p": 6.7,
+        "h": 2.9,
+        "status": "unknown",
+        "cas": "93.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-DICHLOROTETRAFLUOROETHANE (FREON 114)",
+        "d": 12.6,
+        "p": 1.8,
+        "h": 0,
+        "status": "unknown",
+        "cas": "117.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3,4-DICHLOROTOLUENE",
+        "d": 19.8,
+        "p": 9.8,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "128.7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHANOLAMINE",
+        "d": 17.2,
+        "p": 10.8,
+        "h": 21.2,
+        "status": "unknown",
+        "cas": "95.9",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Reprotoxique)"
+    },
+    {
+        "name": "1,1-DIETHOXY ETHANE",
+        "d": 15,
+        "p": 3.4,
+        "h": 4,
+        "status": "unknown",
+        "cas": "143.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N,N-DIETHYL ACETAMIDE",
+        "d": 16.4,
+        "p": 11.3,
+        "h": 7.5,
+        "status": "unknown",
+        "cas": "124.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYL AMINE",
+        "d": 14.9,
+        "p": 2.3,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "103.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-DIETHYL BENZENE",
+        "d": 18,
+        "p": 0,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "156.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYL CARBONATE",
+        "d": 16.6,
+        "p": 3.1,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "121.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYL ETHER",
+        "d": 14.5,
+        "p": 2.9,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "104.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N,N-DIETHYL FORMAMIDE",
+        "d": 16.4,
+        "p": 11.4,
+        "h": 9.2,
+        "status": "unknown",
+        "cas": "111.4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Reprotoxique)"
+    },
+    {
+        "name": "DIETHYL KETONE",
+        "d": 15.8,
+        "p": 7.6,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "106.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYL PHTHALATE",
+        "d": 17.6,
+        "p": 9.6,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "198.0",
+        "risk": "⚠️",
+        "comment": "CMR (Reprotoxique Cat 1B)"
+    },
+    {
+        "name": "DIETHYL SULFATE",
+        "d": 15.7,
+        "p": 14.7,
+        "h": 7.1,
+        "status": "unknown",
+        "cas": "131.5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Mutagène)"
+    },
+    {
+        "name": "DIETHYL SULFIDE",
+        "d": 16.8,
+        "p": 3.1,
+        "h": 2,
+        "status": "unknown",
+        "cas": "107.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-(DIETHYLAMINO) ETHANOL",
+        "d": 14.9,
+        "p": 5.8,
+        "h": 12,
+        "status": "unknown",
+        "cas": "133.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLDISULFIDE",
+        "d": 16.7,
+        "p": 6.7,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "123.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL",
+        "d": 16.6,
+        "p": 12,
+        "h": 20.7,
+        "status": "unknown",
+        "cas": "94.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL BUTYL ETHER ACETATE",
+        "d": 16,
+        "p": 4.1,
+        "h": 8.2,
+        "status": "unknown",
+        "cas": "208.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL HEXYL ETHER",
+        "d": 16,
+        "p": 6,
+        "h": 10,
+        "status": "unknown",
+        "cas": "204.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL METHYL T-BUTYL ETHER",
+        "d": 16,
+        "p": 7.2,
+        "h": 7.2,
+        "status": "unknown",
+        "cas": "193.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL MONOBUTYL ETHER",
+        "d": 16,
+        "p": 7,
+        "h": 10.6,
+        "status": "unknown",
+        "cas": "170.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL MONOETHYL ETHER",
+        "d": 16.1,
+        "p": 9.2,
+        "h": 12.2,
+        "status": "unknown",
+        "cas": "130.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL MONOETHYL ETHER ACETATE",
+        "d": 16.2,
+        "p": 5.1,
+        "h": 9.2,
+        "status": "unknown",
+        "cas": "175.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL MONOMETHYL ETHER",
+        "d": 16.2,
+        "p": 7.8,
+        "h": 12.6,
+        "status": "unknown",
+        "cas": "118.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENE GLYCOL MONOPROPYL ETHER",
+        "d": 16,
+        "p": 7.2,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "153.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIETHYLENETRIAMINE",
+        "d": 16.7,
+        "p": 13.3,
+        "h": 14.3,
+        "status": "unknown",
+        "cas": "108.0",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Reprotoxique)"
+    },
+    {
+        "name": "1,1-DIFLUOROETHANE",
+        "d": 14.9,
+        "p": 10.2,
+        "h": 3,
+        "status": "unknown",
+        "cas": "69.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DIFLUOROETHYLENE",
+        "d": 15,
+        "p": 6.8,
+        "h": 3.6,
+        "status": "unknown",
+        "cas": "58.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIHEXYL PHTHALATE",
+        "d": 17,
+        "p": 7.6,
+        "h": 3.6,
+        "status": "unknown",
+        "cas": "332.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIHYDROGEN DISULFIDE",
+        "d": 17.3,
+        "p": 6.3,
+        "h": 10.7,
+        "status": "unknown",
+        "cas": "49.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIHYDROPYRAN",
+        "d": 17.5,
+        "p": 5.5,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "91.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISODECYL PHTHALATE",
+        "d": 16.6,
+        "p": 6.2,
+        "h": 2.6,
+        "status": "unknown",
+        "cas": "464.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOHEPTYL PHTHALATE",
+        "d": 16.8,
+        "p": 7.2,
+        "h": 3.4,
+        "status": "unknown",
+        "cas": "364.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISONONYL ADIPATE",
+        "d": 16.2,
+        "p": 1.8,
+        "h": 3.8,
+        "status": "unknown",
+        "cas": "433.7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISONONYL PHTHALATE",
+        "d": 16.6,
+        "p": 6.6,
+        "h": 2.9,
+        "status": "unknown",
+        "cas": "432.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOPROPYL PHOSPHONOFLUORIDATE",
+        "d": 15.7,
+        "p": 10.2,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "174.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIKETENE",
+        "d": 16.2,
+        "p": 15.1,
+        "h": 8.1,
+        "status": "unknown",
+        "cas": "75.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1-DIMETHOXY ETHANE",
+        "d": 15.1,
+        "p": 4.9,
+        "h": 4.9,
+        "status": "unknown",
+        "cas": "106.7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N,N-DIMETHYL ACETAMIDE",
+        "d": 16.8,
+        "p": 11.5,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "92.5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Reprotoxique)"
+    },
+    {
+        "name": "DIMETHYL ACETYLENE",
+        "d": 15.1,
+        "p": 3.4,
+        "h": 7.6,
+        "status": "unknown",
+        "cas": "78.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL AMINE",
+        "d": 15.3,
+        "p": 4.8,
+        "h": 11.2,
+        "status": "unknown",
+        "cas": "66.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL AMINE-DIMER",
+        "d": 15.3,
+        "p": 4.8,
+        "h": 7.9,
+        "status": "unknown",
+        "cas": "132.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N,N-DIMETHYL BUTYRAMIDE",
+        "d": 16.4,
+        "p": 10.6,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "127.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL CARBONATE",
+        "d": 15.5,
+        "p": 3.9,
+        "h": 9.7,
+        "status": "unknown",
+        "cas": "84.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL CELLOSOLVE",
+        "d": 15.4,
+        "p": 6,
+        "h": 6,
+        "status": "unknown",
+        "cas": "104.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL DIETHYLENE GLYCOL",
+        "d": 15.8,
+        "p": 6.1,
+        "h": 9.2,
+        "status": "unknown",
+        "cas": "142.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL DIKETONE",
+        "d": 15.7,
+        "p": 5.3,
+        "h": 11.7,
+        "status": "unknown",
+        "cas": "88.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL DISULFIDE",
+        "d": 17.3,
+        "p": 7.8,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "88.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL ETHANOLAMINE",
+        "d": 16.1,
+        "p": 9.2,
+        "h": 15.3,
+        "status": "unknown",
+        "cas": "101.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL ETHER",
+        "d": 15.2,
+        "p": 6.1,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "63.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL FORMAMIDE",
+        "d": 17.4,
+        "p": 13.7,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "68.1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Reprotoxique)"
+    },
+    {
+        "name": "1,1-DIMETHYL HYDRAZINE",
+        "d": 15.3,
+        "p": 5.9,
+        "h": 11,
+        "status": "unknown",
+        "cas": "60.1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène)"
+    },
+    {
+        "name": "DIMETHYL KETENE",
+        "d": 15.2,
+        "p": 7.4,
+        "h": 4.8,
+        "status": "unknown",
+        "cas": "87.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL PHTHALATE",
+        "d": 18.6,
+        "p": 10.8,
+        "h": 4.9,
+        "status": "unknown",
+        "cas": "163.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL SULFIDE",
+        "d": 16.1,
+        "p": 6.4,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "62.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL SULFONE",
+        "d": 19,
+        "p": 19.4,
+        "h": 12.3,
+        "status": "unknown",
+        "cas": "79.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYL SULFOXIDE",
+        "d": 18.4,
+        "p": 16.4,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "67.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-DIMETHYL-1-BUTENE",
+        "d": 14.9,
+        "p": 1.2,
+        "h": 2.8,
+        "status": "unknown",
+        "cas": "71.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIOCTYL PHTHALATE",
+        "d": 16.6,
+        "p": 7,
+        "h": 3.1,
+        "status": "unknown",
+        "cas": "391.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,4-DIOXANE",
+        "d": 19,
+        "p": 1.8,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "123.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,3-DIOXOLANE",
+        "d": 18.1,
+        "p": 6.6,
+        "h": 9.3,
+        "status": "unknown",
+        "cas": "91.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIPROPYL AMINE",
+        "d": 15.3,
+        "p": 1.4,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "75.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIPROPYLENE GLYCOL",
+        "d": 16.5,
+        "p": 10.6,
+        "h": 17.7,
+        "status": "unknown",
+        "cas": "122.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIPROPYLENE GLYCOL METHYL ETHER",
+        "d": 15.5,
+        "p": 5.7,
+        "h": 11.2,
+        "status": "unknown",
+        "cas": "118.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIPROPYLENE GLYCOL MONOMETHYL ETHER ACETATE",
+        "d": 16.3,
+        "p": 4.9,
+        "h": 8,
+        "status": "unknown",
+        "cas": "132.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,3-DITHIABUTANE",
+        "d": 17.3,
+        "p": 7.8,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "62.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DITRIDECYL PHTHALATE",
+        "d": 16.6,
+        "p": 5.4,
+        "h": 1.9,
+        "status": "unknown",
+        "cas": "622.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-DIVINYL BENZENE",
+        "d": 18.6,
+        "p": 1,
+        "h": 7,
+        "status": "unknown",
+        "cas": "104.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIVINYL SULFIDE",
+        "d": 16.5,
+        "p": 4.6,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "95.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DODECANE",
+        "d": 16,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "170.3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "EICOSANE",
+        "d": 16.5,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "282.8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "EPICHLOROHYDRIN",
+        "d": 18.9,
+        "p": 7.6,
+        "h": 6.6,
+        "status": "unknown",
+        "cas": "106.5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "1,2-EPOXY PROPENE",
+        "d": 16.5,
+        "p": 8.6,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "72.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3,4-EPOXY-1-BUTENE",
+        "d": 16.6,
+        "p": 7.7,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "128.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "EPSILON-CAPROLACTAM",
+        "d": 19.4,
+        "p": 13.8,
+        "h": 3.9,
+        "status": "unknown",
+        "cas": "105.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2-ETHANE DITHIOL",
+        "d": 17.9,
+        "p": 7.2,
+        "h": 8.7,
+        "status": "unknown",
+        "cas": "84.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHANESULFONYLCHLORIDE",
+        "d": 17.7,
+        "p": 14.9,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "78.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHANETHIOL (ETHYL MERCAPTAN)",
+        "d": 15.7,
+        "p": 6.5,
+        "h": 7.1,
+        "status": "unknown",
+        "cas": "75.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHANOL",
+        "d": 15.8,
+        "p": 8.8,
+        "h": 19.4,
+        "status": "unknown",
+        "cas": "64-17-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHANOLAMINE",
+        "d": 17,
+        "p": 15.5,
+        "h": 21.2,
+        "status": "unknown",
+        "cas": "141.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHOXYETHYL PROPIONATE",
+        "d": 16.2,
+        "p": 3.3,
+        "h": 8.8,
+        "status": "unknown",
+        "cas": "945.2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL ACETATE",
+        "d": 15.8,
+        "p": 5.3,
+        "h": 7.2,
+        "status": "unknown",
+        "cas": "141-78-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL ACETYLENE",
+        "d": 15.1,
+        "p": 3.4,
+        "h": 5,
+        "status": "unknown",
+        "cas": "74.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL ACRYLATE",
+        "d": 15.5,
+        "p": 7.1,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "140-88-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL AMINE",
+        "d": 15,
+        "p": 5.6,
+        "h": 10.7,
+        "status": "unknown",
+        "cas": "74.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL AMYL KETONE",
+        "d": 16.2,
+        "p": 4.5,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "110-43-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL BENZENE",
+        "d": 17.8,
+        "p": 0.6,
+        "h": 1.4,
+        "status": "unknown",
+        "cas": "100-41-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL BROMIDE",
+        "d": 16.5,
+        "p": 8.4,
+        "h": 2.3,
+        "status": "unknown",
+        "cas": "74-96-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL BUTYL KETONE",
+        "d": 16.2,
+        "p": 5,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "123-72-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL CARBAMATE",
+        "d": 16.8,
+        "p": 10.1,
+        "h": 13,
+        "status": "unknown",
+        "cas": "51-79-6",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "ETHYL CARBYLAMINE",
+        "d": 15.6,
+        "p": 15.2,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "593-25-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL CHLORIDE",
+        "d": 15.7,
+        "p": 6.1,
+        "h": 2.9,
+        "status": "unknown",
+        "cas": "75-00-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL CHLOROFORMATE",
+        "d": 15.5,
+        "p": 10,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "541-41-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL CINNAMATE",
+        "d": 18.4,
+        "p": 8.2,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "103-36-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-ETHYL CROTON ALDEHYDE",
+        "d": 16.1,
+        "p": 8,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "764-03-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL CYANOACRYLATE",
+        "d": 15.2,
+        "p": 10.3,
+        "h": 9,
+        "status": "unknown",
+        "cas": "7085-85-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL ETHYNYLETHER",
+        "d": 15.4,
+        "p": 7.9,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "4051-84-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL FORMATE",
+        "d": 15.5,
+        "p": 8.4,
+        "h": 8.4,
+        "status": "unknown",
+        "cas": "109-94-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-ETHYL-HEXANOL",
+        "d": 15.9,
+        "p": 3.3,
+        "h": 11.8,
+        "status": "unknown",
+        "cas": "104-76-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-ETHYL HEXYL ACETATE",
+        "d": 15.8,
+        "p": 2.9,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "103-09-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-ETHYL HEXYL ACRYLATE",
+        "d": 14.8,
+        "p": 4.7,
+        "h": 3.4,
+        "status": "unknown",
+        "cas": "103-11-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL HYPOCHLORITE",
+        "d": 15.7,
+        "p": 8.6,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "105-05-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL IODIDE",
+        "d": 17.3,
+        "p": 7.9,
+        "h": 7.2,
+        "status": "unknown",
+        "cas": "75-03-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL ISOCYANATE",
+        "d": 15.4,
+        "p": 12,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "625-37-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "ETHYL ISOPROPENYL ETHER",
+        "d": 14.8,
+        "p": 3.5,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "109-94-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL ISOTHIOCYANATE",
+        "d": 17.2,
+        "p": 14.7,
+        "h": 9,
+        "status": "unknown",
+        "cas": "920-46-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL LACTATE",
+        "d": 16,
+        "p": 7.6,
+        "h": 12.5,
+        "status": "unknown",
+        "cas": "97-64-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL METHACRYLATE",
+        "d": 15.8,
+        "p": 7.2,
+        "h": 7.5,
+        "status": "unknown",
+        "cas": "97-63-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL METHYL SULFIDE",
+        "d": 17.1,
+        "p": 4.8,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "624-92-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL THIOCYANATE",
+        "d": 15.4,
+        "p": 13.4,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "1693-92-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-ETHYL VINYL ETHYL ETHER",
+        "d": 15.3,
+        "p": 4.2,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "623-89-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL VINYLETHER",
+        "d": 14.9,
+        "p": 4.9,
+        "h": 5.6,
+        "status": "unknown",
+        "cas": "109-92-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL VINYLKETONE",
+        "d": 15.8,
+        "p": 11.3,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "78-94-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-ETHYL-1-BUTANOL",
+        "d": 15.8,
+        "p": 4.3,
+        "h": 13.5,
+        "status": "unknown",
+        "cas": "123-96-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYL-1-PROPYNYLETHER",
+        "d": 15.9,
+        "p": 6.4,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "630-20-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-ETHYL-1,3-BUTADIENE",
+        "d": 15.3,
+        "p": 1.6,
+        "h": 3.8,
+        "status": "unknown",
+        "cas": "142-29-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE CARBONATE",
+        "d": 19.4,
+        "p": 21.7,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "96-49-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE CHLOROHYDRIN",
+        "d": 16.9,
+        "p": 8.8,
+        "h": 17.2,
+        "status": "unknown",
+        "cas": "107-07-3",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "ETHYLENE CYANOHYDRIN",
+        "d": 17.2,
+        "p": 18.8,
+        "h": 17.6,
+        "status": "unknown",
+        "cas": "107-13-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE DIBROMIDE",
+        "d": 19.2,
+        "p": 3.5,
+        "h": 8.6,
+        "status": "unknown",
+        "cas": "106-93-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène)"
+    },
+    {
+        "name": "ETHYLENE DICHLORIDE",
+        "d": 19,
+        "p": 7.4,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "107-06-2",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "ETHYLENE GLYCOL",
+        "d": 17,
+        "p": 11,
+        "h": 26,
+        "status": "unknown",
+        "cas": "107-21-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL BUTYL ETHER ACETATE",
+        "d": 15.3,
+        "p": 4.5,
+        "h": 8.8,
+        "status": "unknown",
+        "cas": "112-34-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL DI-T-BUTYL ETHER",
+        "d": 14.7,
+        "p": 4.1,
+        "h": 8.2,
+        "status": "unknown",
+        "cas": "112-73-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL DIACETATE",
+        "d": 16.2,
+        "p": 4.7,
+        "h": 9.8,
+        "status": "unknown",
+        "cas": "111-55-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL METHYL T-BUTYL ETHER",
+        "d": 15.3,
+        "p": 5.1,
+        "h": 8.2,
+        "status": "unknown",
+        "cas": "111-76-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONO-2-ETHYL HEXYL ETHER",
+        "d": 16,
+        "p": 4.1,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "112-62-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONO-T-BUTYL ETHER",
+        "d": 15.3,
+        "p": 6.1,
+        "h": 10.8,
+        "status": "unknown",
+        "cas": "111-76-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONOBUTYL ETHER",
+        "d": 16,
+        "p": 5.1,
+        "h": 12.3,
+        "status": "unknown",
+        "cas": "111-76-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONOETHYL ETHER",
+        "d": 16.2,
+        "p": 9.2,
+        "h": 14.3,
+        "status": "unknown",
+        "cas": "110-80-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONOETHYL ETHER ACETATE",
+        "d": 15.9,
+        "p": 4.7,
+        "h": 10.6,
+        "status": "unknown",
+        "cas": "111-15-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONOISOBUTYL ETHER",
+        "d": 15.2,
+        "p": 4.9,
+        "h": 9.6,
+        "status": "unknown",
+        "cas": "112-31-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONOISOPROPYL ETHER",
+        "d": 16,
+        "p": 8.2,
+        "h": 13.1,
+        "status": "unknown",
+        "cas": "107-98-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONOMETHYL ETHER",
+        "d": 16.2,
+        "p": 9.2,
+        "h": 16.4,
+        "status": "unknown",
+        "cas": "109-86-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE GLYCOL MONOMETHYL ETHER ACETATE",
+        "d": 15.9,
+        "p": 5.5,
+        "h": 11.6,
+        "status": "unknown",
+        "cas": "111-77-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENE METHYL SULFONATE",
+        "d": 16.9,
+        "p": 9.3,
+        "h": 9.6,
+        "status": "unknown",
+        "cas": "62-55-5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Mutagène)"
+    },
+    {
+        "name": "ETHYLENE OXIDE",
+        "d": 15.6,
+        "p": 10,
+        "h": 11,
+        "status": "unknown",
+        "cas": "75-21-8",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène"
+    },
+    {
+        "name": "EHTYLENE SULFIDE",
+        "d": 19.3,
+        "p": 9,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "75-23-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYLENEDIAMINE",
+        "d": 16.6,
+        "p": 8.8,
+        "h": 17,
+        "status": "unknown",
+        "cas": "107-15-3",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Mutagène)"
+    },
+    {
+        "name": "ETHYLENEIMINE",
+        "d": 18.6,
+        "p": 9.8,
+        "h": 7.7,
+        "status": "unknown",
+        "cas": "151-56-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Mutagène)"
+    },
+    {
+        "name": "ETHYLIDENE ACETONE",
+        "d": 16.2,
+        "p": 12.1,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "563-80-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYNYL PROPYL ETHER",
+        "d": 15.4,
+        "p": 3.8,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "109-89-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ETHYNYLMETHYLETHER",
+        "d": 15.8,
+        "p": 8.1,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "109-86-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-FLUORO ACRYLIC ACID",
+        "d": 16,
+        "p": 8.7,
+        "h": 13,
+        "status": "unknown",
+        "cas": "4073-87-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-FLUORO ACRYLONITRILE",
+        "d": 14.1,
+        "p": 15.4,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "544-05-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FLUOROBENZENE",
+        "d": 18.7,
+        "p": 6.1,
+        "h": 2,
+        "status": "unknown",
+        "cas": "462-06-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FLUOROETHYLENE",
+        "d": 15.2,
+        "p": 7,
+        "h": 1,
+        "status": "unknown",
+        "cas": "593-67-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FLUOROMETHANE",
+        "d": 13.4,
+        "p": 10.6,
+        "h": 9.5,
+        "status": "unknown",
+        "cas": "593-53-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FLUOROPRENE",
+        "d": 14.2,
+        "p": 5.8,
+        "h": 1,
+        "status": "unknown",
+        "cas": "109-99-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FORMALDEHYDE",
+        "d": 12.8,
+        "p": 14.4,
+        "h": 15.4,
+        "status": "unknown",
+        "cas": "50-00-0",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène)"
+    },
+    {
+        "name": "FORMAMIDE",
+        "d": 17.2,
+        "p": 26.2,
+        "h": 19,
+        "status": "unknown",
+        "cas": "75-12-7",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "FORMIC ACID",
+        "d": 14.3,
+        "p": 11.9,
+        "h": 16.6,
+        "status": "unknown",
+        "cas": "64-18-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FORMYL FLUORIDE",
+        "d": 11.2,
+        "p": 13.4,
+        "h": 7.9,
+        "status": "unknown",
+        "cas": "353-50-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-FORMYL HEXAMETHYLENE IMINE",
+        "d": 18.5,
+        "p": 10.4,
+        "h": 7.6,
+        "status": "unknown",
+        "cas": "274-01-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "N-FORMYL PIPERIDINE",
+        "d": 18.7,
+        "p": 10.6,
+        "h": 7.8,
+        "status": "unknown",
+        "cas": "111-24-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FUMARONITRILE",
+        "d": 16.7,
+        "p": 13.6,
+        "h": 7.8,
+        "status": "unknown",
+        "cas": "110-17-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FURAN",
+        "d": 17.8,
+        "p": 1.8,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "110-00-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FURFURAL",
+        "d": 18.6,
+        "p": 14.9,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "123-99-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "FURFURYL ALCOHOL",
+        "d": 17.4,
+        "p": 7.6,
+        "h": 15.1,
+        "status": "unknown",
+        "cas": "98-00-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "GLYCEROL",
+        "d": 17.4,
+        "p": 12.1,
+        "h": 29.3,
+        "status": "unknown",
+        "cas": "56-81-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "GLYCIDYL METHACRYLATE",
+        "d": 16.3,
+        "p": 8.5,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "106-91-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "GLYOXAL-ETHANDIAL",
+        "d": 15,
+        "p": 17,
+        "h": 13.3,
+        "status": "unknown",
+        "cas": "107-22-2",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Mutagène)"
+    },
+    {
+        "name": "HEPTANE",
+        "d": 15.3,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "142-82-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-HEPTENE",
+        "d": 15,
+        "p": 1.1,
+        "h": 2.6,
+        "status": "unknown",
+        "cas": "592-76-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "n-HEPTYL ACETATE",
+        "d": 15.8,
+        "p": 2.9,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "112-11-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXADECANE",
+        "d": 16.3,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "544-76-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXAFLUORO 1, 3-BUTADIENE",
+        "d": 13.8,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "474-40-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXAFLUORO ISOPROPANOL",
+        "d": 17.2,
+        "p": 4.5,
+        "h": 14.7,
+        "status": "unknown",
+        "cas": "464-36-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXAFLUOROHEXANOL",
+        "d": 15.1,
+        "p": 4.4,
+        "h": 9.9,
+        "status": "unknown",
+        "cas": "370-01-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXAMETHYLPHOSPHORAMIDE",
+        "d": 18.5,
+        "p": 8.6,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "680-31-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXANE",
+        "d": 14.9,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "110-54-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-HEXENE",
+        "d": 14.7,
+        "p": 1.1,
+        "h": 0,
+        "status": "unknown",
+        "cas": "592-41-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXYL ACETATE",
+        "d": 15.8,
+        "p": 2.9,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "142-92-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXYLENE GLYCOL",
+        "d": 15.7,
+        "p": 8.4,
+        "h": 17.8,
+        "status": "unknown",
+        "cas": "107-41-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HEXYLENE GLYCOL DIACETATE",
+        "d": 15.3,
+        "p": 4.5,
+        "h": 7.2,
+        "status": "unknown",
+        "cas": "123-86-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HYDRAZINE",
+        "d": 14.2,
+        "p": 8.3,
+        "h": 8.9,
+        "status": "unknown",
+        "cas": "302-01-2",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "HYDROGEN CYANIDE",
+        "d": 12.3,
+        "p": 17.6,
+        "h": 9,
+        "status": "unknown",
+        "cas": "74-90-8",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Toxique)"
+    },
+    {
+        "name": "HYDROGEN SULFIDE",
+        "d": 17.9,
+        "p": 6,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "2148878",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "HYDROXYETHYL ACRYLATE",
+        "d": 16,
+        "p": 13.2,
+        "h": 13.4,
+        "status": "unknown",
+        "cas": "818-61-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-IODO-1,2-BUTADIENE",
+        "d": 17.4,
+        "p": 6.3,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "30496-80-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "IODOBENZENE",
+        "d": 19.5,
+        "p": 6,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "591-50-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "IODOPRENE",
+        "d": 17.2,
+        "p": 2.5,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "624-40-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOAMYL ACETATE",
+        "d": 15.3,
+        "p": 3.1,
+        "h": 7,
+        "status": "unknown",
+        "cas": "123-92-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOBUTYL ACETATE",
+        "d": 15.1,
+        "p": 3.7,
+        "h": 6.3,
+        "status": "unknown",
+        "cas": "110-19-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOBUTYL ALCOHOL",
+        "d": 15.1,
+        "p": 5.7,
+        "h": 15.9,
+        "status": "unknown",
+        "cas": "78-83-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOBUTYL ISOBUTYRATE",
+        "d": 15.1,
+        "p": 2.9,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "539-92-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOBUTYLENE",
+        "d": 14.5,
+        "p": 2,
+        "h": 1.5,
+        "status": "unknown",
+        "cas": "115-11-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOBUTYLENEOXIDE",
+        "d": 16.1,
+        "p": 4.8,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "1948-84-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOCYANIC ACID",
+        "d": 15.8,
+        "p": 10.5,
+        "h": 13.6,
+        "status": "unknown",
+        "cas": "301-04-2",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "ISOOCTYL ALCOHOL",
+        "d": 14.4,
+        "p": 7.3,
+        "h": 12.9,
+        "status": "unknown",
+        "cas": "27193-28-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPENTANE",
+        "d": 13.7,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "78-78-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPHORONE",
+        "d": 16.6,
+        "p": 8.2,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "1865696",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPRENE (2-METHYL-1,3-BUTADIENE)",
+        "d": 14.7,
+        "p": 1.4,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "78-79-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPROPYL ACETATE",
+        "d": 14.9,
+        "p": 4.5,
+        "h": 8.2,
+        "status": "unknown",
+        "cas": "108-21-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPROPYL AMINE (2-PROPAN AMINE)",
+        "d": 14.8,
+        "p": 4.4,
+        "h": 6.6,
+        "status": "unknown",
+        "cas": "75-31-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPROPYL CHLORIDE (2-CHLORO PROPANE)",
+        "d": 15.9,
+        "p": 8.3,
+        "h": 2.1,
+        "status": "unknown",
+        "cas": "75-29-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPROPYL ETHER",
+        "d": 13.7,
+        "p": 3.9,
+        "h": 2.3,
+        "status": "unknown",
+        "cas": "108-20-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOPROPYL PALMITATE",
+        "d": 14.3,
+        "p": 3.9,
+        "h": 3.7,
+        "status": "unknown",
+        "cas": "142-91-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOVALERALDEHYDE",
+        "d": 14.7,
+        "p": 9.5,
+        "h": 5,
+        "status": "unknown",
+        "cas": "590-86-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "ISOXAZOLE",
+        "d": 18.8,
+        "p": 13.4,
+        "h": 11.2,
+        "status": "unknown",
+        "cas": "320-20-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "KETENE",
+        "d": 15.4,
+        "p": 7.3,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "463-51-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "LAURYL METHACRYLATE",
+        "d": 14.4,
+        "p": 2.2,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "143-26-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "MALONONITRILE",
+        "d": 17.7,
+        "p": 18.4,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "109-77-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "MESITYL OXIDE",
+        "d": 16.4,
+        "p": 6.1,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "141-79-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "MESITYLENE",
+        "d": 18,
+        "p": 0,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "108-67-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHACRYLALDEHYDE",
+        "d": 15.7,
+        "p": 11.1,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "78-93-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHACRYLAMIDE",
+        "d": 15.8,
+        "p": 11,
+        "h": 11.6,
+        "status": "unknown",
+        "cas": "79-06-1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "METHACRYLIC ACID",
+        "d": 15.8,
+        "p": 2.8,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "79-41-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHACRYLONITRILE",
+        "d": 15.8,
+        "p": 15.1,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "126-98-7",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "METHANOL",
+        "d": 15.1,
+        "p": 12.3,
+        "h": 22.3,
+        "status": "unknown",
+        "cas": "67-56-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-METHOXY-1,3-BUTADIENE",
+        "d": 15.5,
+        "p": 8.3,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "111-27-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHOXYHEXANONE (PENTOXONE)",
+        "d": 15.3,
+        "p": 6,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "110-46-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-METHOXYPHENOL (GUAIACOL)",
+        "d": 18,
+        "p": 8.2,
+        "h": 13.3,
+        "status": "unknown",
+        "cas": "90-05-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-METHOXYPROPIONITRILE",
+        "d": 16.6,
+        "p": 14.4,
+        "h": 7.8,
+        "status": "unknown",
+        "cas": "826-28-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-METHYL (CIS) ACRYLIC ACID",
+        "d": 16.8,
+        "p": 5.2,
+        "h": 12.4,
+        "status": "unknown",
+        "cas": "97-85-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-METHYL-1-BUTANOL",
+        "d": 16,
+        "p": 5.1,
+        "h": 14.3,
+        "status": "unknown",
+        "cas": "126-92-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL 1-PROPENYL ETHER",
+        "d": 15,
+        "p": 4.3,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "115-11-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ACETATE",
+        "d": 15.5,
+        "p": 7.2,
+        "h": 7.6,
+        "status": "unknown",
+        "cas": "79-20-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ACETYLENE",
+        "d": 15.1,
+        "p": 3.8,
+        "h": 9.2,
+        "status": "unknown",
+        "cas": "763-44-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ACRYLATE",
+        "d": 15.3,
+        "p": 6.7,
+        "h": 9.4,
+        "status": "unknown",
+        "cas": "96-33-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-METHYL ALLYL ALCOHOL",
+        "d": 16,
+        "p": 6,
+        "h": 15.5,
+        "status": "unknown",
+        "cas": "123-51-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ALLYL CYANIDE",
+        "d": 16.4,
+        "p": 11.3,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "1903-52-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL AMINE",
+        "d": 13,
+        "p": 7.3,
+        "h": 17.3,
+        "status": "unknown",
+        "cas": "74-89-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL AMYL ACETATE",
+        "d": 15.2,
+        "p": 3.1,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "110-19-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL BENZOATE",
+        "d": 17,
+        "p": 8.2,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "93-58-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL BROMIDE",
+        "d": 17,
+        "p": 8.8,
+        "h": 2.6,
+        "status": "unknown",
+        "cas": "74-83-9",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "METHYL BUTYL KETONE",
+        "d": 15.3,
+        "p": 6.1,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "107-87-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL CHLORIDE",
+        "d": 15.3,
+        "p": 6.1,
+        "h": 3.9,
+        "status": "unknown",
+        "cas": "74-87-3",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "METHYL CHLOROFORMATE",
+        "d": 16.3,
+        "p": 9.5,
+        "h": 8.5,
+        "status": "unknown",
+        "cas": "79-21-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL CYCLOHEXANE",
+        "d": 16,
+        "p": 0,
+        "h": 1,
+        "status": "unknown",
+        "cas": "108-87-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3-METHYL CYCLOHEXANONE",
+        "d": 17.7,
+        "p": 6.3,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "591-44-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-METHYL CYCLOHEXANONE",
+        "d": 17.6,
+        "p": 6.3,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "583-60-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ETHYL ETHER",
+        "d": 14.7,
+        "p": 4.9,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "78-78-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ETHYL KETONE",
+        "d": 16,
+        "p": 9,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "78-93-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ETHYL KETOXIME",
+        "d": 14.7,
+        "p": 4.9,
+        "h": 7.8,
+        "status": "unknown",
+        "cas": "111-27-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL FORMATE",
+        "d": 15.3,
+        "p": 8.4,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "107-31-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL GLYOXAL",
+        "d": 15.5,
+        "p": 16.1,
+        "h": 9.7,
+        "status": "unknown",
+        "cas": "107-22-2",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Mutagène)"
+    },
+    {
+        "name": "METHYL HYDRAZINE",
+        "d": 16.2,
+        "p": 8.7,
+        "h": 14.8,
+        "status": "unknown",
+        "cas": "60-34-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "METHYL HYDROPEROXIDE",
+        "d": 15,
+        "p": 15,
+        "h": 30,
+        "status": "unknown",
+        "cas": "7532-62-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-METHYL IMIDAZOLE",
+        "d": 19.7,
+        "p": 15.6,
+        "h": 11.2,
+        "status": "unknown",
+        "cas": "616-47-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL IODIDE",
+        "d": 17.5,
+        "p": 7.7,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "74-88-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "METHYL ISOAMYL KETONE",
+        "d": 16,
+        "p": 5.7,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "110-12-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ISOBUTYL CARBINOL",
+        "d": 15.4,
+        "p": 3.3,
+        "h": 12.3,
+        "status": "unknown",
+        "cas": "108-11-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ISOBUTYL KETONE",
+        "d": 15.3,
+        "p": 6.1,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "108-83-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ISOCYANATE",
+        "d": 15.6,
+        "p": 7.3,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "624-83-9",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "METHYL ISOPROPENYL KETONE",
+        "d": 15.9,
+        "p": 12.1,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "104-72-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ISOTHIOCYANATE",
+        "d": 17.3,
+        "p": 16.2,
+        "h": 10.1,
+        "status": "unknown",
+        "cas": "334-30-5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "3-METHYL ISOXAZOLE",
+        "d": 19.4,
+        "p": 14.8,
+        "h": 11.8,
+        "status": "unknown",
+        "cas": "145-18-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL MERCAPTAN",
+        "d": 16.6,
+        "p": 7.7,
+        "h": 8.6,
+        "status": "unknown",
+        "cas": "74-93-1",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "METHYL METHACRYLATE",
+        "d": 15.8,
+        "p": 6.5,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "80-62-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL n-AMYL KETONE",
+        "d": 16.2,
+        "p": 5.7,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "110-12-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL n-PROPYL KETONE",
+        "d": 16,
+        "p": 7.6,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "106-68-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-METHYL NAPHTHALENE",
+        "d": 20.6,
+        "p": 0.8,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "90-12-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL NITRATE",
+        "d": 15.8,
+        "p": 14,
+        "h": 4.8,
+        "status": "unknown",
+        "cas": "628-73-7",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Mutagène suspecté)"
+    },
+    {
+        "name": "PYRUVONITRILE",
+        "d": 15.9,
+        "p": 18.9,
+        "h": 8,
+        "status": "unknown",
+        "cas": "70.9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "QUINOLINE",
+        "d": 19.4,
+        "p": 7,
+        "h": 7.6,
+        "status": "unknown",
+        "cas": "91.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "STEARIC ACID",
+        "d": 16.3,
+        "p": 3.3,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "57.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "STYRENE",
+        "d": 18.6,
+        "p": 1,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "100-42-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SUCCINALDEHYDE (BUTANEDIAL)",
+        "d": 16.8,
+        "p": 9.8,
+        "h": 10.5,
+        "status": "unknown",
+        "cas": "110-62-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SUCCINIC ANHYDRIDE",
+        "d": 18.6,
+        "p": 20.1,
+        "h": 10.1,
+        "status": "unknown",
+        "cas": "108-30-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SUCCINONITRILE",
+        "d": 17.9,
+        "p": 16.2,
+        "h": 7.9,
+        "status": "unknown",
+        "cas": "514-00-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SULFOLANE",
+        "d": 18.4,
+        "p": 16.6,
+        "h": 7.4,
+        "status": "unknown",
+        "cas": "126-33-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SULFUR DICYANIDE",
+        "d": 18.1,
+        "p": 13.5,
+        "h": 0,
+        "status": "unknown",
+        "cas": "1628-22-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SULFUR DIOXIDE",
+        "d": 15.8,
+        "p": 8.4,
+        "h": 10,
+        "status": "unknown",
+        "cas": "2025884",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "t-BUTYL ALCOHOL",
+        "d": 15.2,
+        "p": 5.1,
+        "h": 14.7,
+        "status": "unknown",
+        "cas": "75-65-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1,2,2-TETRABROMOETHANE",
+        "d": 22.6,
+        "p": 5.1,
+        "h": 8.2,
+        "status": "unknown",
+        "cas": "79-56-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1,2,2-TETRACHLOROPROPANE",
+        "d": 17.9,
+        "p": 6.7,
+        "h": 3.3,
+        "status": "unknown",
+        "cas": "594-45-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1,2,2-TETRACHLOROETHANE",
+        "d": 18.8,
+        "p": 5.1,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "79-34-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRACHLOROETHYLENE",
+        "d": 18.3,
+        "p": 5.7,
+        "h": 0,
+        "status": "unknown",
+        "cas": "127-18-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "TETRAETHYLORTHOSILICATE",
+        "d": 13.9,
+        "p": 4.3,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "78-10-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAHYDROFURAN",
+        "d": 16.8,
+        "p": 5.7,
+        "h": 8,
+        "status": "unknown",
+        "cas": "109-99-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAHYDRONAPHTHALENE",
+        "d": 19.6,
+        "p": 2,
+        "h": 2.9,
+        "status": "unknown",
+        "cas": "91-20-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAHYDROPYRAN",
+        "d": 16.4,
+        "p": 6.3,
+        "h": 6,
+        "status": "unknown",
+        "cas": "142-62-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAHYDROTHIAPYRAN",
+        "d": 18.5,
+        "p": 6.3,
+        "h": 8.9,
+        "status": "unknown",
+        "cas": "2682-29-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAHYDROTHIOPHENE",
+        "d": 18.9,
+        "p": 7.5,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "110-01-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAMETHYLENE SULFIDE",
+        "d": 18.6,
+        "p": 6.7,
+        "h": 9.1,
+        "status": "unknown",
+        "cas": "139-87-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAMETHYLENE SULFOXIDE",
+        "d": 18.2,
+        "p": 11,
+        "h": 9.1,
+        "status": "unknown",
+        "cas": "67-68-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TETRAMETHYLUREA",
+        "d": 16.7,
+        "p": 8.2,
+        "h": 11,
+        "status": "unknown",
+        "cas": "127-09-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-THIABUTANE",
+        "d": 16.2,
+        "p": 5.9,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "1559-28-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "THIACYCLOPROPANE",
+        "d": 19.3,
+        "p": 9.1,
+        "h": 5,
+        "status": "unknown",
+        "cas": "3375-21-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "THIAZOLE",
+        "d": 20.5,
+        "p": 18.8,
+        "h": 10.8,
+        "status": "unknown",
+        "cas": "109-10-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "THIOACETAMIDE",
+        "d": 17.5,
+        "p": 20.6,
+        "h": 20.2,
+        "status": "unknown",
+        "cas": "62-55-5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Mutagène)"
+    },
+    {
+        "name": "THIOACETIC ACID",
+        "d": 17,
+        "p": 6.7,
+        "h": 8.9,
+        "status": "unknown",
+        "cas": "375-39-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "GAMMA-THIOBUTYROLACTONE",
+        "d": 19,
+        "p": 6.9,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "872-50-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "THIOCYANIC ACID",
+        "d": 16.8,
+        "p": 8.9,
+        "h": 10.9,
+        "status": "unknown",
+        "cas": "1769-01-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "THIONYL CHLORIDE",
+        "d": 16.9,
+        "p": 6.2,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "2125597",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "THIOPHENE",
+        "d": 18.9,
+        "p": 2.4,
+        "h": 7.8,
+        "status": "unknown",
+        "cas": "110-02-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "THIOUREA",
+        "d": 20,
+        "p": 21.7,
+        "h": 14.8,
+        "status": "unknown",
+        "cas": "62-56-6",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Mutagène)"
+    },
+    {
+        "name": "1,4-THIOXANE",
+        "d": 19,
+        "p": 6.6,
+        "h": 7.7,
+        "status": "unknown",
+        "cas": "110-81-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TIGALDEHYDE",
+        "d": 16.2,
+        "p": 12.9,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "980-73-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TOLUENE",
+        "d": 18,
+        "p": 1.4,
+        "h": 2,
+        "status": "unknown",
+        "cas": "108-88-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TOLYLENE DIISOCYANATE",
+        "d": 19.3,
+        "p": 7.9,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "26471-62-5",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène)"
+    },
+    {
+        "name": "1,2,3-TRIAZOLE",
+        "d": 20.7,
+        "p": 8.8,
+        "h": 15,
+        "status": "unknown",
+        "cas": "288-88-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIBROMO ETHYLENE",
+        "d": 15.3,
+        "p": 9.4,
+        "h": 8,
+        "status": "unknown",
+        "cas": "79-38-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIBUTYL PHOSPHATE",
+        "d": 16.3,
+        "p": 6.3,
+        "h": 4.3,
+        "status": "unknown",
+        "cas": "126-73-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3,3,3-TRICHLORO PROPENE",
+        "d": 17.7,
+        "p": 15.5,
+        "h": 3.4,
+        "status": "unknown",
+        "cas": "540-59-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1,2-TRICHLORO PROPENE",
+        "d": 17.7,
+        "p": 15.7,
+        "h": 3.4,
+        "status": "unknown",
+        "cas": "715-66-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,2,3-TRICHLORO PROPENE",
+        "d": 17.8,
+        "p": 15.7,
+        "h": 3.4,
+        "status": "unknown",
+        "cas": "507-31-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRICHLOROACETONITRILE",
+        "d": 16.4,
+        "p": 7.4,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "555-24-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRICHLOROBIPHENYL",
+        "d": 19.2,
+        "p": 5.3,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "72-72-0",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 - Reprotoxique)"
+    },
+    {
+        "name": "1,1,1-TRICHLOROETHANE",
+        "d": 16.8,
+        "p": 4.3,
+        "h": 2,
+        "status": "unknown",
+        "cas": "71-55-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1,2-TRICHLOROETHANE",
+        "d": 18.2,
+        "p": 5.3,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "79-00-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRICHLOROETHYLENE",
+        "d": 18,
+        "p": 3.1,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "79-01-6",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "TRICHLOROFLUOROMETHANE (FREON 11)",
+        "d": 15.3,
+        "p": 2,
+        "h": 0,
+        "status": "unknown",
+        "cas": "75-69-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,4,5-TRICHLOROTHIOPHENOL",
+        "d": 21,
+        "p": 4.5,
+        "h": 9.1,
+        "status": "unknown",
+        "cas": "1337-07-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1,2-TRICHLOROTRIFLUOROETHANE (FREON 113)",
+        "d": 14.7,
+        "p": 1.6,
+        "h": 0,
+        "status": "unknown",
+        "cas": "76-13-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRICRESYL PHOSPHATE",
+        "d": 19,
+        "p": 12.3,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "1330-78-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIDECYL ALCOHOL",
+        "d": 14.3,
+        "p": 3.1,
+        "h": 9,
+        "status": "unknown",
+        "cas": "112-53-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIETHANOLAMINE",
+        "d": 17.3,
+        "p": 22.4,
+        "h": 23.3,
+        "status": "unknown",
+        "cas": "102-71-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIETHYLAMINE",
+        "d": 17.8,
+        "p": 0.4,
+        "h": 1,
+        "status": "unknown",
+        "cas": "121-44-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIETHYLENE GLYCOL",
+        "d": 16,
+        "p": 12.5,
+        "h": 18.6,
+        "status": "unknown",
+        "cas": "112-27-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIETHYLENE GLYCOL MONOOLEYL ETHER",
+        "d": 13.3,
+        "p": 3.1,
+        "h": 8.4,
+        "status": "unknown",
+        "cas": "622-46-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIETHYLPHOSPHATE",
+        "d": 16.7,
+        "p": 11.4,
+        "h": 9.2,
+        "status": "unknown",
+        "cas": "78-40-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIFLUOROACETIC ACID",
+        "d": 15.6,
+        "p": 9.9,
+        "h": 11.6,
+        "status": "unknown",
+        "cas": "76-05-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,1,1-TRIFLUOROETHANE",
+        "d": 14.6,
+        "p": 10.7,
+        "h": 0,
+        "status": "unknown",
+        "cas": "75-89-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIFLUOROMETHANE (FREON 23)",
+        "d": 14.4,
+        "p": 8.9,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "75-46-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIISONONYL TRIMELLILATE",
+        "d": 16.6,
+        "p": 5.7,
+        "h": 2.2,
+        "status": "unknown",
+        "cas": "35589-96-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIISOOCTYL TRIMELLITATE",
+        "d": 16.6,
+        "p": 6,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "53806-82-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYL AMINE",
+        "d": 14.6,
+        "p": 3.4,
+        "h": 1.8,
+        "status": "unknown",
+        "cas": "75-50-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,2,4-TRIMETHYL-1,3-PENTANEDIOL MONOISOBUTYRATE",
+        "d": 15.1,
+        "p": 6.1,
+        "h": 9.8,
+        "status": "unknown",
+        "cas": "25265-77-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYL BENZENE",
+        "d": 18.4,
+        "p": 0,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "526-73-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYL CHLORO SILANE",
+        "d": 15.3,
+        "p": 8.5,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "75-77-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYL PHOSPHATE",
+        "d": 16.5,
+        "p": 12.9,
+        "h": 5,
+        "status": "unknown",
+        "cas": "512-56-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYLSILANE",
+        "d": 14,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "7620-77-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIOCTYL PHOSPHATE",
+        "d": 16.3,
+        "p": 6.2,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "78-30-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIOCTYLAMINE",
+        "d": 17.5,
+        "p": 0.6,
+        "h": 2.1,
+        "status": "unknown",
+        "cas": "111-27-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIPHENYL PHOSPHATE",
+        "d": 20.1,
+        "p": 8.4,
+        "h": 4.3,
+        "status": "unknown",
+        "cas": "115-86-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-(2-ETHYLHEXYL) PHOSPHATE",
+        "d": 16.6,
+        "p": 6.6,
+        "h": 2.9,
+        "status": "unknown",
+        "cas": "78-42-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-(CHLOROMETHYL) PHOSPHINE OXIDE",
+        "d": 19.2,
+        "p": 7.2,
+        "h": 3,
+        "status": "unknown",
+        "cas": "13674-84-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-(TRIMETHYLSILYL) PHOSPHATE",
+        "d": 15.5,
+        "p": 7,
+        "h": 1.9,
+        "status": "unknown",
+        "cas": "21351-38-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-2-ETHYLHEXYL CITRATE",
+        "d": 15.6,
+        "p": 6.2,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "77-90-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS(CHLOROETHYL) PHOSPHATE",
+        "d": 19.6,
+        "p": 8,
+        "h": 3.9,
+        "status": "unknown",
+        "cas": "115-96-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-ISOBUTYLPHENYL PHOSPHATE",
+        "d": 19.3,
+        "p": 8.9,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "68937-41-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-OPHENYLPHOSPHATE",
+        "d": 19.5,
+        "p": 6.7,
+        "h": 4.3,
+        "status": "unknown",
+        "cas": "115-86-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-(TRIMETHYLSILYL) PHOSPHINE OXIDE",
+        "d": 16.6,
+        "p": 5.7,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "21351-37-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIS-(TRIMETHYLSILYL) PHOSPHINE",
+        "d": 16.3,
+        "p": 3.8,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "21351-39-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRITERPENE OILS",
+        "d": 19.2,
+        "p": 5.5,
+        "h": 7.9,
+        "status": "unknown",
+        "cas": "933.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRITON X-100",
+        "d": 18.8,
+        "p": 9.5,
+        "h": 13.7,
+        "status": "unknown",
+        "cas": "9002-93-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRITYL ALCOHOL",
+        "d": 20.8,
+        "p": 5.7,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "76-01-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRITYL CHLORIDE",
+        "d": 22.3,
+        "p": 5.6,
+        "h": 3.7,
+        "status": "unknown",
+        "cas": "76-01-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIUMITE 120",
+        "d": 19,
+        "p": 5.5,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "105.0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIUMITE 165",
+        "d": 19.5,
+        "p": 6,
+        "h": 4.5,
+        "status": "unknown",
+        "cas": "110.5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIUMITE 202",
+        "d": 19.7,
+        "p": 6.3,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "112.4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIUMITE QY",
+        "d": 19.2,
+        "p": 5.8,
+        "h": 4.3,
+        "status": "unknown",
+        "cas": "112.1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIURIDINE",
+        "d": 19,
+        "p": 5.2,
+        "h": 4.8,
+        "status": "unknown",
+        "cas": "120.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "UREA",
+        "d": 17,
+        "p": 26.2,
+        "h": 19,
+        "status": "unknown",
+        "cas": "57-13-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "UREA CARBAMATE",
+        "d": 17.8,
+        "p": 25.8,
+        "h": 19.2,
+        "status": "unknown",
+        "cas": "124-55-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "UREA FORMALDEHYDE",
+        "d": 17.7,
+        "p": 26,
+        "h": 18.9,
+        "status": "unknown",
+        "cas": "2597366",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "URETHANE",
+        "d": 15.5,
+        "p": 9,
+        "h": 11.9,
+        "status": "unknown",
+        "cas": "51-79-6",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène)"
+    },
+    {
+        "name": "URONIUM SALTS",
+        "d": 17,
+        "p": 14.5,
+        "h": 13,
+        "status": "unknown",
+        "cas": "9004-29-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "UTS-789",
+        "d": 18,
+        "p": 9.5,
+        "h": 8.1,
+        "status": "unknown",
+        "cas": "127",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VALEER PHENYLACETONE",
+        "d": 19.1,
+        "p": 6.7,
+        "h": 7.3,
+        "status": "unknown",
+        "cas": "105",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-FLUOROANISOLE",
+        "d": 18.7,
+        "p": 7.3,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "150-81-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-BROMOANISOLE",
+        "d": 19.8,
+        "p": 8.4,
+        "h": 6.7,
+        "status": "unknown",
+        "cas": "104-94-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3,4-DICHLORONITROBENZENE",
+        "d": 20.1,
+        "p": 7.2,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "130.6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-BROMOCHLOROBENZENE",
+        "d": 20.3,
+        "p": 7.7,
+        "h": 4.6,
+        "status": "unknown",
+        "cas": "615-60-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-BROMONITROBENZENE",
+        "d": 20.9,
+        "p": 9.9,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "586-78-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-DIBROMOBENZENE",
+        "d": 20.7,
+        "p": 6.5,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "108-86-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-BROMOBENZOYL CHLORIDE",
+        "d": 20.2,
+        "p": 6.5,
+        "h": 5.5,
+        "status": "unknown",
+        "cas": "586-77-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-BROMOBENZONITRILE",
+        "d": 20.4,
+        "p": 9.3,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "623-00-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "α,α-DICHLORO TOLUENE",
+        "d": 19.9,
+        "p": 6.6,
+        "h": 2.4,
+        "status": "unknown",
+        "cas": "134-02-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-CHLOROFLUOROBENZENE",
+        "d": 19.4,
+        "p": 8.7,
+        "h": 2,
+        "status": "unknown",
+        "cas": "307-41-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLORONITROBENZENE",
+        "d": 20.4,
+        "p": 9.6,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "100-00-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-DIFLUOROBENZENE",
+        "d": 18,
+        "p": 9,
+        "h": 1,
+        "status": "unknown",
+        "cas": "98-56-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROBENZONITRILE",
+        "d": 19.5,
+        "p": 8,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "104-47-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLOROBENZOYL CHLORIDE",
+        "d": 19.9,
+        "p": 6.7,
+        "h": 5.1,
+        "status": "unknown",
+        "cas": "122-01-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "6-CHLORO-2-NITROTOLUENE",
+        "d": 20.3,
+        "p": 9.6,
+        "h": 3.8,
+        "status": "unknown",
+        "cas": "83-72-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "p-CHLOROTOLUENE",
+        "d": 19.1,
+        "p": 6.2,
+        "h": 2.6,
+        "status": "unknown",
+        "cas": "106-43-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-BROMO-4-ETHOXY BENZENE",
+        "d": 19.5,
+        "p": 7.7,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "104-92-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-4-ETHOXY BENZENE",
+        "d": 19.3,
+        "p": 6.3,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "637-49-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1-CHLORO-2-ETHOXY BENZENE",
+        "d": 19.2,
+        "p": 8.1,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "1725-61-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "PENTACHLOROCYCLOPROPANE",
+        "d": 18.5,
+        "p": 10.5,
+        "h": 3.7,
+        "status": "unknown",
+        "cas": "128-52-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLORO-2-NITROTOLUENE",
+        "d": 19.9,
+        "p": 11.8,
+        "h": 3.8,
+        "status": "unknown",
+        "cas": "89-60-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-FLUOROPROPYLPHENONE",
+        "d": 19.6,
+        "p": 7.1,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "138-55-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "PENTAFLUOROBENZOPHENONE",
+        "d": 19.3,
+        "p": 8.1,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "1619-69-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,4-DICHLORONITROBENZENE",
+        "d": 20.4,
+        "p": 8.7,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "121-14-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,4-DIFLUORONITROBENZENE",
+        "d": 19.4,
+        "p": 11,
+        "h": 3.7,
+        "status": "unknown",
+        "cas": "510-15-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,4-DICHLORO-3-FLUORONITROBENZENE",
+        "d": 19.9,
+        "p": 7.2,
+        "h": 4.2,
+        "status": "unknown",
+        "cas": "6351-10-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,3-DICHLORO-2-FLUOROBENZENE",
+        "d": 19.4,
+        "p": 9.1,
+        "h": 2.7,
+        "status": "unknown",
+        "cas": "626-94-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,5-DICHLOROBENZOTRIFLUORIDE",
+        "d": 20,
+        "p": 4.7,
+        "h": 2.4,
+        "status": "unknown",
+        "cas": "364-23-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-FLUORO-3-NITROBENZOFLUORIDE",
+        "d": 19.4,
+        "p": 7.2,
+        "h": 3.7,
+        "status": "unknown",
+        "cas": "621-64-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,4-DICHLORO-5-NITROBENZOTRIFLUORIDE",
+        "d": 19.9,
+        "p": 7.6,
+        "h": 3.7,
+        "status": "unknown",
+        "cas": "406-25-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,6-DIFLUOROBENZONITRILE",
+        "d": 18.8,
+        "p": 11.2,
+        "h": 3.2,
+        "status": "unknown",
+        "cas": "612-18-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3,5-DIFLUOROBENZONITRILE",
+        "d": 18.8,
+        "p": 11.2,
+        "h": 3.2,
+        "status": "unknown",
+        "cas": "512-50-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "INDOLE",
+        "d": 19.8,
+        "p": 7.5,
+        "h": 6.5,
+        "status": "unknown",
+        "cas": "120-72-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "SKATOLE",
+        "d": 20,
+        "p": 7.1,
+        "h": 6.2,
+        "status": "unknown",
+        "cas": "83-34-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,5-DICHLOROPENTANE",
+        "d": 19,
+        "p": 7.8,
+        "h": 1.5,
+        "status": "unknown",
+        "cas": "100-41-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2-CHLOROETHYL ETHYL SULFIDE",
+        "d": 17.2,
+        "p": 5,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "63918-89-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "NITROFORM",
+        "d": 16.2,
+        "p": 21.8,
+        "h": 4.1,
+        "status": "unknown",
+        "cas": "476-19-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYLSILYL ACETATE",
+        "d": 15.8,
+        "p": 4.3,
+        "h": 1.4,
+        "status": "unknown",
+        "cas": "1761-71-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYLSILYL CHLORIDE",
+        "d": 15.5,
+        "p": 7.5,
+        "h": 0.6,
+        "status": "unknown",
+        "cas": "75-77-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYLPHOSPHONIC ACID",
+        "d": 16.2,
+        "p": 14.9,
+        "h": 7.2,
+        "status": "unknown",
+        "cas": "585-63-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DIMETHYLMETHYLPHOSPHONATE",
+        "d": 16.7,
+        "p": 13.1,
+        "h": 7.5,
+        "status": "unknown",
+        "cas": "124-67-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOPROPYL METHYL PHOSPHONATE",
+        "d": 16.4,
+        "p": 10,
+        "h": 5.7,
+        "status": "unknown",
+        "cas": "299-94-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL PHOSPHONIC DIFLUORIDE",
+        "d": 14,
+        "p": 14,
+        "h": 8.4,
+        "status": "unknown",
+        "cas": "778-41-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOPROPYL PHOSPHONOFLUORIDATE",
+        "d": 15.7,
+        "p": 10.2,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "475-98-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "METHYL ISOCYANATE",
+        "d": 15.6,
+        "p": 7.3,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "624-83-9",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 2 – Cancérogène suspecté)"
+    },
+    {
+        "name": "N,N,N,N,N-TETRAMETHYLTHIOUREA",
+        "d": 17.3,
+        "p": 6,
+        "h": 10.5,
+        "status": "unknown",
+        "cas": "2032-65-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "DI-ISOBUTYL SULFOXIDE",
+        "d": 16.3,
+        "p": 10.5,
+        "h": 6.1,
+        "status": "unknown",
+        "cas": "55309-85-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,4-DICHLOROBENZALDEHYDE",
+        "d": 19.7,
+        "p": 8.8,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "120-36-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-(TRIFLUOROMETHYL) ACETOPHENONE",
+        "d": 18.8,
+        "p": 6.1,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "431-89-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3,4-DICHLOROPHENYL ACETONITRILE",
+        "d": 20.5,
+        "p": 10.8,
+        "h": 4.4,
+        "status": "unknown",
+        "cas": "19721-46-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,6-DIMETHYL PHENOL",
+        "d": 19.1,
+        "p": 4.9,
+        "h": 12.9,
+        "status": "unknown",
+        "cas": "576-26-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "3,4-DIMETHYL PHENOL",
+        "d": 19.2,
+        "p": 6,
+        "h": 13.4,
+        "status": "unknown",
+        "cas": "95-51-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "PHENYL ACETONITRILE",
+        "d": 19.5,
+        "p": 12.3,
+        "h": 3.8,
+        "status": "unknown",
+        "cas": "140-29-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,6-DICHLOROPHENOL",
+        "d": 20.1,
+        "p": 7.5,
+        "h": 10.9,
+        "status": "unknown",
+        "cas": "120-83-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-CHLOROBENZOTRICHLORIDE",
+        "d": 20.3,
+        "p": 5.5,
+        "h": 3.5,
+        "status": "unknown",
+        "cas": "121-69-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "5-BROMO-2-NITROBENZOTRIFLUORIDE",
+        "d": 20,
+        "p": 6,
+        "h": 4.9,
+        "status": "unknown",
+        "cas": "323-42-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "UNSPECIFIED SOLVENT MIXTURE",
+        "d": 15,
+        "p": 8,
+        "h": 6,
+        "status": "unknown",
+        "cas": "À valider",
+        "risk": "⚠️",
+        "comment": "À valider"
+    },
+    {
+        "name": "TRIETHYLENE GLYCOL MONOMETHYL ETHER",
+        "d": 16.2,
+        "p": 7.6,
+        "h": 12.5,
+        "status": "unknown",
+        "cas": "112-35-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "PROPYLENE GLYCOL MONOISOPROPYL ETHER",
+        "d": 15.5,
+        "p": 6.1,
+        "h": 11,
+        "status": "unknown",
+        "cas": "1569-01-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYLBENZENE",
+        "d": 17.8,
+        "p": 0.4,
+        "h": 1,
+        "status": "unknown",
+        "cas": "526-73-8",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYLENEOXIDE",
+        "d": 19,
+        "p": 9.8,
+        "h": 7.2,
+        "status": "unknown",
+        "cas": "97-99-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYLENESULFIDE",
+        "d": 18.8,
+        "p": 7.8,
+        "h": 9.4,
+        "status": "unknown",
+        "cas": "624-92-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "2,2,4-TRIMETHYLPENTANE",
+        "d": 14.1,
+        "p": 0,
+        "h": 0,
+        "status": "unknown",
+        "cas": "540-84-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIMETHYLPHOSPHATE",
+        "d": 16.7,
+        "p": 15.9,
+        "h": 10.2,
+        "status": "unknown",
+        "cas": "512-56-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "1,3,5-TRIOXANE",
+        "d": 18.7,
+        "p": 9.2,
+        "h": 8.6,
+        "status": "unknown",
+        "cas": "112-21-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "TRIPROPYLENE GLYCOL MONOMETHYL ETHER",
+        "d": 15.3,
+        "p": 5.5,
+        "h": 10.4,
+        "status": "unknown",
+        "cas": "25498-49-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "UREA-R",
+        "d": 19.4,
+        "p": 18.7,
+        "h": 26.4,
+        "status": "unknown",
+        "cas": "57-13-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VALERONITRILE",
+        "d": 15.3,
+        "p": 11,
+        "h": 4.8,
+        "status": "unknown",
+        "cas": "109-89-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL 2-CHLORO ETHYL ETHER",
+        "d": 16.3,
+        "p": 6.7,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "622-54-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL 2-METHOXY ETHYL ETHER",
+        "d": 15.9,
+        "p": 6.7,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "17643-96-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL ACETATE",
+        "d": 16,
+        "p": 7.2,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "108-05-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL ACETIC ACID",
+        "d": 16.8,
+        "p": 5.2,
+        "h": 12.3,
+        "status": "unknown",
+        "cas": "105-38-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL ACETYLENE",
+        "d": 15.1,
+        "p": 1.7,
+        "h": 12,
+        "status": "unknown",
+        "cas": "540-17-4",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL ALLYL ETHER",
+        "d": 14.9,
+        "p": 6.5,
+        "h": 5.3,
+        "status": "unknown",
+        "cas": "556-44-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL AMINE",
+        "d": 15.7,
+        "p": 7.2,
+        "h": 11.8,
+        "status": "unknown",
+        "cas": "107-17-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL BROMIDE",
+        "d": 15.9,
+        "p": 6.3,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "593-60-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL BUTYL SULFIDE",
+        "d": 16,
+        "p": 5,
+        "h": 5.4,
+        "status": "unknown",
+        "cas": "3781-97-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL BUTYRATE",
+        "d": 15.6,
+        "p": 3.9,
+        "h": 6.9,
+        "status": "unknown",
+        "cas": "624-59-1",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL CHLORIDE",
+        "d": 16,
+        "p": 6.5,
+        "h": 2.4,
+        "status": "unknown",
+        "cas": "75-01-4",
+        "risk": "⚠️",
+        "comment": "CMR (Cat 1B – Cancérogène, Mutagène, Reprotoxique)"
+    },
+    {
+        "name": "VINYL CROTONATE",
+        "d": 15.9,
+        "p": 5,
+        "h": 9,
+        "status": "unknown",
+        "cas": "363-83-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL ETHER",
+        "d": 14.8,
+        "p": 4.2,
+        "h": 5.8,
+        "status": "unknown",
+        "cas": "7879-09-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL ETHYL SULFIDE",
+        "d": 16.4,
+        "p": 5.8,
+        "h": 6.3,
+        "status": "unknown",
+        "cas": "5921-90-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL FORMATE",
+        "d": 15.3,
+        "p": 6.5,
+        "h": 9.7,
+        "status": "unknown",
+        "cas": "623-88-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL IODIDE (IODOETHENE)",
+        "d": 17.1,
+        "p": 5.5,
+        "h": 7.3,
+        "status": "unknown",
+        "cas": "593-60-2",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL PROPIONATE",
+        "d": 15.6,
+        "p": 8,
+        "h": 4.7,
+        "status": "unknown",
+        "cas": "527-09-3",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL PROPYL ETHER",
+        "d": 14.9,
+        "p": 3.5,
+        "h": 5.2,
+        "status": "unknown",
+        "cas": "637-73-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "4-VINYL PYRIDINE",
+        "d": 18.1,
+        "p": 7.2,
+        "h": 6.8,
+        "status": "unknown",
+        "cas": "100-42-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL PYRROLIDONE",
+        "d": 16.4,
+        "p": 9.3,
+        "h": 5.9,
+        "status": "unknown",
+        "cas": "88-12-0",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL SILANE",
+        "d": 15.5,
+        "p": 2.6,
+        "h": 4,
+        "status": "unknown",
+        "cas": "7803-62-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL TRIFLUORO ACETATE",
+        "d": 13.9,
+        "p": 4.3,
+        "h": 7.6,
+        "status": "unknown",
+        "cas": "418-60-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYL TRIMETHYL SILANE",
+        "d": 14.5,
+        "p": 1,
+        "h": 2.5,
+        "status": "unknown",
+        "cas": "75-56-9",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "VINYLENECARBONATE",
+        "d": 17.3,
+        "p": 18.1,
+        "h": 9.6,
+        "status": "unknown",
+        "cas": "931-30-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "WATER",
+        "d": 15.5,
+        "p": 16,
+        "h": 42.3,
+        "status": "unknown",
+        "cas": "7732-18-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "WATER — 1% IN R = 18.1",
+        "d": 15.1,
+        "p": 20.4,
+        "h": 16.5,
+        "status": "unknown",
+        "cas": "7732-18-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "WATER — 18",
+        "d": 15.5,
+        "p": 16,
+        "h": 42.3,
+        "status": "unknown",
+        "cas": "7732-18-5",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "XYLENE",
+        "d": 17.6,
+        "p": 1,
+        "h": 3.1,
+        "status": "unknown",
+        "cas": "1330-20-7",
+        "risk": "✅",
+        "comment": "NON CMR"
+    },
+    {
+        "name": "o-XYLENE",
+        "d": 17.8,
+        "p": 1,
+        "h": 3.1,
+        "status": "unknown",
+        "cas": "95-47-6",
+        "risk": "✅",
+        "comment": "NON CMR"
+    }
+]
