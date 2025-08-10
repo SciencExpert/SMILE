@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
 <style>
+<style>
 html, body {
   height: 100%;
   margin: 0;
@@ -21,7 +22,7 @@ html, body {
 
 /* Panels */
 #leftPanel, #rightPanel {
-	width:100%;
+  width: 100%;
   padding: 5px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -164,13 +165,14 @@ input, select {
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
-    height: auto;
+    height: auto; /* height auto pour s'adapter au contenu */
   }
   #leftPanel, #rightPanel {
-    flex: 1 1 100%;
+    flex: none; /* désactive flex-grow/shrink */
+    width: 100%;
+    min-width: auto; /* annule min-width */
     border-right: none;
     border-bottom: 1px solid #ccc;
-    min-width: auto;
   }
   table {
     font-size: 0.9em;
@@ -202,6 +204,9 @@ input, select {
   #footer {
     font-size: 0.9em;
   }
+  #leftPanel, #rightPanel {
+    min-width: auto !important;
+  }
 }
 
 /* Popup plein écran sur mobiles */
@@ -222,7 +227,6 @@ input, select {
     right: 15px;
   }
 }
-
   </style>
 </head>
 <body>
@@ -969,6 +973,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
