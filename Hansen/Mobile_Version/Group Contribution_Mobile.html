@@ -1,100 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>SciencExpert_Calculateur HSP - Hansen</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
-<style>
-html, body {height: 100%; margin: 0; font-family: Arial, sans-serif;}
-.container { display: flex; height: 100vh; }
-#leftPanel, #rightPanel { padding: 5px; box-sizing: border-box; overflow-y: auto; }
-#leftPanel { background-color: #d6e1d5; flex:1 1 35%; border-right: 1px solid #ccc; text-align:center;}
-#rightPanel { background-color: #fff; flex:1 1 65%; }
+  <meta charset="UTF-8">
+  <title>SciencExpert_Calculateur HSP - V21</title>
+  <link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
 
-table { width:100%; border-collapse: collapse; margin-top:10px;}
-th, td { padding: 6px; border: 1px solid #ccc; text-align: center; }
-input, select { width: 100%; box-sizing: border-box; }
+
+
+
+    <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .container { display: flex; height: 100vh; }
+    .left, .right { flex: 1; padding:  5px; box-sizing: border-box; overflow-y: auto; }
+    .left { background-color: #f9f9f9; border-right: 1px solid #ccc; }
+    .right { background-color: #fff; position: relative;padding:0px }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 6px; border: 1px solid #ccc; text-align: center; }
+    input, select { width: 100%; box-sizing: border-box; }
+    .results { font-size: 1em; margin-top: 10px; }
+
+
+
+    
+.row { display: flex; flex-wrap: wrap; gap: 10px;  text-align: center; align-items: center;  justify-content: center; margin-top: 10px; }
+    .row span { display: inline-block; }
+   
+ h2, h3 { color: #2c3e50; margin-bottom: 10px; }
+    button { margin-top: 10px; padding: 6px 10px; }
+    #graph { width: 100%; height: 500px; margin-top: 20px; }
+    .popup {
+      display: none;
+      position: absolute;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: auto;
+      z-index: 999;
+      top: 200px;
+      left: 20px;
+    }
+    .popup-toggle { cursor: pointer; text-decoration: underline; color: grey; }
+    .popup-close { float: right; cursor: pointer; color: red; font-weight: bold; margin-left: 10px; }
+    #r0 { width: 50px; }
+
+
+    #leftPanel { width: 35%; overflow-y: auto; padding: 5px; box-sizing: border-box; border-right: 1px solid #ccc; 
+  height: 100%;
+  overflow-y: auto; /* utile si contenu dépasse */
+  box-sizing: border-box;
+background-color:#d6e1d5;//#FEFDE7;
+text-align:center;
+}
+    #rightPanel { width: 65%; padding: 5px; box-sizing: border-box; 
+  height: 100%;
+  overflow-y: auto; /* utile si contenu dépasse */
+  box-sizing: border-box;
+}
+
+.calcul-button {
+  display: inline-block;
+margin: 0px;width: 80px;background:transparent;border:solid 0px black; cursor:pointer
+}
+.calcul-button:hover {
+  background-color: #005f90;
+  transform: scale(1.05);
+color : white;
+border-radius: 15px;
+}
+
 .predict-button {
-  display:inline-block; background-color:#0076b6; color:white;
-  border:none; padding:10px 20px; margin:2px;
-  font-size:1rem; border-radius:8px; cursor:pointer;
-  transition:background-color 0.3s ease, transform 0.2s ease;
-}
-.predict-button:hover {background-color:#005f90; transform:scale(1.05);}
-
-/* Footer masqué par défaut */
-#footer {
-  position: fixed; bottom: 0; left: 0; width: 100%;
-  background: #f0f0f0; color: black;
-  text-align: center; padding: 8px 0;
-  font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;
-  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-}
-/* Affichage en hover sur PC */
-@media (hover: hover) and (pointer: fine) {
-  body:hover #footer { opacity: 1; pointer-events: auto; }
-}
-/* Bouton toggle mobile */
-#footerToggleBtn {
-  display:none; position:fixed; bottom:18px; right:12px;
-  background:#555; color:white; border-radius:20px;
-  padding:8px 12px; z-index:2001; cursor:pointer; font-size:1.3em;
-}
-
-/* Responsive : stack sur mobile */
-@media (max-width: 900px) {
-  .container { flex-direction: column; height: auto; }
-  #leftPanel, #rightPanel { flex:1 1 100%; border-right:none; border-bottom:1px solid #ccc; }
-  table { font-size: 0.9em; }
-  .predict-button { width:100%; font-size:1.1em; }
-}
-@media (max-width: 500px) {
-  table { font-size: 0.85em; }
-  .predict-button { font-size: 1em; padding: 8px; }
-  #footer { font-size: 0.9em; }
-}
-
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 22px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
-  max-width: 96vw;
-  width: 420px;
-  max-height: 80vh;
-  overflow-y: auto;
-  z-index: 3000;
-}
-
-@media (max-width: 600px) {
-  .popup {
-    width: 99vw;
-    padding: 12px;
-    font-size: 0.97em;
-    max-height: 68vh;
-  }
-  .popup-close {
-    font-size: 2em;
-  }
-}
-.popup-close {
-  float: right;
+  display: inline-block;
+  background-color: #0076b6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 2px;
+  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  color: red;
-  font-weight: bold;
-  font-size: 1.5em;
-  margin-left: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-family: inherit;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  line-height: normal; /* Ajout utile pour l’alignement */
 }
 
-
-
+.predict-button:hover {
+  background-color: #005f90;
+  transform: scale(1.05);
+}
 
   </style>
 </head>
@@ -138,119 +134,167 @@ input, select { width: 100%; box-sizing: border-box; }
 
 </div>
 
- 														 <div class="right">
+  <div class="right">
     <h2 style="text-align:center">Result</h2>
     <div class="results" id="results">
-		<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> 
-		<span>Simulated  Values:</span>
-  		<span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>d</sub></b> :</span>
-  		<span style="width: 30px; display: inline-block;" id="dd">–</span> 
-		<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>   -
+<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> <span>Molecule Stimulated Hansen Values:</span>
 
-  		<span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>p</sub></b> :</span>
-  		<span style="width: 30px; display: inline-block;" id="dp">–</span>
-		<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>  -
+  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>d</sub></b> :</span>
+  <span style="width: 30px; display: inline-block;" id="dd">–</span> 
+<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>   -
 
-  		<span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>h</sub></b> :</span>
-  		<span style="width: 30px; display: inline-block;" id="dh">–</span> 
-		<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>-
+  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>p</sub></b> :</span>
+  <span style="width: 30px; display: inline-block;" id="dp">–</span>
+<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>  -
 
-  		<span style="width: 25px; display: inline-block;color:blue"><b>V</b> :</span>
-  		<span style="width: 30px; display: inline-block;" id="volume">–</span> cm³/mol  
-		</div>
-    </div>
+  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>h</sub></b> :</span>
+  <span style="width: 30px; display: inline-block;" id="dh">–</span> 
+	<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>-
 
-<hr/>
-		<div class="row" style="width:100%"> 
-			<div style="text-align: center;">
-  			<label for="solventSearch"> Solvent ? :</label>
-  			<input style="width:150px" list="solventList" id="solventSelect" name="solventSearch" onchange="calculate()">
-        		<datalist id="solventList">
-  			</datalist>
-			</div>
-<div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
-  <div style="display:flex; align-items:center; gap:5px;">
-    <span style="width:65px; color:red;"><b>δ<sub>d</sub></b>(solv):</span>
-    <span style="width:30px;" id="sd-val">–</span>
-    <span style="width:40px;">MPa<sup>½</sup></span>
-
-    <span style="width:65px; color:red;"><b>δ<sub>p</sub></b>(solv):</span>
-    <span style="width:30px;" id="sp-val">–</span>
-    <span style="width:40px;">MPa<sup>½</sup></span>
-
-    <span style="width:65px; color:red;"><b>δ<sub>h</sub></b>(solv):</span>
-    <span style="width:30px;" id="sh-val">–</span>
-    <span style="width:40px;">MPa<sup>½</sup></span>
-  </div>
-
-  <div style="text-align:center;">
-    <span>Ra/R0&nbsp;=&nbsp;</span>
-    <span id="solubilityStatus"></span>
-  </div>
+  <span style="width: 25px; display: inline-block;color:blue"><b>V</b> :</span>
+  <span style="width: 30px; display: inline-block;" id="volume">–</span> cm³/mol  
 </div>
-	</div>
-	</div>
+    </div>
+<hr/>
+<div style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
+
+  <!-- Bloc titre + select -->
+&nbsp;
+
+<div style="text-align: center;">
+  <label for="solventSearch"> Solvent ? :</label>
+  <input
+    style="width:150px"
+    list="solventList"
+    id="solventSelect"
+    name="solventSearch"
+    onchange="calculate()"
+  >
+  <datalist id="solventList">
+    <!-- options -->
+  </datalist>
+  <!-- bouton supprimé -->
+</div>
+
+
+
+
+
+
+
+
+
+  <!-- Bloc valeurs -->
+
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
+    <span style="width: 30px;" id="sd-val">–</span>
+    <span style="width: 40px;">MPa<sup>½</sup></span>
+
+    <span style="width: 65px; color: red;"><b>δ<sub>p</sub></b>(solv):</span>
+    <span style="width: 30px;" id="sp-val">–</span>
+    <span style="width: 40px;">MPa<sup>½</sup></span>
+
+    <span style="width: 65px; color: red;"><b>δ<sub>h</sub></b>(solv):</span>
+    <span style="width: 30px;" id="sh-val">–</span>
+    <span style="width: 40px;">MPa<sup>½</sup></span>
+&nbsp;
+<span style="display: inline-block; text-align: center;">
+  <span style="display: block;">Ra</span>
+  <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
+</span>
+<span>=</span><span id="redResult">–</span>
+      <span id="solubilityStatus"></span>
+
+  </div>
+
 </div>
 
 <hr style=" padding:0;" />
 
 
-  		<div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%">
-		&nbsp;
-			<select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
-  			<option value="10">10</option>
-  			<option value="20">20</option>
-  			<option value="30">30</option>
-  			<option value="40">40</option>
-  			<option value="50">50</option>
-  			<option value="100">100</option>
-  			<option value="200">200</option>
-  			<option value="400">400</option>
-  			<option id="allOption" value="ALL">ALL</option>
-			</select>
-		&nbsp;
-    			<h3><span class="popup-toggle" style="width:10px" onclick="togglePopup()">Nearest Solvents </span></h3>
-    				<div class="popup" id="popupList">
-      					<span class="popup-close" onclick="togglePopup()">×</span>
-      					<div id="popupContent"></div>
-   				</div>
-		
+  <div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%">
+&nbsp;
+<select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
+  <option value="10">10</option>
+  <option value="20">20</option>
+  <option value="30">30</option>
+  <option value="40">40</option>
+  <option value="50">50</option>
+  <option value="100">100</option>
+  <option value="200">200</option>
+  <option value="400">400</option>
+  <option id="allOption" value="ALL">ALL</option>
+</select>
+&nbsp;
+
+    <h3><span class="popup-toggle" style="width:10px" onclick="togglePopup()">Nearest Solvents </span></h3>
+    <div class="popup" id="popupList">
+      <span class="popup-close" onclick="togglePopup()">×</span>
+      <div id="popupContent"></div>
+
+   </div>
 &nbsp;
 &nbsp;
 &nbsp;
-			<div class="row">
-  				<span>Select Minimum Distance</span>
-  				<span>R<sub>0</sub> :</span>
-  				<input type="number" style= "width:20px" id="r0" value="8" onchange="calculate()">
-			</div>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<div style="display: flex; align-items: center; justify-content: center; gap: 10px; background:#d6e1d5; padding: 10px;">RED&nbsp;=&nbsp;
+  <span style="display: inline-block; text-align: center;">
+    <span style="display: block;">Ra</span>
+    <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
+  </span>
+
+  <span style="font-weight: bold; font-size: 20px; user-select:none;">=</span>
+
+  <span style="display: inline-block; text-align: center;">
+    <span style="display: block;">
+       <span style="display: block;">
+    &radic;<span style="font-size: 0.9em; border-top: 1px solid black;">
+      [(Δδ<sub>d</sub>)² + (Δδ<sub>p</sub>)² + (Δδ<sub>h</sub>)²]
+    </span>
+  </span>
+    </span>
+    <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
+  </span>
+</div>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<!-- DIV en dehors de la formule -->
+<div class="row">
+  <span>Select Minimum Distance</span>
+  <span>R<sub>0</sub> :</span>
+  <input type="number" id="r0" value="8" onchange="calculate()">
+</div>
 
 
-		</div>
+</div>
 
 
 <div id="graph" style="margin: 0; padding: 0; height:400px"></div>
     </div>
-
-
-
-
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-<div id="footer" style="position: fixed; bottom: 0; left: 0; width: 100%; 
+<div style="position: fixed; bottom: 0; left: 0; width: 100%; 
             background: #f0f0f0; text-align: center; padding: 8px 0; 
             font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;">
 <button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='https://sciencexpert.github.io/SMILE/Hansen/Mobile_Version/Menu - Mobile.html'";">CoordiMate&trade;</button>
+  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='Menu.html'";">CoordiMate&trade;</button>
 
 
 © 2025 SciencExpert. Website designed and developed by <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:#0077cc; text-decoration:none;">SciencExpert™ </a>. 
@@ -263,39 +307,9 @@ All rights reserved. Unauthorized use or reproduction is prohibited.
 
 
 
-<!-- Bouton flottant (mobile/touch) -->
-  <div id="footerToggleBtn" style="display:none;position:fixed;bottom:18px;right:12px;background:#555;color:white;border-radius:20px;padding:8px 12px;z-index:2001;cursor:pointer;font-size:1.3em;">
-    ▲
-  </div>
+
 
 <script>
-// Footer toggle en mobile, au tap
-document.addEventListener('DOMContentLoaded', function() {
-  const footer = document.getElementById('footer');
-  const toggleBtn = document.getElementById('footerToggleBtn');
-  const isTouch = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
-
-  // Si tactile, bouton flottant
-  if (isTouch) {
-    toggleBtn.style.display = 'block';
-    let visible = false;
-    toggleBtn.addEventListener('click', () => {
-      visible = !visible;
-      footer.style.opacity = visible ? '1' : '0';
-      footer.style.pointerEvents = visible ? 'auto' : 'none';
-      toggleBtn.textContent = visible ? '▼' : '▲';
-    });
-    // Masque le footer si on clique ailleurs
-    document.body.addEventListener('click', function(e){
-      if (visible && e.target !== toggleBtn) {
-        visible = false;
-        footer.style.opacity = '0';
-        footer.style.pointerEvents = 'none';
-        toggleBtn.textContent = '▲';
-      }
-    }, true);
-  }
-});
 //-----------------------------------------------------------------------------------les constantes
 //const DATA= 'https://sciencexpert.github.io/SMILE/Data/All solvent Hansen_Hanse Book.json';
 const DATA= 'data/All_solvent_Hansen.js';
@@ -475,9 +489,8 @@ function addGroupRow() {
 
 function togglePopup() {
   const popup = document.getElementById("popupList");
-  popup.style.display = (popup.style.display === "block") ? "none" : "block";
+  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
 }
-
 
 //------------------------------------------------------------------------------------------------
 function calculate() {
@@ -704,7 +717,7 @@ function loadPlotly(callback) {
         return;
       }
       const script = document.createElement('script');
-      script.src = 'https://sciencexpert.github.io/SMILE/Hansen/statics/js/graphcode2.js';
+      script.src = 'statics/js/graphcode2.js';
       script.onload = callback;
       script.onerror = () => {
         alert('Erreur lors du chargement de Plotly.');
@@ -716,7 +729,7 @@ function loadPlotly(callback) {
 
 function exportSolventDatabaseAsJSON() {
   const script = document.createElement('script');
-  script.src = 'https://sciencexpert.github.io/SMILE/Hansen/data/All_solvent_Hansen.js'; // <- met ici le nom de ton fichier JS
+  script.src = 'data/All_solvent_Hansen.js'; // <- met ici le nom de ton fichier JS
   script.onload = () => {
     if (!window.solventDatabase || !Array.isArray(window.solventDatabase)) {
       console.error("❌ Aucune donnée trouvée dans solvent.js");
@@ -731,7 +744,7 @@ function exportSolventDatabaseAsJSON() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'https://sciencexpert.github.io/SMILE/Hansen/data/All_solvent_Hansen.js';
+    a.download = 'All_solvent_Hansen.json';
     a.click();
     URL.revokeObjectURL(url);
     console.log("✅ Fichier JSON exporté avec succès !");
@@ -746,7 +759,7 @@ function exportSolventDatabaseAsJSON() {
 //----------------------------------------------------------------------------
 function createSolventJsonURL(callback) {
   const script = document.createElement('script');
-  script.src = 'https://sciencexpert.github.io/SMILE/Hansen/data/All_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
+  script.src = 'data/All_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
 
   script.onload = () => {
     if (!window.solventDatabase || !Array.isArray(window.solventDatabase)) {
@@ -791,5 +804,3 @@ window.onload = () => {
 </script>
 </body>
 </html>
-
-
