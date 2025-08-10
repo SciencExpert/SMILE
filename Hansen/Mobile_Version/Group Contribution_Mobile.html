@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SciencExpert_Calculateur HSP - V21</title>
-  <link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
+   <link rel="icon" type="image/x-icon" href="https://sciencexpert.github.io/SMILE/Hansen/images/SE_favicon.ico">
 
 
 
@@ -781,7 +781,7 @@ function loadPlotly(callback) {
 
 function exportSolventDatabaseAsJSON() {
   const script = document.createElement('script');
-  script.src = 'data/All_solvent_Hansen.js'; // <- met ici le nom de ton fichier JS
+  script.src = 'https://sciencexpert.github.io/SMILE/Hansen/data/All_solvent_Hansen.js'; // <- met ici le nom de ton fichier JS
   script.onload = () => {
     if (!window.solventDatabase || !Array.isArray(window.solventDatabase)) {
       console.error("❌ Aucune donnée trouvée dans solvent.js");
@@ -811,7 +811,7 @@ function exportSolventDatabaseAsJSON() {
 //----------------------------------------------------------------------------
 function createSolventJsonURL(callback) {
   const script = document.createElement('script');
-  script.src = 'data/All_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
+  script.src = 'https://sciencexpert.github.io/SMILE/Hansen/data/All_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
 
   script.onload = () => {
     if (!window.solventDatabase || !Array.isArray(window.solventDatabase)) {
@@ -856,4 +856,5 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
