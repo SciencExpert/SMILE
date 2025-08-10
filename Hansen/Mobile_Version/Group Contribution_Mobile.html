@@ -160,12 +160,12 @@ border-radius: 15px;
 </head>
 <body>
 
-<div class="container">
+<div class="container" style="border:solid 1px grey">
 
 
 
 
-  <div id="leftPanel1" style=" height:500px; z-index: 10; background-color:#d6e1d5; ">
+  <div id="leftPanel1" style=" height:600px; z-index: 10; background-color:#d6e1d5; ">
     <h2 style="text-align:center"> Molecule Descriptors</h2>
 <div>
     <label for="moleculeName">Proposed Molecule Name :</label>
@@ -283,7 +283,7 @@ border-radius: 15px;
 <hr style=" padding:0;" />
 
 
-  <div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%">
+  <div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%;height:100px">
 &nbsp;
 <select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
   <option value="10">10</option>
@@ -858,6 +858,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
