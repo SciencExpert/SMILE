@@ -320,15 +320,14 @@ border-radius: 15px;
 
 <!-- DIV en dehors de la formule -->
 <div class="row">
-  <span style="margin-left:2px">Min Distance</span>
+  <span style="margin-left:2px">Minimum Distance</span>
   <span>R<sub>0</sub> :</span>
-  <input style="width:20px" type="number" id="r0" value="8" onchange="calculate()">
+  <input style="width:30px" type="number" id="r0" value="8" onchange="calculate()">
 </div>
 
 
 </div>
-
-    <div id="graph" ></div>
+<div id="graph" style="position: absolute; top: 20px; left: 30px;z-index: 11;"> </div>
 
 
 </div>
@@ -859,6 +858,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
