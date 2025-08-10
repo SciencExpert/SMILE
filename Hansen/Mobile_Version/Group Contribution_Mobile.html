@@ -1,38 +1,90 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>SciencExpert_Calculateur HSP - Hansen</title>
+<title>Calculateur HSP - Hansen</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
-<style>
-html, body {height: 100%; margin: 0; font-family: Arial, sans-serif;}
-.container { display: flex; height: 100vh; }
-#leftPanel, #rightPanel { padding: 5px; box-sizing: border-box; overflow-y: auto; }
-#leftPanel { background-color: #d6e1d5; flex:1 1 35%; border-right: 1px solid #ccc; text-align:center;}
-#rightPanel { background-color: #fff; flex:1 1 65%; }
 
-table { width:100%; border-collapse: collapse; margin-top:10px;}
-th, td { padding: 6px; border: 1px solid #ccc; text-align: center; }
-input, select { width: 100%; box-sizing: border-box; }
-.predict-button {
-  display:inline-block; background-color:#0076b6; color:white;
-  border:none; padding:10px 20px; margin:2px;
-  font-size:1rem; border-radius:8px; cursor:pointer;
-  transition:background-color 0.3s ease, transform 0.2s ease;
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
-.predict-button:hover {background-color:#005f90; transform:scale(1.05);}
+
+/* Conteneur principal */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Panneau gauche */
+#leftPanel {
+  flex: 1 1 35%;
+  background-color: #d6e1d5;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Panneau droit */
+#rightPanel {
+  flex: 1 1 65%;
+  background-color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th, td {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+input, select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Boutons principaux */
+.predict-button {
+  display: inline-block;
+  background-color: #0076b6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 2px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.predict-button:hover {
+  background-color: #005f90;
+  transform: scale(1.05);
+}
+
+/* Zone résultats et graphe */
+.results { margin-top: 10px; font-size: 1em; }
+#graph { width: 100%; height: 400px; background: #f3f3f3; }
 
 /* Footer masqué par défaut */
 #footer {
-  position: fixed; bottom: 0; left: 0; width: 100%;
+  position: fixed;
+  bottom: 0; left: 0; width: 100%;
   background: #f0f0f0; color: black;
   text-align: center; padding: 8px 0;
   font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;
   opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
 }
-/* Affichage en hover sur PC */
 @media (hover: hover) and (pointer: fine) {
   body:hover #footer { opacity: 1; pointer-events: auto; }
 }
@@ -43,236 +95,63 @@ input, select { width: 100%; box-sizing: border-box; }
   padding:8px 12px; z-index:2001; cursor:pointer; font-size:1.3em;
 }
 
-/* Responsive : stack sur mobile */
+/* Responsive */
 @media (max-width: 900px) {
-  .container { flex-direction: column; height: auto; }
-  #leftPanel, #rightPanel { flex:1 1 100%; border-right:none; border-bottom:1px solid #ccc; }
+  .container { flex-direction: column; }
+  #leftPanel, #rightPanel { flex: 1 1 100%; border-right: none; border-bottom: 1px solid #ccc; }
   table { font-size: 0.9em; }
-  .predict-button { width:100%; font-size:1.1em; }
+  .predict-button { width: 100%; font-size: 1.1em; }
 }
 @media (max-width: 500px) {
   table { font-size: 0.85em; }
   .predict-button { font-size: 1em; padding: 8px; }
   #footer { font-size: 0.9em; }
 }
-
-
-
-
-
-
-  </style>
+</style>
 </head>
 <body>
 
 <div class="container">
-
+  <!-- Panneau gauche -->
   <div id="leftPanel">
-    <h2 style="text-align:center"> Molecule Descriptors</h2>
-<div>
-    <label for="moleculeName">Proposed Molecule Name :</label>
-    <input type="text" style="width: 200px;" id="moleculeName" placeholder="eg: Benzoic Acid" />
-</div>
-
-  <div style="display: flex; align-items: center; gap: 10px;">
-<h3 style="margin: 0; width: auto;">Groups:</h3>
-  <table style="table-layout: fixed;">
-    <thead>
-      <tr>
-        <th style="width: 150px;">
-          <button onclick="addGroupRow()">➕ Add a group</button>
-        </th>
-        <th style="width: 50px;">How Many ?</th>
-      </tr>
-    </thead>
-    <tbody id="groupInputs"></tbody>
-  </table>
-</div>
-
- <div style="text-align: center;">
-
-  <button class="predict-button" style="cursor: pointer;width:180px, marging:0px" onclick="exportData()">💾 Save/Export</button>
-<button  class="predict-button" style="background-color: darkgreen;cursor: pointer;width:180px, marging:0px" onclick="NBSOL=10;document.getElementById('nbSolventsSelect').value = '10';calculate()">🧮 Run </button>
-  <!-- Label stylisé comme bouton -->
-  <label for="jsonFile" class="predict-button" style="cursor: pointer;width:180px, marging:0px">
-    📂 Import Data
-  </label>
-  <!-- Input caché -->
-  <input type="file" accept=".json" id="jsonFile" style="display: none;" class="predict-button" onchange="importData(event)">
-</div>
-
-</div>
-
-  <div class="right">
-    <h2 style="text-align:center">Result</h2>
-    <div class="results" id="results">
-<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> 
-	<span>Stimulated Values:</span>
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>d</sub></b> :</span>
-  <span style="width: 30px; display: inline-block;" id="dd">–</span> 
-<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>   -
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>p</sub></b> :</span>
-  <span style="width: 30px; display: inline-block;" id="dp">–</span>
-<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>  -
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>h</sub></b> :</span>
-  <span style="width: 30px; display: inline-block;" id="dh">–</span> 
-	<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>-
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>V</b> :</span>
-  <span style="width: 30px; display: inline-block;" id="volume">–</span> cm³/mol  
-</div>
-    </div>
-<hr/>
-<div style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
-
-  <!-- Bloc titre + select -->
-&nbsp;
-
-<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> 
-  <label for="solventSearch"> Solvent ? :</label>
-  <input
-    style="width:150px"
-    list="solventList"
-    id="solventSelect"
-    name="solventSearch"
-    onchange="calculate()"
-  >
-  <datalist id="solventList">
-    <!-- options -->
-  </datalist>
-  <!-- bouton supprimé -->
-
-
-  <!-- Bloc valeurs -->
-
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sd-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-
-    <span style="width: 65px; color: red;"><b>δ<sub>p</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sp-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-
-    <span style="width: 65px; color: red;"><b>δ<sub>h</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sh-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-&nbsp;
-<span style="display: inline-block; text-align: center;">
-  <span style="display: block;">Ra</span>
-  <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-</span>
-<span>=</span><span id="redResult">–</span>
-      <span id="solubilityStatus"></span>
-</div>
+    <h2>Molecule Descriptors</h2>
+    <label>Proposed Molecule Name :</label>
+    <input type="text" id="moleculeName" placeholder="eg: Benzoic Acid">
+    <h3>Groups:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th><button onclick="addGroupRow()">➕ Add a group</button></th>
+          <th>How Many?</th>
+        </tr>
+      </thead>
+      <tbody id="groupInputs"></tbody>
+    </table>
+    <button class="predict-button" onclick="exportData()">💾 Save/Export</button>
+    <button class="predict-button" style="background-color:darkgreen" onclick="NBSOL=10;document.getElementById('nbSolventsSelect').value='10';calculate()">🧮 Run</button>
+    <label for="jsonFile" class="predict-button">📂 Import Data</label>
+    <input type="file" accept=".json" id="jsonFile" style="display: none;" onchange="importData(event)">
   </div>
 
-</div>
-
-<hr style=" padding:0;" />
-
-
-  <div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%">
-&nbsp;
-<select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
-  <option value="10">10</option>
-  <option value="20">20</option>
-  <option value="30">30</option>
-  <option value="40">40</option>
-  <option value="50">50</option>
-  <option value="100">100</option>
-  <option value="200">200</option>
-  <option value="400">400</option>
-  <option id="allOption" value="ALL">ALL</option>
-</select>
-&nbsp;
-
-    <h3><span class="popup-toggle" style="width:10px" onclick="togglePopup()">Nearest Solvents </span></h3>
-    <div class="popup" id="popupList">
-      <span class="popup-close" onclick="togglePopup()">×</span>
-      <div id="popupContent"></div>
-
-   </div>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-
-<div style="display: flex; align-items: center; justify-content: center; gap: 10px; background:#d6e1d5; padding: 10px;">RED&nbsp;=&nbsp;
-  <span style="display: inline-block; text-align: center;">
-    <span style="display: block;">Ra</span>
-    <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-  </span>
-
-  <span style="font-weight: bold; font-size: 20px; user-select:none;">=</span>
-
-  <span style="display: inline-block; text-align: center;">
-    <span style="display: block;">
-       <span style="display: block;">
-    &radic;<span style="font-size: 0.9em; border-top: 1px solid black;">
-      [(Δδ<sub>d</sub>)² + (Δδ<sub>p</sub>)² + (Δδ<sub>h</sub>)²]
-    </span>
-  </span>
-    </span>
-    <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-  </span>
-</div>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<!-- DIV en dehors de la formule -->
-<div class="row">
-  <span>Select Minimum Distance</span>
-  <span>R<sub>0</sub> :</span>
-  <input type="number" id="r0" value="8" onchange="calculate()">
-</div>
-
-
-</div>
-
-
-<div id="graph" style="margin: 0; padding: 0; height:400px"></div>
-    </div>
+  <!-- Panneau droit -->
+  <div id="rightPanel">
+    <h2>Result</h2>
+    <div class="results" id="results"></div>
+    <div id="graph"></div>
   </div>
 </div>
 
-<div id="footer" style="position: fixed; bottom: 0; left: 0; width: 100%; 
-            background: #f0f0f0; text-align: center; padding: 8px 0; 
-            font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;">
-<button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='https://sciencexpert.github.io/SMILE/Hansen/Mobile_Version/Menu - Mobile.html'";">CoordiMate&trade;</button>
-
-
-© 2025 SciencExpert. Website designed and developed by <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:#0077cc; text-decoration:none;">SciencExpert™ </a>. 
-All rights reserved. Unauthorized use or reproduction is prohibited.
- <button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="location.reload();">♻️ Reset</button>
+<!-- Footer -->
+<div id="footer">
+  © 2025 SciencExpert. Website designed and developed by
+  <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank">SciencExpert™</a>.
+  All rights reserved.
+  <button style="background-color:#555;color:white;border-radius:10px;height:30px;width:100px;cursor:pointer;" onclick="location.reload();">♻️ Reset</button>
 </div>
 
+<div id="footerToggleBtn">▲</div>
 
 
-
-
-<!-- Bouton flottant (mobile/touch) -->
-  <div id="footerToggleBtn" style="display:none;position:fixed;bottom:18px;right:12px;background:#555;color:white;border-radius:20px;padding:8px 12px;z-index:2001;cursor:pointer;font-size:1.3em;">
-    ▲
-  </div>
 
 <script>
 // Footer toggle en mobile, au tap
@@ -796,5 +675,6 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
