@@ -138,47 +138,37 @@ input, select { width: 100%; box-sizing: border-box; }
 
 </div>
 
-  <div class="right">
+ 														 <div class="right">
     <h2 style="text-align:center">Result</h2>
     <div class="results" id="results">
-<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> <span>Molecule Stimulated Hansen Values:</span>
+		<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> 
+		<span>Simulated  Values:</span>
+  		<span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>d</sub></b> :</span>
+  		<span style="width: 30px; display: inline-block;" id="dd">–</span> 
+		<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>   -
 
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>d</sub></b> :</span>
-  <span style="width: 30px; display: inline-block;" id="dd">–</span> 
-<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>   -
+  		<span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>p</sub></b> :</span>
+  		<span style="width: 30px; display: inline-block;" id="dp">–</span>
+		<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>  -
 
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>p</sub></b> :</span>
-  <span style="width: 30px; display: inline-block;" id="dp">–</span>
-<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>  -
+  		<span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>h</sub></b> :</span>
+  		<span style="width: 30px; display: inline-block;" id="dh">–</span> 
+		<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>-
 
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>h</sub></b> :</span>
-  <span style="width: 30px; display: inline-block;" id="dh">–</span> 
-	<span style="width: 60px; display: inline-block;">MPa<sup>½</sup></span>-
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>V</b> :</span>
-  <span style="width: 30px; display: inline-block;" id="volume">–</span> cm³/mol  
-</div>
+  		<span style="width: 25px; display: inline-block;color:blue"><b>V</b> :</span>
+  		<span style="width: 30px; display: inline-block;" id="volume">–</span> cm³/mol  
+	</div>
     </div>
+
 <hr/>
-<div style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
-
-  <!-- Bloc titre + select -->
-&nbsp;
-
-<div style="text-align: center;">
-  <label for="solventSearch"> Solvent ? :</label>
-  <input
-    style="width:150px"
-    list="solventList"
-    id="solventSelect"
-    name="solventSearch"
-    onchange="calculate()"
-  >
-  <datalist id="solventList">
-    <!-- options -->
-  </datalist>
-  <!-- bouton supprimé -->
-</div>
+	<div  class="results" style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
+		&nbsp;
+		<div style="text-align: center;">
+  		<label for="solventSearch"> Solvent ? :</label>
+  		<input style="width:150px" list="solventList" id="solventSelect" name="solventSearch" onchange="calculate()">
+        	<datalist id="solventList">
+  		</datalist>
+	</div>
 
 
 
@@ -291,8 +281,21 @@ input, select { width: 100%; box-sizing: border-box; }
 
 <div id="graph" style="margin: 0; padding: 0; height:400px"></div>
     </div>
+
+
+
+
   </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 <div id="footer" style="position: fixed; bottom: 0; left: 0; width: 100%; 
             background: #f0f0f0; text-align: center; padding: 8px 0; 
@@ -839,4 +842,5 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
