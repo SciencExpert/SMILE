@@ -11,12 +11,14 @@ html, body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
+
+/* ----- LAYOUT PRINCIPAL ----- */
 .container {
   display: flex;
   height: 100vh;
 }
 #leftPanel, #rightPanel {
-  padding: 5px;
+  padding: 10px;
   box-sizing: border-box;
   overflow-y: auto;
 }
@@ -24,13 +26,13 @@ html, body {
   background-color: #d6e1d5;
   flex: 1 1 35%;
   border-right: 1px solid #ccc;
-  text-align: center;
 }
 #rightPanel {
   background-color: #fff;
   flex: 1 1 65%;
 }
 
+/* ----- TABLES & FORMULAIRES ----- */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -62,14 +64,13 @@ input, select {
   transform: scale(1.05);
 }
 
-/* Footer masqué par défaut */
+/* ----- FOOTER ----- */
 #footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   background: #f0f0f0;
-  color: black;
   text-align: center;
   padding: 8px 0;
   font-size: 14px;
@@ -79,7 +80,8 @@ input, select {
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-/* Affichage en hover sur PC */
+
+/* Footer sur PC (hover) */
 @media (hover: hover) and (pointer: fine) {
   body:hover #footer {
     opacity: 1;
@@ -87,7 +89,7 @@ input, select {
   }
 }
 
-/* Bouton toggle mobile */
+/* Bouton flottant mobile */
 #footerToggleBtn {
   display: none;
   position: fixed;
@@ -102,7 +104,7 @@ input, select {
   font-size: 1.3em;
 }
 
-/* Responsive : stack sur mobile */
+/* ----- RESPONSIVE MOBILE ----- */
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
@@ -120,11 +122,16 @@ input, select {
     width: 100%;
     font-size: 1.1em;
   }
-  /* Sur mobile, footer caché par défaut, bouton visible */
+  /* Footer caché par défaut sur mobile */
+  #footer {
+    opacity: 0;
+    pointer-events: none;
+  }
   #footerToggleBtn {
     display: block;
   }
 }
+
 @media (max-width: 500px) {
   table {
     font-size: 0.85em;
@@ -880,4 +887,5 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
