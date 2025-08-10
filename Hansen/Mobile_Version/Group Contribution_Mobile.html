@@ -161,7 +161,7 @@ input, select { width: 100%; box-sizing: border-box; }
     </div>
 
 <hr/>
-		<div class="row"> 
+		<div class="row" style="width:100%"> 
 		&nbsp;
 			<div style="text-align: center;">
   			<label for="solventSearch"> Solvent ? :</label>
@@ -169,7 +169,7 @@ input, select { width: 100%; box-sizing: border-box; }
         		<datalist id="solventList">
   			</datalist>
 			</div>
-<br/>
+<br>
   		<div style="display: flex; align-items: center; text-align : center; gap:5px;">
     		<span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
     		<span style="width: 30px;" id="sd-val">–</span>
@@ -182,7 +182,7 @@ input, select { width: 100%; box-sizing: border-box; }
     		<span style="width: 65px; color: red;"><b>δ<sub>h</sub></b>(solv):</span>
     		<span style="width: 30px;" id="sh-val">–</span>
     		<span style="width: 40px;">MPa<sup>½</sup></span>
-<br/>
+<br>
 		<span style="display: inline-block; text-align: center;">
   			<span style="display: block;">Ra</span>
   			<span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
@@ -196,66 +196,37 @@ input, select { width: 100%; box-sizing: border-box; }
 <hr style=" padding:0;" />
 
 
-  <div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%">
-&nbsp;
-<select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
-  <option value="10">10</option>
-  <option value="20">20</option>
-  <option value="30">30</option>
-  <option value="40">40</option>
-  <option value="50">50</option>
-  <option value="100">100</option>
-  <option value="200">200</option>
-  <option value="400">400</option>
-  <option id="allOption" value="ALL">ALL</option>
-</select>
-&nbsp;
-
-    <h3><span class="popup-toggle" style="width:10px" onclick="togglePopup()">Nearest Solvents </span></h3>
-    <div class="popup" id="popupList">
-      <span class="popup-close" onclick="togglePopup()">×</span>
-      <div id="popupContent"></div>
-
-   </div>
-&nbsp;
+  		<div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%">
+		&nbsp;
+			<select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
+  			<option value="10">10</option>
+  			<option value="20">20</option>
+  			<option value="30">30</option>
+  			<option value="40">40</option>
+  			<option value="50">50</option>
+  			<option value="100">100</option>
+  			<option value="200">200</option>
+  			<option value="400">400</option>
+  			<option id="allOption" value="ALL">ALL</option>
+			</select>
+		&nbsp;
+    			<h3><span class="popup-toggle" style="width:10px" onclick="togglePopup()">Nearest Solvents </span></h3>
+    				<div class="popup" id="popupList">
+      					<span class="popup-close" onclick="togglePopup()">×</span>
+      					<div id="popupContent"></div>
+   				</div>
+		
 &nbsp;
 &nbsp;
 &nbsp;
-&nbsp;
-
-
-  <span style="font-weight: bold; font-size: 20px; user-select:none;">=</span>
-
-  <span style="display: inline-block; text-align: center;">
-    <span style="display: block;">
-       <span style="display: block;">
-    &radic;<span style="font-size: 0.9em; border-top: 1px solid black;">
-      [(Δδ<sub>d</sub>)² + (Δδ<sub>p</sub>)² + (Δδ<sub>h</sub>)²]
-    </span>
-  </span>
-    </span>
-    <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-  </span>
-</div>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<!-- DIV en dehors de la formule -->
-<div class="row">
-  <span>Select Minimum Distance</span>
-  <span>R<sub>0</sub> :</span>
-  <input type="number" id="r0" value="8" onchange="calculate()">
-</div>
+			<div class="row">
+  				<span>Select Minimum Distance</span>
+  				<span>R<sub>0</sub> :</span>
+  				<input type="number" style= "width:20px" id="r0" value="8" onchange="calculate()">
+			</div>
 
 
-</div>
+		</div>
 
 
 <div id="graph" style="margin: 0; padding: 0; height:400px"></div>
