@@ -56,7 +56,42 @@ input, select { width: 100%; box-sizing: border-box; }
   #footer { font-size: 0.9em; }
 }
 
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 22px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  max-width: 96vw;
+  width: 420px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 3000;
+}
 
+@media (max-width: 600px) {
+  .popup {
+    width: 99vw;
+    padding: 12px;
+    font-size: 0.97em;
+    max-height: 68vh;
+  }
+  .popup-close {
+    font-size: 2em;
+  }
+}
+.popup-close {
+  float: right;
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-left: 10px;
+}
 
 
 
@@ -488,8 +523,9 @@ function addGroupRow() {
 
 function togglePopup() {
   const popup = document.getElementById("popupList");
-  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  popup.style.display = (popup.style.display === "block") ? "none" : "block";
 }
+
 
 //------------------------------------------------------------------------------------------------
 function calculate() {
@@ -803,3 +839,4 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
