@@ -18,7 +18,19 @@
     th, td { padding: 6px; border: 1px solid #ccc; text-align: center; }
     input, select { width: 100%; box-sizing: border-box; }
     .results { font-size: 1em; margin-top: 10px; }
-
+		
+@media only screen and (max-width: 600px), 
+       only screen and (max-height: 600px) {
+  body {
+    max-width: 100vw;   /* limite la largeur à la largeur de la fenêtre */
+    max-height: 100vh;  /* limite la hauteur à la hauteur de la fenêtre */
+    overflow-x: hidden; /* évite le scroll horizontal */
+    overflow-y: auto;   /* scroll vertical si besoin */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
 
 
     
@@ -856,6 +868,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
