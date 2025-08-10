@@ -1,387 +1,344 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>SciencExpert_Calculateur HSP - V21</title>
-   <link rel="icon" type="image/x-icon" href="https://sciencexpert.github.io/SMILE/Hansen/images/SE_favicon.ico">
+  <link rel="icon" type="image/x-icon" href="https://sciencexpert.github.io/SMILE/Hansen/images/SE_favicon.ico" />
 
-
-
-
-    <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .container { display: flex; height: 100vh; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 6px; border: 1px solid #ccc; text-align: center; }
-    input, select { width: 100%; box-sizing: border-box; }
-    .results { font-size: 1em; margin-top: 10px; }
-		
-@media only screen and (max-width: 600px), 
-       only screen and (max-height: 600px) {
-  body {
-    max-width: 100vw;   /* limite la largeur à la largeur de la fenêtre */
-    max-height: 100vh;  /* limite la hauteur à la hauteur de la fenêtre */
-    overflow-x: hidden; /* évite le scroll horizontal */
-    overflow-y: auto;   /* scroll vertical si besoin */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-}
-
-
-    
-.row { display: flex; flex-wrap: wrap; gap: 10px;  text-align: center; align-items: center;  justify-content: center; margin-top: 10px; }
-    .row span { display: inline-block; }
-   
- h2, h3 { color: #2c3e50; margin-bottom: 10px; }
-    button { margin-top: 10px; padding: 6px 10px; }
-    #graph { width: 100%; height: 500px; margin-top: 20px; }
-    .popup {
-      display: none;
-      position: absolute;
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      max-width: auto;
-      z-index: 999;
-      top: 200px;
-      left: 20px;
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      box-sizing: border-box;
     }
-    .popup-toggle { cursor: pointer; text-decoration: underline; color: grey; }
-    .popup-close { float: right; cursor: pointer; color: red; font-weight: bold; margin-left: 10px; }
-    #r0 { width: 50px; }
 
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
 
-#leftPanel {
-  width: 35vw;
-  max-width: 35%;
-  max-height: 100vh;
-  overflow-y: auto;
-  padding: 5px;
-  box-sizing: border-box;
-  border-right: 1px solid #ccc;
-  background-color: #d6e1d5;
-  text-align: center;
-}
+    /* Panels avec largeur 35% / 65% */
+    #leftPanel {
+      width: 35vw;
+      max-width: 35%;
+      max-height: 100vh;
+      overflow-y: auto;
+      padding: 10px;
+      box-sizing: border-box;
+      border-right: 1px solid #ccc;
+      background-color: #d6e1d5;
+      text-align: center;
+    }
 
-#rightPanel {
-  width: 65vw;
-  max-width: 65%;
-  max-height: 100vh;
-  overflow-y: auto;
-  padding: 5px;
-  box-sizing: border-box;
-}
+    #rightPanel {
+      width: 65vw;
+      max-width: 65%;
+      max-height: 100vh;
+      overflow-y: auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
 
-/* Pour écrans très petits (ex: moins de 400px de large) */
-@media (max-width: 400px) {
-  .container {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-  }
-  #leftPanel, #rightPanel {
-    min-width: 300px; /* éviter que ça soit trop étroit */
-    max-height: 100vh;
-    overflow-y: auto;
-  }
-}
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
 
+    th, td {
+      padding: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
 
-.calcul-button {
-  display: inline-block;
-margin: 0px;width: 80px;background:transparent;border:solid 0px black; cursor:pointer
-}
-.calcul-button:hover {
-  background-color: #005f90;
-  transform: scale(1.05);
-color : white;
-border-radius: 15px;
-}
+    input, select {
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 1rem;
+      padding: 6px;
+    }
 
-.predict-button {
-  display: inline-block;
-  background-color: #0076b6;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 2px;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  font-family: inherit;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  line-height: normal; /* Ajout utile pour l’alignement */
-}
+    button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background-color: #0076b6;
+      color: white;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      line-height: normal;
+      user-select: none;
+    }
 
-.predict-button:hover {
-  background-color: #005f90;
-  transform: scale(1.05);
-}
+    button:hover {
+      background-color: #005f90;
+      transform: scale(1.05);
+    }
 
-/* Footer caché */
-#footer {
-  position: fixed;
-  bottom: 0; left: 0;
-  width: 100%;
-  background: #f0f0f0;
-  color: black;
-  text-align: center;
-  padding: 8px 0;
-  font-size: 14px;
-  border-top: 1px solid #ccc;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-/* Affichage au hover sur desktop */
-@media (hover: hover) and (pointer: fine) {
-  body:hover #footer {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
+    h2, h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
 
-/* Responsive : stack sur mobile */
-@media (max-width: 900px) {
-  body { flex-direction: column; height: auto; }
-  #leftPanel, #rightPanel {
-    flex: 1 1 100%;
-    border-right: none;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-  }
-  table { font-size: 0.9em; }
-  .predict-button { width: 100%; font-size: 1.1em; }
-}
-@media (max-width: 500px) {
-  table { font-size: 0.85em; }
-  .predict-button { font-size: 1em; padding: 8px; }
-  #footer { font-size: 0.9em; }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
 
-	/* Par défaut, le popup est invisible */
-#popupList {
-  display: none;
-}
+    .row span {
+      display: inline-block;
+    }
 
-/* Quand tu veux l’ouvrir, tu lui ajoutes .open en JS */
-#popupList.open {
-  display: block;
-}
-}
+    /* Scrollbars et hauteur max */
+    #leftPanel, #rightPanel {
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f1f1f1;
+    }
 
-		
+    /* Footer */
+    #footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #f0f0f0;
+      color: black;
+      text-align: center;
+      padding: 8px 0;
+      font-size: 14px;
+      border-top: 1px solid #ccc;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      body:hover #footer {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    /* Responsive - smartphones et petits écrans */
+    @media (max-width: 600px) {
+      .container {
+        /* garder flex row pour respecter 35/65 */
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      #leftPanel, #rightPanel {
+        min-width: 300px; /* éviter écriture trop compressée */
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 8px;
+      }
+
+      h2, h3 {
+        font-size: 1.2rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      input, select {
+        font-size: 0.9rem;
+        padding: 5px;
+      }
+
+      button {
+        font-size: 0.95rem;
+        padding: 7px 12px;
+        border-radius: 6px;
+        min-width: 100px;
+      }
+
+      /* Réduire largeur des inputs fixes */
+      #moleculeName {
+        width: 100% !important;
+        max-width: none !important;
+      }
+      #r0 {
+        width: 60px !important;
+      }
+    }
+
+    @media (max-width: 400px) {
+      /* Pour écrans vraiment petits, autoriser scroll horizontal */
+      .container {
+        overflow-x: auto;
+      }
+      #leftPanel, #rightPanel {
+        min-width: 280px;
+      }
+      button {
+        min-width: 90px;
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+      input, select {
+        font-size: 0.85rem;
+        padding: 4px;
+      }
+      table {
+        font-size: 0.85rem;
+      }
+    }
+
   </style>
 </head>
+
 <body>
 
 <div class="container">
 
-
-
-
   <div id="leftPanel">
-    <h2 style="text-align:center"> Molecule Descriptors</h2>
-<div>
-    <label for="moleculeName">Proposed Molecule Name :</label>
-    <input type="text" style="width: 200px;" id="moleculeName" placeholder="eg: Benzoic Acid" />
-</div>
+    <h2>Molecule Descriptors</h2>
+    <div>
+      <label for="moleculeName">Proposed Molecule Name :</label><br/>
+      <input type="text" id="moleculeName" placeholder="eg: Benzoic Acid" style="max-width:100%;" />
+    </div>
 
-  <div style="display: flex; align-items: center; gap: 10px;">
-<h3 style="margin: 0; width: auto;">Groups:</h3>
-  <table style="table-layout: fixed;">
-    <thead>
-      <tr>
-        <th style="width: 150px;">
-          <button onclick="addGroupRow()">➕ Add a group</button>
-        </th>
-        <th style="width: 50px;">How Many ?</th>
-      </tr>
-    </thead>
-    <tbody id="groupInputs"></tbody>
-  </table>
-</div>
+    <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+      <h3 style="margin: 0; width: auto;">Groups:</h3>
+      <table style="table-layout: fixed; flex: 1;">
+        <thead>
+          <tr>
+            <th style="width: 150px;">
+              <button onclick="addGroupRow()">➕ Add a group</button>
+            </th>
+            <th style="width: 50px;">How Many ?</th>
+          </tr>
+        </thead>
+        <tbody id="groupInputs"></tbody>
+      </table>
+    </div>
 
- <div style="text-align: center;">
+    <div style="text-align: center; margin-top: 15px;">
+      <button class="predict-button" onclick="exportData()" style="width: 180px; margin: 5px auto;">💾 Save/Export</button>
+      <button class="predict-button" onclick="NBSOL=10;document.getElementById('nbSolventsSelect').value = '10';calculate()" style="background-color: darkgreen; width: 180px; margin: 5px auto;">🧮 Run</button>
 
-  <button class="predict-button" style="cursor: pointer;width:180px, marging:0px" onclick="exportData()">💾 Save/Export</button>
-<button  class="predict-button" style="background-color: darkgreen;cursor: pointer;width:180px, marging:0px" onclick="NBSOL=10;document.getElementById('nbSolventsSelect').value = '10';calculate()">🧮 Run </button>
-  <!-- Label stylisé comme bouton -->
-  <label for="jsonFile" class="predict-button" style="cursor: pointer;width:180px, marging:0px">
-    📂 Import Data
-  </label>
-  <!-- Input caché -->
-  <input type="file" accept=".json" id="jsonFile" style="display: none;" class="predict-button" onchange="importData(event)">
-</div>
+      <label for="jsonFile" class="predict-button" style="cursor: pointer; width: 180px; margin: 5px auto; display: inline-block;">
+        📂 Import Data
+      </label>
+      <input type="file" accept=".json" id="jsonFile" style="display: none;" onchange="importData(event)">
+    </div>
+  </div>
 
-</div>
-
-
-
-
-
-  <div class="right">
-    <h2 style="text-align:center">Result</h2>
+  <div id="rightPanel">
+    <h2>Result</h2>
     <div class="results" id="results">
-<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> <span>Molecule Stimulated Hansen Values:</span>
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>d</sub></b> :</span>
-  <span style="width: 20px; display: inline-block;" id="dd">–</span> 
-<span style="width: 50px; display: inline-block;">MPa<sup>½</sup></span>   -
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>p</sub></b> :</span>
-  <span style="width: 20px; display: inline-block;" id="dp">–</span>
-<span style="width: 50px; display: inline-block;">MPa<sup>½</sup></span>  -
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>δ<sub>h</sub></b> :</span>
-  <span style="width: 20px; display: inline-block;" id="dh">–</span> 
-	<span style="width: 50px; display: inline-block;">MPa<sup>½</sup></span>-
-
-  <span style="width: 25px; display: inline-block;color:blue"><b>V</b> :</span>
-  <span style="width: 20px; display: inline-block;" id="volume">–</span> cm³/mol  
-</div>
+      <div class="row" style="font-family: sans-serif; font-size: 1rem; text-align:center;">
+        <span>Molecule Stimulated Hansen Values:</span>
+        <span style="width: 25px; display: inline-block; color:blue;"><b>δ<sub>d</sub></b> :</span>
+        <span style="width: 20px; display: inline-block;" id="dd">–</span> 
+        <span style="width: 50px; display: inline-block;">MPa<sup>½</sup></span>   -
+        <span style="width: 25px; display: inline-block; color:blue;"><b>δ<sub>p</sub></b> :</span>
+        <span style="width: 20px; display: inline-block;" id="dp">–</span>
+        <span style="width: 50px; display: inline-block;">MPa<sup>½</sup></span>  -
+        <span style="width: 25px; display: inline-block; color:blue;"><b>δ<sub>h</sub></b> :</span>
+        <span style="width: 20px; display: inline-block;" id="dh">–</span> 
+        <span style="width: 50px; display: inline-block;">MPa<sup>½</sup></span>-
+        <span style="width: 25px; display: inline-block; color:blue;"><b>V</b> :</span>
+        <span style="width: 20px; display: inline-block;" id="volume">–</span> cm³/mol  
+      </div>
     </div>
-<hr/>
-<div style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
+    <hr/>
+    <!-- Suite du contenu rightPanel, inputs, selects, etc., avec tailles adaptatives -->
 
-  <!-- Bloc titre + select -->
-&nbsp;
+    <div style="text-align:center; display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 1rem;">
+      &nbsp;
+      <div style="text-align: center;">
+        <label for="solventSearch">Solvent ? :</label><br/>
+        <input
+          style="width:150px"
+          list="solventList"
+          id="solventSelect"
+          name="solventSearch"
+          onchange="calculate()"
+        >
+        <datalist id="solventList"></datalist>
+      </div>
 
-<div style="text-align: center;">
-  <label for="solventSearch"> Solvent ? :</label>
-  <input
-    style="width:150px"
-    list="solventList"
-    id="solventSelect"
-    name="solventSearch"
-    onchange="calculate()"
-  >
-  <datalist id="solventList">
-    <!-- options -->
-  </datalist>
-  <!-- bouton supprimé -->
-</div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
+        <span style="width: 30px;" id="sd-val">–</span>
+        <span style="width: 40px;">MPa<sup>½</sup></span>
 
+        <span style="width: 65px; color: red;"><b>δ<sub>p</sub></b>(solv):</span>
+        <span style="width: 30px;" id="sp-val">–</span>
+        <span style="width: 40px;">MPa<sup>½</sup></span>
 
+        <span style="width: 65px; color: red;"><b>δ<sub>h</sub></b>(solv):</span>
+        <span style="width: 30px;" id="sh-val">–</span>
+        <span style="width: 40px;">MPa<sup>½</sup></span>
+        &nbsp;
+        <span style="display: inline-block; text-align: center;">
+          <span style="display: block;">Ra</span>
+          <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
+        </span>
+        <span>=</span><span id="redResult">–</span>
+        <span id="solubilityStatus"></span>
+      </div>
+    </div>
 
+    <hr style="padding:0;" />
 
+    <div style="display: flex; align-items: center; gap: 0px; margin: 0; width: 100%;">
+      &nbsp;
+      <select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="400">400</option>
+        <option id="allOption" value="ALL">ALL</option>
+      </select>
+      &nbsp;
 
+      <h3>
+        <span class="popup-toggle" style="width:10px; cursor: pointer;" onclick="togglePopup()">Nearest Solvents </span>
+      </h3>
+      <div class="popup" id="popupList">
+        <span class="popup-close" onclick="togglePopup()">×</span>
+        <div id="popupContent"></div>
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-
-
-
-  <!-- Bloc valeurs -->
-
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sd-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-
-    <span style="width: 65px; color: red;"><b>δ<sub>p</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sp-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-
-    <span style="width: 65px; color: red;"><b>δ<sub>h</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sh-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-&nbsp;
-<span style="display: inline-block; text-align: center;">
-  <span style="display: block;">Ra</span>
-  <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-</span>
-<span>=</span><span id="redResult">–</span>
-      <span id="solubilityStatus"></span>
-
-  </div>
-
-</div>
-
-<hr style=" padding:0;" />
-
-
-  <div style="display: flex; align-items: center; gap: 0px;margin:0;width:100%">
-&nbsp;
-<select id="nbSolventsSelect" onchange="updateNBSOL(this.value)" style="width: 40px; font-family: 'Segoe UI Emoji', sans-serif;">
-  <option value="10">10</option>
-  <option value="20">20</option>
-  <option value="30">30</option>
-  <option value="40">40</option>
-  <option value="50">50</option>
-  <option value="100">100</option>
-  <option value="200">200</option>
-  <option value="400">400</option>
-  <option id="allOption" value="ALL">ALL</option>
-</select>
-&nbsp;
-
-    <h3><span class="popup-toggle" style="width:10px" onclick="togglePopup()">Nearest Solvents </span></h3>
-    <div class="popup" id="popupList">
-      <span class="popup-close" onclick="togglePopup()">×</span>
-      <div id="popupContent"></div>
-
-   </div>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-
-<div style="display: flex; align-items: center; justify-content: center; gap: 10px; background:#d6e1d5; padding: 10px;">RED&nbsp;=&nbsp;
-  <span style="display: inline-block; text-align: center;">
-    <span style="display: block;">Ra</span>
-    <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-  </span>
-
-  <span style="font-weight: bold; font-size: 20px; user-select:none;">=</span>
-
-  <span style="display: inline-block; text-align: center;">
-    <span style="display: block;">
-       <span style="display: block;">
-    &radic;<span style="font-size: 0.9em; border-top: 1px solid black;">
-      [(Δδ<sub>d</sub>)² + (Δδ<sub>p</sub>)² + (Δδ<sub>h</sub>)²]
-    </span>
-  </span>
-    </span>
-    <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-  </span>
-</div>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<!-- DIV en dehors de la formule -->
-<div class="row">
-  <span>Select Minimum Distance</span>
-  <span>R<sub>0</sub> :</span>
-  <input type="number" id="r0" value="8" onchange="calculate()">
-</div>
-
-
-</div>
-
-
-<div id="graph" style="margin: 0; padding: 0; height:400px"></div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 1rem;">
+        <label for="r0" style="margin-right: 5px;">R₀:</label>
+        <input
+          id="r0"
+          type="number"
+          value="12"
+          min="0"
+          max="100"
+          step="0.5"
+          onchange="calculate()"
+          style="width: 70px;"
+        />
+      </div>
     </div>
   </div>
-</div>
 
+</div>
 <!-- Footer -->
 <div id="footer">
   <button style="background-color: #555; color: white; border-radius:10px; height:30px; width:100px; cursor: pointer;" onclick="window.location.href='Menu.html'">CoordiMate™</button>
@@ -905,6 +862,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
