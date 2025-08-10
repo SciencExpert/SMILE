@@ -18,6 +18,15 @@
       color: white;
       text-align: center;
     }
+
+    @media (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* évite le bug mobile */
+    background-position: center top;
+  }
+}
+
+
     h1 {
       margin-top: 10px;
       font-size: 3em;
@@ -159,7 +168,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, true);
   }
 });
+
+//https://sciencexpert.github.io/SMILE/Hansen/Mobile_Version/Menu - Mobile.html
 </script>
 </body>
 </html>
-
