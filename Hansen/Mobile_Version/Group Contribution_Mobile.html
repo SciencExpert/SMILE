@@ -56,7 +56,21 @@ input, select { width: 100%; box-sizing: border-box; }
   #footer { font-size: 0.9em; }
 }
 
-
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 3000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+}
 
 
 
@@ -487,8 +501,12 @@ function addGroupRow() {
 
 
 function togglePopup() {
-  const popup = document.getElementById("popupList");
-  popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  const popup = document.getElementById('popupList');
+  if (popup.style.display === 'block') {
+    popup.style.display = 'none';
+  } else {
+    popup.style.display = 'block';
+  }
 }
 
 //------------------------------------------------------------------------------------------------
@@ -803,4 +821,5 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
