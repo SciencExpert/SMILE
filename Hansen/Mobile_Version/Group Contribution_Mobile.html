@@ -54,20 +54,41 @@
     #r0 { width: 50px; }
 
 
-    #leftPanel { 
-	width: 35vw; overflow-y: auto; padding: 5px; box-sizing: border-box; border-right: 1px solid #ccc; 
+#leftPanel {
+  width: 35vw;
+  max-width: 35%;
   max-height: 100vh;
-  overflow-y: auto; /* utile si contenu dépasse */
+  overflow-y: auto;
+  padding: 5px;
   box-sizing: border-box;
-background-color:#d6e1d5;//#FEFDE7;
-text-align:center;
+  border-right: 1px solid #ccc;
+  background-color: #d6e1d5;
+  text-align: center;
 }
-    #rightPanel { 
-width: 65vw; padding: 5px; box-sizing: border-box; 
+
+#rightPanel {
+  width: 65vw;
+  max-width: 65%;
   max-height: 100vh;
-  overflow-y: auto; /* utile si contenu dépasse */
+  overflow-y: auto;
+  padding: 5px;
   box-sizing: border-box;
 }
+
+/* Pour écrans très petits (ex: moins de 400px de large) */
+@media (max-width: 400px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  #leftPanel, #rightPanel {
+    min-width: 300px; /* éviter que ça soit trop étroit */
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+}
+
 
 .calcul-button {
   display: inline-block;
@@ -884,6 +905,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
