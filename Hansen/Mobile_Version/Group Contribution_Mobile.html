@@ -327,7 +327,7 @@ border-radius: 15px;
 
 
 </div>
-<div id="graph" style="position: absolute; top: 150px;left: 300px;z-index:-1;"> </div>
+<div id="graph" style="position: absolute; top: 150px;left: 300px;z-index:3;"> </div>
 
 
 </div>
@@ -674,6 +674,8 @@ document.getElementById("popupContent").innerHTML = `
 
 ], {
     margin: { l: 0, r: 0, b: 0, t: 0 },
+	plot_bgcolor: 'rgba(0,0,0,0)',   // Fond de la zone de tracé
+  paper_bgcolor: 'rgba(0,0,0,0)',  // Fond global transparent
     scene: {
       xaxis: { title: 'δd' },
       yaxis: { title: 'δp' },
@@ -858,6 +860,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
