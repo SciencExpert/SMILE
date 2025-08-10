@@ -92,6 +92,49 @@ border-radius: 15px;
   transform: scale(1.05);
 }
 
+/* Footer caché */
+#footer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  background: #f0f0f0;
+  color: black;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+/* Affichage au hover sur desktop */
+@media (hover: hover) and (pointer: fine) {
+  body:hover #footer {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Responsive : stack sur mobile */
+@media (max-width: 900px) {
+  body { flex-direction: column; height: auto; }
+  #leftPanel, #rightPanel {
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+  }
+  table { font-size: 0.9em; }
+  .predict-button { width: 100%; font-size: 1.1em; }
+}
+@media (max-width: 500px) {
+  table { font-size: 0.85em; }
+  .predict-button { font-size: 1em; padding: 8px; }
+  #footer { font-size: 0.9em; }
+}
+
+		
   </style>
 </head>
 <body>
@@ -290,26 +333,35 @@ border-radius: 15px;
   </div>
 </div>
 
-<div style="position: fixed; bottom: 0; left: 0; width: 100%; 
-            background: #f0f0f0; text-align: center; padding: 8px 0; 
-            font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;">
-<button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='Menu.html'";">CoordiMate&trade;</button>
-
-
-© 2025 SciencExpert. Website designed and developed by <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:#0077cc; text-decoration:none;">SciencExpert™ </a>. 
-All rights reserved. Unauthorized use or reproduction is prohibited.
- <button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="location.reload();">♻️ Reset</button>
+<!-- Footer -->
+<div id="footer">
+  <button style="background-color: #555; color: white; border-radius:10px; height:30px; width:100px; cursor: pointer;" onclick="window.location.href='Menu.html'">CoordiMate™</button>
+  © 2025 SciencExpert. Website designed and developed by
+  <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank">SciencExpert™</a>.
+  All rights reserved. Unauthorized use or reproduction is prohibited.
+  <button style="background-color: #555; color: white; border-radius:10px; height:30px; width:100px; cursor: pointer;" onclick="location.reload();">♻️ Reset</button>
 </div>
 
-
-
-
-
-
+<!-- Bouton toggle mobile -->
+<div id="footerToggleBtn" style="display:none;position:fixed;bottom:18px;right:12px;background:#555;color:white;border-radius:20px;padding:8px 12px;z-index:2001;cursor:pointer;font-size:1.3em;">▲</div>
 
 <script>
+// Toggle du footer en mode tactile
+document.addEventListener('DOMContentLoaded', function() {
+  const footer = document.getElementById('footer');
+  const toggleBtn = document.getElementById('footerToggleBtn');
+  const isTouch = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
+  if (isTouch) {
+    toggleBtn.style.display = 'block';
+    let visible = false;
+    toggleBtn.addEventListener('click', () => {
+      visible = !visible;
+      footer.style.opacity = visible ? '1' : '0';
+      footer.style.pointerEvents = visible ? 'auto' : 'none';
+      toggleBtn.textContent = visible ? '▼' : '▲';
+    });
+  }
+});
 //-----------------------------------------------------------------------------------les constantes
 //const DATA= 'https://sciencexpert.github.io/SMILE/Data/All solvent Hansen_Hanse Book.json';
 const DATA= 'data/All_solvent_Hansen.js';
@@ -804,3 +856,4 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
