@@ -298,7 +298,7 @@ border-radius: 15px;
 </select>
 &nbsp;
 
-    <h3><span class="popup-toggle" style="width:10px; z-index: 50; margin-right:5px" onclick="togglePopup()">Nearest Solvents </span></h3>
+    <h3><span class="popup-toggle" style="width:10px; z-index: 50; margin-right:2px" onclick="togglePopup()">Nearest Solvents </span></h3>
     <div class="popup" id="popupList">
       <span class="popup-close" onclick="togglePopup()">×</span>
       <div id="popupContent"></div>
@@ -320,9 +320,9 @@ border-radius: 15px;
 
 <!-- DIV en dehors de la formule -->
 <div class="row">
-  <span style="margin-left:2px">Minimum Distance</span>
+  <span style="margin-left:2px">Min Distance</span>
   <span>R<sub>0</sub> :</span>
-  <input style="width:10px" type="number" id="r0" value="8" onchange="calculate()">
+  <input style="width:20px" type="number" id="r0" value="8" onchange="calculate()">
 </div>
 
 
@@ -859,6 +859,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
