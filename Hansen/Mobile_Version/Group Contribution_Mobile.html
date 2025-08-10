@@ -145,10 +145,49 @@ input, select {
   }
 }
 
+/* ----- Force rotate ----- */
+#rotateNotice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5em;
+  padding: 20px;
+}
+#rotateNotice img {
+  max-width: 100px;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+	
   </style>
 </head>
 <body>
 
+
+<div id="rotateNotice">
+  <div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Phone_rotation_icon.svg/120px-Phone_rotation_icon.svg.png" alt="Rotate">
+    <p>Veuillez tourner votre appareil en mode paysage<br>📱➡️📟</p>
+  </div>
+</div>
+
+
+
+
+
+	
 <div class="container">
 
   <div id="leftPanel">
@@ -366,6 +405,35 @@ All rights reserved. Unauthorized use or reproduction is prohibited.
   </div>
 
 <script>
+
+function checkOrientation() {
+  if (window.innerHeight > window.innerWidth) {
+    // Mode portrait
+    document.getElementById('rotateNotice').style.display = 'flex';
+  } else {
+    // Mode paysage
+    document.getElementById('rotateNotice').style.display = 'none';
+  }
+}
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('orientationchange', checkOrientation);
+checkOrientation();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 // Footer toggle en mobile, au tap
 document.addEventListener('DOMContentLoaded', function() {
   const footer = document.getElementById('footer');
@@ -887,5 +955,6 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
