@@ -769,7 +769,7 @@ function loadPlotly(callback) {
         return;
       }
       const script = document.createElement('script');
-      script.src = 'statics/js/graphcode2.js';
+      script.src = 'https://sciencexpert.github.io/SMILE/Hansen/statics/js/graphcode2.js';
       script.onload = callback;
       script.onerror = () => {
         alert('Erreur lors du chargement de Plotly.');
@@ -856,5 +856,6 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
