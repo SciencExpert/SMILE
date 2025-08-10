@@ -24,3 +24,4 @@ QVGM Chromato : https://sciencexpert.github.io/SMILE/QVGM_Chromato/Chromato.html
 Demo Escape Game Silicone : https://sciencexpert.github.io/SMILE/Demo EscapeGame Silicone/Demo EscapeGame Silicone.html
 Data solvant : https://sciencexpert.github.io/SMILE/Data/solvents.json
 https://sciencexpert.github.io/SMILE/Data/graphcode.js
+https://sciencexpert.github.io/SMILE/Hansen/Solubility Sphere Finder mobile.html
