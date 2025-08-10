@@ -1,273 +1,217 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>SciencExpert - Hansen Solubility Parameters</title>
-   <link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
-  <style>
+<meta charset="UTF-8">
+<title>SciencExpert - Hansen Solubility Parameters</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://sciencexpert.github.io/SMILE/Hansen/images/SE_favicon.ico">
+<style>
 html, body {
   height: 100%;
   margin: 0;
+  font-family: Arial, sans-serif;
 }
-
 body {
   display: flex;
-  flex-direction: row; /* ou 'column' si vertical */
-  height: 100vh; /* prend toute la hauteur de la fenêtre */
+  flex-direction: row;
+  height: 100vh;
 }
-  main {
-    flex: 1;
-  }
-
-  footer {
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 14px;
-  }
-  footer a {
-    color: #0077cc;
-    text-decoration: none;
-  }
-  footer a:hover {
-    text-decoration: underline;
-  }
-
-
-    #leftPanel { width: 45%; overflow-y: auto; padding: 20px; box-sizing: border-box; border-right: 1px solid #ccc; 
-  height: 95%;
-  overflow-y: auto; /* utile si contenu dépasse */
+#leftPanel {
+  flex: 1 1 45%;
+  overflow-y: auto;
+  padding: 20px;
   box-sizing: border-box;
-background-color:#FEFDE7;
+  border-right: 1px solid #ccc;
+  background-color: #FEFDE7;
 }
-    #rightPanel { width: 55%; padding: 20px; box-sizing: border-box; 
-  height: 100%;
-  overflow-y: auto; /* utile si contenu dépasse */
+#rightPanel {
+  flex: 1 1 55%;
+  padding: 20px;
   box-sizing: border-box;
+  overflow-y: auto;
+  text-align: center;
 }
-
-
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 2px;
-      text-align: center;
-background-color:white;
-    }
- //   th, td {
- //     width: 110px;
-//    }
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 4px;
+  text-align: center;
+  background-color: white;
+}
 th.nom { width: 180px; }
-th.deltaD, td.deltaD { width: 30px; }
-th.deltaP, td.deltaP { width: 30px; }
+th.deltaD, td.deltaD,
+th.deltaP, td.deltaP,
 th.deltaH, td.deltaH { width: 30px; }
 th.Behaviour, td.Behaviour { width: 80px; }
-th.RISK, td.RISK { width: 70px; text-align:center}
-th.CAS, td.CAS { width: 70px; text-align:center}
+th.RISK, td.RISK { width: 70px; text-align:center }
+th.CAS, td.CAS { width: 70px; text-align:center }
 
 .predict-button {
   display: inline-block;
   background-color: #0076b6;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 16px;
   margin: 2px;
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  font-family: inherit;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  line-height: normal; /* Ajout utile pour l’alignement */
 }
-
 .predict-button:hover {
   background-color: #005f90;
   transform: scale(1.05);
 }
-
-    input, select {
-      width: 100px;
-    }
-/* Supprimer les flèches dans les input[type=number] — Chrome, Safari, Edge */
+input, select {
+  width: 100px;
+}
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-/* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
-#output {border:solid 0px black;}
-
 #plot {
-margin-left: auto;
-margin-right: auto;
   width: 100%;
-//  max-width: 600px; /* largeur max (modifiable) */
-  height: auto;     /* ou fixe comme 50px, 100px si tu veux */
-  padding: 0px;
-  margin-bottom: 0px;
   background-color: #f3f3f3;
-  border: 0px solid #ccc;
   border-radius: 6px;
   font-family: monospace;
   font-size: 14px;
-  white-space: pre-wrap; /* permet de garder le formatage */
+  white-space: pre-wrap;
 }
-    button { margin-top: 0px; margin-right: 10px; }
-
-    .link-container {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 1.5rem;
-      border-radius: 10px;
-      max-width: 600px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-    a.dataset-link {
-      text-decoration: none;
-      color: #0076b6;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-    a.dataset-link:hover {
-      text-decoration: underline;
-    }
-
-td {
-  text-align: center; /* centre le contenu de la cellule */
-}
-
 td input {
   width: 100%;
-border:solid 0px black;
-  box-sizing: border-box; /* pour inclure padding/border dans les 80% */
-  text-align: center;      /* (optionnel) centre le texte à l'intérieur de l'input */
+  border: none;
+  text-align: center;
+  box-sizing: border-box;
 }
-  </style>
+
+/* Footer caché */
+#footer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  background: #f0f0f0;
+  color: black;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  border-top: 1px solid #ccc;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+/* Affichage au hover sur desktop */
+@media (hover: hover) and (pointer: fine) {
+  body:hover #footer {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Responsive : stack sur mobile */
+@media (max-width: 900px) {
+  body { flex-direction: column; height: auto; }
+  #leftPanel, #rightPanel {
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+  }
+  table { font-size: 0.9em; }
+  .predict-button { width: 100%; font-size: 1.1em; }
+}
+@media (max-width: 500px) {
+  table { font-size: 0.85em; }
+  .predict-button { font-size: 1em; padding: 8px; }
+  #footer { font-size: 0.9em; }
+}
+</style>
 </head>
 <body>
-  <div id="leftPanel"  >
-    <h2 id="solventTitle" style="text-align:center;line-height: 0;">Solvent selection <span id="solventCount">(0)</span></h2>
-
-
-Ref :
-
-<span style="text-align:center;line-height: 0;"> <a class="dataset-link" 
-href="https://kinampark.com/PL/files/Books/Hansen%20Solubility%20Parameters%202007.pdf" target="_blank">
-   <i style="font-size:0.8em">Hansen Parameters</i>
-    </a>
--
- <a class="dataset-link" 
-href="https://archive.org/details/CRCHandbookOfChemistryAndPhysics97thEdition2016/mode/2up" target="_blank">
-   <i style="font-size:0.8em">Handbook of Chemistry & Physics</i>
-    </a></span>
--
- <a class="dataset-link" 
-href="https://www.cas.org/cas-data/cas-registry" target="_blank">
-   <i style="font-size:0.8em">CAS Number</i>
-    </a></span>
--
- <a class="dataset-link" 
-https://www.prc.cnrs.fr/outils/la-liste-des-substances-cmr/" target="_blank">
-   <i style="font-size:0.8em">CRM</i>
-    </a></span>
-
-<hr/>
- <div style="text-align: center;">
-
-  <button class="predict-button" style="cursor: pointer;width:200px" onclick="exportTableAsJSON()">💾 Save Data</button>
-
-  <!-- Label stylisé comme bouton -->
-  <label for="jsonFile" class="predict-button" style="cursor: pointer;width:200px">
-    📂 Import Data
-  </label>
-
-  <!-- Input caché -->
-  <input type="file" id="jsonFile" style="display: none;" class="predict-button" onchange="importTableFromJSON(this)">
-</div>
-
-<hr/>
-    <div style="text-align: center; margin-bottom: 10px;">
-      <label for="solventSearch">Solvent ? :</label>
-      <input style="width:400px" list="solventList" id="solventSearch" name="solventSearch">
-      <datalist id="solventList"></datalist>
-      <button onclick="addSelectedSolvent()" style="color:white; background-color:brown; width:50px;cursor: pointer;">Add</button>
-    </div>
-
-
-    <table id="solventTable">
-      <tr>
-        <th class="nom">Solvent</th>
-        <th class="deltaD">δ<sub>d</sub></th>
-        <th class="deltaP">δ<sub>p</sub></th>
-        <th class="deltaH">δ<sub>h</sub></th>
-        <th class="Behaviour">Behaviour</th>
-        <th class="CAS">CAS N°</th>
-        <th class="RISK">Risk</th>
-        <th>Remove</th>
-      </tr>
-    </table>
-
-
- 
-
-
+<div id="leftPanel">
+  <h2 id="solventTitle" style="text-align:center;">Solvent selection <span id="solventCount">(0)</span></h2>
+  <div style="text-align: center; margin-bottom: 10px;">
+    <button class="predict-button" onclick="exportTableAsJSON()">💾 Save Data</button>
+    <label for="jsonFile" class="predict-button">📂 Import Data</label>
+    <input type="file" id="jsonFile" style="display:none;" onchange="importTableFromJSON(this)">
   </div>
 
-  <div id="rightPanel" style="text-align:center">
-
- <button class="predict-button" onclick="calculate()" ><span style="font-size:1.5em">🌐</span> Sphere Calculation & Visualisation</button>
-
-     <div id="output"></div>
-    <div id="plot"></div>
-
-<div style="margin-top: 0px;">
-  <button class="predict-button" onclick="renderPlot('dh_dp')">🗺️<span style="font-size:1.2em">δ</span></b><sub>h</sub> / <span style="font-size:1.2em">δ</span><sub>p</sub> Plan</button>
-  <button class="predict-button" onclick="renderPlot('dh_dd')">🗺️<span style="font-size:1.2em">δ</span><sub>h</sub> / <span style="font-size:1.2em">δ</span><sub>d</sub> Plan</button>
-  <button class="predict-button" onclick="renderPlot('dp_dd')">🗺️<span style="font-size:1.2em">δ</span><sub>p</sub> / <span style="font-size:1.2em">δ</span><sub>d</sub> Plan</button>
-  <button class="predict-button" onclick="renderPlot('teas')">📉 Teas Plot</button>
-<button class="predict-button" onclick="renderPlot('3D')">🌐3D View</button>
-</div>
-
-
-   <div style="text-align: center;">
-<hr>
-      <label for="solventSearch">Predict solvent behavior :</label>
-      <input style="width:300px" list="solventList" id="predictionSelect" name="solventSearch">
-      <datalist id="solventList"></datalist>
-<button class="predict-button"  onclick="predictSolubility()">Predict</button>
-<br><span id="predictionResult" style="margin-top: 10px; font-weight: bold;"></span>
+  <div style="text-align: center; margin-bottom: 10px;">
+    <label for="solventSearch">Solvent ? :</label>
+    <input style="width:80%" list="solventList" id="solventSearch">
+    <datalist id="solventList"></datalist>
+    <button onclick="addSelectedSolvent()" style="color:white; background-color:brown; width:50px;">Add</button>
   </div>
-    </div>
 
-
-
-
-
-
-
-
-<div style="position: fixed; bottom: 0; left: 0; width: 100%; 
-            background: #f0f0f0; text-align: center; padding: 8px 0; 
-            font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;">
-<button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='Menu.html'";">CoordiMate&trade;</button>
-
-© 2025 SciencExpert. Website designed and developed by <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:#0077cc; text-decoration:none;">SciencExpert™ </a>. 
-All rights reserved. Unauthorized use or reproduction is prohibited.
- <button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="location.reload();">♻️ Reset</button>
+  <table id="solventTable">
+    <tr>
+      <th class="nom">Solvent</th>
+      <th class="deltaD">δ<sub>d</sub></th>
+      <th class="deltaP">δ<sub>p</sub></th>
+      <th class="deltaH">δ<sub>h</sub></th>
+      <th class="Behaviour">Behaviour</th>
+      <th class="CAS">CAS N°</th>
+      <th class="RISK">Risk</th>
+      <th>Remove</th>
+    </tr>
+  </table>
 </div>
 
+<div id="rightPanel">
+  <button class="predict-button" onclick="calculate()">🌐 Sphere Calculation & Visualisation</button>
+  <div id="output"></div>
+  <div id="plot"></div>
+  <div style="margin-top: 10px;">
+    <button class="predict-button" onclick="renderPlot('dh_dp')">🗺️ δh / δp</button>
+    <button class="predict-button" onclick="renderPlot('dh_dd')">🗺️ δh / δd</button>
+    <button class="predict-button" onclick="renderPlot('dp_dd')">🗺️ δp / δd</button>
+    <button class="predict-button" onclick="renderPlot('teas')">📉 Teas Plot</button>
+    <button class="predict-button" onclick="renderPlot('3D')">🌐 3D View</button>
+  </div>
 
+  <div style="text-align: center; margin-top: 10px;">
+    <label for="predictionSelect">Predict solvent behavior :</label>
+    <input style="width:80%" list="solventList" id="predictionSelect">
+    <button class="predict-button" onclick="predictSolubility()">Predict</button>
+    <br>
+    <span id="predictionResult" style="margin-top: 10px; font-weight: bold;"></span>
+  </div>
+</div>
 
-  <script>// ------ Nouvelle gestion de la base de solvants ------
+<!-- Footer -->
+<div id="footer">
+  <button style="background-color: #555; color: white; border-radius:10px; height:30px; width:100px; cursor: pointer;" onclick="window.location.href='Menu.html'">CoordiMate™</button>
+  © 2025 SciencExpert. Website designed and developed by
+  <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank">SciencExpert™</a>.
+  All rights reserved. Unauthorized use or reproduction is prohibited.
+  <button style="background-color: #555; color: white; border-radius:10px; height:30px; width:100px; cursor: pointer;" onclick="location.reload();">♻️ Reset</button>
+</div>
+
+<!-- Bouton toggle mobile -->
+<div id="footerToggleBtn" style="display:none;position:fixed;bottom:18px;right:12px;background:#555;color:white;border-radius:20px;padding:8px 12px;z-index:2001;cursor:pointer;font-size:1.3em;">▲</div>
+
+<script>
+// Toggle du footer en mode tactile
+document.addEventListener('DOMContentLoaded', function() {
+  const footer = document.getElementById('footer');
+  const toggleBtn = document.getElementById('footerToggleBtn');
+  const isTouch = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
+  if (isTouch) {
+    toggleBtn.style.display = 'block';
+    let visible = false;
+    toggleBtn.addEventListener('click', () => {
+      visible = !visible;
+      footer.style.opacity = visible ? '1' : '0';
+      footer.style.pointerEvents = visible ? 'auto' : 'none';
+      toggleBtn.textContent = visible ? '▼' : '▲';
+    });
+  }
+});
+
 let solventDatabase = [];     // Remplie via fetch
 let ellipsoidTrace = null;    // Pour affichage 3D
 let ellipsoidPoints = [];
