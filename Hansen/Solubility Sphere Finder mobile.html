@@ -133,6 +133,24 @@
         left: 1vw;
         transform: none;
       }
+
+/* Apparaît quand on survole le body */
+body:hover #footer {
+  opacity: 1;
+  pointer-events: auto;
+}
+#footer {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+body:hover #footer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
     }
   </style>
 </head>
@@ -206,7 +224,7 @@
   </div>
 </div>
 
-<div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #f0f0f0; text-align: center; padding: 8px 0; font-size: 6px; border-top: 1px solid #ccc; z-index: 1000;">
+<div id="footer"  style="position: fixed; bottom: 0; left: 0; width: 100%; background: #f0f0f0; text-align: center; padding: 8px 0; font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;">
   <button class="" style="background-color: #555; color: white; border-radius:10px; height:30px; width:100px; cursor: pointer;" onclick="window.location.href='Menu.html';">CoordiMate&trade;</button>
   © 2025 SciencExpert. Website designed and developed by <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:#0077cc; text-decoration:none;">SciencExpert™ </a>.
   All rights reserved. Unauthorized use or reproduction is prohibited.
@@ -233,6 +251,38 @@
     ];
 //-------------------------------------------------------------------------
     
+
+document.addEventListener('DOMContentLoaded', () => {
+  const footer = document.getElementById('footer');
+
+  // Détection "pas de hover" (mobile, tablette)
+  const noHover = window.matchMedia('(hover: none)').matches;
+
+  if (noHover) {
+    // On crée un bouton flottant pour afficher/masquer
+    const toggleBtn = document.createElement('div');
+    toggleBtn.textContent = '▲';
+    toggleBtn.style.position = 'fixed';
+    toggleBtn.style.bottom = '5px';
+    toggleBtn.style.right = '10px';
+    toggleBtn.style.background = '#555';
+    toggleBtn.style.color = 'white';
+    toggleBtn.style.padding = '6px 10px';
+    toggleBtn.style.borderRadius = '6px';
+    toggleBtn.style.cursor = 'pointer';
+    toggleBtn.style.zIndex = '2000';
+    document.body.appendChild(toggleBtn);
+
+    let visible = false;
+    toggleBtn.addEventListener('click', () => {
+      visible = !visible;
+      footer.style.opacity = visible ? '1' : '0';
+      footer.style.pointerEvents = visible ? 'auto' : 'none';
+      toggleBtn.textContent = visible ? '▼' : '▲';
+    });
+  }
+});
+
 
 
 
@@ -847,4 +897,5 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
