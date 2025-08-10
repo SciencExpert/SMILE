@@ -161,17 +161,16 @@ input, select { width: 100%; box-sizing: border-box; }
     </div>
 
 <hr/>
-<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> 
-		<div  style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
+		<div class="row"> 
 		&nbsp;
-		<div style="text-align: center;">
-  		<label for="solventSearch"> Solvent ? :</label>
-  		<input style="width:150px" list="solventList" id="solventSelect" name="solventSearch" onchange="calculate()">
-        	<datalist id="solventList">
-  		</datalist>
-		</div>
+			<div style="text-align: center;">
+  			<label for="solventSearch"> Solvent ? :</label>
+  			<input style="width:150px" list="solventList" id="solventSelect" name="solventSearch" onchange="calculate()">
+        		<datalist id="solventList">
+  			</datalist>
+			</div>
 
-  		<div style="display: flex; align-items: center; gap: 10px;">
+  		<div style="display: flex; align-items: center; gap:5px;">
     		<span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
     		<span style="width: 30px;" id="sd-val">–</span>
    		<span style="width: 40px;">MPa<sup>½</sup></span>
@@ -191,7 +190,7 @@ input, select { width: 100%; box-sizing: border-box; }
 		<span>=</span><span id="redResult">–</span>
       		<span id="solubilityStatus"></span>
   		</div>
-</div>
+	</div>
 </div>
 
 <hr style=" padding:0;" />
