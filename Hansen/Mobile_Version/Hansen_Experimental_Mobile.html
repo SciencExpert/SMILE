@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>SciencExpert - Hansen Solubility Parameters</title>
+   <link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
+  <style>
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: row; /* ou 'column' si vertical */
+  height: 100vh; /* prend toute la hauteur de la fenêtre */
+}
+  main {
+    flex: 1;
+  }
+
+  footer {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  footer a {
+    color: #0077cc;
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+
+    #leftPanel { width: 45%; overflow-y: auto; padding: 20px; box-sizing: border-box; border-right: 1px solid #ccc; 
+  height: 95%;
+  overflow-y: auto; /* utile si contenu dépasse */
+  box-sizing: border-box;
+background-color:#FEFDE7;
+}
+    #rightPanel { width: 55%; padding: 20px; box-sizing: border-box; 
+  height: 100%;
+  overflow-y: auto; /* utile si contenu dépasse */
+  box-sizing: border-box;
+}
+
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 2px;
+      text-align: center;
+background-color:white;
+    }
+ //   th, td {
+ //     width: 110px;
+//    }
+th.nom { width: 180px; }
+th.deltaD, td.deltaD { width: 30px; }
+th.deltaP, td.deltaP { width: 30px; }
+th.deltaH, td.deltaH { width: 30px; }
+th.Behaviour, td.Behaviour { width: 80px; }
+th.RISK, td.RISK { width: 70px; text-align:center}
+th.CAS, td.CAS { width: 70px; text-align:center}
+
+.predict-button {
+  display: inline-block;
+  background-color: #0076b6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 2px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-family: inherit;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  line-height: normal; /* Ajout utile pour l’alignement */
+}
+
+.predict-button:hover {
+  background-color: #005f90;
+  transform: scale(1.05);
+}
+
+    input, select {
+      width: 100px;
+    }
+/* Supprimer les flèches dans les input[type=number] — Chrome, Safari, Edge */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+#output {border:solid 0px black;}
+
+#plot {
+margin-left: auto;
+margin-right: auto;
+  width: 100%;
+//  max-width: 600px; /* largeur max (modifiable) */
+  height: auto;     /* ou fixe comme 50px, 100px si tu veux */
+  padding: 0px;
+  margin-bottom: 0px;
+  background-color: #f3f3f3;
+  border: 0px solid #ccc;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 14px;
+  white-space: pre-wrap; /* permet de garder le formatage */
+}
+    button { margin-top: 0px; margin-right: 10px; }
+
+    .link-container {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 1.5rem;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    a.dataset-link {
+      text-decoration: none;
+      color: #0076b6;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    a.dataset-link:hover {
+      text-decoration: underline;
+    }
+
+td {
+  text-align: center; /* centre le contenu de la cellule */
+}
+
+td input {
+  width: 100%;
+border:solid 0px black;
+  box-sizing: border-box; /* pour inclure padding/border dans les 80% */
+  text-align: center;      /* (optionnel) centre le texte à l'intérieur de l'input */
+}
+  </style>
+</head>
+<body>
+  <div id="leftPanel"  >
+    <h2 id="solventTitle" style="text-align:center;line-height: 0;">Solvent selection <span id="solventCount">(0)</span></h2>
+
+
+Ref :
+
+<span style="text-align:center;line-height: 0;"> <a class="dataset-link" 
+href="https://kinampark.com/PL/files/Books/Hansen%20Solubility%20Parameters%202007.pdf" target="_blank">
+   <i style="font-size:0.8em">Hansen Parameters</i>
+    </a>
+-
+ <a class="dataset-link" 
+href="https://archive.org/details/CRCHandbookOfChemistryAndPhysics97thEdition2016/mode/2up" target="_blank">
+   <i style="font-size:0.8em">Handbook of Chemistry & Physics</i>
+    </a></span>
+-
+ <a class="dataset-link" 
+href="https://www.cas.org/cas-data/cas-registry" target="_blank">
+   <i style="font-size:0.8em">CAS Number</i>
+    </a></span>
+-
+ <a class="dataset-link" 
+https://www.prc.cnrs.fr/outils/la-liste-des-substances-cmr/" target="_blank">
+   <i style="font-size:0.8em">CRM</i>
+    </a></span>
+
+<hr/>
+ <div style="text-align: center;">
+
+  <button class="predict-button" style="cursor: pointer;width:200px" onclick="exportTableAsJSON()">💾 Save Data</button>
+
+  <!-- Label stylisé comme bouton -->
+  <label for="jsonFile" class="predict-button" style="cursor: pointer;width:200px">
+    📂 Import Data
+  </label>
+
+  <!-- Input caché -->
+  <input type="file" id="jsonFile" style="display: none;" class="predict-button" onchange="importTableFromJSON(this)">
+</div>
+
+<hr/>
+    <div style="text-align: center; margin-bottom: 10px;">
+      <label for="solventSearch">Solvent ? :</label>
+      <input style="width:400px" list="solventList" id="solventSearch" name="solventSearch">
+      <datalist id="solventList"></datalist>
+      <button onclick="addSelectedSolvent()" style="color:white; background-color:brown; width:50px;cursor: pointer;">Add</button>
+    </div>
+
+
+    <table id="solventTable">
+      <tr>
+        <th class="nom">Solvent</th>
+        <th class="deltaD">δ<sub>d</sub></th>
+        <th class="deltaP">δ<sub>p</sub></th>
+        <th class="deltaH">δ<sub>h</sub></th>
+        <th class="Behaviour">Behaviour</th>
+        <th class="CAS">CAS N°</th>
+        <th class="RISK">Risk</th>
+        <th>Remove</th>
+      </tr>
+    </table>
+
+
+ 
+
+
+  </div>
+
+  <div id="rightPanel" style="text-align:center">
+
+ <button class="predict-button" onclick="calculate()" ><span style="font-size:1.5em">🌐</span> Sphere Calculation & Visualisation</button>
+
+     <div id="output"></div>
+    <div id="plot"></div>
+
+<div style="margin-top: 0px;">
+  <button class="predict-button" onclick="renderPlot('dh_dp')">🗺️<span style="font-size:1.2em">δ</span></b><sub>h</sub> / <span style="font-size:1.2em">δ</span><sub>p</sub> Plan</button>
+  <button class="predict-button" onclick="renderPlot('dh_dd')">🗺️<span style="font-size:1.2em">δ</span><sub>h</sub> / <span style="font-size:1.2em">δ</span><sub>d</sub> Plan</button>
+  <button class="predict-button" onclick="renderPlot('dp_dd')">🗺️<span style="font-size:1.2em">δ</span><sub>p</sub> / <span style="font-size:1.2em">δ</span><sub>d</sub> Plan</button>
+  <button class="predict-button" onclick="renderPlot('teas')">📉 Teas Plot</button>
+<button class="predict-button" onclick="renderPlot('3D')">🌐3D View</button>
+</div>
+
+
+   <div style="text-align: center;">
+<hr>
+      <label for="solventSearch">Predict solvent behavior :</label>
+      <input style="width:300px" list="solventList" id="predictionSelect" name="solventSearch">
+      <datalist id="solventList"></datalist>
+<button class="predict-button"  onclick="predictSolubility()">Predict</button>
+<br><span id="predictionResult" style="margin-top: 10px; font-weight: bold;"></span>
+  </div>
+    </div>
+
+
+
+
+
+
+
+
+<div style="position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: #f0f0f0; text-align: center; padding: 8px 0; 
+            font-size: 14px; border-top: 1px solid #ccc; z-index: 1000;">
+<button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
+  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='Menu.html'";">CoordiMate&trade;</button>
+
+© 2025 SciencExpert. Website designed and developed by <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:#0077cc; text-decoration:none;">SciencExpert™ </a>. 
+All rights reserved. Unauthorized use or reproduction is prohibited.
+ <button class="" style=" background-color: #555; color: white; border-radius:10px;height:30px;width:100px;
+  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="location.reload();">♻️ Reset</button>
+</div>
+
+
+
+  <script>// ------ Nouvelle gestion de la base de solvants ------
+let solventDatabase = [];     // Remplie via fetch
+let ellipsoidTrace = null;    // Pour affichage 3D
+let ellipsoidPoints = [];
+
+async function loadSolventsFromJSON() {
+  try {
+    const response = await fetch("https://sciencexpert.github.io/SMILE/Data/All solvent Hansen_Hanse Book.json");
+
+
+
+    if (!response.ok) throw new Error("Erreur lors du chargement de solvents.json");
+    const solvents = await response.json();
+
+    solvents.sort((a, b) => a.name.localeCompare(b.name));
+    solventDatabase = solvents;
+
+    // Remplit la datalist (auto-complétion)
+    const datalist = document.getElementById("solventList");
+    datalist.innerHTML = "";
+    solventDatabase.forEach(solvent => {
+      const option = document.createElement("option");
+      option.value = solvent.name;
+      datalist.appendChild(option);
+    });
+
+    // Remplit la liste de sélection pour la prédiction
+    const predictionSelect = document.getElementById("predictionSelect");
+    predictionSelect.innerHTML = '<option value="">-- Choose a solvent --</option>';
+    solventDatabase.forEach(solvent => {
+      const option = document.createElement("option");
+      option.value = solvent.name;
+      option.textContent = solvent.name;
+      predictionSelect.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error(error);
+    alert("Impossible de charger la base des solvants.");
+  }
+}
+window.addEventListener('DOMContentLoaded', loadSolventsFromJSON);
+
+//-------------------------------------------------------------------------------------------denombrement du nombre de solvant
+function updateSolventCount() {
+  const count = document.querySelectorAll("#solventTable tr").length - 1; // Ne pas compter l'en-tête
+  document.getElementById("solventCount").textContent = `(${count})`;
+}
+
+function updateSolventCount2() {
+  const count = document.querySelectorAll("#solventTable tr").length - 1; // enlevant l'en-tête
+  const title = document.getElementById("solventTitle");
+  if (title) {
+    title.textContent = `Solvent selection (${count})`;
+  }
+}
+
+//-----------------------------------------------
+
+function removeSolvent(button) {
+  const row = button.closest('tr');
+  row.remove();
+  updatePlot();
+  updateSolventCount();
+}
+
+//-------------------------------------------------------------------------------------------- ADD Solvent
+function addSelectedSolvent() {
+  const inputEl = document.getElementById("solventSearch");
+  const name = inputEl.value.trim();
+  if (!name) return;
+
+  const existing = Array.from(document.querySelectorAll("#solventTable tr td:first-child input"))
+    .map(input => input.value);
+
+  if (existing.includes(name)) {
+    inputEl.value = "Already selected";
+    setTimeout(() => inputEl.value = "", 1500);
+    return;
+  }
+
+  const solvent = solventDatabase.find(s => s.name === name) || {
+    name: name,
+    d: "",
+    p: "",
+    h: "",
+    cas: "",
+    risk: "",
+    comment: ""
+  };
+//-------------------------------------------------------------Donne un solvant éditable : NEW
+  const isEditable = name.toLowerCase() === "new";
+
+  const row = document.getElementById("solventTable").insertRow(1);
+  row.innerHTML = `
+    <td class="nom"><input style="text-align:left" type="text" value="${solvent.name}" ${isEditable ? "" : "readonly"}></td>
+    <td><input type="number" step="0.1" value="${solvent.d}" ${isEditable ? "" : "readonly"}></td>
+    <td><input type="number" step="0.1" value="${solvent.p}" ${isEditable ? "" : "readonly"}></td>
+    <td><input type="number" step="0.1" value="${solvent.h}" ${isEditable ? "" : "readonly"}></td>
+
+    <td style="padding: 0; margin: 0;">
+      <select id="solubilitySelect" style="width: 100%; margin: 0; padding: 0;" onchange="updateSelectColor(this); updatePlot();">
+        <option value="unknown" selected>Unknown</option>    
+        <option value="soluble">Soluble</option>
+        <option value="gel">Swell</option>
+        <option value="insoluble">Insoluble</option>
+      </select>
+    </td>
+
+    <td class="CAS"><input style="text-align:left" type="text" value="${solvent.cas || ""}" ${isEditable ? "" : "readonly"}></td>
+    <td class="RISK" title="${solvent.comment || ""}">
+      <input style="text-align:center" type="text" value="${solvent.risk || ""}" ${isEditable ? "" : "readonly"}>
+    </td>
+    <td><button onclick="removeSolvent(this)">X</button></td>
+  `;
+
+  const select = row.querySelector("select");
+  select.value = "unknown";
+  updateSelectColor(select);
+
+  updatePlot();
+  updateSolventCount();
+  inputEl.value = "";
+}
+
+//--------------------------------------------------------------------- change color of select
+
+function updateSelectColor(select) {
+  const value = select.value;
+  const td = select.parentElement;
+  select.style.border = 'none';
+  select.style.outline = 'none';
+  select.style.textAlign = 'center';
+  select.style.textAlignLast = 'center';
+
+  switch (value) {
+    case "soluble":
+      select.style.backgroundColor = "green";
+      select.style.color = "white";
+      td.style.backgroundColor = "green";
+      break;
+    case "gel":
+      select.style.backgroundColor = "orange";
+      select.style.color = "black";
+      td.style.backgroundColor = "orange";
+      break;
+    case "insoluble":
+      select.style.backgroundColor = "red";
+      select.style.color = "white";
+      td.style.backgroundColor = "red";
+      break;
+    case "unknown":
+    default:
+      select.style.backgroundColor = "black";
+      select.style.color = "white";
+      td.style.backgroundColor = "black";
+  }
+}
+
+
+
+//----------------------------------------------------------------------------update Plot
+
+function updatePlot() {
+  const table = document.getElementById("solventTable");
+  const solvents = [];
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+    const name = cells[0].children[0].value;
+    const d = parseFloat(cells[1].children[0].value);
+    const p = parseFloat(cells[2].children[0].value);
+    const h = parseFloat(cells[3].children[0].value);
+    const status = cells[4].children[0].value;
+    if (!isNaN(d) && !isNaN(p) && !isNaN(h)) {
+      solvents.push({ name, d, p, h, status });
+    }
+  }
+
+  const good = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'green', size: 5 }, name: 'Soluble' };
+  const gel = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'orange', size: 5 }, name: 'Swell' };
+  const bad = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'red', size: 5 }, name: 'Insoluble' };
+  const unknown = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'black', size: 5 }, name: 'Unknown' };
+
+  solvents.forEach(s => {
+    let target;
+    if (s.status === 'soluble')      target = good;
+    else if (s.status === 'gel')    target = gel;
+    else if (s.status === 'insoluble') target = bad;
+    else target = unknown;
+    target.x.push(s.d);
+    target.y.push(s.p);
+    target.z.push(s.h);
+    target.text.push(s.name);
+  });
+
+  Plotly.newPlot('plot', [good, gel, bad, unknown], {
+    scene: { xaxis: { title: 'δd' }, yaxis: { title: 'δp'}, zaxis: { title: 'δh'} },
+    margin: { t: 0 }
+  });
+}
+//-----------------------------------------------------------------------
+function calculate() {
+  const table = document.getElementById("solventTable");
+  const solvents = [];
+
+  // Lecture des solvants et status
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+    const name = cells[0].children[0].value;
+    const d = parseFloat(cells[1].children[0].value);
+    const p = parseFloat(cells[2].children[0].value);
+    const h = parseFloat(cells[3].children[0].value);
+    const status = cells[4].children[0].value;
+
+    if (!isNaN(d) && !isNaN(p) && !isNaN(h)) {
+      solvents.push({ name, d, p, h, status });
+    }
+  }
+
+  const goodSolvents = solvents.filter(s => s.status === 'soluble');
+  if (goodSolvents.length === 0) return;
+
+  // Calcul centre initial (moyenne des bons solvants)
+  let center = {
+    d: goodSolvents.reduce((acc, s) => acc + s.d, 0) / goodSolvents.length,
+    p: goodSolvents.reduce((acc, s) => acc + s.p, 0) / goodSolvents.length,
+    h: goodSolvents.reduce((acc, s) => acc + s.h, 0) / goodSolvents.length
+  };
+
+  // Calcul des écarts absolus par coordonnée
+  function meanOfTop3(arr) {
+    const sorted = arr.slice().sort((a, b) => b - a);
+    return sorted.slice(0, 3).reduce((sum, val) => sum + val, 0) / 3;
+  }
+
+  const Rd = meanOfTop3(goodSolvents.map(s => Math.abs(s.d - center.d)));
+  const Rp = meanOfTop3(goodSolvents.map(s => Math.abs(s.p - center.p)));
+  const Rh = meanOfTop3(goodSolvents.map(s => Math.abs(s.h - center.h)));
+
+  // Rayon fixé = plus petit parmi Rd, Rp, Rh // Moyenne des trois ? 
+  const R0 = (Rd+Rp+Rh)/3;//Math.min(Rd, Rp, Rh);
+
+  // Fonction erreur à minimiser : pénalise mauvais classement (bons hors sphère, mauvais dedans)
+  function error(centerArr) {
+    const [cd, cp, ch] = centerArr;
+    let totalPenalty = 0;
+
+    solvents.forEach(s => {
+      // Distance euclidienne simple (sans le facteur 4 sur d, car on prend le plus petit rayon)
+      const Ra = Math.sqrt(
+        Math.pow(s.d - cd, 2) +
+        Math.pow(s.p - cp, 2) +
+        Math.pow(s.h - ch, 2)
+      );
+
+      if (s.status === 'soluble' && Ra > R0) {
+        totalPenalty += Math.exp(Ra - R0);
+      } else if (s.status !== 'soluble' && Ra <= R0) {
+        totalPenalty += Math.exp(R0 - Ra);
+      }
+    });
+
+    return totalPenalty;
+  }
+
+  // Algorithme Nelder-Mead simple sur (δd, δp, δh)
+  function nelderMeadOptimize(start, maxIter = 300, alpha = 1, gamma = 2, rho = 0.5, sigma = 0.5) {
+    let simplex = [start];
+    for (let i = 0; i < start.length; i++) {
+      let point = [...start];
+      point[i] += 0.1; // déplacement initial
+      simplex.push(point);
+    }
+
+    for (let iter = 0; iter < maxIter; iter++) {
+      simplex.sort((a, b) => error(a) - error(b));
+      let best = simplex[0];
+      let worst = simplex[simplex.length - 1];
+      let secondWorst = simplex[simplex.length - 2];
+
+      let centroid = best.map((_, i) =>
+        simplex.slice(0, -1).reduce((sum, p) => sum + p[i], 0) / (simplex.length - 1)
+      );
+
+      let reflected = centroid.map((c, i) => c + alpha * (c - worst[i]));
+      let reflectedErr = error(reflected);
+
+      if (reflectedErr < error(best)) {
+        let expanded = centroid.map((c, i) => c + gamma * (reflected[i] - c));
+        simplex[simplex.length - 1] = (error(expanded) < reflectedErr) ? expanded : reflected;
+      } else if (reflectedErr < error(secondWorst)) {
+        simplex[simplex.length - 1] = reflected;
+      } else {
+        let contracted = centroid.map((c, i) => c + rho * (worst[i] - c));
+        if (error(contracted) < error(worst)) {
+          simplex[simplex.length - 1] = contracted;
+        } else {
+          for (let i = 1; i < simplex.length; i++) {
+            simplex[i] = simplex[0].map((c, j) => c + sigma * (simplex[i][j] - c));
+          }
+        }
+      }
+    }
+    simplex.sort((a, b) => error(a) - error(b));
+    return simplex[0];
+  }
+
+  // Optimisation
+  let [cd, cp, ch] = nelderMeadOptimize([center.d, center.p, center.h]);
+
+  document.getElementById("output").innerHTML =
+    `Center δ<sub>d</sub>=${cd.toFixed(1)}| δ<sub>p</sub>=${cp.toFixed(1)}| δ<sub>H</sub>=${ch.toFixed(1)}&nbsp;&nbsp;&nbsp;&nbsp;R0=${R0.toFixed(1)} | (Rd=${Rd.toFixed(1)};Rp=${Rp.toFixed(1)};RH=${Rh.toFixed(1)};)            Erreur totale = ${error([cd, cp, ch]).toExponential(3)}`;
+
+  // Ici on peut tracer la sphère centrée sur (cd, cp, ch) avec rayon R0
+  // EllipsoidTrace peut être adapté pour une sphère avec même rayon dans toutes les directions mais on reprend les Rd, Rp et RH initial
+  ellipsoidTrace = createEllipsoid(cd, cp, ch, Rd, Rp, Rh);
+
+ellipsoidPoints = [];
+  for (let i = 0; i < ellipsoidTrace.x.length; i++) {
+    for (let j = 0; j < ellipsoidTrace.x[i].length; j++) {
+      ellipsoidPoints.push({
+        d: ellipsoidTrace.x[i][j],
+        p: ellipsoidTrace.y[i][j],
+        h: ellipsoidTrace.z[i][j]
+      });
+    }
+  }
+  renderPlot('3D');
+}
+
+
+
+
+//---------------------------------------Hansen Error calcul
+function hansenError(center, radii, solvents) {
+  let n = solvents.length;
+  let product = 1;
+
+  solvents.forEach(s => {
+    // Distance ellipsoïdale
+    const Ra = Math.sqrt(
+      ((s.d - center.d) / radii.Rd) ** 2 +
+      ((s.p - center.p) / radii.Rp) ** 2 +
+      ((s.h - center.h) / radii.Rh) ** 2
+    );
+
+    let fi;
+    if ((s.status === 'soluble' && Ra <= 1) || (s.status !== 'soluble' && Ra > 1)) {
+      fi = 1; // bon classement
+    } else if (s.status === 'soluble' && Ra > 1) {
+      fi = Math.exp(1 - Ra); // pénalité : bon solvant hors
+    } else {
+      fi = Math.exp(Ra - 1); // pénalité : mauvais solvant dedans
+    }
+    product *= fi;
+  });
+
+  return Math.pow(product, 1 / n); // racine n-ième
+}
+//-----------------------------------------simplex pour optimal dd, dp, dh
+
+
+function optimizeCenter(initialCenter, radii, solvents) {
+  let center = { ...initialCenter };
+  let step = 0.05;
+  let bestScore = hansenError(center, radii, solvents);
+
+  for (let iter = 0; iter < 500; iter++) {
+    let improved = false;
+    for (let axis of ['d', 'p', 'h']) {
+      for (let dir of [-1, 1]) {
+        let trial = { ...center };
+        trial[axis] += dir * step;
+        let score = hansenError(trial, radii, solvents);
+        if (score < bestScore) {
+          bestScore = score;
+          center = trial;
+          improved = true;
+        }
+      }
+    }
+    if (!improved) step *= 0.5;
+    if (step < 1e-4) break;
+  }
+  return { center, bestScore };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function createEllipsoid(cx, cy, cz, rx, ry, rz, resolution = 30) {
+  const x = [],
+        y = [],
+        z = [];
+  for (let i = 0; i <= resolution; i++) {
+    const theta = i * Math.PI / resolution;
+    const rowX = [], rowY = [], rowZ = [];
+    for (let j = 0; j <= resolution; j++) {
+      const phi = j * 2 * Math.PI / resolution;
+      const xp = rx * Math.sin(theta) * Math.cos(phi);
+      const yp = ry * Math.sin(theta) * Math.sin(phi);
+      const zp = rz * Math.cos(theta);
+      rowX.push(cx + xp);
+      rowY.push(cy + yp);
+      rowZ.push(cz + zp);
+    }
+    x.push(rowX);
+    y.push(rowY);
+    z.push(rowZ);
+  }
+  return { x, y, z, opacity: 0.3, colorscale: 'Viridis', name: 'Ellipsoïde', hoverinfo: 'skip', type: 'surface', showscale: false };
+}
+
+//--------------------------------------------------------------------------------------------Prédiction
+function predictSolubility() {
+  const predictionSelect = document.getElementById("predictionSelect");
+  const resultBox = document.getElementById("predictionResult");
+  const selected = predictionSelect.value;
+  if (!selected) {
+    resultBox.innerText = "Please select a solvent.";
+    return;
+  }
+
+  const data = solventDatabase.find(s => s.name === selected);
+  if (!data) {
+    resultBox.innerText = "Solvent not found.";
+    return;
+  }
+  const { d, p, h } = data;
+
+  const table = document.getElementById("solventTable");
+  const goodSolvents = [];
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+    const status = cells[4].children[0].value;
+    if (status === 'soluble') {
+      const sd = parseFloat(cells[1].children[0].value);
+      const sp = parseFloat(cells[2].children[0].value);
+      const sh = parseFloat(cells[3].children[0].value);
+      goodSolvents.push({ d: sd, p: sp, h: sh });
+    }
+  }
+  if (goodSolvents.length === 0) {
+    resultBox.innerText = "Add at least one 'Soluble' solvent first.";
+    return;
+  }
+  const avg = goodSolvents.reduce((acc, s) => {
+    acc.d += s.d;
+    acc.p += s.p;
+    acc.h += s.h;
+    return acc;
+  }, { d: 0, p: 0, h: 0 });
+  const center = {
+    d: avg.d / goodSolvents.length,
+    p: avg.p / goodSolvents.length,
+    h: avg.h / goodSolvents.length
+  };
+
+  const Rd = Math.max(...goodSolvents.map(s => Math.abs(s.d - center.d))) || 1;
+  const Rp = Math.max(...goodSolvents.map(s => Math.abs(s.p - center.p))) || 1;
+  const Rh = Math.max(...goodSolvents.map(s => Math.abs(s.h - center.h))) || 1;
+
+  const value =
+    Math.pow((d - center.d) / Rd, 2) +
+    Math.pow((p - center.p) / Rp, 2) +
+    Math.pow((h - center.h) / Rh, 2);
+
+  let result;
+  if (value <= 1) {
+    result = "✅ Soluble";
+    resultBox.style.color = "green";
+  } else if (value <= 2.25) {
+    result = "🟠 Swell";
+    resultBox.style.color = "orange";
+  } else {
+    result = "❌ Insoluble";
+    resultBox.style.color = "red";
+  }
+  resultBox.innerText = `${selected}: ${result} (Normalized distance² = ${value.toFixed(2)})`;
+}
+
+//-------------------------------------- Vue 2D & 3D
+let lastSolventData = null;
+
+
+
+
+
+
+function renderPlot(viewType) {
+  const table = document.getElementById("solventTable");
+  const solvents = [];
+
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+    const name = cells[0].children[0].value;
+    const d = parseFloat(cells[1].children[0].value);
+    const p = parseFloat(cells[2].children[0].value);
+    const h = parseFloat(cells[3].children[0].value);
+    const status = cells[4].children[0].value;
+    if (!isNaN(d) && !isNaN(p) && !isNaN(h)) {
+      solvents.push({ name, d, p, h, status });
+    }
+  }
+  if (solvents.length === 0) return;
+
+  lastSolventData = solvents;
+
+  function roundDown10(val) { return Math.floor(val / 10) * 10; }
+  function roundUp10(val) { return Math.ceil(val / 10) * 10; }
+
+  const dVals = solvents.map(s => s.d);
+  const pVals = solvents.map(s => s.p);
+  const hVals = solvents.map(s => s.h);
+
+  const dMin = roundDown10(Math.min(...dVals));
+  const dMax = roundUp10(Math.max(...dVals));
+  const pMin = roundDown10(Math.min(...pVals));
+  const pMax = roundUp10(Math.max(...pVals));
+  const hMin = roundDown10(Math.min(...hVals));
+  const hMax = roundUp10(Math.max(...hVals));
+
+  const height = Math.sqrt(3) / 2;
+
+  function norm(value, min, max) {
+    if (max === min) return 0.5;
+    return (value - min) / (max - min);
+  }
+
+  function toTriangleCoords(dNorm, pNorm, hNorm) {
+    const sum = dNorm + pNorm + hNorm;
+    const fd = dNorm / sum;
+    const fp = pNorm / sum;
+    const fh = hNorm / sum;
+    const x = 0.5 * (2 * fp + fh);
+    const y = height * fh;
+    return { x, y };
+  }
+
+  if (viewType === 'teas') {
+    const solventsNorm = solvents.map(s => ({
+      name: s.name,
+      dNorm: norm(s.d, dMin, dMax),
+      pNorm: norm(s.p, pMin, pMax),
+      hNorm: norm(s.h, hMin, hMax),
+      status: s.status
+    }));
+
+    const points = solventsNorm.map(s => {
+      const { x, y } = toTriangleCoords(s.dNorm, s.pNorm, s.hNorm);
+      return { x, y, name: s.name, status: s.status };
+    });
+
+    const colorMap = {
+      soluble: 'green',
+      gel: 'orange',
+      insoluble: 'red',
+      unknown: 'black'
+    };
+
+    // Solvants par statut
+    const traces = ['soluble', 'gel', 'insoluble', 'unknown'].map(status => {
+      const group = points.filter(p => p.status === status);
+      return {
+        x: group.map(p => p.x),
+        y: group.map(p => p.y),
+        text: group.map(p => p.name),
+        mode: 'markers',
+        type: 'scatter',
+        name: status.charAt(0).toUpperCase() + status.slice(1),
+        marker: { color: colorMap[status], size: 8 }
+      };
+    });
+
+    // Triangle rempli gris très clair
+    const triangleFill = {
+      x: [0, 1, 0.5, 0],
+      y: [0, 0, height, 0],
+      fill: 'toself',
+      fillcolor: 'rgba(200,200,200,0.15)',
+      line: { color: 'gray' },
+      mode: 'lines',
+      type: 'scatter',
+      hoverinfo: 'skip',
+      showlegend: false
+    };
+
+    // Labels sommets, écartés des sommets en gras colorés
+    const labelOffsetX = 0.1;
+    const labelOffsetY = 0.08;
+    const labelFont = { size: 16, family: 'Arial, sans-serif', weight: 'bold' };
+
+    const labels = [
+      { x: -labelOffsetX, y: -labelOffsetY, text: "δd", color: 'red' },
+      { x: 1 + labelOffsetX * 1.2, y: -labelOffsetY, text: "δp", color: 'blue' },
+      { x: 0.5, y: height + labelOffsetY * 1.2, text: "δh", color: 'green' }
+    ].map(l => ({
+      x: [l.x],
+      y: [l.y],
+      mode: 'text',
+      type: 'scatter',
+      text: [l.text],
+      textfont: { ...labelFont, color: l.color },
+      showlegend: false,
+      textposition: 'middle center'
+    }));
+
+    // Fonction graduations (ticks + labels %) toujours hors du triangle
+    function graduations(x0, y0, x1, y1, color, labelMin, labelMax, sideName) {
+      const grads = [];
+      const labels = [];
+      const segments = 5;
+
+      const vx = x1 - x0;
+      const vy = y1 - y0;
+      const len = Math.sqrt(vx * vx + vy * vy);
+
+      // Normal vecteur extérieur au côté (pointant à l'extérieur)
+      // En triangle équilatéral, extérieur est vers l'extérieur du polygone, on fait simple :
+      // Le triangle est (0,0)-(1,0)-(0.5,height)
+      // On calcule vecteur perpendiculaire vers l'extérieur du triangle :
+      // pour chaque côté, on définit manuellement le vecteur normal extérieur :
+
+      // dd-dp : base horizontale, extérieur vers le bas (0,-1)
+      // dp-dh : côté droit, extérieur vers la droite (approx 0.87, 0.5)
+      // dh-dd : côté gauche, extérieur vers la gauche (-0.87, 0.5)
+
+      let nx, ny;
+      if (sideName === 'dd_dp') {
+        nx = 0;
+        ny = -1;
+      } else if (sideName === 'dp_dh') {
+        nx = 0.87;
+        ny = 0.5;
+      } else if (sideName === 'dh_dd') {
+        nx = -0.87;
+        ny = 0.5;
+      } else {
+        nx = -vy / len; // fallback
+        ny = vx / len;
+      }
+
+      const tickLength = 0.03;
+
+      for (let i = 0; i <= segments; i++) {
+        const t = i / segments;
+        const x = x0 + t * vx;
+        const y = y0 + t * vy;
+
+        const tickEndX = x + nx * tickLength;
+        const tickEndY = y + ny * tickLength;
+
+        grads.push({
+          x: [x, tickEndX],
+          y: [y, tickEndY],
+          mode: 'lines',
+          type: 'scatter',
+          line: { color: color, width: 1.5 },
+          hoverinfo: 'skip',
+          showlegend: false
+        });
+
+        const valPercent = Math.round(labelMin + t * (labelMax - labelMin));
+
+        // Décalage label un peu plus loin que tick
+        const labelX = x + nx * (tickLength + 0.04);
+        const labelY = y + ny * (tickLength + 0.04);
+
+        labels.push({
+          x: [labelX],
+          y: [labelY],
+          mode: 'text',
+          type: 'scatter',
+          text: [`${valPercent}%`],
+          textfont: { size: 10, color: color, family: 'Arial, sans-serif' },
+          showlegend: false,
+          textposition: 'middle center'
+        });
+      }
+
+      return { grads, labels };
+    }
+
+    // Graduations et labels hors triangle sur les 3 côtés
+    const sideDdDp = graduations(0, 0, 1, 0, 'red', dMin, dMax, 'dd_dp');
+    const sideDpDh = graduations(1, 0, 0.5, height, 'blue', pMin, pMax, 'dp_dh');
+    const sideDhDd = graduations(0.5, height, 0, 0, 'green', hMin, hMax, 'dh_dd');
+
+    const gradTraces = [...sideDdDp.grads, ...sideDpDh.grads, ...sideDhDd.grads];
+    const gradLabels = [...sideDdDp.labels, ...sideDpDh.labels, ...sideDhDd.labels];
+
+    Plotly.newPlot('plot', [...traces, triangleFill, ...labels, ...gradTraces, ...gradLabels], {
+
+xaxis: {
+  showgrid: false,
+  zeroline: false,
+  showticklabels: false,
+  range: [0 - 0.05, 1 + 0.05], // centrage horizontal autour du triangle
+  scaleanchor: "y",  // garde les proportions équilatérales
+  scaleratio: 1.5
+},
+yaxis: {
+  showgrid: false,
+  zeroline: false,
+  showticklabels: false,
+  range: [-0.15, height + 0.15]
+},
+      margin: { t: 1, b: 1, l: 1, r: 1 },
+      showlegend: true
+    });
+
+    return;
+  }
+
+  // Gestion des autres vues 2D / 3D comme avant
+
+  const colorMap = {
+    soluble: 'green',
+    gel: 'orange',
+    insoluble: 'red',
+    unknown: 'black'
+  };
+
+  if (viewType === '3D') {
+    const good = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'green', size: 5 }, name: 'Soluble' };
+    const gel = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'orange', size: 5 }, name: 'Swell' };
+    const bad = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'red', size: 5 }, name: 'Insoluble' };
+    const unknown = { x: [], y: [], z: [], text: [], type: 'scatter3d', mode: 'markers', marker: { color: 'black', size: 5 }, name: 'Unknown' };
+
+    solvents.forEach(s => {
+      let target;
+      if (s.status === 'soluble') target = good;
+      else if (s.status === 'gel') target = gel;
+      else if (s.status === 'insoluble') target = bad;
+      else target = unknown;
+      target.x.push(s.d);
+      target.y.push(s.p);
+      target.z.push(s.h);
+      target.text.push(s.name);
+    });
+    let traces3d = [good, gel, bad, unknown];
+    if (typeof ellipsoidTrace !== "undefined" && ellipsoidTrace) traces3d.push(ellipsoidTrace);
+
+    Plotly.newPlot('plot', traces3d, {
+      scene: { xaxis: { title: 'δd' }, yaxis: { title: 'δp' }, zaxis: { title: 'δh' } },
+      margin: { t: 20 }
+    });
+  } else {
+    let xKey, yKey, xLabel, yLabel;
+    if (viewType === 'dh_dp') {
+      xKey = 'p'; yKey = 'h'; xLabel = 'δp'; yLabel = 'δh';
+    } else if (viewType === 'dh_dd') {
+      xKey = 'd'; yKey = 'h'; xLabel = 'δd'; yLabel = 'δh';
+    } else if (viewType === 'dp_dd') {
+      xKey = 'd'; yKey = 'p'; xLabel = 'δd'; yLabel = 'δp';
+    }
+
+    let traces2d = ['soluble', 'gel', 'insoluble', 'unknown'].map(status => {
+      const filtered = solvents.filter(s => s.status === status);
+      return {
+        x: filtered.map(s => s[xKey]),
+        y: filtered.map(s => s[yKey]),
+        mode: 'markers',
+        type: 'scatter',
+        name: status.charAt(0).toUpperCase() + status.slice(1),
+        text: filtered.map(s => s.name),
+        marker: { color: colorMap[status], size: 8 }
+      };
+    });
+
+    if (typeof ellipsoidPoints !== "undefined" && ellipsoidPoints.length > 0) {
+      let xE = [], yE = [];
+      if (viewType === 'dh_dp') {
+        xE = ellipsoidPoints.map(pt => pt.p);
+        yE = ellipsoidPoints.map(pt => pt.h);
+      } else if (viewType === 'dh_dd') {
+        xE = ellipsoidPoints.map(pt => pt.d);
+        yE = ellipsoidPoints.map(pt => pt.h);
+      } else if (viewType === 'dp_dd') {
+        xE = ellipsoidPoints.map(pt => pt.d);
+        yE = ellipsoidPoints.map(pt => pt.p);
+      }
+      traces2d.push({
+        x: xE, y: yE,
+        mode: 'markers', type: 'scatter', name: 'Ellipsoïde (projection)',
+        marker: { color: 'blue', size: 2, opacity: 0.2 }, showlegend: true
+      });
+    }
+
+    Plotly.newPlot('plot', traces2d, {
+      xaxis: { title: xLabel },
+      yaxis: { title: yLabel },
+      margin: { t: 20 }
+    });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------- Export/Import Table JSON
+function exportTableAsJSON() {
+  const table = document.getElementById("solventTable");
+  const solvents = [];
+  for (let i = 1; i < table.rows.length; i++) {
+    const cells = table.rows[i].cells;
+    const name = cells[0].children[0].value;
+    const d = parseFloat(cells[1].children[0].value);
+    const p = parseFloat(cells[2].children[0].value);
+    const h = parseFloat(cells[3].children[0].value);
+    const status = cells[4].children[0].value;
+    const cas = cells[5].children[0].value;
+    const risk = cells[6].children[0].value;
+    solvents.push({ name, d, p, h, status, cas, risk });
+  }
+  const blob = new Blob([JSON.stringify(solvents, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "solvents.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+//---------------------------------------------------------------------------import data
+function importTableFromJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const data = JSON.parse(e.target.result);
+    data.forEach(s => {
+      const row = document.getElementById("solventTable").insertRow();
+      row.innerHTML = `
+        <td class="nom"><input style="text-align:left" type="text" value="${s.name}" readonly></td>
+        <td><input type="number" value="${s.d}" readonly></td>
+        <td><input type="number" value="${s.p}" readonly></td>
+        <td><input type="number" value="${s.h}" readonly></td>
+        <td style="padding: 0; margin: 0;">
+          <select onchange="updateSelectColor(this); updatePlot();">
+            <option value="unknown">Unknown</option>
+            <option value="soluble">Soluble</option>
+            <option value="gel">Swell</option>
+            <option value="insoluble">Insoluble</option>
+          </select>
+        </td>
+        <td class="CAS"><input style="text-align:left" type="text" value="${s.cas}" readonly></td>
+        <td class="RISK" title="${s.comment || s.status || ''}">
+  <input style="text-align:center" type="text" value="${s.risk}" readonly>
+</td>
+        <td><button onclick="this.closest('tr').remove(); updatePlot();">X</button></td>
+      `;
+      const select = row.querySelector("select");
+      select.value = s.status || "unknown";
+      updateSelectColor(select);
+    });
+    updatePlot();
+    updateSolventCount();
+  };
+  reader.readAsText(file);
+}
+
+//-------------------------------------------------------------fonctionne avec ENTER pour ajouter les solvents
+document.getElementById("solventSearch").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") addSelectedSolvent();
+});
+//---------------------------------------
+function loadPlotly(callback) {
+      if (window.Plotly) {
+        callback();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://cdn.plot.ly/plotly-latest.min.js';
+      script.onload = callback;
+      script.onerror = () => {
+        alert('Erreur lors du chargement de Plotly.');
+      };
+      document.head.appendChild(script);
+    }
+
+
+//-------------------------------------------------démarrage
+
+
+window.onload = function() {
+    const select = document.getElementById("solubilitySelect");
+    if(select) updateSelectColor('unknown');
+loadPlotly(renderPlot); 
+//calculate();
+};
+
+  </script>
+</body>
+</html>
