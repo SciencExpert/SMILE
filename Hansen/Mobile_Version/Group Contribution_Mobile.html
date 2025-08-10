@@ -157,51 +157,41 @@ input, select { width: 100%; box-sizing: border-box; }
 
   		<span style="width: 25px; display: inline-block;color:blue"><b>V</b> :</span>
   		<span style="width: 30px; display: inline-block;" id="volume">–</span> cm³/mol  
-	</div>
+		</div>
     </div>
 
 <hr/>
-	<div  class="results" style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
+<div class="row" style="font-family: sans-serif; font-size: 14px; text-align:center"> 
+		<div  style=" text-align:center;display: flex; align-items: center; gap: 20px; flex-wrap: nowrap; font-family: sans-serif; font-size: 14px;">
 		&nbsp;
 		<div style="text-align: center;">
   		<label for="solventSearch"> Solvent ? :</label>
   		<input style="width:150px" list="solventList" id="solventSelect" name="solventSearch" onchange="calculate()">
         	<datalist id="solventList">
   		</datalist>
-	</div>
+		</div>
 
+  		<div style="display: flex; align-items: center; gap: 10px;">
+    		<span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
+    		<span style="width: 30px;" id="sd-val">–</span>
+   		<span style="width: 40px;">MPa<sup>½</sup></span>
 
+    		<span style="width: 65px; color: red;"><b>δ<sub>p</sub></b>(solv):</span>
+    		<span style="width: 30px;" id="sp-val">–</span>
+    		<span style="width: 40px;">MPa<sup>½</sup></span>
 
-
-
-
-
-
-
-  <!-- Bloc valeurs -->
-
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <span style="width: 65px; color: red;"><b>δ<sub>d</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sd-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-
-    <span style="width: 65px; color: red;"><b>δ<sub>p</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sp-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-
-    <span style="width: 65px; color: red;"><b>δ<sub>h</sub></b>(solv):</span>
-    <span style="width: 30px;" id="sh-val">–</span>
-    <span style="width: 40px;">MPa<sup>½</sup></span>
-&nbsp;
-<span style="display: inline-block; text-align: center;">
-  <span style="display: block;">Ra</span>
-  <span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
-</span>
-<span>=</span><span id="redResult">–</span>
-      <span id="solubilityStatus"></span>
-
-  </div>
-
+    		<span style="width: 65px; color: red;"><b>δ<sub>h</sub></b>(solv):</span>
+    		<span style="width: 30px;" id="sh-val">–</span>
+    		<span style="width: 40px;">MPa<sup>½</sup></span>
+		&nbsp;
+		<span style="display: inline-block; text-align: center;">
+  			<span style="display: block;">Ra</span>
+  			<span style="display: block; border-top: 1px solid black;">R<sub>0</sub></span>
+		</span>
+		<span>=</span><span id="redResult">–</span>
+      		<span id="solubilityStatus"></span>
+  		</div>
+</div>
 </div>
 
 <hr style=" padding:0;" />
