@@ -9,78 +9,67 @@
 
 
     <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .container { display: flex; height: 100vh; }
-    .left, .right { flex: 1; padding:  5px; box-sizing: border-box; overflow-y: auto; }
-    .left { background-color: #f9f9f9; border-right: 1px solid #ccc; }
-    .right { background-color: #fff; position: relative;padding:0px }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 6px; border: 1px solid #ccc; text-align: center; }
-    input, select { width: 100%; box-sizing: border-box; }
-    .results { font-size: 1em; margin-top: 10px; }
-		
-@media only screen and (max-width: 600px), 
-       only screen and (max-height: 600px) {
-  body {
-    max-width: 100vw;   /* limite la largeur à la largeur de la fenêtre */
-    max-height: 100vh;  /* limite la hauteur à la hauteur de la fenêtre */
-    overflow-x: hidden; /* évite le scroll horizontal */
-    overflow-y: auto;   /* scroll vertical si besoin */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-}
-
-
-    
-.row { display: flex; flex-wrap: wrap; gap: 10px;  text-align: center; align-items: center;  justify-content: center; margin-top: 10px; }
-    .row span { display: inline-block; }
-   
- h2, h3 { color: #2c3e50; margin-bottom: 10px; }
-    button { margin-top: 10px; padding: 6px 10px; }
-    #graph { width: 100%; height: 500px; margin-top: 20px; }
-    .popup {
-      display: none;
-      position: absolute;
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      max-width: auto;
-      z-index: 999;
-      top: 200px;
-      left: 20px;
-    }
-    .popup-toggle { cursor: pointer; text-decoration: underline; color: grey; }
-    .popup-close { float: right; cursor: pointer; color: red; font-weight: bold; margin-left: 10px; }
-    #r0 { width: 50px; }
-
-
-    #leftPanel { width: 35%; overflow-y: auto; padding: 5px; box-sizing: border-box; border-right: 1px solid #ccc; 
-  height: 100%;
-  overflow-y: auto; /* utile si contenu dépasse */
+   /* Reset de base */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;            /* pour gérer la hauteur sur mobile */
+  overflow-x: hidden;       /* éviter le scroll horizontal */
   box-sizing: border-box;
-background-color:#d6e1d5;//#FEFDE7;
-text-align:center;
+  display: flex;            /* pour gérer le flex des panneaux */
+  flex-direction: row;      /* par défaut côte à côte */
 }
-    #rightPanel { width: 65%; padding: 5px; box-sizing: border-box; 
-  height: 100%;
-  overflow-y: auto; /* utile si contenu dépasse */
+
+.container {
+  display: flex;
+  flex: 1;                 /* prend tout l’espace disponible */
+  height: 100vh;           /* hauteur pleine */
+  min-height: 0;           /* important pour le scroll interne */
+  overflow: hidden;
+}
+
+/* Panneaux gauche et droite */
+.left, #leftPanel {
+  flex: 1 1 35%;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: #d6e1d5;
+  border-right: 1px solid #ccc;
+  min-width: 250px;        /* éviter trop étroit */
+  text-align: center;
+}
+
+.right, #rightPanel {
+  flex: 1 1 65%;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: #fff;
+  min-width: 300px;
+  position: relative;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
   box-sizing: border-box;
 }
 
-.calcul-button {
-  display: inline-block;
-margin: 0px;width: 80px;background:transparent;border:solid 0px black; cursor:pointer
-}
-.calcul-button:hover {
-  background-color: #005f90;
-  transform: scale(1.05);
-color : white;
-border-radius: 15px;
-}
-
+/* Boutons */
 .predict-button {
   display: inline-block;
   background-color: #0076b6;
@@ -91,12 +80,9 @@ border-radius: 15px;
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  font-family: inherit;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  line-height: normal; /* Ajout utile pour l’alignement */
+  width: auto;
+  text-align: center;
 }
 
 .predict-button:hover {
@@ -104,47 +90,56 @@ border-radius: 15px;
   transform: scale(1.05);
 }
 
-/* Footer caché */
-#footer {
-  position: fixed;
-  bottom: 0; left: 0;
-  width: 100%;
-  background: #f0f0f0;
-  color: black;
-  text-align: center;
-  padding: 8px 0;
-  font-size: 14px;
-  border-top: 1px solid #ccc;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-/* Affichage au hover sur desktop */
-@media (hover: hover) and (pointer: fine) {
-  body:hover #footer {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-/* Responsive : stack sur mobile */
+/* Responsive mobile */
 @media (max-width: 900px) {
-  body { flex-direction: column; height: auto; }
-  #leftPanel, #rightPanel {
+  body {
+    flex-direction: column;
+    height: auto;
+  }
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .left, #leftPanel, .right, #rightPanel {
     flex: 1 1 100%;
+    min-width: auto;
     border-right: none;
     border-bottom: 1px solid #ccc;
     padding: 10px;
+    height: auto;
   }
-  table { font-size: 0.9em; }
-  .predict-button { width: 100%; font-size: 1.1em; }
+  table {
+    font-size: 0.9em;
+  }
+  .predict-button {
+    width: 100%;
+    font-size: 1.1em;
+  }
 }
+
+/* Petits écrans encore plus petits */
 @media (max-width: 500px) {
-  table { font-size: 0.85em; }
-  .predict-button { font-size: 1em; padding: 8px; }
-  #footer { font-size: 0.9em; }
+  table {
+    font-size: 0.85em;
+  }
+  .predict-button {
+    font-size: 1em;
+    padding: 8px;
+  }
 }
+
+/* Fix hauteur sur mobile */
+@media (max-width: 600px) {
+  body, html {
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 
 		
   </style>
@@ -868,6 +863,7 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
 
 
 
