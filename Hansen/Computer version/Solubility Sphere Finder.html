@@ -213,6 +213,10 @@ title="Import your own data (json format)."
 <button class="button"  style="width:150px" onclick="showCommonSolvents()" 
 title="View all solvents in all spheres, or those in a unique sphere. Results can be saved as a CSV file.">
 👁️ Shared Solvents</button>
+
+<button  class="button" style="width:180px" onclick="showExclusiveSolvents()">🚫 Non-Shared Solvents</button>
+
+
 </div>
 
 
@@ -387,10 +391,14 @@ function addProductRow() {
   updateLegend();
 }
 
-function getRandomColor() {
-  return 'hsl(' + Math.floor(Math.random()*360) + ',70%,60%)';
-}
+let colorIndex = 0; // compteur global pour les couleurs
 
+function getRandomColor() {
+  const GOLDEN_ANGLE = 137.508; // assure un bon espacement
+  const hue = (colorIndex * GOLDEN_ANGLE) % 360;
+  colorIndex++;
+  return `hsl(${hue},70%,60%)`;
+}
 //----------------------------------------
 function updateLegend() {
 
@@ -579,6 +587,94 @@ commonSolvents = [...solvents];
     });
   }
   window.commonSolventsList = commonSolvents;
+
+
+
+
+//
+
+
+
+
+
+
+ // exclusifs : uniquement définis si on a au moins 2 produits (sphère 1 = products[0], sphère 2 = products[1])
+    if (products.length >= 2) {
+
+  const p1 = products[0];
+  const p2 = products[1];
+
+  // stocker les noms pour le popup
+  window.sphere1Name = p1.name;
+  window.sphere2Name = p2.name;
+
+      const inside1 = solvents.filter(solvent => {
+        const dist = Math.sqrt(
+          Math.pow(solvent.d - p1.d, 2) +
+          Math.pow(solvent.p - p1.p, 2) +
+          Math.pow(solvent.h - p1.h, 2)
+        );
+        return dist <= p1.R0;
+      });
+
+      const inside2 = solvents.filter(solvent => {
+        const dist = Math.sqrt(
+          Math.pow(solvent.d - p2.d, 2) +
+          Math.pow(solvent.p - p2.p, 2) +
+          Math.pow(solvent.h - p2.h, 2)
+        );
+        return dist <= p2.R0;
+      });
+
+      const onlySphere1 = inside1.filter(s => !inside2.some(t => t.name === s.name));
+      const onlySphere2 = inside2.filter(s => !inside1.some(t => t.name === s.name));
+
+      window.solventsSphere1Exclusive = onlySphere1;
+      window.solventsSphere2Exclusive = onlySphere2;
+    } else {
+      // moins de 2 produits => listes exclusives vides
+      window.solventsSphere1Exclusive = [];
+      window.solventsSphere2Exclusive = [];
+    }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // --- 6️⃣ Affichage ---
   if (projection === '3d') {
@@ -883,6 +979,86 @@ function showCommonSolvents() {
 //-------------------------------------------------------------------
 
 
+//-----------------------------------------------popup sur les solvants exclusifs
+
+function showExclusiveSolvents() {
+  const popupContent = document.getElementById("popupContent");
+  if (!popupContent) {
+    console.error("Element with id 'popupContent' not found.");
+    return;
+  }
+
+  const onlySphere1 = window.solventsSphere1Exclusive || [];
+  const onlySphere2 = window.solventsSphere2Exclusive || [];
+
+  if (onlySphere1.length === 0 && onlySphere2.length === 0) {
+    popupContent.innerHTML = "No exclusive solvents found.";
+  } else {
+    let html = `
+      <div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:4px;">
+        <div>
+          <button onclick="exportExclusiveSolventsCSV()">📥 Export CSV</button>
+        </div>
+        <div style="flex:1; text-align:center;">
+          <span style="font-size:1.2em;"><b>Exclusive Solvents</b></span>
+        </div>
+      </div>
+      <hr/>
+    `;
+
+    // Section Sphere 1
+    html += `
+      <div style="font-weight:bold; color:#0066cc; margin-top:10px; font-size:1.1em">
+      In ${window.sphere1Name} sphere but NOT in ${window.sphere2Name} sphere
+      </div>
+      <div style="font-weight:bold; display:flex; justify-content:space-between; padding-bottom:6px; border-bottom:1px solid #ccc;font-size:1em">
+        <div>Name</div>
+        <div style="margin-right:20px">δ<sub>d</sub> - δ<sub>p</sub> - δ<sub>h</sub></div>
+      </div>
+    `;
+    onlySphere1.forEach(solvent => {
+      const d = solvent.d ?? solvent.dd;
+      const p = solvent.p ?? solvent.dp;
+      const h = solvent.h ?? solvent.dh;
+      html += `
+        <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #eee; font-size:0.85em; background:#e6f0ff">
+          <div style="flex:1; text-align:left;">${solvent.name}</div>
+          <div style="flex:1; text-align:right;">
+            ${d.toFixed(1)} &nbsp;-&nbsp; ${p.toFixed(1)} &nbsp;-&nbsp; ${h.toFixed(1)}&nbsp;&nbsp;
+          </div>
+        </div>
+      `;
+    });
+
+    // Section Sphere 2
+    html += `
+      <div style="font-weight:bold; color:#cc0000; margin-top:16px; font-size:1.1em">
+        In ${window.sphere2Name} sphere but NOT in ${window.sphere1Name} sphere
+      </div>
+      <div style="font-weight:bold; display:flex; justify-content:space-between; padding-bottom:6px; border-bottom:1px solid #ccc;font-size:1em">
+        <div>Name</div>
+        <div style="margin-right:20px">δ<sub>d</sub> - δ<sub>p</sub> - δ<sub>h</sub></div>
+      </div>
+    `;
+    onlySphere2.forEach(solvent => {
+      const d = solvent.d ?? solvent.dd;
+      const p = solvent.p ?? solvent.dp;
+      const h = solvent.h ?? solvent.dh;
+      html += `
+        <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #eee; font-size:0.85em; background:#ffe6e6">
+          <div style="flex:1; text-align:left;">${solvent.name}</div>
+          <div style="flex:1; text-align:right;">
+            ${d.toFixed(1)} &nbsp;-&nbsp; ${p.toFixed(1)} &nbsp;-&nbsp; ${h.toFixed(1)}&nbsp;&nbsp;
+          </div>
+        </div>
+      `;
+    });
+
+    popupContent.innerHTML = html;
+  }
+
+  togglePopup();
+}
 
 
 
@@ -935,6 +1111,65 @@ csvContent += `${solvent.name},${d.toFixed(2)},${p.toFixed(2)},${h.toFixed(2)},$
   document.body.removeChild(link);
 }
 
+//-------------------------------------------------------------------------
+function exportExclusiveSolventsCSV() {
+  let csvContent = "";
+
+  // --- Section 1 : Solvants communs
+  if (window.commonSolventsList && window.commonSolventsList.length > 0) {
+    csvContent += "=== Common Solvents ===\n";
+    csvContent += "Name,δd,δp,δh,risk,comment\n";
+    window.commonSolventsList.forEach(solvent => {
+      const d = solvent.d ?? solvent.dd;
+      const p = solvent.p ?? solvent.dp;
+      const h = solvent.h ?? solvent.dh;
+      csvContent += `${solvent.name},${d.toFixed(2)},${p.toFixed(2)},${h.toFixed(2)},${solvent.risk ?? ""},${solvent.comment ?? ""}\n`;
+    });
+    csvContent += "\n";
+  }
+
+  // --- Section 2 : Exclusifs sphère 1
+  if (window.solventsSphere1Exclusive && window.solventsSphere1Exclusive.length > 0) {
+    csvContent += "=== Sphere 1 Exclusive ===\n";
+    csvContent += "Name,δd,δp,δh,risk,comment\n";
+    window.solventsSphere1Exclusive.forEach(solvent => {
+      const d = solvent.d ?? solvent.dd;
+      const p = solvent.p ?? solvent.dp;
+      const h = solvent.h ?? solvent.dh;
+      csvContent += `${solvent.name},${d.toFixed(2)},${p.toFixed(2)},${h.toFixed(2)},${solvent.risk ?? ""},${solvent.comment ?? ""}\n`;
+    });
+    csvContent += "\n";
+  }
+
+  // --- Section 3 : Exclusifs sphère 2
+  if (window.solventsSphere2Exclusive && window.solventsSphere2Exclusive.length > 0) {
+    csvContent += "=== Sphere 2 Exclusive ===\n";
+    csvContent += "Name,δd,δp,δh,risk,comment\n";
+    window.solventsSphere2Exclusive.forEach(solvent => {
+      const d = solvent.d ?? solvent.dd;
+      const p = solvent.p ?? solvent.dp;
+      const h = solvent.h ?? solvent.dh;
+      csvContent += `${solvent.name},${d.toFixed(2)},${p.toFixed(2)},${h.toFixed(2)},${solvent.risk ?? ""},${solvent.comment ?? ""}\n`;
+    });
+    csvContent += "\n";
+  }
+
+  // Rien à exporter ?
+  if (csvContent.trim() === "") {
+    alert("Aucun solvant à exporter.");
+    return;
+  }
+
+  // --- Télécharger
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "solvents_export.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 
 
