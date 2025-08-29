@@ -1,5 +1,4 @@
-// solvent.js
-window.solventDatabase = [
+[
     {
         "name": "NEW",
         "d": 0,
@@ -9,6 +8,16 @@ window.solventDatabase = [
         "cas": "---",
         "risk": "",
         "comment": ""
+    },
+    {
+        "name": "ACETALDEHYDE",
+        "d": 14.7,
+        "p": 8,
+        "h": 11.3,
+        "status": "unknown",
+        "cas": "75-07-0",
+        "risk": "⚠️",
+        "comment": " Cancerigen C1B Mutagen M2"
     },
     {
         "name": "ACETALDEHYDE",
@@ -150,4 +159,5 @@ window.solventDatabase = [
         "risk": "✅/❓",
         "comment": "Non CMR or ND"
     }
+
 ]
