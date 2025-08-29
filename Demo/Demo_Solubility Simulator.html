@@ -150,7 +150,7 @@ text-align :justify;
 </head>
 <body>
 <div class="bloc">
-
+<div class="container" >
   <!-- --------------------------------------------------------------------------------------------------------------Bloc de gauche -->
   <div id="leftPanel">
     <h1 style="text-align:center; color:darkgreen;"><i> Molecule Descriptors</i></h1>
@@ -382,7 +382,7 @@ An R0 value of 4 is medium. The smaller and more precise the molecule, the lower
             background:#d6e1d5; text-align: center; padding: 8px 0; 
             font-size: 14px; border-top: 0px solid #ccc; z-index: 1000;">
 <button class="" style=" background-color: darkgreen; color: white; border-radius:10px;height:30px;width:100px;
-  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='Demo_Menu.html'";">
+  transition: background-color 0.3s ease, transform 0.2s ease width:80px;cursor: pointer;" onclick="window.location.href='Menu.html'";">
 CoordiMate&trade;</button>
 
 
@@ -397,6 +397,7 @@ All rights reserved. Unauthorized use or reproduction is prohibited.
 
 
 
+</div>
 
 <script>
 //-----------------------------------------------------------------------------------les constantes
@@ -781,7 +782,7 @@ function loadPlotly(callback) {
         return;
       }
       const script = document.createElement('script');
-      script.src = 'Statics/js/graphcode2.js';
+      script.src = 'statics/js/graphcode2.js';
       script.onload = callback;
       script.onerror = () => {
         alert('Erreur lors du chargement de Plotly.');
@@ -823,7 +824,7 @@ function exportSolventDatabaseAsJSON() {
 //----------------------------------------------------------------------------
 function createSolventJsonURL(callback) {
   const script = document.createElement('script');
-  script.src = 'Data/Demo_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
+  script.src = 'data/Demo_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
 
   script.onload = () => {
     if (!window.solventDatabase || !Array.isArray(window.solventDatabase)) {
@@ -913,8 +914,3 @@ predict solubility with different solvents.</p>
 </script>
 </body>
 </html>
-
-
-
-
-
