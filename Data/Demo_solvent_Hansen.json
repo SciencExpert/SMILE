@@ -1,5 +1,4 @@
-// solvent.js
-window.solventDatabase = [
+[
     {
         "name": "NEW",
         "d": 0,
@@ -150,4 +149,5 @@ window.solventDatabase = [
         "risk": "✅/❓",
         "comment": "Non CMR or ND"
     }
+
 ]
