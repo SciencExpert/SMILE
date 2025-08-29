@@ -824,7 +824,7 @@ function exportSolventDatabaseAsJSON() {
 //----------------------------------------------------------------------------
 function createSolventJsonURL(callback) {
   const script = document.createElement('script');
-  script.src = 'data/Demo_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
+  script.src = 'Data/Demo_solvent_Hansen.js'; // ton fichier JS qui définit window.solventDatabase
 
   script.onload = () => {
     if (!window.solventDatabase || !Array.isArray(window.solventDatabase)) {
@@ -914,5 +914,6 @@ predict solubility with different solvents.</p>
 </script>
 </body>
 </html>
+
 
 
