@@ -26,3 +26,4 @@ Data solvant : https://sciencexpert.github.io/SMILE/Data/solvents.json
 https://sciencexpert.github.io/SMILE/Data/graphcode.js
 https://sciencexpert.github.io/SMILE/Hansen/Solubility Sphere Finder mobile.html
 https://sciencexpert.github.io/SMILE/Hansen/Computer version/Menu - Copie.html
+https://sciencexpert.github.io/SMILE/MATE/StateMate/Ebook StatMate6.html
