@@ -314,6 +314,87 @@ font-size:0.8em;
   font-weight: bold;
 }
 
+/* --- Adaptation tablettes et mobiles --- */
+
+/* Tablettes (écrans ≤ 1024px) */
+@media (max-width: 1024px) {
+  .book-container {
+    max-width: 95%;
+    height: 85%;
+  }
+  .page {
+    font-size: 1em;
+    padding: 12px;
+  }
+  .nav-btn {
+    width: 40px; height: 40px;
+    font-size: 1.8em;
+    line-height: 40px;
+  }
+  .nav-left { left: -60px; }
+  .nav-right { right: -60px; }
+}
+
+/* Mobiles (écrans ≤ 768px) */
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto; /* éviter le blocage du scroll sur mobile */
+  }
+  .book-container {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    perspective: 1500px;
+    border-radius: 10px;
+  }
+  .page {
+    width: 100%;   /* page prend toute la largeur */
+    height: auto;
+    position: relative;
+    border-radius: 10px;
+    font-size: 0.9em;
+    padding: 10px;
+  }
+  .spine {
+    display: none; /* enlever la reliure sur petit écran */
+  }
+  .nav-btn {
+    width: 35px; height: 35px;
+    font-size: 1.5em;
+    line-height: 35px;
+  }
+  .nav-left, .nav-right {
+    top: auto;
+    bottom: -60px;
+  }
+  .nav-left { left: 20%; }
+  .nav-right { right: 20%; }
+  .footer {
+    font-size: 0.7em;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* Très petits écrans (≤ 480px, ex: iPhone SE) */
+@media (max-width: 480px) {
+  .book-container {
+    border-radius: 6px;
+  }
+  .page {
+    font-size: 0.8em;
+    padding: 8px;
+  }
+  .page h1 { font-size: 1em; }
+  .page h2 { font-size: 0.9em; }
+  .page p, .page li { font-size: 0.75em; }
+  .nav-btn {
+    width: 30px; height: 30px;
+    font-size: 1.2em;
+    line-height: 30px;
+  }
+  .footer h2 { font-size: 12px; }
+}
 
 </style>
 </head>
@@ -1606,3 +1687,4 @@ render();
 
 </body>
 </html>
+
