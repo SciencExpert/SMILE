@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rétrosynthèse IBM RXN - Simple</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+
+    .info-box strong {
+      color: #1976d2;
+    }
+
+    .warning-box {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+
+    .warning-box strong {
+      color: #e65100;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-hint {
+      font-size: 0.85em;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 15px;
+      align-items: flex-end;
+    }
+
+    .flex-1 {
+      flex: 1;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+    }
+
+    .btn-full {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1em;
+    }
+
+    .examples {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .example-btn {
+      background: #f0f0f0;
+      color: #333;
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-size: 0.9em;
+      border: 1px solid #ddd;
+      font-weight: normal;
+    }
+
+    .example-btn:hover {
+      background: #e0e0e0;
+      transform: none;
+    }
+
+    .alert {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid;
+    }
+
+    .alert-error {
+      background: #ffebee;
+      border-color: #f44336;
+      color: #c62828;
+    }
+
+    .alert-warning {
+      background: #fff3e0;
+      border-color: #ff9800;
+      color: #e65100;
+    }
+
+    .alert-success {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      color: #2e7d32;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .pathway {
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      border: 1px solid #dee2e6;
+    }
+
+    .pathway-header {
+      background: linear-gradient(135deg, #f3e5f5 0%, #fce4ec 100%);
+      padding: 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .pathway-header:hover {
+      background: linear-gradient(135deg, #e1bee7 0%, #f8bbd0 100%);
+    }
+
+    .pathway-title {
+      font-weight: 600;
+      color: #6a1b9a;
+      font-size: 1.1em;
+    }
+
+    .confidence-badge {
+      background: #6a1b9a;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+
+    .pathway-content {
+      padding: 15px;
+      display: none;
+    }
+
+    .pathway-content.expanded {
+      display: block;
+    }
+
+    .molecule {
+      background: #e3f2fd;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      display: inline-block;
+      margin: 5px;
+      border: 1px solid #90caf9;
+    }
+
+    .node {
+      background: #f5f5f5;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border-left: 3px solid #667eea;
+    }
+
+    .logs {
+      background: #1e1e1e;
+      color: #00ff00;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 15px;
+    }
+
+    .log-entry {
+      margin: 3px 0;
+    }
+
+    code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+
+    a {
+      color: #1976d2;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>🧪 Rétrosynthèse avec IBM RXN</h1>
+      <p>Solution 100% HTML avec proxy CORS gratuit</p>
+    </div>
+
+    <!-- Info Box -->
+    <div class="card">
+      <div class="info-box">
+        <strong>📋 Instructions :</strong><br><br>
+        1. Créez un compte gratuit sur <a href="https://rxn.app.accelerate.science" target="_blank">rxn.app.accelerate.science</a><br>
+        2. Dans votre profil, section "API Key", copiez votre clé API<br>
+        3. Collez votre clé API ci-dessous<br>
+        4. Cliquez sur "Créer un projet"<br>
+        5. Entrez un SMILES et lancez l'analyse
+      </div>
+
+      <div class="warning-box">
+        <strong>⚠️ Limitations du proxy CORS gratuit :</strong><br>
+        • Ce code utilise <code>https://corsproxy.io</code> pour contourner CORS<br>
+        • Limite : ~200 requêtes/heure<br>
+        • Si vous voyez "429 Too Many Requests", attendez quelques minutes<br>
+        • Pour un usage intensif, installez la version avec serveur Node.js
+      </div>
+    </div>
+
+    <!-- Configuration API -->
+    <div class="card">
+      <h2>🔑 Configuration API</h2>
+      
+      <div class="input-group">
+        <label>Clé API IBM RXN *</label>
+        <input type="password" id="apiKey" placeholder="Collez votre clé API ici">
+        <div class="input-hint">apk-81273e86f27576a5d0796f7c04f8ee9390600cd7f4bad98b9f9503c414a32078</div>
+      </div>
+
+      <div class="flex-row">
+        <div class="flex-1">
+          <label>Project ID</label>
+          <input type="text" id="projectId" placeholder="Créez un projet ou collez un ID existant">
+        </div>
+        <div>
+          <button class="btn-secondary" onclick="createProject()" id="createBtn">
+            Créer un projet
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Section -->
+    <div class="card">
+      <h2>🎯 Molécule cible</h2>
+
+      <div class="input-group">
+        <label>SMILES *</label>
+        <input type="text" id="smiles" value="CC(=O)Oc1ccccc1C(=O)O" placeholder="Ex: CC(=O)Oc1ccccc1C(=O)O">
+      </div>
+
+      <div>
+        <label>Exemples rapides :</label>
+        <div class="examples">
+          <button class="example-btn" onclick="setSmiles('CC(=O)Oc1ccccc1C(=O)O')">Aspirine</button>
+          <button class="example-btn" onclick="setSmiles('CC(C)Cc1ccc(cc1)C(C)C(=O)O')">Ibuprofène</button>
+          <button class="example-btn" onclick="setSmiles('CC(=O)Nc1ccc(O)cc1')">Paracétamol</button>
+          <button class="example-btn" onclick="setSmiles('CN1C=NC2=C1C(=O)N(C(=O)N2C)C')">Caféine</button>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <button class="btn-full" onclick="startRetrosynthesis()" id="startBtn">
+          🚀 Lancer la rétrosynthèse
+        </button>
+      </div>
+
+      <div id="logs" class="logs" style="display: none;"></div>
+    </div>
+
+    <!-- Messages -->
+    <div id="messages"></div>
+
+    <!-- Results -->
+    <div id="results"></div>
+  </div>
+
+  <script>
+    // Utilisation d'un proxy CORS gratuit
+// Option 1 (actuelle)
+const PROXY = '';
+
+
+// Option 2
+//const PROXY = 'https://api.allorigins.win/raw?url=';
+
+// Option 3
+//const PROXY = 'https://cors-anywhere.herokuapp.com/';
+
+
+
+
+
+
+
+    const API_BASE = 'https://rxn.app.accelerate.science/rxn/api/api/v1';
+
+    
+    let logs = [];
+
+    function addLog(message) {
+      const timestamp = new Date().toLocaleTimeString();
+      logs.push(`[${timestamp}] ${message}`);
+      updateLogs();
+    }
+
+    function updateLogs() {
+      const logsDiv = document.getElementById('logs');
+      
+      if (logs.length > 0) {
+        logsDiv.style.display = 'block';
+        logsDiv.innerHTML = logs.map(log => `<div class="log-entry">${log}</div>`).join('');
+        logsDiv.scrollTop = logsDiv.scrollHeight;
+      }
+    }
+
+    function setSmiles(smiles) {
+      document.getElementById('smiles').value = smiles;
+    }
+
+    function showMessage(message, type = 'info') {
+      const messagesDiv = document.getElementById('messages');
+      const alertClass = type === 'error' ? 'alert-error' : 
+                        type === 'warning' ? 'alert-warning' : 
+                        type === 'success' ? 'alert-success' : '';
+      
+      messagesDiv.innerHTML = `
+        <div class="card">
+          <div class="alert ${alertClass}">
+            ${message}
+          </div>
+        </div>
+      `;
+    }
+
+    function setButtonsDisabled(disabled) {
+      document.getElementById('createBtn').disabled = disabled;
+      document.getElementById('startBtn').disabled = disabled;
+    }
+
+    async function createProject() {
+      const apiKey =  document.getElementById('apiKey').value.trim();//'apk-81273e86f27576a5d0796f7c04f8ee9390600cd7f4bad98b9f9503c414a32078';	
+      
+      if (!apiKey) {
+        showMessage('❌ Veuillez entrer votre clé API', 'error');
+        return;
+      }
+
+      logs = [];
+      addLog('Création du projet...');
+      showMessage('⏳ Création du projet en cours...', 'warning');
+      setButtonsDisabled(true);
+
+      try {
+        const response = await fetch(PROXY + encodeURIComponent(`${API_BASE}/projects`), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+
+          },
+          body: JSON.stringify({
+            name: `Retrosynthesis_${Date.now()}`,
+            invitations: []
+          })
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+
+        const data = await response.json();
+        const projectId = data.response?.payload?.id || data.payload?.id;
+        
+        if (projectId) {
+          document.getElementById('projectId').value = projectId;
+          showMessage(`✅ Projet créé avec succès !<br><strong>ID:</strong> <code>${projectId}</code>`, 'success');
+          addLog(`✅ Projet créé: ${projectId}`);
+        } else {
+          throw new Error('Impossible de récupérer l\'ID du projet');
+        }
+      } catch (err) {
+        showMessage(`❌ Erreur:<br>${err.message}<br><br><small>Si vous voyez "429", le proxy a atteint sa limite. Attendez 1-2 minutes.</small>`, 'error');
+        addLog(`❌ Erreur: ${err.message}`);
+      } finally {
+        setButtonsDisabled(false);
+      }
+    }
+
+    async function startRetrosynthesis() {
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const projectId = document.getElementById('projectId').value.trim();
+      const smiles = document.getElementById('smiles').value.trim();
+
+      if (!apiKey || !projectId) {
+        showMessage('❌ Veuillez entrer votre clé API et ID de projet', 'error');
+        return;
+      }
+
+      if (!smiles) {
+        showMessage('❌ Veuillez entrer un SMILES', 'error');
+        return;
+      }
+
+      logs = [];
+      document.getElementById('results').innerHTML = '';
+      
+      addLog('Envoi de la requête à IBM RXN...');
+      showMessage('<span class="spinner"></span> Envoi de la requête...', 'warning');
+      setButtonsDisabled(true);
+
+      try {
+        const response = await fetch(PROXY + encodeURIComponent(`${API_BASE}/retrosynthesis`), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            product: smiles,
+            aiModel: '2020-07-01',
+            projectId: projectId,
+            parameters: {
+              maxSteps: 3,
+              nbeams: 10,
+              pruningSteps: 500
+            }
+          })
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+
+        const data = await response.json();
+        const predictionId = data.response?.payload?.id || data.prediction_id;
+        
+        if (predictionId) {
+          addLog(`Prédiction lancée: ${predictionId}`);
+          showMessage(
+            `<span class="spinner"></span> Analyse en cours...<br>` +
+            `Cela peut prendre 30-60 secondes.<br>` +
+            `<small>ID: <code>${predictionId}</code></small>`,
+            'warning'
+          );
+          
+          pollResults(predictionId, apiKey);
+        } else {
+          throw new Error('Impossible de récupérer l\'ID de prédiction');
+        }
+      } catch (err) {
+        showMessage(`❌ Erreur:<br>${err.message}<br><br><small>Si vous voyez "429", attendez 1-2 minutes.</small>`, 'error');
+        addLog(`❌ Erreur: ${err.message}`);
+        setButtonsDisabled(false);
+      }
+    }
+
+    async function pollResults(predictionId, apiKey) {
+      let attempts = 0;
+      const maxAttempts = 60;
+
+      const poll = async () => {
+        if (attempts >= maxAttempts) {
+          showMessage('⏱️ Timeout: La prédiction prend trop de temps (> 5 minutes)', 'error');
+          addLog('⏱️ Timeout atteint');
+          setButtonsDisabled(false);
+          return;
+        }
+
+        try {
+          addLog(`Vérification ${attempts + 1}/${maxAttempts}...`);
+
+          const response = await fetch(PROXY + encodeURIComponent(`${API_BASE}/retrosynthesis/${predictionId}`), {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${apiKey}`
+
+            }
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+          }
+
+          const data = await response.json();
+          const payload = data.response?.payload || data.payload;
+          const status = payload?.status || data.status;
+
+          addLog(`Status: ${status}`);
+
+          if (status === 'SUCCESS' || status === 'DONE') {
+            showMessage('✅ Analyse terminée avec succès !', 'success');
+            addLog('✅ Résultats reçus');
+            displayResults(payload);
+            setButtonsDisabled(false);
+          } else if (status === 'FAILED' || status === 'ERROR') {
+            throw new Error('La prédiction a échoué sur le serveur IBM');
+          } else {
+            attempts++;
+            setTimeout(poll, 5000);
+          }
+        } catch (err) {
+          showMessage(`❌ Erreur:<br>${err.message}`, 'error');
+          addLog(`❌ Erreur: ${err.message}`);
+          setButtonsDisabled(false);
+        }
+      };
+
+      poll();
+    }
+
+    function displayResults(results) {
+      const resultsDiv = document.getElementById('results');
+      
+      if (!results.retrosynthetic_paths || results.retrosynthetic_paths.length === 0) {
+        resultsDiv.innerHTML = `
+          <div class="card">
+            <h2>📊 Résultats</h2>
+            <div class="alert alert-warning">
+              ⚠️ Aucune voie de synthèse trouvée pour cette molécule.
+            </div>
+            <details>
+              <summary style="cursor: pointer; color: #666;">Voir les données brutes (debug)</summary>
+              <pre style="background: #f5f5f5; padding: 15px; border-radius: 8px; overflow: auto; margin-top: 10px; font-size: 0.85em;">${JSON.stringify(results, null, 2)}</pre>
+            </details>
+          </div>
+        `;
+        return;
+      }
+
+      let html = `
+        <div class="card">
+          <h2>📊 Résultats de l'analyse</h2>
+          <div class="alert alert-success">
+            ✅ <strong>${results.retrosynthetic_paths.length}</strong> voie(s) de synthèse trouvée(s)
+          </div>
+      `;
+
+      results.retrosynthetic_paths.forEach((path, index) => {
+        const pathId = `path-${index}`;
+        const confidence = path.confidence !== undefined ? (path.confidence * 100).toFixed(1) : 'N/A';
+        
+        html += `
+          <div class="pathway">
+            <div class="pathway-header" onclick="togglePathway('${pathId}')">
+              <div class="pathway-title">▶ Voie de synthèse ${index + 1}</div>
+              <div class="confidence-badge">${confidence}%</div>
+            </div>
+            <div class="pathway-content" id="${pathId}">
+        `;
+
+        if (path.smiles) {
+          html += `
+            <div style="margin-bottom: 15px;">
+              <strong>Produit cible:</strong><br>
+              <span class="molecule" style="background: #c8e6c9;">${path.smiles}</span>
+            </div>
+          `;
+        }
+
+        if (path.children && path.children.length > 0) {
+          html += `<div><strong>Précurseurs:</strong></div>`;
+          html += renderNode(path.children);
+        } else {
+          html += `<p style="color: #666; font-style: italic;">Aucun précurseur trouvé</p>`;
+        }
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      resultsDiv.innerHTML = html;
+
+      const firstPath = document.getElementById('path-0');
+      if (firstPath) {
+        firstPath.classList.add('expanded');
+      }
+    }
+
+    function renderNode(children, depth = 0) {
+      if (!children || children.length === 0) return '';
+      
+      let html = '';
+      children.forEach((node) => {
+        if (node.smiles) {
+          html += `
+            <div class="node" style="margin-left: ${depth * 20}px;">
+              <span class="molecule">${node.smiles}</span>
+              ${node.type ? `<span style="color: #999; font-size: 0.85em; margin-left: 10px;">(${node.type})</span>` : ''}
+          `;
+          
+          if (node.children && node.children.length > 0) {
+            html += `<div style="margin-left: 20px; border-left: 2px solid #ddd; padding-left: 15px;">`;
+            html += renderNode(node.children, depth + 1);
+            html += `</div>`;
+          }
+          
+          html += `</div>`;
+        }
+      });
+      
+      return html;
+    }
+
+    function togglePathway(pathId) {
+      const content = document.getElementById(pathId);
+      if (content) {
+        content.classList.toggle('expanded');
+      }
+    }
+  </script>
+</body>
+</html>
