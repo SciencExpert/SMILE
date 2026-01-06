@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<!--
+_______________________________________
+ 	 Ebook StatMate
+	Sub programm of StatMate
+---------------------------------------
+  Design by SciencExpert
+  Version 5.05 // Octobre 2025
+ 	MATE Project
+  SciencExpert Edition 2025
+  Author : Gérard Bacquet
+  Contact@sciencexpert.fr 
+---------------------------------------
+https://payhip.com/SciencExpert
+_______________________________________
+Copyright © 2025 SciencExpert
+Tous droits réservés.
+Toute reproduction, y compris par des systèmes automatisés ou d’IA, est interdite sans autorisation écrite.
+-->
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SciencExpert-StatMate Ebook</title>
+<link rel="icon" href="../images/SE_favicon.ico" />
+<style>
+
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0; padding: 0;
+    height: 100%; width: 100%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    font-family: Arial, sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+
+  }
+  .book-container {
+    position: relative;
+    top:-10px;
+    width: 100vw;
+    max-width: 90%;
+    height: 90%;
+    perspective: 2200px;
+    border-radius: 18px;
+    user-select: none;
+background: linear-gradient(to right, white 20%, #CCCC 50%, white 80%);
+  }
+  .spine {
+    position: absolute;
+    width: 5px;
+    height: 90%;
+    background:#cccc;
+    border-radius: 3px;
+    top: 5%;
+    left: 51%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    z-index: 30;
+  }
+  .page {
+    width: 50%;
+    height: 100%;
+    border-radius: 18px;
+    border: solid 1px #cccc;
+    padding: 16px 16px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0%;
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    cursor: default;
+    background: white;
+  }
+  .cover {
+    left: 10;
+    transform-origin: right;
+    z-index: 20;
+    box-shadow: inset -10px 0 15px -10px rgba(0,0,0,0.2), 
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.left {
+    left: 0;
+    transform-origin: right center;
+    z-index: 20;
+    box-shadow: inset -10px 0 15px -10px rgba(0,0,0,0.2), 
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.right {
+    right: 0;
+    transform-origin: left center;
+    z-index: 40;
+    box-shadow: inset 10px 0 15px -10px rgba(0,0,0,0.2),
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.transparent {
+	width:60%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    box-shadow: none;
+    border: solid 0px black;
+  border-radius: 0px;
+  }
+  @keyframes flipRightForward {
+    0%   { transform: rotateY(0) translateX(0); box-shadow: 0 5px 18px rgba(0,0,0,0.25);}
+    40%  { transform: rotateY(-110deg) translateX(-10%); box-shadow: inset 8px 0 20px rgba(0,0,0,0.6);}
+    100% { transform: rotateY(-180deg) translateX(-20%); box-shadow: inset 12px 0 30px rgba(0,0,0,0.7);}
+  }
+  @keyframes flipLeftForward {
+    0%   { transform: rotateY(0) translateX(0); box-shadow: 0 5px 18px rgba(0,0,0,0.25);}
+    40%  { transform: rotateY(110deg) translateX(10%); box-shadow: inset -8px 0 20px rgba(0,0,0,0.6);}
+    100% { transform: rotateY(180deg) translateX(20%); box-shadow: inset -12px 0 30px rgba(0,0,0,0.7);}
+  }
+  .flip-right {
+    animation: flipRightForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+  .flip-left {
+    animation: flipLeftForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: #a52a2a;
+    color: white;
+    font-size: 2.2em;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    user-select: none;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+    z-index: 110;
+  }
+  .nav-btn:hover {
+    background-color: #d97474;
+  }
+  .nav-left {
+    left: -80px;
+  }
+  .nav-right {
+    right: -80px;
+  }
+  .page h1 {
+    margin: 0 0 20px;
+    color: #a52a2a;
+    font-size:1.2em;
+  }
+  .page h2 {
+    margin: 0 0 0px;
+    color: black;
+    font-size:1em;
+  }
+  .page p {
+    margin: 0 0 20px;
+    color: black;
+    font-size:0.8em;
+text-align:justify;
+line-height:1.3em;
+  }
+  .page ul {
+    margin: 0px;
+padding:0px;
+    color: black;
+    font-size:0.8em;
+text-align:justify;
+line-height:1.3em;
+  }
+  .page li {
+    margin-left: 30px;
+padding:0px;
+    color: black;
+text-align:justify;
+    font-size:0.8em;
+line-height:1.5em;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.6em; /* taille du texte */
+    text-align: center;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0px;
+padding-top:0;
+padding-bottom:0;
+margin:0;
+line-height:1em;
+  }
+  th {
+    background-color: #f5f5f5;
+  }
+  tr:nth-child(even) td {
+    background-color: #fafafa;
+  }
+
+.header-line {
+  display: flex;
+  align-items: center;   /* verticalement centré */
+  justify-content: space-between; /* titre à gauche, lien à droite */
+  gap: 16px;
+  padding: 0 8px;
+}
+
+/* Optionnel : pour éviter que le titre soit trop large et empêche la page d'être lisible */
+.header-line h2 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: normal;
+  text-align: left;
+  flex: 1 0 auto;
+}
+
+/* Pour aligner le lien à droite */
+.header-line span {
+  margin-left: auto;
+}
+
+/* Pour styliser le lien éventuellement */
+.header-line a {
+  text-decoration: none;
+  color: #A52A2A;
+  font-weight: bold;
+  font-size: .95em;
+}
+
+.continue {
+
+background-color:transparent;
+  text-align: center;
+  margin: 0px 0;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #ccc;
+    z-index: 110;
+    cursor: pointer;
+}
+
+.continue span {
+  padding: 0 10px;
+  background: #fff;
+  color: #ccc;
+    cursor: pointer;
+}
+
+/* overlay full-screen (hidden by default) */
+  .img-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.65);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+  }
+  .img-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* wrapper to limit image size */
+  .img-overlay .img-wrap {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  /* cloned image styling */
+  .img-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border-radius: 6px;
+    cursor: zoom-out;
+    transition: transform .25s ease;
+    transform: scale(1);
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* small vignette: original images keep cursor */
+  img {
+    cursor: zoom-in;
+  }
+
+  /* optional: when overlay open, slightly scale image for subtle effect */
+  .img-overlay.open img {
+    transform: scale(1);
+  }
+
+
+
+.footer {
+
+font-size:0.8em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;                  /* occupe toute la largeur */
+  display: flex;
+  justify-content: space-between; /* titre à gauche, page à droite */
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  background: transparent;             /* fond blanc pour masquer le contenu derrière */
+  border-top: 2px solid #ccc;    /* petite bordure au-dessus */
+}
+
+.footer h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.footer span {
+  font-weight: bold;
+}
+
+
+</style>
+</head>
+<body>
+
+
+<!-------------------------------------------------------------------------------------------
+			Cover
+--------------------------------------------------------------------------------------------->
+<template id="page--1"> 
+
+<img src="../images/cover.png" alt="Illustration" style="width:100%; height:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+
+</template>
+
+
+<!-------------------------------------------------------------------------------------------
+			Introduction et table of content
+--------------------------------------------------------------------------------------------->
+<template id="page-0">
+<div style="text-align:center">
+<h1 style="
+  font-style: italic;
+  font-family: 'Georgia'; 
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: #2c2c2c;
+  margin: 20px 0;
+">
+  StatMate&trade;
+</h1>
+<img src="../images/cover.png" alt="Illustration" style=" width:25%;"> 
+
+ <hr><span style="  font-style: italic;
+  font-family: 'Georgia'; "
+<span>SciencExpert Ed.</span><br>
+<span>2025</span>
+</span>
+</div>
+
+<div style="font-size:0.8em;line-height:1.5em">
+<h1>Table of content</h1>
+<div class="header-line"><h2>Chapter 1: Descriptive Statistic</h2><span><a href="#page-2" data-page="2">Page<span style="display:inline-block; width:3ch; text-align:right;">2</span></a></span></div>
+<div class="header-line"><h2>Chapter 2: Dendrogram Clusters</h2><span><a href="#page-6" data-page="6">Page<span style="display:inline-block; width:3ch; text-align:right;">6</span></a></span></div>
+<div class="header-line"><h2>Chapter 3: Clustering</h2><span><a href="#page-10" data-page="10">Page<span style="display:inline-block; width:3ch; text-align:right;">10</span></a></span></div>
+<div class="header-line"><h2>Chapter 4: Multi-Plots, Correlation and CoVariance</h2><span><a href="#page-14" data-page="14">Page<span style="display:inline-block; width:3ch; text-align:right;">14</span></a></span></div>
+<div class="header-line"><h2>Chapter 5: Principal Composant Analysis</h2><span><a href="#page-18" data-page="18">Page<span style="display:inline-block; width:3ch; text-align:right;">18</span></a></span></div>
+<div class="header-line"><h2>Chapter 6: Plackett-Burman Designs for variable reduction</h2><span><a href="#page-22" data-page="22">Page<span style="display:inline-block; width:3ch; text-align:right;">22</span></a></span></div>
+<div class="header-line"><h2>Chapter 7: Design of Experiments</h2><span><a href="#page-26" data-page="26">Page<span style="display:inline-block; width:3ch; text-align:right;">26</span></a></span></div>
+<div class="header-line"><h2>Chapter 8: Mixture Design</h2><span><a href="#page-30" data-page="30">Page<span style="display:inline-block; width:3ch; text-align:right;">30</span></a></span></div>
+<div class="header-line"><h2>About the author</h2><span><a href="https://www.linkedin.com/in/bacquetgerard/"><span style="display:inline-block; width:10ch; text-align:right;">Linkedin</span></a></span></div>
+<div class="header-line"><h2>About SciencExpert</h2><span><a href="https://payhip.com/SciencExpert/sciencexpert">Page<span style="display:inline-block; width:3ch; text-align:right;">Web</span></a></span></div>
+</div>
+  <p></p>
+</template>
+
+
+<!-------------------------------------------------------------------------------------------
+			Chapter 1 :  Descriptive Statistic
+--------------------------------------------------------------------------------------------->
+
+
+<template id="page-1">
+        <h1>Chapter 1: Distribution, Indicators & Applications</h1>
+      <p>
+        The distribution describes how values are arranged across their range. This chapter focuses on
+        <em>profiles</em> of distributions, their <em>indicators</em> used to describe them,
+        and the real-world <em>applications</em> where these ideas are useful.
+      </p>
+      <h2>Distribution profiles</h2>
+        <ul>The "shape" of a distribution gives a quick visual summary of how values are concentrated, where tails lie,
+        and whether there are multiple peaks:
+<li>Symmetrical / Normal (Bell-shaped):Balanced on both sides; mean ≈ median ≈ mode.</li>
+<li>Right-Skew (Positive) : Most values at lower side, long tail to the right.</li>
+<li>Left-Skew (Negative): Most values at higher side, tail to the left.</li>
+<li>Bimodal / Multimodal:Two groups or clusters in the same dataset.</li>
+        </ul>
+
+<h2>Shapes</h2>
+          <ul>
+            <li><strong>Skewness</strong> — numeric measure of asymmetry (positive = right tail).</li>
+            <li><strong>Kurtosis</strong> — measure of "tailedness" or peakedness relative to normal.</li>
+            <li><strong>Outliers</strong> — extreme values that differ markedly from others (often detected with IQR).</li>
+          </ul>
+<br>
+      <h2>Key Indicators</h2>
+      <ul>Indicators summarize position, spread, and shape of the distribution:
+          
+            <li><strong>Mean</strong> — arithmetic average (sensitive to outliers).</li>
+            <li><strong>Median</strong> — middle value after ordering (robust to outliers).</li>
+            <li><strong>Mode</strong> — most frequent value (useful for categories).</li>
+            <li><strong>Range</strong> — max − min.</li>
+            <li><strong>Variance</strong> — average squared deviation from the mean.</li>
+            <li><strong>Standard Deviation (SD)</strong> — square root of variance (same units as data).</li>
+            <li><strong>Interquartile Range (IQR)</strong> — difference between 75th and 25th percentiles (middle 50%).</li>
+          </ul>
+<div class="footer"><h2><a href="#page-0" data-page="-0">Menu</a></h2><span>Page 2</span></div>
+</template>
+
+<!-------------------------Page3--------->
+
+<template id="page-2">
+      <h2> Applications — How to use Profiles & Indicators</h2>
+	<br>
+      <p><strong>Education Score</strong> : 
+        Teachers examine test score distributions. A <strong>right-skew</strong> may indicate many low scores and a few high performers;
+        a <strong>bimodal</strong> distribution can reveal two student groups and suggest targeted instruction.</p>
+      <p><strong>Business & Marketing:</strong> most customers make small purchases; a few are big spenders.
+        Use median revenue to report typical customer value and detect top-performing clients via outliers.</p>   
+      <p><strong>Healthcare</strong> : 
+        Lab results or recovery times may be skewed. Using median and IQR provides robust summaries when outliers exist.
+        Detecting unusual outliers helps flag cases for clinical review.
+      </p>
+     <p><strong>Public Policy & Economics</strong>:
+        Income distribution is usually right-skewed; policymakers prefer median income (not mean) to discuss typical household conditions.
+        Age distributions guide resource planning for schools and eldercare.
+      </p>
+      <p><strong>Sports & Performance</strong>
+        Coaches look at distribution of times or scores. Low variance indicates consistent performance; a long tail may indicate a few exceptional results.
+      </p>
+      <p><strong>Note:</strong> Always pair a visual (histogram or box plot) with numeric indicators (mean/median, SD/IQR, skewness) — visuals reveal shape; numbers quantify it.
+      </p> 
+      <h2>Choosing Appropriate Indicators — Quick Guide</h2>
+      <ul>
+        <li><strong>Symmetrical distribution:</strong> mean and standard deviation are fine.</li>
+        <li><strong>Skewed distribution:</strong> prefer median and IQR (robust measures).</li>
+        <li><strong>Presence of outliers:</strong> use median & IQR; examine raw data points to decide if outliers are errors or real observations.</li>
+        <li><strong>Bimodal data:</strong> report modes or consider splitting the dataset into meaningful groups before summarizing.</li>
+      </ul>
+
+
+<div class="footer"><h2><a href="#page-0" data-page="-0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 3</span></div>
+</template>
+
+
+<!-------------------------Page4--------->
+
+<template id="page-3">
+      <h2> StatMate&trade; Descriptive Statistics </h2><br>
+<p>The software takes the data of each variable (each column) which can be added manually or uploaded.This module from StatMate&trade;, analyze & manage your dataset interactively:<br>
+
+<span style="margin-left:5px"><b>➕ Add Col.</b>: Add a new variable (column) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Col.</b>: Remove the last variable (column) from the table.</span><br>
+<span style="margin-left:5px"><b>➕ Add Row</b>: Add a new observation (row) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Row</b>: Remove the last observation (row) from the table.</span><br>
+<span style="margin-left:5px"><b>📂 Import Data</b>: Load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span><br>
+<span style="margin-left:5px"><b>🖶 Print Tab</b>: Print the data table.</span><br>
+</p>
+<img src="../images/DescripImage1.png" alt="Illustration" style=" width:100%;"> 
+<br>
+<p>Curves are updated at any changes.<br>
+Once your data is ready, you can analyze each column with <b>📊 Analyze Results</b>.</p>
+<div class="footer"><h2><a href="#page-0" data-page="-0">Menu</a></h2><span>Page 4</span></div>
+</template>
+<!-------------------------Page5--------->
+
+<template id="page-4">   
+<ul>Then it attempts to fit several classical statistical families:
+      <li>Bernoulli (success/failure)</li>
+      <li>Binomial (number of successes in <em>n</em> trials)</li>
+      <li>Poisson (rare events)</li>
+      <li>Gaussian (Normal)</li>
+    </ul>
+<p>The log-likelihood is computes. It is a score that measures how well the distribution fits.</p>
+<ul> Measures of Central Tendency - To better describe the central trend, the module displays:<br>
+  <li>Arithmetic mean (classical).</li>
+  <li>Geometric mean (if all values > 0).</li>
+  <li>Harmonic mean (if all values > 0).</li>
+</ul>
+<ul>Shape & Measures of Dispersion : <br>
+  <li><strong>Variance</strong>. nand <strong>Standard deviation</strong>.</li>
+  <li><strong>Quartiles</strong> Q1 and Q3.</li>
+  <li><strong>IQR</strong> (Interquartile Range): Q3 − Q1 & median (Q2)</li>
+  <li><strong>Skewness</strong> (asymmetry: &gt;0 = right tail, &lt;0 = left tail).</li>
+  <li><strong>Kurtosis</strong> (peakedness: &gt;3 = more peaked than normal, &lt;3 = flatter).</li>
+</ul><br>
+
+<div style="text-align:center;">
+  <img src="../images/DescripImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:50%; height:auto;border:solid 1px black">
+</div><br>
+<p>The IA provides an initial analysis of the distribution profile, its metrics, and its shape.</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="-0">Menu</a></h2><span class="continue" onclick="flipRight()">End of chapter 1</span><span>Page 5</span></div>
+
+</template>
+
+<!-------------------------------------------------------------------------------------------
+			Chapter 2 :  Dendrogram Clustering
+---------------------------------------------------------------------------------Page6------>
+
+<template id="page-5"> 
+<h1>Chapter 2: Dendrogram Clustering </h1>
+<p>Dendrogram clustering organizes data into groups using a hierarchical tree. It does not require predefining the number of clusters. 
+Instead, clusters form stepwise by merging similar data points. The dendrogram’s horizontal axis shows samples, while the vertical axis shows the distance between merged clusters. By analyzing it, you can choose the number of clusters that best fit your data.</p>
+
+
+<h2>Principle of the Dendrogram</h2> 
+<ul> 
+<li>A <strong>dendrogram</strong> is a branching diagram that visualizes how groups are merged (agglomerative) or split (divisive).</li> 
+<li>Data points start as individual clusters, which are gradually merged based on their similarity or distance.</li> 
+<li>Each branch point in the tree shows when clusters combine; the height indicates the distance at which they merge.</li> 
+<li>Cutting the dendrogram at different heights produces different cluster groupings.</li> </ul> 
+<h2>Methods of Hierarchical Clustering</h2> 
+<ul> 
+<li><strong>Agglomerative clustering</strong> — a bottom-up approach. Each data point is its own cluster. At each step, the two closest clusters are merged.</li> 
+<li><strong>Divisive clustering</strong> — a top-down approach. All data points start in one cluster, which is split recursively into smaller clusters.</li> </ul>
+<h2>Linkage criteria</h2>
+<p>single, complete, average, Ward can be used to define how distances between clusters are calculated.The choice affects cluster shape and structure:<ul> 
+<li>Single linkage: Distance between the closest points of two clusters. Creates "chain-like" clusters but is sensitive to noise and outliers.</li>
+<li>Complete linkage: Distance between the farthest points. Produces more compact, spherical clusters but can be distorted by outliers.</li>
+<li>Average linkage: Average distance between all pairs of points in two clusters. Balances single and complete linkage effects, producing moderate cluster sizes.</li>
+<li>Ward’s linkage: Minimizes the total within-cluster variance after merging. Tends to create balanced and compact clusters, widely used in practice.</li>
+</ul> 
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 6</span></div> 
+</template>
+
+<!-------------------------Page7--------->
+<template id="page-6">
+
+ <h2> Application</h2><br>
+<p> <strong>Bioinformatics :</strong>
+    Dendrograms are extensively used to group genes or samples by similarity in gene-expression profiles (microarray / RNA-seq), revealing co-regulated gene sets and sample subtypes; the classic example is the clustering work by Eisen et al. that visualized genome-wide expression as dendrograms alongside heatmaps. 
+    <a href="https://www.pnas.org/doi/10.1073/pnas.95.25.14863" target="_blank" rel="noopener noreferrer">Eisen et al., PNAS (1998)</a>.
+  </p>
+
+  <p><strong>Healthcare : </strong>
+    Hierarchical clustering and dendrograms are used to identify clinically meaningful patient subgroups (stratification) from electronic health records or multi-omics data, which can reveal prognostic groups or treatment-responsive cohorts; recent studies demonstrate robust, explainable pipelines for clinical subtyping. 
+    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10854470/" target="_blank" rel="noopener noreferrer">Werner et al., 2023 (explainable hierarchical clustering)</a>; 
+  </p>
+
+  <p><strong>Ecology & Biodiversity : </strong>
+    Ecologists apply dendrogram clustering to group sites or species by community composition (presence/abundance), enabling classification of habitat types, detection of assemblages, and tracking changes in biodiversity across gradients.  
+    <a href="https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecs2.4589" target="_blank" rel="noopener noreferrer">Pang et al., Ecological Applications (2023)</a>. 
+  </p>
+
+  <p><strong>Image analysis : </strong>
+    Bottom-up hierarchical clustering of image regions produces dendrograms that guide multilevel image segmentation and cosegmentation; modern approaches combine hierarchical clustering with deep features to generate interpretable segmentation trees.  
+    <a href="https://arxiv.org/abs/2205.09949" target="_blank" rel="noopener noreferrer">HCFormer — hierarchical clustering for segmentation (arXiv, 2022)</a>.
+  </p>
+
+   <p><strong>Materials & Polymers</strong>
+    Researchers use dendrograms to group material compositions, processing conditions, or measured property profiles (e.g., mechanical tests) to detect formulations with similar performance and to guide selection of candidate blends for further testing.  
+    Representative example: hierarchical approaches applied to polymer blend evaluation and property clustering. 
+<a href="https://doi.org/10.1016/j.polymer.2015.07.025" target="_blank" rel="noopener noreferrer">Polymer, 2015</a>.
+  </p>
+
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 7</span></div> 
+</template>
+
+<!-------------------------Page8--------->
+
+<template id="page-7"> 
+<h2> StatMate&trade; Dendrogram </h2>
+<p>The software takes the data of each variable (each column) which can be added manually or uploaded.This module from StatMate&trade;, analyze & manage your dataset interactively:<br>
+
+<span style="margin-left:5px"><b>➕ Add Col.</b>: Add a new variable (column) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Col.</b>: Remove the last variable (column) from the table.</span><br>
+<span style="margin-left:5px"><b>➕ Add Row</b>: Add a new observation (row) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Row</b>: Remove the last observation (row) from the table.</span><br>
+<span style="margin-left:5px"><b>📂 Import Data</b>: Load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span><br>
+<span style="margin-left:5px"><b>🖶 Print Tab</b>: Print the data table.</span><br>
+</p>
+<img src="../images/DendrogramImage1.jpg" alt="Illustration" style=" width:100%;"> 
+<br>
+<p>The dendrogram chart is updated at any changes.<br>
+Once your data is ready, you can analyze each column with <b>📊 Analyze Results</b>.</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 8</span></div> 
+</template>
+
+<!-------------------------Page9--------->
+
+<template id="page-8">
+  <h2>StatMate&trade; Dendrogram  Algorithms</h2>
+
+  <ul>1️⃣ K-means : Choose K, assign points to nearest centers, recalculate centers until stable.
+    <li><strong>Pros:</strong> Simple, fast, works well for spherical clusters of similar size.  </li>
+    <li><strong>Cons:</strong> K must be chosen in advance; sensitive to outliers.</li>  
+    <li><strong>Best for:</strong> Simple datasets with clear round clusters.</li>
+  </ul>
+
+  <ul>2️⃣ Hierarchical Clustering : Each point as its own cluster and then merge step by step.
+    <li><strong>Pros:</strong> No need to pick K first; shows hierarchical structure.</li>  
+    <li><strong>Cons:</strong> Slow for large datasets; sensitive to distance metrics.</li>  
+    <li><strong>Best for:</strong> Exploring structure or small datasets.</li>
+  </ul>
+
+  <ul>3️⃣ DBSCAN : Groups dense regions based on distance. 
+    <li><strong>Pros:</strong> Finds clusters of any shape; detects noise; no need for K.</li>  
+    <li><strong>Cons:</strong> Sensitive to parameter choices; struggles with varying densities.</li> 
+    <li><strong>Best for:</strong> Noisy data or irregular cluster shapes.</li>
+  </ul>
+
+  <ul>4️⃣ Gaussian Mixture Model (GMM) : Data comes from overlapping Gaussian distributions 
+    <li><strong>Pros:</strong> Flexible, handles elliptical clusters, provides probabilities of membership.</li>  
+    <li><strong>Cons:</strong> Slower and more complex; K must be chosen.</li>  
+    <li><strong>Best for:</strong> Data with non-spherical or overlapping clusters.</li>
+</ul><br>
+<p> The software gives the number of custer vs distance for the algorithm chosen :</p>
+
+<div style="text-align:center;">
+  <img src="../images/DendrogramImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:50%; height:auto;border:solid 1px black">
+</div>
+
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter2</span><span>Page 9</span></div> 
+</template>
+
+<!-------------------------------------------------------------------------------------------
+			Chapter 3 : Clustering
+----------------------------------------------------------------------------------------page10--->
+
+<template id="page-9">
+  <h1>Chapter 3: Clustering — Overview and Types</h1>
+  <h2>Common Clustering Types</h2>
+  <p>
+    Clustering groups data points into clusters so that points within a cluster are similar, and points from different clusters are dissimilar.<br>
+
+    Additional clustering approaches include distribution-based, which models clusters via probability distributions (e.g., Gaussian Mixture Models); 
+and fuzzy clustering, which allows overlapping cluster membership, useful for ambiguous data.</p>
+
+<ul>
+  <li>
+    <strong>Centroid-based clustering:</strong>  
+    This method groups data points around central points called centroids, which represent the mean position of all points in the cluster.  
+    The most common algorithm is <em>K-Means</em>, which starts by initializing k centroids and iteratively assigns data points to the nearest centroid, then recalculates centroids based on current assignments.  
+    It is fast and efficient for large datasets but assumes clusters are roughly spherical and requires specifying the number of clusters (k) beforehand.  
+  </li>
+
+  <li>
+    <strong>Density-based clustering:</strong>  
+    These algorithms identify clusters as areas of high point density separated by regions of low density.  
+   Density-Based Spatial Clustering of Applications with Noise defines clusters based on two parameters: the radius (ε) for neighborhood search and the minimum number of points (MinPts) needed to form a dense region.  
+    DBSCAN can find clusters of arbitrary shape and is robust to noise by marking sparse points as outliers.  
+    This makes it well suited for real-world data with noise and varying cluster shapes, but it may struggle with varying density clusters.
+  </li>
+
+  <li>
+    <strong>Hierarchical clustering:</strong>  
+    Builds a tree of nested clusters called a dendrogram, either by agglomerative (bottom-up) or divisive (top-down) approaches.  
+    Agglomerative methods start with each data point as a cluster and successively merge nearest clusters, while divisive methods split clusters recursively.  
+    This approach does not require predefining the number of clusters, making it flexible and interpretable.  
+    However, it can be computationally intensive for large datasets and sensitive to the choice of linkage method and distance metric.
+  </li>
+
+  <li>
+    <strong>Distribution-based and fuzzy clustering methods:</strong>  
+    Distribution-based clustering assumes data is generated by a mixture of probability distributions, such as Gaussian Mixture Models, which estimate cluster parameters using statistical methods like Expectation-Maximization.  
+    These methods model uncertainty and overlapping clusters, providing soft assignments of data points.  
+    Fuzzy clustering, like Fuzzy C-Means, allows points to belong to multiple clusters with varying memberships, which is useful when cluster boundaries are ambiguous.  
+    Such approaches can capture complex data structures but tend to be more computationally expensive.
+  </li>
+</ul>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 10</span></div> 
+</template>
+
+<!-------------------------------------page-11--->
+<template id="page-10">
+
+<h2>Applications of Clustering Methods</h2><br>
+
+  <p>
+    <strong>Centroid-based clustering (K-Means):</strong>  
+    Widely used in <a href="https://www.ibm.com/fr-fr/think/topics/k-means-clustering" target="_blank" rel="noopener noreferrer">customer segmentation</a> to group customers based on purchasing behavior and demographics, enabling personalized marketing campaigns and improved product recommendations.  
+    In <a href="https://www.lesphinx-developpement.fr/blog/les-typologies-des-repondants-la-classification-k-means/" target="_blank" rel="noopener noreferrer">image processing</a>, K-Means helps segment images by grouping pixels with similar colors or intensities.  
+    It is also used to cluster documents to detect topics in large text corpora, as explained by <a href="https://www.projectpro.io/article/clustering-algorithms-in-machine-learning/842" target="_blank" rel="noopener noreferrer">ProjectPro</a>.
+  </p>
+  <p>
+    <strong>Density-based clustering (DBSCAN):</strong>  
+    Especially effective in spatial data analysis, DBSCAN identifies geographic clusters such as crime hotspots or ecological habitats (<a href="https://www.geeksforgeeks.org/machine-learning/dbscan-clustering-in-ml-density-based-clustering/" target="_blank" rel="noopener noreferrer">GeeksForGeeks</a>).  
+    It is also widely applied in fraud detection for financial transactions, separating normal patterns from anomalous behavior using spatial analysis tools like <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/how-density-based-clustering-works.htm" target="_blank" rel="noopener noreferrer">ArcGIS Pro</a>.
+  </p>
+  <p>
+    <strong>Hierarchical clustering:</strong>  
+    Crucial in bioinformatics for grouping genes or proteins by similarity, uncovering evolutionary relationships and gene expression patterns (<a href="https://www.pnas.org/doi/10.1073/pnas.95.25.14863" target="_blank" rel="noopener noreferrer">Eisen et al., 1998</a>).  
+    It is also applied in social sciences to segment survey respondents or social groups with shared attitudes (<a href="https://www.pearson.com/us/higher-education/program/Hair-Multivariate-Data-Analysis-Global-Edition-7th-Edition/PGM184093.html" target="_blank" rel="noopener noreferrer">Hair et al., 2010</a>).
+  </p>
+  <p>
+    <strong>Distribution-based and fuzzy clustering:</strong>  
+    Used in medical diagnosis to handle overlapping symptoms and uncertain cluster boundaries, improving personalized treatment strategies (<a href="https://www.sciencedirect.com/science/article/pii/S153204642200184X" target="_blank" rel="noopener noreferrer">Kusuma et al., 2022</a>).  
+    Also employed in market research to model complex consumer behaviors via fuzzy segmentation (<a href="https://www.wiley.com/en-us/Applied+Statistics+and+Probability+for+Engineers%2C+6th+Edition-p-9780470044586" target="_blank" rel="noopener noreferrer">Montgomery, 2008</a>).
+  </p>
+
+<h2>Applications in Chemistry</h2>
+<p>
+Clustering is used in chemistry to group molecules based on similarities. 
+<a href="https://journal.r-project.org/articles/RN-2006-022/RN-2006-022.pdf" target="_blank" rel="noopener noreferrer">model-based clustering
+</a> supports identifying representative compounds in drug discovery. Density and similarity clustering help select diverse chemical libraries and analyze biological activity profiles 
+(<a href="https://www.daylight.com/cheminformatics/whitepapers/ClusteringWhitePaper.pdf" target="_blank" rel="noopener noreferrer">Daylight CIS, 2007</a>).
+ Clustering assists in chemical risk assessment, grouping substances by toxicity for regulatory processes like 
+<a href="https://ehp.niehs.nih.gov/EHP14001" target="_blank" rel="noopener noreferrer">REACH</a>. 
+</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 11</span></div> 
+</template>
+
+<!----------------------------------------page12 ------>
+<template id="page-11"> 
+<h2> StatMate&trade; Clustering</h2>
+<p>The software takes the data of each variable (each column) which can be added manually or uploaded.This module from StatMate&trade;, analyze & manage your dataset interactively:<br>
+
+<span style="margin-left:5px"><b>➕ Add Col.</b>: Add a new variable (column) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Col.</b>: Remove the last variable (column) from the table.</span><br>
+<span style="margin-left:5px"><b>➕ Add Row</b>: Add a new observation (row) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Row</b>: Remove the last observation (row) from the table.</span><br>
+<span style="margin-left:5px"><b>📂 Import Data</b>: Load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span><br>
+<span style="margin-left:5px"><b>🖶 Print Tab</b>: Print the data table.</span><br>
+</p>
+<img src="../images/ClusteringImage1.jpg" alt="Illustration" style=" width:100%;"> 
+<br>
+<p>The clustoring is updated when the run button is pressed.<br>
+Once your data is ready, you can analyze each column with <b>📊 Analyze Results</b>.</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 12</span></div> 
+</template>
+
+<!-------------------------Page13--------->
+
+<template id="page-12">
+  <h2>StatMate&trade; Clustering Algorithms</h2>
+
+  <ul>1️⃣ K-means : Choose K, assign points to nearest centers, recalculate centers until stable.
+    <li><strong>Pros:</strong> Simple, fast, works well for spherical clusters of similar size.  </li>
+    <li><strong>Cons:</strong> K must be chosen in advance; sensitive to outliers.</li>  
+    <li><strong>Best for:</strong> Simple datasets with clear round clusters.</li>
+  </ul>
+
+  <ul>2️⃣ Hierarchical Clustering : Each point as its own cluster and then merge step by step.
+    <li><strong>Pros:</strong> No need to pick K first; shows hierarchical structure.</li>  
+    <li><strong>Cons:</strong> Slow for large datasets; sensitive to distance metrics.</li>  
+    <li><strong>Best for:</strong> Exploring structure or small datasets.</li>
+  </ul>
+
+  <ul>3️⃣ DBSCAN : Groups dense regions based on distance. 
+    <li><strong>Pros:</strong> Finds clusters of any shape; detects noise; no need for K.</li>  
+    <li><strong>Cons:</strong> Sensitive to parameter choices; struggles with varying densities.</li> 
+    <li><strong>Best for:</strong> Noisy data or irregular cluster shapes.</li>
+  </ul>
+
+  <ul>4️⃣ Gaussian Mixture Model (GMM) : Data comes from overlapping Gaussian distributions 
+    <li><strong>Pros:</strong> Flexible, handles elliptical clusters, provides probabilities of membership.</li>  
+    <li><strong>Cons:</strong> Slower and more complex; K must be chosen.</li>  
+    <li><strong>Best for:</strong> Data with non-spherical or overlapping clusters.</li>
+</ul><br>
+<p> The software gives the coordinate of the clusters and data agregates :</p>
+
+<div style="text-align:center;">
+  <img src="../images/ClusteringImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:50%; height:auto;border:solid 1px black">
+</div>
+
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 3</span><span>Page 13</span></div> 
+</template>
+
+
+
+
+
+
+<!-------------------------------------------------------------------------------------------
+			Chapter 4 : Multiplot & Covariance
+-----------------------------------------------------------------------------------Page14---------->
+<template id="page-13">
+  <h1>Chapter 4: Multiplot, Correlation & CoVariance</h1>
+
+<h2>Multiplots and Correlation Analysis</h2>
+<p>
+Multiplots visualize relationships among multiple variables by presenting several plots together, often scatterplots arranged in a matrix to compare variable pairs.  
+Correlation analysis quantifies the strength and direction of linear relationships between variables, typically using coefficients like Pearson’s r, which ranges from -1 (perfect inverse) to +1 (perfect direct correlation).  
+In multiplot approaches, correlation matrices help identify which variables are strongly related, guiding feature selection and dimensionality reduction.  
+This combined visual and statistical technique supports deeper understanding of complex data structures and interdependencies, essential for multivariate analysis and predictive modeling.
+</p>
+<h2>CoVariance</h2>
+  <p style:"line-height:0px">
+    Covariance is a statistical measure that quantifies how two variables change together. A positive covariance indicates that the variables tend to increase or decrease in tandem, while a negative covariance indicates an inverse relationship. Unlike correlation, covariance measures the direction but not the strength of the linear relationship.
+
+    Mathematically, covariance between variables X and Y is calculated as:</p>
+
+  <center>Cov(X,Y) = (1/(n-1)) Σ (X<sub>i</sub> - mean(X)) (Y<sub>i</sub> - mean(Y))</center>
+
+<p>
+    where X<sub>i</sub> and Y<sub>i</sub> are individual observations, mean(X) and mean(Y) are the averages, and n is the number of observations.
+
+
+  <p>
+    Covariance matrices are fundamental in multiplot data analysis for understanding relationships among multiple variables simultaneously. They allow assessment of joint variability, helping identify correlated variables and reduce dimensionality in multivariate visualization.  
+    This approach aids in exploratory data analysis, feature selection, and preparing datasets for principal component analysis (PCA) or other multivariate techniques.
+  </p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 14</span></div> 
+</template>
+
+
+<!-------------------------Page15--------->
+
+<template id="page-14">
+
+<h2>Applications of Covariance and Multiplot Methods</h2><br>
+<p>
+Multi-Plot, correlation and covariance is a fundamental statistical measure used to analyze how two variables vary together. It plays a crucial role in many scientific fields for understanding relationships within complex datasets.  
+</p>
+<p>
+In <strong>chemistry</strong>, covariance helps analyze molecular properties and reaction parameters by grouping correlated variables to identify underlying patterns in spectroscopic or chemical data. For example, it supports clustering molecules with similar behaviors aiding drug discovery and material design (<a href="https://journal.r-project.org/articles/RN-2006-022/RN-2006-022.pdf" target="_blank" rel="noopener noreferrer">Fraley & Raftery, 2006</a>).  
+</p>
+<p>
+In <strong>finance</strong>, covariance matrices are widely used to measure how different assets move together, assisting in portfolio diversification and risk management by minimizing correlated risks (<a href="https://fr.wikipedia.org/wiki/Covariance" target="_blank" rel="noopener noreferrer">Wikipedia, 2025</a>).  
+</p>
+<p>
+In <strong>signal processing and telecommunications</strong>, covariance functions describe the dependency structure of signals, improving noise filtering and signal reconstruction techniques for radar or wireless systems (<a href="https://www.studysmarter.fr/resumes/ingenierie/mathematiques-pour-lingenierie/covariance-et-correlation/" target="_blank" rel="noopener noreferrer">Studysmarter, 2025</a>).
+</p>
+<p>
+Multiplot visualizations combined with covariance and correlation analysis allow researchers to explore multivariate data interactively. Such approaches are essential in <strong>exploratory data analysis</strong>, feature selection, and dimensionality reduction techniques like principal component analysis (PCA).  
+Their use spans <strong>biological sciences</strong> (gene expression studies), <strong>environmental sciences</strong> (climate variable interdependencies), and <strong>social sciences</strong> (behavioral data clustering) (<a href="https://www.sciencedirect.com/science/article/pii/S0165178123002159" target="_blank" rel="noopener noreferrer">Sciencedirect, 2023</a>).  
+</p>
+<p>
+Understanding the covariance structure enables modeling complex relationships beyond linear pairs, facilitating robust predictions and decision-making across scientific research and industry.
+</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 15</span></div> 
+</template>
+
+<!-------------------------Page16--------->
+<template id="page-15"> 
+<h2> StatMate&trade; Multiplot and variances</h2>
+<p>The software takes the data of each variable (each column) which can be added manually or uploaded.This module from StatMate&trade;, analyze & manage your dataset interactively:<br>
+
+<span style="margin-left:5px"><b>➕ Add Col.</b>: Add a new variable (column) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Col.</b>: Remove the last variable (column) from the table.</span><br>
+<span style="margin-left:5px"><b>➕ Add Row</b>: Add a new observation (row) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Row</b>: Remove the last observation (row) from the table.</span><br>
+<span style="margin-left:5px"><b>📂 Import Data</b>: Load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span><br>
+<span style="margin-left:5px"><b>🖶 Print Tab</b>: Print the data table.</span><br>
+</p>
+<img src="../images/MultiPlotImage1.jpg" alt="Illustration" style=" width:100%;"> 
+<br>
+<p>The graph are updated dynamically at any input<br>
+Once your data is ready, you can analyze each column with <b>📊 Analyze Results</b>.</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 16</span></div> 
+</template>
+
+
+<!-------------------------Page17--------->
+
+<template id="page-16">
+  <h2>StatMate&trade; Multiplots Results</h2>
+<p>StatMate's Multiplot software enables you to analyse the interactions between different variables in three ways:</p>
+<p>1) Through a <strong>visual inspection</strong>, which gives you an overview of the distributions. Clicking on a graph zooms in on it. Limited to 10 variables (100 graphs in the matrix).</p>
+<p>2) Studying variances and <strong>affine equations</strong>. A modal displays these relationships in order of importance (R²) alongside the displayed equations.</p>
+<p>3) Covariance values. IA comments the values for quick and efficient decisions :  "No correlation"-"Weak correlation"
+-"Moderate correlation"-"Strong correlation";</p>
+<div style="text-align:center;">
+  <img src="../images/MultiPlotImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:100%; height:auto;border:solid 1px black">
+</div>
+<br>
+<p>This result sheet can be printed or save on json, xls, txt, csv file.</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 4</span><span>Page 17</span></div> 
+</template>
+
+
+
+
+
+
+
+<!-------------------------------------------------------------------------------------------
+			Chapter 5 Principal COmposant Analysis
+-----------------------------------------------------------------------------------Page18---------->
+
+<template id="page-17">
+  <h1>Chapter 5: Principal Component Analysis (PCA) — Variable reduction</h1>
+  <p>
+    Principal Component Analysis (PCA) is a statistical method used to reduce dimensionality of large datasets.  
+    It transforms correlated variables into a smaller number of uncorrelated variables called principal components <strong>[Ck]</strong>, which retain most of the variance in the original data.</p>
+  <h2>Method and Principles</h2>
+  <p>
+    PCA identifies new axes, called eigenvectors, corresponding to directions of maximum variance in the data, ordered by decreasing eigenvalues representing explained variance.  
+    The first principal component explains the largest variability; subsequent components explain the remaining variance orthogonal to previous ones.  
+    By selecting the first few components, PCA reduces data dimension while minimizing information loss.  
+    This requires centering and scaling data, then computing the covariance matrix and its eigen decomposition to find principal components.
+  </p>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>C</mi><msub><mi>k</mi></msub>
+  <mo>=</mo>
+  <mrow>
+    <mo>&#x2211;</mo> <!-- symbole somme -->
+  </mrow>
+  <msub><mi>U</mi><mrow><mi>k</mi><mi>j</mi></mrow></msub>
+  <msub><mi>X</mi><mi>j</mi></msub>
+</math>
+<ul>With:
+  <li><b>C<sub>k</sub></b>: k<sup>th</sup> principal component</li>
+  <li><b>X<sub>j</sub></b>: j<sup>th</sup> centered and scaled variable</li>
+  <li><b>U<sub>kj</sub></b>: coefficient of the associated eigenvector. &Sigma;Ui=1 because it uses centered and scaled variable.</li>
+</ul>
+
+  <h2>Usage in Data Analysis</h2>
+  <p>
+    PCA is commonly used for visualization of high-dimensional data, exploratory analysis, noise reduction, and feature extraction.  
+    It prepares data for subsequent methods such as clustering or regression by simplifying variable space.  
+    The correlation circle is a common PCA plot that shows variable contributions and relationships on principal component axes.
+  </p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 18</span></div> 
+</template>
+
+<!-------------------------Page19--------->
+
+<template id="page-18">
+<h2>PCA Applications</h2>
+<p>
+  Principal Component Analysis (PCA) is widely used across scientific and industrial domains due to its ability to reduce data dimensionality while preserving essential information.
+</p>
+
+    <p><strong>Chemistry and Cheminformatics:</strong>
+    PCA is frequently applied to reduce the dimensionality of complex molecular descriptor datasets, enabling the visualization and classification of chemical compounds.  
+    For example, recent research utilizes PCA to identify chemical clusters and predict drug activity, facilitating drug discovery and materials design (<a href="https://www.sciencedirect.com/science/article/pii/S0165178123002159" target="_blank" rel="noopener noreferrer">Sciencedirect, 2023</a>).
+  </p>
+  <p>
+    <strong>Genomics and Bioinformatics:</strong>
+    In gene expression studies, PCA uncovers hidden patterns by grouping genes or biological samples based on similarity of their expression profiles.  
+    This aids in identifying disease subtypes and understanding genetic mechanisms (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1950091/" target="_blank" rel="noopener noreferrer">NCBI, 2009</a>).
+  </p>
+  <p>
+    <strong>Finance:</strong>
+    PCA assists in risk management by transforming correlated financial variables into fewer uncorrelated components, simplifying portfolio analysis and asset allocation.  
+    This approach helps detect underlying factors affecting markets and reduces model complexity. 
+ </p>
+  <p>
+    <strong>Image and Signal Processing:</strong>
+    PCA improves image compression and noise reduction by projecting images or signals onto the most significant principal components.  
+    This results in reduced data size and enhanced signal clarity, widely used in multimedia, medical imaging, and remote sensing (<a href="https://www.tutorialspoint.com/principal-component-analysis-in-image-processing" target="_blank" rel="noopener noreferrer">TutorialsPoint, 2021</a>).
+  </p>
+  <p>
+    <strong>Environmental Science:</strong>
+    PCA analyzes complex environmental datasets, such as climate variables and pollution measurements, to identify key factors driving environmental changes and to facilitate monitoring and forecasting (<a href="https://www.sciencedirect.com/science/article/pii/S0165178123002159" target="_blank" rel="noopener noreferrer">Sciencedirect, 2023</a>).
+  </p>
+  <p>
+    <strong>Social Sciences and Market Research:</strong>
+    PCA is used to reduce and interpret survey data, uncovering latent variables that influence consumer behavior or social trends.  
+    This supports segmentation and targeted marketing efforts (<a href="https://pca4ds.github.io/application-examples.html" target="_blank" rel="noopener noreferrer">PCA4DS, 2025</a>).
+  </p>
+
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 19</span></div> 
+</template>
+
+
+<!-------------------------Page20--------->
+
+<template id="page-19">
+<h2> StatMate&trade; PCA Software</h2>
+<p>The software takes the data of each variable (each column) which can be added manually or uploaded.This module from StatMate&trade;, analyze & manage your dataset interactively:<br>
+
+<span style="margin-left:5px"><b>➕ Add Col.</b>: Add a new variable (column) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Col.</b>: Remove the last variable (column) from the table.</span><br>
+<span style="margin-left:5px"><b>➕ Add Row</b>: Add a new observation (row) to the table.</span><br>
+<span style="margin-left:5px"><b>➖ Del. Row</b>: Remove the last observation (row) from the table.</span><br>
+<span style="margin-left:5px"><b>📂 Import Data</b>: Load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span><br>
+<span style="margin-left:5px"><b>🖶 Print Tab</b>: Print the data table.</span><br>
+</p>
+<img src="../images/PCAImage1.jpg" alt="Illustration" style=" width:100%;"> 
+<br>
+<p>The right panel shows the PCA graphs. The graph are updated dynamically at any input or can be updated with the button "PCA Calculate"<br>
+Once your data is ready, you can analyze each column with <b>📊 Equation</b>.</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 20</span></div> 
+</template>
+
+
+<!-------------------------Page21--------->
+
+<template id="page-20">
+ <h2>StatMate&trade; PCA Results</h2>
+<p>StatMate's PCA software enables you to show and provide equations of the principal component analyses with: </p>
+
+<ul>1️⃣ Standard PCA plots. Axis can be changed :
+<li><strong>Scree plot</strong> (eigenvalue plot)which shows how variance each component explains, helps decide how many to keep.</li>
+<li><strong>Scores plot</strong> (projection of observations) which scatterplot of individuals on PC1 vs PC2 (or PC1 vs PC3, etc.).</li>
+<li><strong>Correlation circle</strong> / loadings plot which shows how variables contribute and correlate with the components.</li></ul>
+<div style="text-align:center;">
+  <img src="../images/PCAImage3.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:80%; height:auto;border:solid 1px black">
+</div>
+<ul>2️⃣ Numerical results. The key outputs are:
+<li><strong>Eigenvalues</strong> variance explained by each component.</li>
+<li><strong>Weight</strong> Percentage of variance explained</li>
+<li><strong>Equation</strong> the coordinates of your observations (individuals) in the new PCA space.</li></ul>
+
+<div style="text-align:center;">
+  <img src="../images/PCAImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:80%; height:auto;border:solid 1px black">
+</div>
+<br>
+<p>This result sheet can be printed or save on json, xls, txt, csv file.</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 5</span><span>Page 21</span></div> 
+</template>
+
+
+<!-------------------------------------------------------------------------------------------
+			Chapter 6 Plackett-Burman Design
+-----------------------------------------------------------------------------------Page22---------->
+
+<template id="page-21">
+
+<h1>Chapter 6 : Plackett-Burman Designs</h1>
+<p>
+Plackett-Burman designs are efficient fractional factorial experimental designs mainly used to <strong>screen and identify</strong> the most influential variables among a large number of factors.  
+These designs require only a small number of experimental runs relative to the number of variables, making them ideal for early-stage experimental screening (<a href="https://www.sctunisie.org/pdf/JSCT_v13-22.pdf" target="_blank" rel="noopener noreferrer">JSCT, 2022</a>).
+
+<h2>Method</h2>
+<p>
+Plackett-Burman designs are two-level fractional factorial plans with run sizes modulo 4 (12, 20, 24, 28, 32, etc.) from Hadamard orthogonal matrices (<a href="https://doi.org/10.1112/plms/s2-35.1.241" target="_blank" rel="noopener noreferrer">Paley, 1933</a>). 
+They allow estimation of main effects assuming interactions are negligible.  
+For <em>N</em> runs, up to <em>N-1</em> variables can be screened efficiently.  
+These screening pinpoints the significant factors while minimizing the number of experiments.
+</p>
+<h2>Advantages</h2>
+<ul>
+  <li>Highly efficient for screening a large number of variables with few experiments, saving time & resources.</li>
+  <li>Orthogonality ensures that the estimates of main effects are independent, reducing confounding between factors.</li>
+  <li>Supports statistical analysis, allowing identification of significant factors and effect estimation.</li>
+  <li>Simple two-level design makes it easy to implement and analyze, even for non-expert experimenters.</li>
+  <li>Flexible run sizes allow adaptation to different numbers of variables and experimental constraints.</li>
+</ul>
+<br>
+<h2>Limitations</h2>
+<ul>
+  <li>Focuses only on main effects. If interactions are significant, results may be misleading.</li>
+  <li>Cannot estimate interactions directly; additional experiments are needed to explore them.</li>
+  <li>Not suitable for experiments where curvature or non-linear effects are important.</li>
+  <li>Designs are limited to certain run sizes (multiples of 4), which may not match the exact number of factors.</li>
+  <li>Interpretation requires careful consideration: false positives can occur if noise are present.</li>
+</ul>
+
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 22</span></div> 
+</template>
+
+<!-------------------------Page23--------->
+
+<template id="page-22">
+
+<h2>Applications of Plackett-Burman Designs</h2><br>
+
+<p>
+    <strong>Biotechnology and Enzyme Production:</strong>
+    In optimizing bacterial enzyme production, Plackett-Burman designs have been employed to screen numerous culture medium components and physical parameters rapidly.  
+    For example, a study optimized chitinase enzyme yield by identifying critical nutritional and environmental factors using a Plackett-Burman design with only 12 runs (<a href="https://fac.umc.edu.dz/snv/bibliotheque/biblio/mmf/2022/L%E2%80%99utilisation%20de%20la%20Plackett-Burman%20comme%20plan%20statistique%20dans%20l%E2%80%99optimisation%20de%20la%20production%20de%20la%20chitinase%20bact%C3%A9rienne.pdf" target="_blank" rel="noopener noreferrer">UMC, 2022</a>).
+  </p>
+  <p>
+    <strong>Chemical Engineering and Materials Science:</strong>
+    Plackett-Burman plans have helped optimize reaction parameters or formulation variables in chemical manufacturing. For instance, they were used alongside Box-Behnken designs to predict optimal geopolymer formation conditions (<a href="https://www.sciencedirect.com/science/article/abs/pii/S2352710222001759" target="_blank" rel="noopener noreferrer">Marzouki et al., 2022</a>).  
+    Similarly, they identified significant amino acids influencing higher alcohols and esters production in biochemical reactions (<a href="https://onlinelibrary.wiley.com/doi/full/10.1002/jib.424" target="_blank" rel="noopener noreferrer">Yin et al., 2017</a>).
+  </p>
+  <p>
+    <strong>Agricultural Sciences and Soil Fertility:</strong>
+    Researchers applied Plackett-Burman designs to assess soil amendments and fertilizer effects on crop yield. One study developed predictive models for soil quality by efficiently screening nutrient factors with minimal trials (<a href="https://www.jeeng.net/pdf-155080-82822?filename=Application+of+the.pdf" target="_blank" rel="noopener noreferrer">Abbou et al., 2022</a>).
+  </p>
+  <p>
+    <strong>Pharmaceuticals and Drug Formulation:</strong>
+    In pharmaceutical development, Plackett-Burman designs facilitated the screening of formulation variables impacting drug stability and bioavailability, reducing expensive trial-and-error studies (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9320474/" target="_blank" rel="noopener noreferrer">El-Shafie et al., 2022</a>).
+  </p>
+  <p>
+    <strong>Manufacturing and Process Optimization:</strong>
+    Plackett-Burman designs have identified key manufacturing factors affecting product texture, durability, or efficiency. For example, quality improvement in bonded composite joints was achieved by screening fracture energy determinants (<a href="https://www.6sigma.us/six-sigma-in-focus/plackett-burman-designs/" target="_blank" rel="noopener noreferrer">6Sigma, 2024</a>).
+  </p>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 23</span></div> 
+</template>
+
+
+
+<!-------------------------Page24--------->
+
+
+<template id="page-23">
+<h2> StatMate&trade; Plackett-Burman Software</h2>
+<p>The software takes the data of each variable (each column) which can be added manually or uploaded.This module from StatMate&trade;, analyze & manage your dataset interactively:</p>
+
+<p><span style="margin-left:5px"><b>DIM</b>: The dimensions can range from 3 to 25. The information and results matrices are loaded dynamically. 
+The info matrix provides the name, lower value and upper value for each variable.
+The results matrix provides the experience plan and the results achieved.</span><br>
+<span style="margin-left:5px"><b>📂 Import Data</b>: Load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span><br>
+<span style="margin-left:5px"><b>🖶 Print Tab</b>: Print the result data table only.</span><br>
+</p>
+
+<p>• For added convenience, you can switch between the factor table and the DoE table by clicking the 'Show DoE tab' button when there are up to five variables.</p>
+
+<img src="../images/pbImage1.jpg" alt="Illustration" style=" width:100%;"> 
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 24</span></div> 
+</template>
+
+
+<!-------------------------Page25--------->
+
+<template id="page-24">
+ <h2>StatMate&trade; Plackett-Burman Results</h2>
+
+<p>The right-hand panel shows the Plackett-Burman graphs, which illustrate the weight of each variable. Red indicates a negative effect and green indicates a positive effect. The Y axis, representing the variable, is ranked in descending order.
+Any input updated the graph.<p>
+
+ <img src="../images/pbImage3.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:50%; height:auto;border:solid 0px black">
+
+Once your data is ready, you can analyze each column by clicking the <b>📊 Equation</b> button. StatMate's Plackett-Burman software provide the equation. This result sheet can be printed. </p>
+<div style="text-align:center;">
+  <img src="../images/pbImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:45%; height:auto;border:solid 1px black">
+</div>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 6</span><span>Page 25</span></div> 
+</template>
+
+
+
+<!-------------------------------------------------------------------------------------------
+			Chapter7 DOE design
+---------------------------------------------------------------------------Page26---------->
+
+<template id="page-25">
+<h1>Chapter 7 : Design of Experiments (DoE)</h1>
+<p>
+Design of Experiments (DoE) is a  structured statistical approach used to plan, conduct, analyze, and interpret controlled tests.  
+Its primary purpose is to understand and quantify the effects that multiple input variables (factors) have on one or more output variables (responses). 
+</p>
+<p>
+In fractional factorial designs, the <strong>design matrix</strong> represents the layout of experimental runs, listing combinations of factor levels for each trial.  
+Each row corresponds to one experimental run, and each column to a factor or an interaction term. Matrices are often derived from Hadamard matrices, which are orthogonal arrays 
+of ±1 entries ensuring clear estimation of main effects.  
+</p>
+
+<p>
+For <strong>3<sup>N-k</sup></strong> designs, factors have three levels (generally coded as -1, 0, and +1). The matrices use complex algebraic constructions to maintain orthogonality and balance among factor levels, enabling accurate effect estimation with fewer runs while considering nonlinear effects.
+</p>
+
+<h2>2<sup>N-k</sup> Fractional Factorial Designs</h2>
+<p>
+Fractional factorial designs 2<sup>(n-k)</sup> are used to reduce the number of experimental runs when studying multiple factors, each at <strong>two levels, min (-1) and max(+1)</strong> by studying only a fraction of the full factorial.  
+These designs rely on the assumption that higher-order (x1x2x3x4 ...) interactions are negligible, allowing estimation of main effects and low-order interactions with fewer experiments.
+For example, a full factorial on 7 factors (<span style="font-size:0.8em">2<sup>7</sup></span>=128 runs) can be replaced by a <span style="font-size:0.8em">2<sup>(7-4)</sup></span> 8 runs).
+</p>
+<h2>3<sup>N-k</sup> Fractional Factorial Designs</h2>
+<p>
+Fractional factorial designs 3<sup>N-k</sup> extend the concept to factors with three levels each, allowing efficient experimentation when multiple numeric factors must be studied over
+<strong> low-medium-high (-1;0;+1)</strong> settings.  
+These designs capture nonlinear effects and quadratic relationships better than 2-level designs but require more runs.
+</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 26</span></div> 
+
+</template>
+
+<!-------------------------Page27--------->
+
+<template id="page-26">
+
+<h2>Application of Factorial Designs</h2>
+ 
+<p>They are widely applied for screening factors in industrial processes, quality control, and product optimization.</p>
+<p>
+    <strong>Injection Molding:</strong> A study used a 2<sup>(6-2)</sup> fractional factorial design (16 runs) to identify significant factors affecting shrinkage 
+in molded parts such as mold temperature and screw speed (<a href="https://www.stat.purdue.edu/~yuzhu/stat514fall05/Lecnot/fracfactfall05.pdf" target="_blank" rel="noopener noreferrer">
+Purdue Univ., 2005</a>).  
+  </p>
+  <p>
+    <strong>Ceramic Glazing:</strong> A 2<sup>3</sup> factorial design was used for testing three pigment doses, to find optimal combinations for glazed ceramics 
+(<a href="https://courses.mai.liu.se/GU/TAMS38/Dokument/fo8.pdf" target="_blank" rel="noopener noreferrer">Liu University, Fractional Factorial</a>).  
+  </p>
+  <p>
+    <strong>Agriculture:</strong> A 2<sup>(5-2)</sup> design was applied to study irrigation level, fertilizer dose, and planting density in crop yield optimization, 
+reducing the experimental load while identifying the most critical factors 
+(<a href="https://doi.org/10.1080/02664760801944586" target="_blank" rel="noopener noreferrer">Journal of Applied Statistics, 2008</a>).  
+  </p>
+  <p>
+    <strong>Process Optimization:</strong> A 3-level fractional factorial design was applied to optimize temperature, 
+pH, and agitation speed in bioreactor fermentation for maximal yield, using a fractional design to limit the experiment size 
+(<a href="https://www.researchgate.net/publication/283826492_Three-level_fractional_factorial_designs" target="_blank" rel="noopener noreferrer">
+ResearchGate, 3-level fractional designs</a>).  
+  </p>
+  <p>
+    <strong>Pharmaceutical Formulation:</strong> Screening formulation variables at three levels, a 3<sup>(5-2)</sup> 
+fractional factorial plan helped identify key excipients and processing parameters influencing tablet hardness 
+(<a href="https://www.sciencedirect.com/science/article/pii/S0168269319322058" target="_blank" rel="noopener noreferrer">ScienceDirect, 3-level fractional design</a>).  
+  </p>
+  <p>
+    <strong>Food Science:</strong> A 3<sup>(4-1)</sup> fractional factorial design was used to investigate 
+sugar concentration, fermentation time, and yeast strain in wine production, revealing nonlinear effects on 
+aroma and alcohol yield (<a href="https://doi.org/10.1016/j.foodchem.2011.05.025" target="_blank" rel="noopener noreferrer">Food Chemistry, 2012</a>).  
+</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 27</span></div> 
+</template>
+
+
+
+
+<!-------------------------Page28--------->
+
+
+<template id="page-27">
+<h2> StatMate&trade; DoE Software</h2>
+<p>The software takes the data of each variable (each column) which can be added manually or uploaded.This module from StatMate&trade;, analyze & manage your dataset interactively:</p>
+
+<p>The operator selects <span style="margin-left:5px"><b>Factor n</b>, the number of variable which can range from 3 to 12 and select the type of DoE desired : 2<sup>n-k</sup> or 3<sup>n-k</sup>.
+This allows the software to randomly generate the experimental plan. All these data are summarised in the sheet title.<br> The operator must then implement the achieved results on the last column.</span><br>
+</p>
+<p> Buttons should be used to
+<span style="margin-left:5px"><b>📂 Import Data</b>: load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span>
+<span style="margin-left:5px"><b>🖶 Print Tab</b> for tab printing:</p>
+
+<img src="../images/DOEImage1.jpg" alt="Illustration" style=" width:100%;"> 
+<p>The right-hand panel shows the response curve, which is updated dynamically in response to any input. X1 & X2 are set at the beginning, but the axes can be changed on demand.</p>
+
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 28</span></div> 
+</template>
+
+
+<!-------------------------Page29--------->
+
+<template id="page-28">
+ <h2>StatMate&trade; DoE Results</h2>
+
+<p>The response curve is shown in the right-hand panel. Red indicates the lowest value and blue indicates the highest. Initially, 
+all other X<sub>i</sub>s are set to 0, but any value from -1 to +1 can be selected to visualise the curve.
+Any input updated the graph.<p>
+
+ <img src="../images/DOEImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:50%; height:auto;border:solid 0px black">
+<p>By clicking the 'Equation' button, StatMate's DOE software provides the equation and the extremal coordinates (X1, ..., Xn): minimum and maximum. This result sheet can be printed. </p>
+<div style="text-align:center;">
+  <img src="../images/DOEImage3.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:100%; height:auto;border:solid 1px black">
+</div>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 7</span><span>Page 29</span></div> 
+</template>
+
+
+
+
+<!-------------------------------------------------------------------------------------------
+			Chapter8 Mixture Plan
+---------------------------------------------------------------------------Page30---------->
+
+<template id="page-29">
+<h1>Chapter 8: Mixture Designs (2ᵏ and 3ᵏ)</h1>
+<p>
+Mixture designs are a special class of experimental designs used when the response depends on the relative proportions of components in a blend rather than their absolute amounts.  
+Unlike factorial designs where factors can vary independently, in mixture experiments the sum of the component proportions is constrained (usually to 1 or 100%).  
+They are widely applied in fields such as chemistry, food science, pharmaceuticals, and materials engineering where formulations involve combining several ingredients (<a href="https://doi.org/10.1080/00949655.2016.1156684" target="_blank" rel="noopener noreferrer">Cornell, 2016</a>).  
+</p>
+<h2>Methodology</h2>
+<ul>
+Mixture designs can be structured as 2ᵏ or 3ᵏ factorial-type experiments, where <em>k</em> is the number of components:  
+
+  <li><strong>2ᵏ mixture design:</strong> Each component is tested at two proportions (low and high). This approach is efficient for preliminary screening to identify main effects of ingredients on the response.</li>
+  <li><strong>3ᵏ mixture design:</strong> Each component is tested at three proportions (low, medium, high). This design captures curvature and interaction effects, making it suitable for optimization once key ingredients are identified.</li>
+<p>
+Because mixture designs must satisfy the constant-sum constraint, special coordinate systems (such as simplex-lattice or simplex-centroid arrangements) 
+are used to define experimental points (<a href="https://www.itl.nist.gov/div898/handbook/pri/section5/pri56.htm" target="_blank" rel="noopener noreferrer">NIST/SEMATECH Handbook</a>). </p> 
+</ul>
+<h2>Why 2-Level and 3-Level Designs?</h2>
+<p>
+Two-level (2ᵏ) mixture designs are useful for <strong>screening</strong>. They require fewer runs and can quickly indicate which components are influential.  
+However, they cannot capture nonlinear blending effects or synergistic/antagonistic interactions. 
+<br><br>Three-level (3ᵏ) mixture designs provide greater flexibility by including intermediate levels, which makes it possible to model <strong>curvature</strong> 
+and more accurately describe how component proportions influence the response.  </p><p>
+Practitioners often start with a 2ᵏ mixture design for factor screening, then move to a 3ᵏ design for fine-tuning and optimization.  
+</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 30</span></div> 
+</template>
+<!-------------------------Page31--------->
+<template id="page-30">
+<h2>Applications</h2><br>
+<p>
+  <strong>Food Industry:</strong> A 3ᵏ mixture design was used to optimize the mix of flour, sugar, and fat in cake formulations, improving both texture and shelf life (<a href="https://doi.org/10.1016/j.foodchem.2012.09.007" target="_blank" rel="noopener noreferrer">Food Chemistry, 2012</a>).  
+  Similarly, dairy mixtures were studied with a 2ᵏ design to screen stabilizers such as pectin and carrageenan, along with milk fat levels, in order to optimize yogurt viscosity (<a href="https://doi.org/10.1111/j.1365-2621.2008.01637.x" target="_blank" rel="noopener noreferrer">Journal of Food Science, 2009</a>).
+</p>
+<p>
+  <strong>Pharmaceutical Formulation:</strong> A 2ᵏ mixture design was applied to identify critical excipients for fast-dissolving tablets, and later refined with a 3ᵏ design to optimize hardness and dissolution (<a href="https://doi.org/10.1016/j.ijpharm.2018.06.012" target="_blank" rel="noopener noreferrer">International Journal of Pharmaceutics, 2018</a>).  
+  Likewise, in nanoparticle drug delivery, a 3ᵏ design optimized the ratios of lipid, surfactant, and polymer to achieve maximum encapsulation efficiency (<a href="https://doi.org/10.1016/j.ejps.2019.105098" target="_blank" rel="noopener noreferrer">European Journal of Pharmaceutical Sciences, 2019</a>).
+</p>
+<p>
+  <strong>Cosmetics:</strong>A sunscreen formulations were investigated using a 3ᵏ mixture design to optimize the balance of UV filters, emulsifiers, and stabilizers, resulting in improved SPF performance and better skin feel (<a href="https://doi.org/10.1111/j.1468-2494.2010.00614.x" target="_blank" rel="noopener noreferrer">International Journal of Cosmetic Science, 2010</a>).  
+</p>
+<p>
+  <strong>Polymer & Materials Engineering:</strong> In polymer engineering, a 3ᵏ mixture design was applied to study the effect of three monomers on the tensile strength and elasticity of polymer blends (<a href="https://doi.org/10.1016/j.polymer.2015.07.025" target="_blank" rel="noopener noreferrer">Polymer, 2015</a>).  
+  In cement composites, a 2ᵏ design identified the influence of water, sand, and fly ash proportions on compressive strength (<a href="https://doi.org/10.1016/j.conbuildmat.2012.06.059" target="_blank" rel="noopener noreferrer">Construction and Building Materials, 2013</a>).  
+</p>
+<p>
+  <strong>Environmental Science:</strong> A 3ᵏ mixture design was used to optimize blends of alum, ferric chloride, and polymer for wastewater treatment, leading to improved turbidity removal while minimizing sludge (<a href="https://doi.org/10.1016/j.jenvman.2016.05.040" target="_blank" rel="noopener noreferrer">Journal of Environmental Management, 2016</a>).  
+</p>
+<p>
+  <strong>Energy:</strong> A mixture designs have been used to study biofuels. A 3ᵏ design explored blending ratios of ethanol, biodiesel, and diesel, enabling the optimization of combustion efficiency and reduction of emissions (<a href="https://doi.org/10.1016/j.enconman.2014.07.042" target="_blank" rel="noopener noreferrer">Energy Conversion and Management, 2015</a>).  
+</p>
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 31</span></div> 
+</template>
+
+
+
+
+<!-------------------------Page32--------->
+
+
+<template id="page-31">
+<h2> StatMate&trade; Mixture Plan Software</h2>
+<p>The software takes the number and  Min & Max of each compounds of the mixture and propose and mixture plan according to the algorithm chosen.
+This module from StatMate&trade;, analyze & manage your dataset interactively.<br>
+The operator selects the algorithm for calculating the mixture plan, which is then used to determine the mixture's composition: <b>Full centroïd</b> or <b>Fractional</b>. 
+Then the operator defines the <b>number of ingredients</b> (form 3 to 8).
+The more ingredients there are, the more trials there will be. It depends of the algorithm selected :
+<table style="border-collapse: collapse;
+    width: 100%;
+    font-size: 0.6em; /* taille du texte */
+    text-align: center; line-height:0.5em; margin-top:0">
+  <tr>
+    <th># Ingredient</th>
+    <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+  </tr>
+  <tr>
+    <th># Full Centroïd</th>
+    <td>7</td><td>15</td><td>31</td><td>63</td><td>127</td><td>255</td>
+  </tr>
+  <tr>
+    <th># Fractional</th>
+    <td>6</td><td>10</td><td>15</td><td>21</td><td>28</td><td>36</td>
+  </tr>
+</table>
+</p>
+<p> Buttons should be used to
+<span style="margin-left:5px"><b>📂 Import Data</b>: load  or <b>💾 Export Data</b> download the data table (CSV, txt, xls or json file).</span>
+<span style="margin-left:5px"><b>🖶 Print Tab</b> for tab printing:
+
+<img src="../images/MixtureImage1.jpg" alt="Illustration" style="display:block; margin:auto; width:80%; height:auto;border:solid 0px black";"> 
+
+The right-hand panel shows a ternaire response curve, which is updated dynamically in response to any input. X1 & X2 & X3 are set at the beginning, but the axes can be changed on demand.</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span>Page 32</span></div> 
+</template>
+
+
+<!-------------------------Page33--------->
+
+<template id="page-32">
+ <h2>StatMate&trade; Mixture Plan Results</h2>
+
+<p>The ternary mapping is shown in the panel on the right. The lowest value is indicated by dark blue, while the highest is indicated by yellow. X1, X2 and X3 are initially on the map, but any value can be selected to visualise the mixture by substitution. 
+If no Xis are selected, they are set to 0. Changing this value gives the ternary mapping at this level of Xi. Note that the sum should stay at 1.
+Any input updated the graph.By clicking the 'Equation' button, StatMate's DOE software provides the equation and the extremal coordinates (X1, ..., Xn): minimum and maximum. This result sheet can be printed. 
+ <img src="../images/MixtureImage3.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:50%; height:auto;border:solid 0px black">
+<br>To get a better view of the minimum and maximum values, or of any area, you can zoom in or out. You can reset or fully zoom out using the designated button.
+
+  <img src="../images/MixtureImage2.jpg" alt="Illustration" 
+       style="display:block; margin:auto; width:100%; height:auto;border:solid 0px black">
+
+</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="0">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 8</span><span>Page 33</span></div> 
+</template>
+
+
+
+<!-----------------------------------fin des pages---------------------------------------------->
+
+
+<div class="book-container" aria-label="Livre avec page titre et page sans fond" role="region">
+  <div class="spine" aria-hidden="true"></div>
+
+
+  <div class="nav-btn nav-left" id="nav-left" role="button" tabindex="0" aria-label="Page précédente">&#9664;</div>
+
+  <div class="nav-btn nav-right" id="nav-right" role="button" tabindex="0" aria-label="Page suivante">&#9654;</div>
+</div>
+
+
+
+
+
+<script>let tempo = 300;
+// On détecte toutes les pages via les templates (id commençant par "page-")
+const allTemplates = Array.from(document.querySelectorAll('template[id^="page-"]'));
+// Trier les templates par index numérique (extrait de l'id)
+allTemplates.sort((a, b) => {
+  const aNum = parseInt(a.id.replace('page-', ''), 10);
+  const bNum = parseInt(b.id.replace('page-', ''), 10);
+  return aNum - bNum;
+});
+// Crée un tableau des indexes disponibles
+const pagesIndexes = allTemplates.map(tpl => parseInt(tpl.id.replace('page-', ''), 10));
+// Pour la navigation, on utilise les indexes triés
+let currentLeftIndexPos = 0;  // position dans pagesIndexes pour page de gauche
+let currentRightIndexPos = 1; // position dans pagesIndexes pour page de droite
+const book = document.querySelector('.book-container');
+let leftPage = null;
+let rightPage = null;
+
+// Crée une page à partir d'un template cloné
+function createPage(pagePosInArray, side) {
+  const tpl = allTemplates[pagePosInArray];
+  const div = document.createElement('div');
+  div.classList.add('page', side);
+  // Si le template est celui de la page vide (-1), on ajoute classe transparent
+  if (pagesIndexes[pagePosInArray] === -1) div.classList.add('transparent');
+  div.setAttribute('aria-hidden', 'false');
+  div.appendChild(tpl.content.cloneNode(true));
+  // Interception des liens pour navigation fluide
+  div.querySelectorAll('a[data-page]').forEach(link => {
+    link.style.color = "#A52A2A";
+    link.addEventListener('click', function (e) {
+      const targetPage = parseInt(link.getAttribute('data-page'), 10);
+      if (pagesIndexes.includes(targetPage)) {
+        e.preventDefault();
+        gotoPage(targetPage);
+      }
+    });
+  });
+  return div;
+}
+
+function clearFlipClasses() {
+  if (leftPage) leftPage.classList.remove('flip-left');
+  if (rightPage) rightPage.classList.remove('flip-right');
+  if (leftPage) leftPage.style.zIndex = '';
+  if (rightPage) rightPage.style.zIndex = '';
+}
+
+function render() {
+  clearFlipClasses();
+  if (leftPage) leftPage.remove();
+  if (rightPage) rightPage.remove();
+  // Clamp bornes
+  if (currentLeftIndexPos < 0) currentLeftIndexPos = 0;
+  if (currentRightIndexPos < 1) currentRightIndexPos = 1;
+  if (currentLeftIndexPos > allTemplates.length - 2) currentLeftIndexPos = allTemplates.length - 2;
+  if (currentRightIndexPos > allTemplates.length - 1) currentRightIndexPos = allTemplates.length - 1;
+  leftPage = createPage(currentLeftIndexPos, 'left');
+  rightPage = createPage(currentRightIndexPos, 'right');
+  book.appendChild(leftPage);
+  book.appendChild(rightPage);
+}
+
+function flipRight() {
+  if (currentRightIndexPos >= allTemplates.length - 2) return;
+  rightPage.classList.add('flip-right');
+  rightPage.style.zIndex = 100;
+  setTimeout(() => {
+    currentLeftIndexPos = currentRightIndexPos + 1;
+    currentRightIndexPos = currentRightIndexPos + 2;
+    render();
+  }, tempo);
+}
+
+function flipLeft() {
+  if (currentLeftIndexPos <= 0) return;
+  leftPage.classList.add('flip-left');
+  leftPage.style.zIndex = 100;
+  setTimeout(() => {
+    currentRightIndexPos = currentLeftIndexPos - 1;
+    currentLeftIndexPos = currentLeftIndexPos - 2;
+    render();
+  }, tempo);
+}
+
+// Navigation "goto" vers n'importe quelle page
+function gotoPage(targetPageIndex) {
+  let idx = pagesIndexes.indexOf(targetPageIndex);
+  if (idx === -1) return;
+  // Book tourne dans le bon sens selon la destination
+  
+if (idx % 2 === 1) { // cible = page droite
+    if (currentRightIndexPos === idx) return;
+    rightPage.classList.add('flip-right');
+    rightPage.style.zIndex = 100;
+    setTimeout(() => {
+      currentLeftIndexPos = idx - 1;
+      currentRightIndexPos = idx;
+      render();
+    }, tempo);
+  } else { // gauche
+    if (currentLeftIndexPos === idx) return;
+    leftPage.classList.add('flip-left');
+    leftPage.style.zIndex = 100;
+    setTimeout(() => {
+      currentLeftIndexPos = idx;
+      currentRightIndexPos = idx + 1;
+      render();
+    }, tempo);
+  }
+}
+  const continues = document.querySelectorAll('.continue');
+
+  continues.forEach(el => {
+    el.addEventListener('click', flipRight);
+  });
+
+document.getElementById('nav-right').addEventListener('click', flipRight);
+document.getElementById('nav-left').addEventListener('click', flipLeft);
+['nav-left', 'nav-right'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      document.getElementById(id).click();
+    }
+  });
+});
+//----------------------------------------------------------------
+ document.addEventListener('click', function handleClick(e) {
+  // Ignore clicks already inside the overlay (so overlay click closes it separately)
+  if (e.target.closest('.img-overlay')) return;
+
+  // Find nearest image clicked (works if clicking inside <a><img> or <figure><img> etc.)
+  const img = e.target.closest('img');
+  if (!img) return;
+
+  // OPTIONAL: ignore tiny icons (uncomment if needed)
+  // if (img.naturalWidth < 80 && img.naturalHeight < 80) return;
+
+  // Prevent link navigation if image is inside an <a>
+  const link = img.closest('a');
+  if (link) e.preventDefault();
+
+  openImageOverlay(img);
+});
+
+/* Create overlay once and reuse it */
+function createOverlay() {
+  const ov = document.createElement('div');
+  ov.className = 'img-overlay';
+  ov.innerHTML = '<div class="img-wrap"><img alt=""></div>';
+  document.body.appendChild(ov);
+
+  // clicking overlay (outside image) closes it
+  ov.addEventListener('click', (ev) => {
+    // if user clicked the image itself, also close (ev.target is the img) — both behaviours ok
+    closeOverlay();
+  });
+
+  // ESC closes
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') closeOverlay();
+  });
+
+  return ov;
+}
+
+let overlay = null;
+function ensureOverlay() {
+  if (!overlay) overlay = createOverlay();
+  return overlay;
+}
+
+function openImageOverlay(sourceImg) {
+  const ov = ensureOverlay();
+  const clonedImg = ov.querySelector('img');
+
+  // set src to currentSrc if available to handle responsive <img srcset>
+  clonedImg.src = sourceImg.currentSrc || sourceImg.src;
+  clonedImg.alt = sourceImg.alt || '';
+
+  // show overlay
+  ov.classList.add('open');
+
+  // prevent background scrolling
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+  if (!overlay) return;
+  overlay.classList.remove('open');
+
+  // restore scrolling after small timeout to allow opacity transition
+  setTimeout(() => {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }, 200);
+}
+
+//-----------------------------------------------------------------
+
+// Affichage initial
+render();
+</script>
+
+</body>
+</html>
