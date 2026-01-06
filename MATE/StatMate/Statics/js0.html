@@ -22,129 +22,191 @@ Toute reproduction, y compris par des systèmes automatisés ou d’IA, est inte
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    html, body {
-      max-width: 100%;
-      overflow-x: hidden;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+/* ==============================
+   BASE
+================================ */
+* { box-sizing: border-box; }
 
-    /* Conteneur général de l’ebook */
-    .ebook-wrapper {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ccc;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-    /* Effet livre sur desktop : deux pages, ombre, etc. */
-    .book {
-      display: flex;
-      flex-direction: row;
-      background: #fdfaf3;
-      box-shadow: 0 0 25px rgba(0,0,0,0.25);
-      border-radius: 4px;
-      overflow: hidden;
-      max-width: 1200px;          /* largeur max sur grand écran */
-      width: 90vw;                /* laisse un peu de marge */
-      max-height: 90vh;
-    }
+/* ==============================
+   BOOK CONTAINER
+================================ */
+.book-container {
+  width: min(96vw, 1200px);
+  height: min(92vh, 800px);
+  aspect-ratio: 3 / 2;
+  position: relative;
+  perspective: 2000px;
+  border-radius: 18px;
+  background: linear-gradient(to right, #fff 20%, #ddd 50%, #fff 80%);
+}
 
-    .page-left,
-    .page-right {
-      width: 50%;
-      padding: 2rem;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
+/* ==============================
+   SPINE
+================================ */
+.spine {
+  position: absolute;
+  left: 50%;
+  top: 4%;
+  width: 6px;
+  height: 92%;
+  transform: translateX(-50%);
+  background: #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  z-index: 30;
+}
 
-    /* Empêcher les éléments internes de déborder */
-    .page-left *,
-    .page-right * {
-      max-width: 100%;
-    }
+/* ==============================
+   PAGES
+================================ */
+.page {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #ccc;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  line-height: 1.5;
+}
 
-    img, svg, video, canvas {
-      max-width: 100%;
-      height: auto;
-    }
+/* LEFT / RIGHT */
+.page.left {
+  left: 0;
+  transform-origin: right center;
+  box-shadow: inset -12px 0 20px rgba(0,0,0,.2);
+}
 
-    /* Boutons navigation */
-    .nav-left,
-    .nav-right {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1000;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      cursor: pointer;
-      border: none;
-    }
+.page.right {
+  right: 0;
+  transform-origin: left center;
+  box-shadow: inset 12px 0 20px rgba(0,0,0,.2);
+}
 
-    .nav-left  { left: 8px; }
-    .nav-right { right: 8px; }
+/* ==============================
+   PAGE CONTENT (SCROLL SAFE)
+================================ */
+.page-content {
+  padding: clamp(12px, 2vw, 20px);
+  overflow-y: auto;
+}
 
-    .nav-left button,
-    .nav-right button,
-    .nav-left a,
-    .nav-right a {
-      background: transparent;
-      border: none;
-      color: inherit;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
+/* ==============================
+   TEXT
+================================ */
+.page h1 {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  margin: 0 0 12px;
+  color: #a52a2a;
+}
 
-    /* ---- Responsive : mobile / tablette ---- */
-    @media (max-width: 900px) {
-      /* On passe le livre en une seule page pour éviter le débordement */
-      .book {
-        flex-direction: column;
-        width: 100vw;
-        max-width: 100%;
-        max-height: none;
-        border-radius: 0;
-        box-shadow: none;
-      }
+.page h2 {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  margin: 12px 0 6px;
+}
 
-      .page-left,
-      .page-right {
-        width: 100%;
-        padding: 1rem;
-        max-height: none;
-      }
+.page p,
+.page li {
+  font-size: 0.9em;
+  text-align: justify;
+}
 
-      .ebook-wrapper {
-        background: #fff;
-        align-items: flex-start;
-      }
+/* ==============================
+   IMAGES
+================================ */
+.page img {
+  max-width: 100%;
+  max-height: 40vh;
+  object-fit: contain;
+  display: block;
+  margin: 12px auto;
+}
 
-      .nav-left,
-      .nav-right {
-        width: 32px;
-        height: 32px;
-      }
-    }
+/* ==============================
+   FOOTER
+================================ */
+.footer {
+  position: sticky;
+  bottom: 0;
+  margin-top: auto;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to top, white 70%, transparent);
+  border-top: 1px solid #ccc;
+  font-size: 0.85em;
+}
 
-    @media (max-width: 480px) {
-      .nav-left  { left: 4px; }
-      .nav-right { right: 4px; }
-    }
-  </style>
+/* ==============================
+   NAV BUTTONS
+================================ */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #a52a2a;
+  color: white;
+  font-size: 2rem;
+  line-height: 46px;
+  text-align: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.nav-left { left: -70px; }
+.nav-right { right: -70px; }
+
+/* ==============================
+   MOBILE MODE (1 PAGE)
+================================ */
+@media (max-width: 768px) {
+
+  .book-container {
+    aspect-ratio: 2 / 3;
+  }
+
+  .page {
+    width: 100%;
+  }
+
+  .page.left,
+  .spine {
+    display: none;
+  }
+
+  .page.right {
+    left: 0;
+    right: 0;
+    transform-origin: center;
+  }
+
+  .nav-left { left: 10px; }
+  .nav-right { right: 10px; }
+}
+</style>
+
 </head>
 
 <body>
