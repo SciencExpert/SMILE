@@ -23,34 +23,58 @@ Toute reproduction, y compris par des systèmes automatisés ou d’IA, est inte
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* Empêcher le débordement horizontal global */
     html, body {
       max-width: 100%;
       overflow-x: hidden;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Conteneur principal : ne jamais dépasser la largeur écran */
-    .page,
-    .container,
-    .content,
+    /* Conteneur général de l’ebook */
     .ebook-wrapper {
-      box-sizing: border-box;
-      max-width: 100%;
-      width: 100%;
-      margin: 0 auto;
-      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ccc;
     }
 
-    /* Images et éléments média adaptatifs */
+    /* Effet livre sur desktop : deux pages, ombre, etc. */
+    .book {
+      display: flex;
+      flex-direction: row;
+      background: #fdfaf3;
+      box-shadow: 0 0 25px rgba(0,0,0,0.25);
+      border-radius: 4px;
+      overflow: hidden;
+      max-width: 1200px;          /* largeur max sur grand écran */
+      width: 90vw;                /* laisse un peu de marge */
+      max-height: 90vh;
+    }
+
+    .page-left,
+    .page-right {
+      width: 50%;
+      padding: 2rem;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    /* Empêcher les éléments internes de déborder */
+    .page-left *,
+    .page-right * {
+      max-width: 100%;
+    }
+
     img, svg, video, canvas {
       max-width: 100%;
       height: auto;
     }
 
-    /* Boutons navigation gauche/droite */
+    /* Boutons navigation */
     .nav-left,
     .nav-right {
-      position: fixed;          /* Toujours visibles sur téléphone */
+      position: fixed;
       top: 50%;
       transform: translateY(-50%);
       z-index: 1000;
@@ -69,35 +93,44 @@ Toute reproduction, y compris par des systèmes automatisés ou d’IA, est inte
     .nav-left  { left: 8px; }
     .nav-right { right: 8px; }
 
-    /* Si ce sont des <a> ou <button>, on enlève la déco par défaut */
-    .nav-left a,
-    .nav-right a,
     .nav-left button,
-    .nav-right button {
-      color: inherit;
-      text-decoration: none;
+    .nav-right button,
+    .nav-left a,
+    .nav-right a {
       background: transparent;
       border: none;
-      padding: 0;
+      color: inherit;
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
     }
 
-    /* Ajustements mobiles */
-    @media (max-width: 768px) {
-      body {
-        font-size: 0.95rem;
+    /* ---- Responsive : mobile / tablette ---- */
+    @media (max-width: 900px) {
+      /* On passe le livre en une seule page pour éviter le débordement */
+      .book {
+        flex-direction: column;
+        width: 100vw;
+        max-width: 100%;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
       }
 
-      .page,
-      .container,
-      .content,
+      .page-left,
+      .page-right {
+        width: 100%;
+        padding: 1rem;
+        max-height: none;
+      }
+
       .ebook-wrapper {
-        padding-left: 8px;
-        padding-right: 8px;
+        background: #fff;
+        align-items: flex-start;
       }
 
       .nav-left,
@@ -107,7 +140,6 @@ Toute reproduction, y compris par des systèmes automatisés ou d’IA, est inte
       }
     }
 
-    /* Ajustements très petits écrans */
     @media (max-width: 480px) {
       .nav-left  { left: 4px; }
       .nav-right { right: 4px; }
