@@ -23,188 +23,426 @@ Toute reproduction, y compris par des systèmes automatisés ou d’IA, est inte
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ==============================
-   BASE
-================================ */
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* ==============================
-   BOOK CONTAINER
-================================ */
-.book-container {
-  width: min(96vw, 1200px);
-  height: min(92vh, 800px);
-  aspect-ratio: 3 / 2;
-  position: relative;
-  perspective: 2000px;
-  border-radius: 18px;
-  background: linear-gradient(to right, #fff 20%, #ddd 50%, #fff 80%);
-}
-
-/* ==============================
-   SPINE
-================================ */
-.spine {
-  position: absolute;
-  left: 50%;
-  top: 4%;
-  width: 6px;
-  height: 92%;
-  transform: translateX(-50%);
-  background: #ccc;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0,0,0,.5);
-  z-index: 30;
-}
-
-/* ==============================
-   PAGES
-================================ */
-.page {
-  position: absolute;
-  top: 0;
-  width: 50%;
-  height: 100%;
-  background: #fff;
-  border-radius: 18px;
-  border: 1px solid #ccc;
-  backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-  line-height: 1.5;
-}
-
-/* LEFT / RIGHT */
-.page.left {
-  left: 0;
-  transform-origin: right center;
-  box-shadow: inset -12px 0 20px rgba(0,0,0,.2);
-}
-
-.page.right {
-  right: 0;
-  transform-origin: left center;
-  box-shadow: inset 12px 0 20px rgba(0,0,0,.2);
-}
-
-/* ==============================
-   PAGE CONTENT (SCROLL SAFE)
-================================ */
-.page-content {
-  padding: clamp(12px, 2vw, 20px);
-  overflow-y: auto;
-}
-
-/* ==============================
-   TEXT
-================================ */
-.page h1 {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  margin: 0 0 12px;
-  color: #a52a2a;
-}
-
-.page h2 {
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
-  margin: 12px 0 6px;
-}
-
-.page p,
-.page li {
-  font-size: 0.9em;
-  text-align: justify;
-}
-
-/* ==============================
-   IMAGES
-================================ */
-.page img {
-  max-width: 100%;
-  max-height: 40vh;
-  object-fit: contain;
-  display: block;
-  margin: 12px auto;
-}
-
-/* ==============================
-   FOOTER
-================================ */
-.footer {
-  position: sticky;
-  bottom: 0;
-  margin-top: auto;
-  padding: 8px 12px;
-  display: flex;
-  justify-content: space-between;
-  background: linear-gradient(to top, white 70%, transparent);
-  border-top: 1px solid #ccc;
-  font-size: 0.85em;
-}
-
-/* ==============================
-   NAV BUTTONS
-================================ */
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: #a52a2a;
-  color: white;
-  font-size: 2rem;
-  line-height: 46px;
-  text-align: center;
-  cursor: pointer;
-  transform: translateY(-50%);
-  z-index: 100;
-}
-
-.nav-left { left: -70px; }
-.nav-right { right: -70px; }
-
-/* ==============================
-   MOBILE MODE (1 PAGE)
-================================ */
-@media (max-width: 768px) {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
 
   .book-container {
-    aspect-ratio: 2 / 3;
+    position: relative;
+    width: 90vw;
+    max-width: 1400px;
+    height: 85vh;
+    max-height: 800px;
+    perspective: 2200px;
+    border-radius: 18px;
+    user-select: none;
+    background: linear-gradient(to right, white 20%, #CCCC 50%, white 80%);
+  }
+
+  .spine {
+    position: absolute;
+    width: 5px;
+    height: 90%;
+    background: #cccc;
+    border-radius: 3px;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    z-index: 30;
   }
 
   .page {
-    width: 100%;
+    width: 50%;
+    height: 100%;
+    border-radius: 18px;
+    border: solid 1px #cccc;
+    padding: 2vh 1.5vw;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    cursor: default;
+    background: white;
+    overflow: hidden;
   }
 
-  .page.left,
-  .spine {
-    display: none;
+  .page-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+  }
+
+  .page-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .page-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  .page-content::-webkit-scrollbar-thumb {
+    background: #a52a2a;
+    border-radius: 3px;
+  }
+
+  .page.left {
+    left: 0;
+    transform-origin: right center;
+    z-index: 20;
+    box-shadow: inset -10px 0 15px -10px rgba(0,0,0,0.2), 
+                0 0 10px 0 rgba(165,42,42,0.08);
   }
 
   .page.right {
-    left: 0;
     right: 0;
-    transform-origin: center;
+    transform-origin: left center;
+    z-index: 40;
+    box-shadow: inset 10px 0 15px -10px rgba(0,0,0,0.2),
+                0 0 10px 0 rgba(165,42,42,0.08);
   }
 
-  .nav-left { left: 10px; }
-  .nav-right { right: 10px; }
-}
+  .page.transparent {
+    width: 60%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  @keyframes flipRightForward {
+    0%   { transform: rotateY(0) translateX(0); }
+    40%  { transform: rotateY(-110deg) translateX(-10%); }
+    100% { transform: rotateY(-180deg) translateX(-20%); }
+  }
+
+  @keyframes flipLeftForward {
+    0%   { transform: rotateY(0) translateX(0); }
+    40%  { transform: rotateY(110deg) translateX(10%); }
+    100% { transform: rotateY(180deg) translateX(20%); }
+  }
+
+  .flip-right {
+    animation: flipRightForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+
+  .flip-left {
+    animation: flipLeftForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #a52a2a;
+    color: white;
+    font-size: 2em;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    user-select: none;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+    z-index: 110;
+  }
+
+  .nav-btn:hover {
+    background-color: #d97474;
+  }
+
+  .nav-left {
+    left: -70px;
+  }
+
+  .nav-right {
+    right: -70px;
+  }
+
+  /* Typography responsive avec clamp */
+  .page h1 {
+    margin: 0 0 1.2em;
+    color: #a52a2a;
+    font-size: clamp(0.9rem, 1.8vw + 0.3vh, 1.3rem);
+    line-height: 1.3;
+  }
+
+  .page h2 {
+    margin: 0.8em 0 0.5em;
+    color: black;
+    font-size: clamp(0.75rem, 1.4vw + 0.25vh, 1.05rem);
+    line-height: 1.3;
+  }
+
+  .page p {
+    margin: 0 0 0.8em;
+    color: black;
+    font-size: clamp(0.65rem, 1.1vw + 0.2vh, 0.85rem);
+    text-align: justify;
+    line-height: 1.4;
+  }
+
+  .page ul {
+    margin: 0.3em 0;
+    padding: 0 0 0 1.2em;
+    font-size: clamp(0.65rem, 1.1vw + 0.2vh, 0.85rem);
+  }
+
+  .page li {
+    margin: 0.3em 0;
+    line-height: 1.4;
+    text-align: justify;
+  }
+
+  .page img {
+    max-width: 100%;
+    max-height: 35vh;
+    height: auto;
+    display: block;
+    margin: 0.8em auto;
+    object-fit: contain;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: clamp(0.5rem, 0.9vw + 0.15vh, 0.7rem);
+    text-align: center;
+    margin: 0.8em 0;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.3em;
+    line-height: 1.2;
+  }
+
+  th {
+    background-color: #f5f5f5;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #fafafa;
+  }
+
+  .header-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    padding: 0.3em;
+    font-size: clamp(0.65rem, 1.1vw + 0.2vh, 0.85rem);
+  }
+
+  .header-line h2 {
+    margin: 0;
+    flex: 1;
+    font-size: inherit;
+  }
+
+  .header-line a {
+    text-decoration: none;
+    color: #A52A2A;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .continue {
+    background-color: transparent;
+    text-align: center;
+    margin: 0.8em 0;
+    font-weight: bold;
+    font-size: clamp(0.8rem, 1.3vw + 0.25vh, 1.1rem);
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .continue span {
+    padding: 0 0.5em;
+    background: #fff;
+    color: #ccc;
+  }
+
+  .footer {
+    font-size: clamp(0.6rem, 1vw + 0.18vh, 0.8rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8em 0 0;
+    margin-top: auto;
+    border-top: 1px solid #ccc;
+    flex-shrink: 0;
+  }
+
+  .footer h2 {
+    margin: 0;
+    font-size: inherit;
+  }
+
+  /* Image overlay */
+  .img-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .img-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .img-overlay .img-wrap {
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .img-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border-radius: 6px;
+    cursor: zoom-out;
+  }
+
+  img {
+    cursor: zoom-in;
+  }
+
+  /* RESPONSIVE - MOBILE & TABLET */
+  @media (max-width: 1024px) {
+    .book-container {
+      width: 95vw;
+      height: 90vh;
+    }
+
+    .nav-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 1.8em;
+      line-height: 45px;
+    }
+
+    .nav-left {
+      left: -55px;
+    }
+
+    .nav-right {
+      right: -55px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .book-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 0;
+      background: white;
+    }
+
+    .spine {
+      display: none;
+    }
+
+    .page {
+      width: 100%;
+      border-radius: 0;
+      padding: 2vh 3vw;
+    }
+
+    .nav-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 1.6em;
+      line-height: 45px;
+    }
+
+    .nav-left {
+      left: 10px;
+    }
+
+    .nav-right {
+      right: 10px;
+    }
+
+    .page img {
+      max-height: 30vh;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page {
+      padding: 1.5vh 4vw;
+    }
+
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 1.4em;
+      line-height: 40px;
+    }
+
+    .nav-left {
+      left: 5px;
+    }
+
+    .nav-right {
+      right: 5px;
+    }
+
+    .page img {
+      max-height: 25vh;
+    }
+  }
+
+  /* LANDSCAPE MODE sur mobile */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .book-container {
+      height: 100vh;
+    }
+
+    .page {
+      padding: 1vh 2vw;
+    }
+
+    .page img {
+      max-height: 40vh;
+    }
+  }
 </style>
 
 </head>
