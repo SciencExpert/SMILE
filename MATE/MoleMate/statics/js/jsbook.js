@@ -18,16 +18,54 @@ let leftPage = null;
 let rightPage = null;
 
 // ⭐ FONCTION ADAPTATION POLICE (MANQUANTE) ⭐
+// ✅ FONCTION PRINCIPALE : Ajuste automatiquement la police
 function adaptFontToContent() {
   document.querySelectorAll('.page').forEach(page => {
-    const content = page.textContent || page.innerText;
-    const availableHeight = page.offsetHeight - 80;
-    const estimatedLines = Math.max(15, Math.ceil(content.length / 50));
-    const lineHeightFactor = 1.3;
-    const idealFontSize = Math.max(0.35, Math.min(1.2, availableHeight / (estimatedLines * lineHeightFactor)));
-    page.style.fontSize = `${idealFontSize}rem`;
+    // Hauteur disponible
+    const computedStyle = window.getComputedStyle(page);
+    const paddingTop = parseFloat(computedStyle.paddingTop);
+    const paddingBottom = parseFloat(computedStyle.paddingBottom);
+    const availableHeight = page.clientHeight - paddingTop - paddingBottom;
+    
+    // Espace pris par le footer
+    const footer = page.querySelector('.footer');
+    const footerHeight = footer ? footer.offsetHeight + 10 : 0;
+    
+    // Hauteur utilisable
+    const usableHeight = availableHeight - footerHeight;
+    
+    // Reset temporaire
+    page.style.fontSize = '1rem';
+    
+    // Mesure après rendu
+    setTimeout(() => {
+      let contentHeight = 0;
+      Array.from(page.children).forEach(child => {
+        if (!child.classList.contains('footer')) {
+          contentHeight += child.offsetHeight;
+        }
+      });
+      
+      // Calcule et applique la nouvelle taille
+      if (contentHeight > 0) {
+        const ratio = usableHeight / contentHeight;
+        const newSize = Math.max(0.35, Math.min(1.2, ratio * 1)); // Entre 0.35rem et 1.2rem
+        page.style.fontSize = `${newSize}rem`;
+      }
+    }, 50);
   });
 }
+
+// ✅ DÉCLENCHEURS
+window.addEventListener('load', adaptFontToContent);
+window.addEventListener('resize', () => {
+  clearTimeout(window.resizeTimer);
+  window.resizeTimer = setTimeout(adaptFontToContent, 200);
+});
+
+// Double appel pour polices qui chargent tard
+setTimeout(adaptFontToContent, 100);
+setTimeout(adaptFontToContent, 500);
 
 function createPage(pagePosInArray, side) {
   const tpl = allTemplates[pagePosInArray];
@@ -196,3 +234,4 @@ document.addEventListener('click', function(e) {
 
 // Initialisation
 render();
+
