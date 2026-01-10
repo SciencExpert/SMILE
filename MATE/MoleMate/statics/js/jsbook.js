@@ -1,133 +1,5 @@
 let tempo = 300;
 
-// ✅ DÉTECTION MOBILE
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-// ✅ FONCTION PRINCIPALE : Ajuste la taille de police
-function adaptFontToContent() {
-  document.querySelectorAll('.page').forEach(page => {
-    // Forcer le reflow sur mobile
-    if (isMobile) {
-      page.style.display = 'none';
-      page.offsetHeight; // Force reflow
-      page.style.display = 'flex';
-    }
-    
-    // Récupère les dimensions réelles
-    const computedStyle = window.getComputedStyle(page);
-    const paddingTop = parseFloat(computedStyle.paddingTop) || 0;
-    const paddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
-    const availableHeight = page.clientHeight - paddingTop - paddingBottom;
-    
-    // Hauteur du footer
-    const footer = page.querySelector('.footer');
-    const footerHeight = footer ? footer.offsetHeight + 10 : 0;
-    
-    // Hauteur utilisable
-    const usableHeight = availableHeight - footerHeight;
-    
-    // Taille de départ adaptée au device
-    const startSize = isMobile ? 12 : 16; // px
-    page.style.fontSize = `${startSize}px`;
-    
-    // Attente du rendu complet
-    const measureDelay = isMobile ? 150 : 50; // Plus de temps sur mobile
-    
-    setTimeout(() => {
-      // Mesure la hauteur totale du contenu
-      let contentHeight = 0;
-      Array.from(page.children).forEach(child => {
-        if (!child.classList.contains('footer')) {
-          const childHeight = child.offsetHeight;
-          const marginTop = parseFloat(window.getComputedStyle(child).marginTop) || 0;
-          const marginBottom = parseFloat(window.getComputedStyle(child).marginBottom) || 0;
-          contentHeight += childHeight + marginTop + marginBottom;
-        }
-      });
-      
-      // Calcule le ratio
-      if (contentHeight > 0 && usableHeight > 0) {
-        const ratio = usableHeight / contentHeight;
-        
-        // Limites différentes selon le device
-        const minSize = isMobile ? 8 : 10;
-        const maxSize = isMobile ? 16 : 20;
-        
-        let newSize = startSize * ratio;
-        newSize = Math.max(minSize, Math.min(maxSize, newSize));
-        
-        page.style.fontSize = `${newSize}px`;
-        
-        // Log pour debug
-        console.log(`📱 Device: ${isMobile ? 'Mobile' : 'Desktop'}`);
-        console.log(`📏 Contenu: ${contentHeight}px | Dispo: ${usableHeight}px`);
-        console.log(`🔤 Police: ${startSize}px → ${newSize.toFixed(1)}px (ratio: ${ratio.toFixed(2)})`);
-      }
-    }, measureDelay);
-  });
-}
-
-// Navigation avec support tactile
-const leftBtn = document.getElementById('nav-left');
-const rightBtn = document.getElementById('nav-right');
-const leftPage = document.querySelector('.page.left');
-const rightPage = document.querySelector('.page.right');
-
-function flipRight() {
-  leftPage.classList.add('flip-right');
-  setTimeout(() => {
-    leftPage.classList.remove('flip-right');
-    adaptFontToContent();
-  }, 1000);
-}
-
-function flipLeft() {
-  rightPage.classList.add('flip-left');
-  setTimeout(() => {
-    rightPage.classList.remove('flip-left');
-    adaptFontToContent();
-  }, 1000);
-}
-
-// Events click ET touch
-rightBtn.addEventListener('click', flipRight);
-rightBtn.addEventListener('touchend', (e) => {
-  e.preventDefault();
-  flipRight();
-});
-
-leftBtn.addEventListener('click', flipLeft);
-leftBtn.addEventListener('touchend', (e) => {
-  e.preventDefault();
-  flipLeft();
-});
-
-// ✅ DÉCLENCHEURS MULTIPLES (crucial pour mobile)
-window.addEventListener('load', () => {
-  setTimeout(adaptFontToContent, 100);
-  setTimeout(adaptFontToContent, 500);
-  setTimeout(adaptFontToContent, 1000); // Triple sécurité
-});
-
-window.addEventListener('resize', () => {
-  clearTimeout(window.resizeTimer);
-  window.resizeTimer = setTimeout(adaptFontToContent, 300);
-});
-
-// Gestion orientation mobile
-window.addEventListener('orientationchange', () => {
-  setTimeout(adaptFontToContent, 500);
-});
-
-// iOS: réajuste après scroll dans la barre d'adresse
-if (isIOS) {
-  window.addEventListener('scroll', () => {
-    clearTimeout(window.scrollTimer);
-    window.scrollTimer = setTimeout(adaptFontToContent, 200);
-  });
-}
-
 // On détecte toutes les pages via les templates
 const allTemplates = Array.from(document.querySelectorAll('template[id^="page-"]'));
 
@@ -146,54 +18,16 @@ let leftPage = null;
 let rightPage = null;
 
 // ⭐ FONCTION ADAPTATION POLICE (MANQUANTE) ⭐
-// ✅ FONCTION PRINCIPALE : Ajuste automatiquement la police
 function adaptFontToContent() {
   document.querySelectorAll('.page').forEach(page => {
-    // Hauteur disponible
-    const computedStyle = window.getComputedStyle(page);
-    const paddingTop = parseFloat(computedStyle.paddingTop);
-    const paddingBottom = parseFloat(computedStyle.paddingBottom);
-    const availableHeight = page.clientHeight - paddingTop - paddingBottom;
-    
-    // Espace pris par le footer
-    const footer = page.querySelector('.footer');
-    const footerHeight = footer ? footer.offsetHeight + 10 : 0;
-    
-    // Hauteur utilisable
-    const usableHeight = availableHeight - footerHeight;
-    
-    // Reset temporaire
-    page.style.fontSize = '1rem';
-    
-    // Mesure après rendu
-    setTimeout(() => {
-      let contentHeight = 0;
-      Array.from(page.children).forEach(child => {
-        if (!child.classList.contains('footer')) {
-          contentHeight += child.offsetHeight;
-        }
-      });
-      
-      // Calcule et applique la nouvelle taille
-      if (contentHeight > 0) {
-        const ratio = usableHeight / contentHeight;
-        const newSize = Math.max(0.35, Math.min(1.2, ratio * 1)); // Entre 0.35rem et 1.2rem
-        page.style.fontSize = `${newSize}rem`;
-      }
-    }, 50);
+    const content = page.textContent || page.innerText;
+    const availableHeight = page.offsetHeight - 80;
+    const estimatedLines = Math.max(15, Math.ceil(content.length / 50));
+    const lineHeightFactor = 1.3;
+    const idealFontSize = Math.max(0.35, Math.min(1.2, availableHeight / (estimatedLines * lineHeightFactor)));
+    page.style.fontSize = `${idealFontSize}rem`;
   });
 }
-
-// ✅ DÉCLENCHEURS
-window.addEventListener('load', adaptFontToContent);
-window.addEventListener('resize', () => {
-  clearTimeout(window.resizeTimer);
-  window.resizeTimer = setTimeout(adaptFontToContent, 200);
-});
-
-// Double appel pour polices qui chargent tard
-setTimeout(adaptFontToContent, 100);
-setTimeout(adaptFontToContent, 500);
 
 function createPage(pagePosInArray, side) {
   const tpl = allTemplates[pagePosInArray];
@@ -362,5 +196,3 @@ document.addEventListener('click', function(e) {
 
 // Initialisation
 render();
-
-
