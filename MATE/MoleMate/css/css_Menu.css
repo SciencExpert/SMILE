@@ -1,0 +1,162 @@
+<style>
+/* Reset Basse */
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+html, body {
+  height: 100%; width: 100%;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden; /* ✅ Ajout anti-scroll horizontal mobile */
+}
+
+body {
+  background-image: url('../images/cover.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 1rem; /* ✅ Padding mobile */
+}
+
+h1 {
+  margin-top: clamp(0.5rem, 3vw, 1rem); /* ✅ Responsive */
+  font-size: clamp(2rem, 8vw, 3em); /* ✅ Garde ton 3em max */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+/* TES BOUTONS EXACTEMENT IDENTIQUES */
+.button-container {
+  position: absolute;
+  top: clamp(60%, 70%, 70%); /* ✅ Adaptatif */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 clamp(5%, 15%, 15%);
+  margin-bottom: clamp(2rem, 4rem, 60px);
+  gap: clamp(0.5rem, 1vw, 10px);
+}
+
+.button-container a {
+  background: linear-gradient(135deg, #ccd6dd, #7f9db9);
+  color: black;
+  padding: clamp(1rem, 2vw, 20px) clamp(1rem, 2vw, 20px); /* ✅ Garde tes 20px max */
+  font-size: clamp(1.2rem, 3vw, 1.5em); /* ✅ Garde ton 1.5em max */
+  text-decoration: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 1 clamp(12rem, 28vw, auto); /* ✅ Garde ton flex:0 1 auto */
+  text-align: center;
+  min-height: 3rem; /* ✅ Tactile mobile */
+}
+
+.button-container a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+  background: linear-gradient(135deg, #e2e8f0, #9bb4cc);
+}
+
+/* Modal responsive */
+#modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+#modalContent {
+  background: white;
+  width: min(90vw, 400px);
+  max-height: clamp(50vh, 60vh, 60vh);
+  padding: clamp(1rem, 2vw, 20px);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  overflow-y: auto;
+  text-align: center;
+}
+
+/* Footer */
+#footer {
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  position: fixed;
+  bottom: 0;
+  left: 0; 
+  width: 100%;
+  background: #f0f0f0; 
+  color: black;
+  text-align: center; 
+  padding: clamp(0.5rem, 2vw, 10px) 0;
+  font-size: clamp(0.875rem, 2vw, 15px); 
+  border-top: 1px solid #ccc; 
+  z-index: 1000;
+}
+
+#footer:hover {
+  opacity: 1;
+}
+
+.declaration {
+  position: absolute;
+  top: 50%; left:50%;
+  transform: translate(-50%, -50%) rotate(-20deg);
+  font: 800 clamp(2rem, 6vw, 3rem)/1 system-ui, sans-serif;
+  color: white;
+  opacity: 0.6;
+  pointer-events: auto;
+  z-index: 10000;
+  user-select: none;
+  white-space: nowrap;
+  max-width: 85vw; /* ✅ Anti-débordement */
+}
+
+/* ========================================
+   MEDIA QUERIES - Desktop seulement
+   ======================================== */
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed; /* ✅ Fixed seulement desktop */
+    padding: 2rem;
+  }
+  
+  .button-container {
+    top: 70%;
+    padding: 0 15%;
+    gap: 10px;
+  }
+  
+  .button-container a {
+    padding: 20px 20px;
+    font-size: 1.5em;
+    flex: 0 1 auto;
+  }
+}
+
+/* Paysage mobile/tablette */
+@media (max-height: 500px) and (orientation: landscape) {
+  .button-container {
+    top: 55%;
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    margin-top: 0.5rem;
+  }
+}
+</style>
