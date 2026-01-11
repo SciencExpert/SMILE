@@ -24,13 +24,35 @@ _______________________________________
 <!-------------------------------------------------------------------------------------------
 			Cover
 --------------------------------------------------------------------------------------------->
-<template id="page--1"> 
 
-  <img
-    src="../images/MoleMate_bookcover.png"
-    alt="Illustration"
-    style="width:100%; height:100vh; object-fit:cover; display:block; margin:0; padding:0;"
-  >
+
+<template id="page--1">
+  <div style="
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+  ">
+    <img
+      src="../images/MoleMate_bookcover.png"
+      alt="Couverture du livre"
+      style="
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+        border-radius: 6px;
+border:50px solid transparent;
+        box-shadow:
+          inset 0 0 0 2px rgba(255,255,255,0.35),
+          inset -12px 0 18px rgba(0,0,0,0.25),
+          0 18px 35px rgba(0,0,0,0.45);
+
+      "
+    >
+  </div>
 </template>
 
 
@@ -51,16 +73,16 @@ _______________________________________
 ">
 MoleMate<span style="font-size : 0.8em">&trade;</span>
 </h1>
-<span style="  font-style: italic;
-  font-family: 'Georgia'; ">
-Data knows more than you think</span><br>
+<p style="  font-style: italic;
+  font-family: 'Georgia'; text-align:center">
+Data knows more than you think</p>
 <img src="../images/MoleMate_bookcover.png" alt="Illustration" style=" width:55%"> <br>
 
- <hr><span style="  font-style: italic;
-  font-family: 'Georgia'; "
-<span>SciencExpert Ed.</span><br>
+ <hr><p style="  font-style: italic;
+  font-family: 'Georgia'; text-align:center">
+SciencExpert Ed.<br>
 <span style="  font-style: italic; font-family: 'Georgia'; ">2025</span>
-</span>
+</p>
 </div>
 
 
@@ -79,13 +101,15 @@ Data knows more than you think</span><br>
 <p>Cover illustration by SciencExpert™<br>
 This eBook is distributed in the online edition of SciencExpert™ <br>
 Registration date : December 2025<br>
-
 Correspondence contact-at-sciencexpert.fr<br>
 © SciencExpert - 2025</p>
 
 <p>The use of general descriptive names, trademarks, etc., in this eBook, even if the former are not especially identified, is not to be taken as a sign that such names, as understood by the Trade Marks and Merchandise Marks Act in various countries, may accordingly be used freely by anyone.</p>
+
 <p>While the advice and information in this eBook are believed to be true and accurate at the date of going to edition, neither the authors nor the editor nor the publisher can accept any legal responsibility for any errors or omissions that may be made. SciencExpert™ makes no warranty, express or implied, with respect to the material contained herein.</p>
+
 <p>This research, publication and edition received no external funding. Data are available upon request from SciencExpert™ correspondence address. The author declare no conflict of interest.</p>
+
 <p>All rights reserved. No part of this eBook may be reproduced or transmitted in any form or by any means, electronic or mechanical, including photocopying or by any information storage and retrieval system; without permission in writing from the publisher</p>
 
 <div class="footer"><h2><a href="#page-0" data-page="-0"> </a></h2><span>Page 2</span></div>
