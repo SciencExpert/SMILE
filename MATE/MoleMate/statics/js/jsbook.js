@@ -31,7 +31,7 @@ function adaptFontToContent() {
     const currentSize = parseFloat(styles.fontSize);
 
     // Limites
-    const minSize = 8;
+    const minSize = 14;		//8
     const maxSize = 24;
 
     // Si trop grand → réduire
