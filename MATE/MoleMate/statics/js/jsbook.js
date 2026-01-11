@@ -247,9 +247,9 @@ function closeOverlay() {
     document.body.style.overflow = '';
   }, 200);
 }
-
-document.addEventListener('click', e => {
 /*
+document.addEventListener('click', e => {
+
   // ❌ Ne rien faire si clic dans l’overlay
   if (e.target.closest('.img-overlay')) return;
 
@@ -276,5 +276,6 @@ window.addEventListener('resize', () => {
   render();
   adaptFontToContent();
 });
+
 
 
