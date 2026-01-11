@@ -336,8 +336,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: clamp(8px, 2.5vw, 25px);
-    background: rgba(255,255,255,0.95);
+    padding: clamp(8px, 2.5vw, 15px);
+  	backdrop-filter: blur(6px);
+  	background-color: rgb(255 255 255 / 80%);
     border-top: 2px solid #ccc;
     z-index: 200;
   }
