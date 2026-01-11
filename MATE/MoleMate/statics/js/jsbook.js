@@ -249,12 +249,23 @@ function closeOverlay() {
 }
 
 document.addEventListener('click', e => {
+
+  // ❌ Ne rien faire si clic dans l’overlay
   if (e.target.closest('.img-overlay')) return;
-  const img = e.target.closest('img');
+
+  // ✅ Image cliquée DANS une page uniquement
+  const img = e.target.closest('.page img');
   if (!img) return;
-  e.preventDefault();
+
+  // ❌ Ne pas intercepter les images déjà ouvertes
+  if (img.closest('.img-overlay')) return;
+
+  const link = img.closest('a');
+  if (link) e.preventDefault();
+
   openImageOverlay(img);
 });
+
 
 /* ===================== INIT ===================== */
 window.addEventListener('load', () => {
@@ -265,3 +276,4 @@ window.addEventListener('resize', () => {
   render();
   adaptFontToContent();
 });
+
