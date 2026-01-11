@@ -58,7 +58,7 @@
   transform-style: preserve-3d;
   
   /* ✅ POLICE DE BASE RESPONSIVE */
-font-size: clamp(1rem, 2.2vmin, 1.25rem); /*  font-size: clamp(0.5rem, 1.8vmin, 1rem); ⬅️ MODIFIÉ */
+font-size: clamp(1.5rem, 2.5vmin, 1.5rem); /*  font-size: clamp(0.5rem, 1.8vmin, 1rem); ⬅️ MODIFIÉ */
   line-height: 1.4; /* ⬅️ AUGMENTÉ pour lisibilité */
   
   overflow-y: auto; /* ⬅️ CHANGÉ pour permettre scroll si nécessaire */
