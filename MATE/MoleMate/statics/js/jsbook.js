@@ -214,7 +214,7 @@ document.addEventListener('touchend', e => {
 
 /* ===================== IMAGE OVERLAY (INCHANGÉ) ===================== */
 let overlay = null;
-
+/*
 function createOverlay() {
   const ov = document.createElement('div');
   ov.className = 'img-overlay';
@@ -247,7 +247,7 @@ function closeOverlay() {
     document.body.style.overflow = '';
   }, 200);
 }
-/*
+
 document.addEventListener('click', e => {
 
   // ❌ Ne rien faire si clic dans l’overlay
@@ -276,6 +276,7 @@ window.addEventListener('resize', () => {
   render();
   adaptFontToContent();
 });
+
 
 
 
