@@ -249,7 +249,7 @@ function closeOverlay() {
 }
 
 document.addEventListener('click', e => {
-
+/*
   // ❌ Ne rien faire si clic dans l’overlay
   if (e.target.closest('.img-overlay')) return;
 
@@ -265,7 +265,7 @@ document.addEventListener('click', e => {
 
   openImageOverlay(img);
 });
-
+*/
 
 /* ===================== INIT ===================== */
 window.addEventListener('load', () => {
@@ -276,4 +276,5 @@ window.addEventListener('resize', () => {
   render();
   adaptFontToContent();
 });
+
 
