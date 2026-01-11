@@ -11,11 +11,6 @@ html, body {
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overscroll-behavior: none;
-  touch-action: manipulation;
 }
 
 /* ===================== BOOK CONTAINER ===================== */
@@ -23,13 +18,14 @@ html, body {
   position: relative;
   width: 90vw;
   max-width: 1200px;
-  height: 90svh; /* SAFE viewport mobile */
+  height: 90svh; /* viewport stable mobile */
   perspective: 2200px;
   border-radius: 16px;
   background: linear-gradient(to right, #f0e6d2 20%, #c4c2be 50%, #edddbb 80%);
   display: flex;
   align-items: stretch;
   user-select: none;
+  margin: auto; /* centrage SANS casser le menu */
 }
 
 /* ===================== SPINE ===================== */
@@ -54,15 +50,18 @@ html, body {
   background: white;
   border-radius: 14px;
   border: 1px solid #ccc;
-  overflow-y: auto;
-  overflow-x: hidden;
+
+  /* IMPORTANT : pas de scroll desktop */
+  overflow: hidden;
+
   display: flex;
   flex-direction: column;
   backface-visibility: hidden;
   transform-style: preserve-3d;
+
+  /* taille contrôlée par le JS */
   font-size: 1rem;
   line-height: 1.45;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* ===================== PAGE POSITIONS ===================== */
@@ -185,10 +184,6 @@ th, td {
     width: 95vw;
     height: 92svh;
   }
-
-  .page {
-    font-size: 0.95rem;
-  }
 }
 
 /* -------- SMARTPHONES -------- */
@@ -200,13 +195,16 @@ th, td {
     border-radius: 0;
   }
 
-  /* ✅ UNE SEULE PAGE */
+  /* UNE SEULE PAGE + SCROLL MOBILE */
   .page {
     width: 100%;
     left: 0 !important;
     right: 0 !important;
     border-radius: 0;
-    font-size: 1rem;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
     padding: 14px 12px;
   }
 
