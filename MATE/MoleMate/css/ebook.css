@@ -473,7 +473,7 @@ font-size: clamp(1.5rem, 2.5vmin, 1.5rem); /*  font-size: clamp(0.5rem, 1.8vmin,
 /* TRÈS PETITS ÉCRANS */
 @media (max-width: 400px) {
   .page {
-    font-size: clamp(0.85rem, 2.8vmin, 1rem);
+    font-size: clamp(0.25rem, 0.6vmin, 0.3rem);     /*font-size: clamp(0.85rem, 2.8vmin, 1rem); */
     padding: 5px 4px;
   }
 
@@ -492,3 +492,4 @@ font-size: clamp(1.5rem, 2.5vmin, 1.5rem); /*  font-size: clamp(0.5rem, 1.8vmin,
     font-size: 0.85em !important;
   }
 }
+
