@@ -2255,27 +2255,10 @@ DRbench / ChemRxiv / related PMC article – systematic comparison of PCA, t‑S
   <div class="nav-btn nav-right" id="nav-right" role="button" tabindex="0" aria-label="Page suivante" style="display:none">&#9654;</div>
 </div>
 
-<script>
-// Au chargement et resize
-function adaptFontToContent() {
-  document.querySelectorAll('.page').forEach(page => {
-    const content = page.textContent || page.innerText;
-    const lineHeight = parseFloat(getComputedStyle(page).lineHeight);
-    const pageHeight = page.offsetHeight - 60; // padding/footer
-    const estimatedLines = Math.max(20, content.length / 45); // estimation
-    page.style.setProperty('--line-count', estimatedLines);
-  });
-}
 
-window.addEventListener('load', adaptFontToContent);
-window.addEventListener('resize', adaptFontToContent);
-setTimeout(adaptFontToContent, 100); // pour animations flip
-</script>
 
         <script src="js/jsbook.js"></script>
 	<LINK rel="stylesheet" type="text/css" href="../css/ebook.css">
 
 </body>
 </html>
-
-
