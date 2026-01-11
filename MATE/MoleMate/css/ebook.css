@@ -442,8 +442,8 @@ font-size: clamp(1.5rem, 2.5vmin, 1.5rem); /*  font-size: clamp(0.5rem, 1.8vmin,
   }
 
   .page {
-    font-size: clamp(0.9rem, 2.6vmin, 1.05rem);
-    padding: 6px 5px;
+       font-size: clamp(0.25rem, 0.6vmin, 0.3rem);     /*font-size: clamp(0.9rem, 2.6vmin, 1.05rem);*/
+        padding: 6px 5px;
     width: 49.5%;
   }
 
@@ -492,4 +492,5 @@ font-size: clamp(1.5rem, 2.5vmin, 1.5rem); /*  font-size: clamp(0.5rem, 1.8vmin,
     font-size: 0.85em !important;
   }
 }
+
 
