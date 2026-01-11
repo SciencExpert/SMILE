@@ -1,4 +1,4 @@
-let tempo = 300;
+let tempo = 500;
 
 /* ===================== UTIL ===================== */
 function isMobileView() {
@@ -276,6 +276,7 @@ window.addEventListener('resize', () => {
   render();
   adaptFontToContent();
 });
+
 
 
 
