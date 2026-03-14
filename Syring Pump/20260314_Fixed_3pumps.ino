@@ -1,3 +1,13 @@
+//=====================================================
+// Independent 3-pump syringe pump control program
+// Sub programm of syringe pump
+// Electronic for Chemists Project
+// ---------------------------------------
+// Design by SciencExpert
+// Version 5.02– Mars 2026
+// Author : Gerard Bacquet
+//=====================================================
+//
 // ___/   SHORT DESCRIPTION   \____________________________________________________________________________
 //      Independent 3-pump syringe pump controller
 //      Each pump has its own flow rate set individually through the menu.
