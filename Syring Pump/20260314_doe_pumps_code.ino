@@ -1,5 +1,5 @@
 //=====================================================
-// Synchronised 2 or 3 syringe pump control program
+//  Design of Experiments (DoE) syringe pump control program
 // Sub programm of syringe pump
 // Electronic for Chemists Project
 // ---------------------------------------
