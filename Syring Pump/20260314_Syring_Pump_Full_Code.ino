@@ -1,3 +1,13 @@
+//=====================================================
+// Syringe pump control program
+// Sub programm of syringe pump
+// Electronic for Chemists Project
+// ---------------------------------------
+// Design by SciencExpert
+// Version 5.00– Mars 2026
+// Author : Gerard Bacquet
+//=====================================================
+//
 // ___/   SHORT DESCRIPTION   \____________________________________________________________________________
 //  	This program allows you to control three syringe pumps simultaneously and in a controlled manner 
 //	It also enables you to record feedback from eight sensors
