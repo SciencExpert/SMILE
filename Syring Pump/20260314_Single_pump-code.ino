@@ -1,3 +1,13 @@
+//=====================================================
+// Single syringe pump control program
+// Sub programm of syringe pump
+// Electronic for Chemists Project
+// ---------------------------------------
+// Design by SciencExpert
+// Version 5.01– Mars 2026
+// Author : Gerard Bacquet
+//=====================================================
+//
 // ___/   SHORT DESCRIPTION   \____________________________________________________________________________
 //      Single syringe pump control program
 //      Based on the original 3-pump program - simplified for 1 pump
