@@ -1,3 +1,13 @@
+//=====================================================
+// Synchronised 2 or 3 syringe pump control program
+// Sub programm of syringe pump
+// Electronic for Chemists Project
+// ---------------------------------------
+// Design by SciencExpert
+// Version 5.03– Mars 2026
+// Author : Gerard Bacquet
+//=====================================================
+//
 // ___/   SHORT DESCRIPTION   \____________________________________________________________________________
 //      Synchronised 2 or 3 syringe pump control program
 //      Constant total flow rate across all pumps (triangular formulation pattern)
