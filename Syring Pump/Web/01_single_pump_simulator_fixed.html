@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Single Pump — Arduino Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* ── Motor ───────────────────────────────────────────────── */
+.mrow{display:flex;align-items:center;gap:10px;}
+.mdata{font-family:var(--mono);font-size:9px;line-height:2;color:var(--muted);}
+.mdata b{color:var(--g);}
+@keyframes rot{to{transform:rotate(360deg)}}
+#mrot{transform-origin:50px 50px;}
+#mrot.spin{animation:rot var(--ms,.4s) linear infinite;}
+
+</style>
+
+
+</head>
+<body>
+<div class="wrap">
+
+
+<header>
+  <div class="header" style="gap-bottom:10px">
+
+    <h1>Single Pump — ARDUINO SIMULATOR         .</h1>
+    <div style="display:flex; align-items:center; gap:50px;">
+      <button style="background-color:#ADD8E6; color:#000080; border-radius:10px;
+                     height:30px; width:100px; cursor:pointer;
+                     transition:background-color 0.3s ease, transform 0.2s ease;"
+              onclick="window.location.href='00_PUMP_Menu.html';">
+        PumpLab™
+      </button>
+
+      <span style="margin:0; line-height:normal; display:flex; align-items:center; color:var(--g)">
+        © 2025 SciencExpert. Website designed and developed by
+        <a href="https://payhip.com/SciencExpert/sciencexpert"
+           target="_blank" rel="noopener noreferrer"
+           style="color:var(--secondary-color); text-decoration:none; margin-left:5px;">
+          <img src="images/SE_favicon.ico" alt="Icône"
+               style="height:16px; vertical-align:middle; margin-right:5px;">
+          SciencExpert™
+        </a>. All rights reserved. Unauthorized use or reproduction is prohibited.
+      </span>
+
+      <button style="background-color:#ADD8E6; color:#000080; border-radius:10px;
+                     height:30px; width:100px; cursor:pointer;
+                     transition:background-color 0.3s ease, transform 0.2s ease;"
+              onclick="location.reload();">
+        ♻️ Reset
+      </button>
+    </div>
+
+  </div>
+
+<div>. </div>
+</header>
+
+
+<div class="grid">
+
+  <!-- ══============================================================================================LEFT ══ -->
+  <div class="col">
+
+    <div class="panel">
+      <div class="pt">Nokia PCD8544 LCD</div>
+      <div class="lcd-shell"><div id="lcd"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Buttons — pins 2 / 3 / 4</div>
+      <div class="hwbtns">
+        <button class="hb hb-up"  id="b-up" >&#9650;  UP &nbsp;&nbsp;&nbsp;&nbsp; pin 2</button>
+        <button class="hb hb-sel" id="b-sel">&#9679;  SELECT  pin 3</button>
+        <button class="hb hb-dn"  id="b-dn" >&#9660;  DOWN &nbsp;&nbsp; pin 4</button>
+        <button class="hb hb-emg" id="b-emg">&#9888;  EMERGENCY STOP</button>
+      </div>
+      <div class="kb">Keyboard: &uarr; &darr; Enter &nbsp;&#183;&nbsp; E = emergency</div>
+    </div>
+
+    <div class="panel" style="background-color:grey">
+      <div class="pt" >Syringe — 19 ml</div>
+      <div style="font-family:var(--mono);font-size:7.5px;color:var(--muted);letter-spacing:2px;">FILL LEVEL<br>.</div>
+      <div class="syr">
+        <div class="pbar-f  p1" id="syr-f"></div>
+        <div class="syr-t" id="syr-t">0.00 ml injected</div>
+      </div>
+    </div>
+
+    <div class="panel" style="background-color:grey">
+      <div class="pt">Stepper + EasyDriver <br> pins 10/9</div>
+      <div class="mrow" >
+        <svg width="60" height="60" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#0d1520" stroke="#1e2535" stroke-width="2"/>
+          <g id="mrot">
+            <circle cx="50" cy="50" r="28" fill="#111a28" stroke="#1d2a40" stroke-width="1.5"/>
+            <rect x="48" y="12" width="4" height="20" rx="2" fill="#00e5a0"/>
+            <rect x="48" y="68" width="4" height="20" rx="2" fill="#1e2535"/>
+            <rect x="12" y="48" width="20" height="4" rx="2" fill="#1e2535"/>
+            <rect x="68" y="48" width="20" height="4" rx="2" fill="#1e2535"/>
+          </g>
+          <circle cx="50" cy="50" r="7" fill="#0c0f18" stroke="#00e5a0" stroke-width="1.5"/>
+        </svg>
+        <div class="mdata" >
+          Steps/rev: <b>1600</b><br>
+          Gearbox: <b>1:16</b><br>
+          Pos: <b id="mpos">0</b> steps<br>
+          Speed: <b id="mspd">0</b> stp/s
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /left -->
+
+  <!-- ══============================================================================================= RIGHT ══ -->
+  <div class="col">
+
+     <div class="panel" style="display:none">
+      <div class="pt">   <span id="sbar-t">IDLE &mdash; select a flow rate then press RUN</span> - Firmware state</div>
+      <div id="sbar" class="sbar"><span id="dot" class="dot"></span></div>
+      <div class="states">
+        <div class="st on" id="st0">MENU</div>
+        <div class="st"    id="st1">SEL RATE</div>
+        <div class="st"    id="st2">RECAP</div>
+        <div class="st"    id="st3">RUNNING</div>
+        <div class="st"    id="st4">DONE</div>
+      </div>
+    </div>
+
+    <div class="panel" style="display:none">
+      <div class="pt">Flow rate — VPump (ml/min)</div>
+      <div class="readout"><div class="rv" id="rv">0.00</div><div class="ru">ml / min</div></div>
+      <div class="chips" id="chips">
+        <button class="chip" data-v="0.05">0.05</button>
+        <button class="chip" data-v="0.10">0.10</button>
+        <button class="chip" data-v="0.20">0.20</button>
+        <button class="chip" data-v="0.50">0.50</button>
+        <button class="chip" data-v="0.75">0.75</button>
+        <button class="chip" data-v="1.00">1.00</button>
+        <button class="chip" data-v="2.00">2.00</button>
+        <button class="chip" data-v="5.00">5.00</button>
+      </div>
+      <div class="arow">
+        <button class="ab run" id="btn-run">&#9654; RUN</button>
+        <button class="ab"     id="btn-rst">&#8635; RESET</button>
+      </div>
+      <div class="subinf" style="margin-top:9px;">
+        Conversion: <b id="cv">—</b> steps&middot;s<sup>-1</sup> per ml&middot;min<sup>-1</sup>
+        &nbsp;&middot;&nbsp; tour_max: <b id="tm">—</b> steps
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Pump progress</div>
+      <div class="syr"><div class="pbar-f  p1" id="syr1"></div><div class="syr-t" id="syt1">0.00 ml</div></div>
+      <div class="pbar" style="margin-top:8px; display:none"><div class="pbar-f p1" id="pbar-f"></div></div>
+      <div class="prow">
+        <span>Injected: <span id="p-inj">0.00</span> / 19.0 ml</span>
+        <span>Time: <span id="p-t">0.0</span> s</span>
+        <span>ETA: <span id="p-eta">—</span></span>
+      </div>
+      <div class="sub" style="margin-top:5px;">
+        Steps: <b id="p-stp">0</b> / <b id="p-tgt">—</b>
+        &nbsp;&middot;&nbsp; Serial rows: <b id="p-meas">0</b>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Sensors A0&ndash;A5 (simulated)</div>
+      <div class="sgrid">
+        <div class="sc"><div class="sn">TEMP &middot; A0</div><span class="sv" id="sv0">—</span><span class="su"> degC</span></div>
+        <div class="sc"><div class="sn">POT &middot; A1</div><span class="sv" id="sv1">—</span><span class="su"> mV</span></div>
+        <div class="sc"><div class="sn">COND &middot; A2</div><span class="sv" id="sv2">—</span><span class="su"> mS</span></div>
+        <div class="sc"><div class="sn">TURB &middot; A3</div><span class="sv" id="sv3">—</span><span class="su"> NTU</span></div>
+        <div class="sc"><div class="sn">S4 &middot; A4</div><span class="sv" id="sv4">—</span><span class="su"> u</span></div>
+        <div class="sc"><div class="sn">S5 &middot; A5</div><span class="sv" id="sv5">—</span><span class="su"> u</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Serial monitor — PLX-DAQ 9600 baud</div>
+      <div class="serial" id="serial-log"></div>
+    </div>
+
+  </div><!-- /right -->
+</div><!-- /grid -->
+</div><!-- /wrap -->
+
+<script>
+
+/* ================================================================
+   Colors
+================================================================ */
+ 
+// Couleurs par défaut
+let bg = "#00e5a0"; // couleur principale
+let panel = "#131825";
+let panelbg = "#BDBDBD";
+let border = "#1d2740";
+let g = "white"; //"#008679";  titre et texte
+let b = "#0099ff";
+let r = "#ff4060";
+let o = "#ff9020";
+let dim = "#1a2438";
+let text = "yellow";
+let p1 = "#00e5a0";
+let p2 = "#0099ff";
+let p3 = "#ff9020";
+
+// Fonction pour mettre à jour les CSS variables
+function setColors(c1, c2, c3, c4) {
+    const root = document.documentElement;
+    root.style.setProperty('--bg', c1);
+    root.style.setProperty('--panel', c2);
+    root.style.setProperty('--panelbg', c3);
+    root.style.setProperty('--border', c4);
+    root.style.setProperty('--g', g);
+    root.style.setProperty('--b', b);
+    root.style.setProperty('--r', r);
+    root.style.setProperty('--o', o);
+    root.style.setProperty('--dim', dim);
+    root.style.setProperty('--text', text);
+    root.style.setProperty('--p1', p1);
+    root.style.setProperty('--p2', p2);
+    root.style.setProperty('--p3', p3);
+}
+
+// Exemple : changer les couleurs
+setColors("#00e5a0", "#131825", "#BDBDBD", "#1d2740");
+/* ================================================================
+   CONSTANTS  — mirror Arduino compile-time values
+================================================================ */
+var V_TOTAL   = 19.0;
+var STEP_TOUR = 1600;
+var LONG_MAX  = 60;
+var RTOUR_MM  = 1.0 / 16;
+var CONV      = Math.round(STEP_TOUR * LONG_MAX / (RTOUR_MM * V_TOTAL * 60.0));
+var TOUR_MAX  = STEP_TOUR * LONG_MAX / RTOUR_MM;
+var NB_MES    = 10;
+
+document.getElementById('cv').textContent = CONV;
+document.getElementById('tm').textContent = TOUR_MAX.toLocaleString();
+
+/* ================================================================
+   SIMULATOR STATE
+================================================================ */
+var vpump    = 0.0;   // VPump
+var running  = false; // RUN flag
+var niveau   = 0;     // menu level  0=main 1=rate-p1 2=rate-p2 3=recap
+var choice   = 0;     // menu item   0=none 1..N
+
+var curPos   = 0, tgtPos  = 0;
+var elapsed  = 0, measCnt = 0, nextMeas = 0;
+var dPump    = 0, dMes    = 0;
+var runTimer = null;
+
+/* Menu text — mirrors Txt[4][6]
+   [0]=title  [1..5]=selectable items */
+var MENUS = [
+  ["  1-PUMP",   " >Fixed",    " > ",   " > ",  " >Reset",    ""],
+  ["FLOW RATE",  "0.05 ml/m",  "0.10 ml/m",  "0.20 ml/m",  "0.50 ml/m",  " >More..."],
+  ["FLOW RATE",  "0.75 ml/m",  "1.00 ml/m",  "2.00 ml/m",  " >Adjust",   " <Back"],
+  ["  RECAP",    "",           "",           "",           " >Run",      " >Menu"]
+];
+var SEL_V  = [0, 0.05, 0.10, 0.20, 0.50, 0.75, 1.00, 2.00, 5.00];
+var MAX_CH = [4, 5, 5, 5];   // max selectable item per niveau
+
+/* ================================================================
+   LCD  — mirrors Affiche_menu() and running screens
+================================================================ */
+function lcdDraw(lines, hlIdx) {
+  /* hlIdx = 0-based line index to invert, -1 = none */
+  var html = '';
+  for (var i = 0; i < 6; i++) {
+    var line = (lines[i] || '').padEnd(14, ' ');
+    if (i === hlIdx) {
+      html += '<span class="hl">' + escHtml(line) + '</span>\n';
+    } else {
+      html += escHtml(line) + '\n';
+    }
+  }
+  document.getElementById('lcd').innerHTML = html;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function lcdMenu() {
+  // choice is 1-based; line 0 = title (never highlighted)
+  // item 1 is on line 1, item 2 on line 2, etc.
+  // so hlIdx = choice (not choice-1)
+  var hl = (choice >= 1) ? choice : -1;
+  lcdDraw(MENUS[niveau], hl);
+}
+
+function lcdRunning() {
+  lcdDraw([
+    " RUNNING",
+    " Pump=>",
+    " " + vpump.toFixed(2) + " ml/m",
+    "",
+    " Pos:",
+    " " + Math.round(curPos) + " stp"
+  ], -1);
+}
+
+/* ================================================================
+   FIRMWARE STATE INDICATOR
+================================================================ */
+function fwSt(n) {
+  for (var i = 0; i <= 4; i++) {
+    document.getElementById('st' + i).classList.toggle('on', i === n);
+  }
+}
+
+/* ================================================================
+   STATUS BAR
+================================================================ */
+function setStatus(msg, type) {
+  var bar = document.getElementById('sbar');
+  var dot = document.getElementById('dot');
+  var txt = document.getElementById('sbar-t');
+  bar.className = 'sbar' + (type ? ' ' + type : '');
+  dot.className = 'dot' + (type === 'run' ? ' pulse' : (type ? ' on' : ''));
+  txt.textContent = msg;
+}
+
+/* ================================================================
+   SENSORS (simulated random walk)
+================================================================ */
+var S_BASE  = [22.5, 512, 1.80, 14.0, 3.20, 0.90];
+var S_NOISE = [0.30, 20,  0.10,  1.0, 0.20, 0.05];
+
+function readSensors() {
+  return S_BASE.map(function(b, i) {
+    return b + (Math.random() - 0.5) * S_NOISE[i] * 2;
+  });
+}
+
+function updateSensors() {
+  var v = readSensors();
+  for (var i = 0; i < 6; i++) {
+    document.getElementById('sv' + i).textContent = v[i].toFixed(2);
+  }
+  return v;
+}
+
+/* ================================================================
+   SERIAL LOG  — mirrors impression()
+================================================================ */
+function serialAdd(msg, cls) {
+  var log  = document.getElementById('serial-log');
+  var line = document.createElement('div');
+  line.className = cls || 'sd';
+  line.textContent = msg;
+  log.appendChild(line);
+  while (log.children.length > 80) log.removeChild(log.firstChild);
+  log.scrollTop = log.scrollHeight;
+}
+
+serialAdd('LABEL,Temps,Pump1,Temp,Pot,Cond,Turb,S4,S5,Duree,DelaiMes', 'sh');
+
+function sendRow() {
+  var v = updateSensors();
+  measCnt++;
+  var row = 'DATA,TIME,' + vpump.toFixed(2) + ',' +
+    v.map(function(x){ return x.toFixed(2); }).join(',') + ',' +
+    dPump.toFixed(2) + ',' + dMes.toFixed(2);
+  serialAdd(row);
+  document.getElementById('p-meas').textContent = measCnt;
+}
+
+/* ================================================================
+   MOTOR
+================================================================ */
+function motorSet(sps) {
+  document.getElementById('mspd').textContent = Math.round(sps);
+  var r = document.getElementById('mrot');
+  if (sps > 0) {
+    var period = Math.max(0.05, STEP_TOUR / sps).toFixed(3) + 's';
+    r.style.setProperty('--ms', period);
+    r.classList.add('spin');
+  } else {
+    r.classList.remove('spin');
+  }
+}
+
+/* ================================================================
+   RUN  — mirrors Run()
+================================================================ */
+function doRun() {
+  if (running)    return;
+  if (vpump <= 0) { setStatus('Select a flow rate first!', 'warn'); return; }
+
+  running      = true;
+  curPos       = 0;
+  elapsed      = 0;
+  measCnt      = 0;
+  dPump        = V_TOTAL / vpump;                  // real duration (minutes)
+  dMes         = 60.0 * dPump / NB_MES;           // real interval (seconds) — display only
+  nextMeas     = dMes;
+  tgtPos       = Math.round(dPump * vpump * STEP_TOUR * LONG_MAX / (V_TOTAL * RTOUR_MM));
+
+  var sps      = vpump * CONV;
+  motorSet(sps);
+  fwSt(3);
+  setStatus('RUNNING — ' + vpump.toFixed(2) + ' ml/min', 'run');
+  document.getElementById('p-tgt').textContent = tgtPos.toLocaleString();
+
+  // Always finish in ~20 real seconds (400 ticks x 50 ms) regardless of flow rate.
+  // This lets every run show all 10 serial rows without waiting hours.
+  var sptick      = tgtPos / 400;                  // steps per tick (simulated)
+  var mlPerStp    = V_TOTAL / tgtPos;
+  // Trigger one serial row every 10% of total steps (mirrors impression() interval)
+  var measEvery   = tgtPos / NB_MES;
+  var nextMeasPos = measEvery;
+
+  runTimer = setInterval(function() {
+    curPos  += sptick;
+    // Simulated time: proportional to position progress
+    elapsed  = (curPos / tgtPos) * dPump * 60;
+
+    var inj = Math.min(V_TOTAL, curPos * mlPerStp);
+    var pct = Math.min(100, curPos / tgtPos * 100);
+    var rem = Math.max(0, dPump * 60 - elapsed);
+
+    document.getElementById('pbar-f').style.width   = pct.toFixed(1) + '%';
+    document.getElementById('syr-f').style.width    = pct.toFixed(1) + '%';
+    document.getElementById('syr-t').textContent    = inj.toFixed(2) + ' ml injected';
+    document.getElementById('syr1').style.width     = pct.toFixed(1) + '%';
+    document.getElementById('syt1').textContent     = inj.toFixed(2) + ' ml';
+    document.getElementById('p-inj').textContent    = inj.toFixed(2);
+    document.getElementById('p-t').textContent      = elapsed.toFixed(1);
+    document.getElementById('p-eta').textContent    = rem > 0 ? rem.toFixed(0) + ' s' : 'Done';
+    document.getElementById('p-stp').textContent    = Math.round(curPos).toLocaleString();
+    document.getElementById('mpos').textContent     = Math.round(curPos).toLocaleString();
+
+    lcdRunning();
+
+    // Send a DATA row each time we cross a measurement threshold
+    if (curPos >= nextMeasPos) {
+      sendRow();
+      nextMeasPos += measEvery;
+    }
+
+    if (curPos >= tgtPos) { clearInterval(runTimer); onDone(); }
+  }, 50);
+}
+
+function onDone() {
+  running = false;
+  motorSet(0);
+  document.getElementById('pbar-f').style.width  = '100%';
+  document.getElementById('syr-f').style.width   = '100%';
+  document.getElementById('syr-t').textContent   = V_TOTAL.toFixed(1) + ' ml injected';
+  document.getElementById('syr1').style.width    = '100%';
+  document.getElementById('syt1').textContent    = V_TOTAL.toFixed(1) + ' ml';
+  document.getElementById('p-inj').textContent   = V_TOTAL.toFixed(2);
+  document.getElementById('p-eta').textContent   = 'Done';
+  fwSt(4);
+  setStatus('DONE — ' + V_TOTAL + ' ml injected', '');
+  serialAdd('// ── INJECTION COMPLETE ──────────────────────────', 'sh');
+  serialAdd('// Flow rate : ' + vpump.toFixed(2) + ' ml/min', 'sh');
+  serialAdd('// Volume    : ' + V_TOTAL.toFixed(2) + ' ml delivered', 'sh');
+  serialAdd('// Duration  : ' + dPump.toFixed(2) + ' min  |  Measurements : ' + measCnt, 'sh');
+  serialAdd('// ── END OF RUN ─────────────────────────────────', 'sh');
+  lcdDraw(["  DONE !", "", "  " + V_TOTAL.toFixed(1) + " ml", "  injected", "", ""], -1);
+  setTimeout(function() {
+    niveau = 0; choice = 0; lcdMenu(); fwSt(0);
+    setStatus('IDLE — select a flow rate and press RUN', '');
+  }, 3000);
+}
+
+/* ================================================================
+   RESET  — mirrors Reset()
+================================================================ */
+function doReset() {
+  if (runTimer) { clearInterval(runTimer); runTimer = null; }
+  running = false; vpump = 0; curPos = 0; elapsed = 0; measCnt = 0;
+  document.getElementById('rv').textContent       = '0.00';
+  document.getElementById('pbar-f').style.width   = '0%';
+  document.getElementById('syr-f').style.width    = '0%';
+  document.getElementById('syr-t').textContent    = '0.00 ml injected';
+  document.getElementById('syr1').style.width     = '0%';
+  document.getElementById('syt1').textContent     = '0.00 ml';
+  document.getElementById('p-inj').textContent    = '0.00';
+  document.getElementById('p-t').textContent      = '0.0';
+  document.getElementById('p-eta').textContent    = '—';
+  document.getElementById('p-stp').textContent    = '0';
+  document.getElementById('mpos').textContent     = '0';
+  document.getElementById('mspd').textContent     = '0';
+  document.getElementById('p-meas').textContent   = '0';
+  document.getElementById('p-tgt').textContent    = '—';
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+  motorSet(0);
+  fwSt(0); niveau = 0; choice = 0;
+  setStatus('IDLE — select a flow rate and press RUN', '');
+  lcdDraw(["  Reset done", "  Menu 10s..", "", "", "", ""], -1);
+  setTimeout(function() { lcdMenu(); }, 2000);
+}
+
+/* ================================================================
+   EMERGENCY  — mirrors emergency()
+================================================================ */
+function doEmerg() {
+  if (!running) return;
+  clearInterval(runTimer); runTimer = null;
+  running = false; motorSet(0);
+  fwSt(0); niveau = 0; choice = 0;
+  setStatus('!! EMERGENCY STOP !!', 'warn');
+  lcdDraw(["!! STOP !!", "Emergency", "stop", "", "", ""], -1);
+  setTimeout(function() { lcdMenu(); setStatus('IDLE — emergency stop triggered', ''); }, 2500);
+}
+
+/* ================================================================
+   RATE CHIP CLICK
+================================================================ */
+function setRate(v) {
+  vpump = v;
+  document.getElementById('rv').textContent = v.toFixed(2);
+  document.querySelectorAll('.chip').forEach(function(c) {
+    c.classList.toggle('on', parseFloat(c.dataset.v) === v);
+  });
+  MENUS[3][1] = 'Rate:' + v.toFixed(2) + 'ml/m';
+  MENUS[3][2] = 'Vol: ' + V_TOTAL + ' ml';
+  MENUS[3][3] = 'ETA:' + (V_TOTAL / v).toFixed(1) + 'min';
+  niveau = 3; choice = 0; lcdMenu(); fwSt(2);
+  setStatus('Rate set: ' + v.toFixed(2) + ' ml/min — press RUN', 'info');
+}
+
+/* ================================================================
+   HARDWARE BUTTON HANDLERS  — mirror Select_menu()
+================================================================ */
+function btnUP() {
+  if (running) return;
+  var mx = MAX_CH[niveau] || 4;
+  choice = (choice >= mx) ? 1 : choice + 1;
+  lcdMenu();
+}
+function btnDN() {
+  if (running) return;
+  var mx = MAX_CH[niveau] || 4;
+  choice = (choice <= 1) ? mx : choice - 1;
+  lcdMenu();
+}
+function btnSEL() {
+  if (running) return;
+  runProg();
+}
+
+/* ================================================================
+   PROGRAMME()  — mirrors Programme()
+================================================================ */
+function runProg() {
+  /* niveau 0 */
+  if (niveau === 0) {
+    if      (choice === 1) { niveau = 1; choice = 0; lcdMenu(); fwSt(1); setStatus('Select a flow rate', 'info'); }
+    else if (choice === 2) { setStatus('Adjust: click a flow-rate chip above', 'info'); }
+    else if (choice === 3) {
+      var v = updateSensors();
+      lcdDraw([" SENSORS","Tmp:"+v[0].toFixed(1),"Pot:"+v[1].toFixed(1),
+               "Cnd:"+v[2].toFixed(1),"Trb:"+v[3].toFixed(1),"S4:"+v[4].toFixed(1)], -1);
+      setStatus('Sensors — SELECT or wait 4 s to exit', 'info');
+      setTimeout(function(){ niveau = 0; choice = 0; lcdMenu(); fwSt(0); }, 4000);
+    }
+    else if (choice === 4) { doReset(); }
+    return;
+  }
+  /* niveau 1 */
+  if (niveau === 1) {
+    if (choice >= 1 && choice <= 4) setRate(SEL_V[choice]);
+    else if (choice === 5)          { niveau = 2; choice = 0; lcdMenu(); }
+    return;
+  }
+  /* niveau 2 */
+  if (niveau === 2) {
+    if (choice >= 1 && choice <= 3) setRate(SEL_V[choice + 4]);
+    else if (choice === 4)          setStatus('Adjust: click a flow-rate chip above', 'info');
+    else if (choice === 5)          { niveau = 1; choice = 0; lcdMenu(); }
+    return;
+  }
+  /* niveau 3 (recap) */
+  if (niveau === 3) {
+    if      (choice === 0) { lcdMenu(); fwSt(2); }
+    else if (choice === 4) { doRun(); }
+    else if (choice === 5) { niveau = 0; choice = 0; lcdMenu(); fwSt(0); setStatus('IDLE — select a flow rate and press RUN', ''); }
+    return;
+  }
+}
+
+/* ================================================================
+   EVENT BINDINGS
+================================================================ */
+document.getElementById('b-up').addEventListener('click',  btnUP);
+document.getElementById('b-sel').addEventListener('click', btnSEL);
+document.getElementById('b-dn').addEventListener('click',  btnDN);
+document.getElementById('b-emg').addEventListener('click', doEmerg);
+document.getElementById('btn-run').addEventListener('click', doRun);
+document.getElementById('btn-rst').addEventListener('click', doReset);
+
+document.getElementById('chips').addEventListener('click', function(e) {
+  var c = e.target.closest('.chip');
+  if (c) setRate(parseFloat(c.dataset.v));
+});
+
+document.addEventListener('keydown', function(e) {
+  if      (e.key === 'ArrowUp')            { btnUP();   e.preventDefault(); }
+  else if (e.key === 'ArrowDown')          { btnDN();   e.preventDefault(); }
+  else if (e.key === 'Enter')              { btnSEL();  e.preventDefault(); }
+  else if (e.key === 'e' || e.key === 'E') { doEmerg(); }
+});
+
+/* ================================================================
+   CONTINUOUS SENSOR REFRESH + BOOT
+================================================================ */
+setInterval(function(){ if (!running) updateSensors(); }, 1500);
+
+/* Boot splash — mirrors setup() */
+lcdDraw(["  1-PUMP v1.0","  Ready !", "", "", "", ""], -1);
+serialAdd('// Setup complete — waiting...', 'sh');
+setTimeout(function() { niveau = 0; choice = 0; lcdMenu(); fwSt(0); }, 2000);
+</script>
+<link rel="stylesheet" type="text/css" href="css/css0.css">
+</body>
+</html>

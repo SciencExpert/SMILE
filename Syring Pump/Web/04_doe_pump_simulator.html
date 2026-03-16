@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoE Pumps — Arduino Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  	--bg:#B3FFE8; 	<!--#0c0f18;-->
+	--panel:#131825;
+	--panelbg:#BDBDBD;
+	--border:#1d2740;
+  	--g:#008679;		<!-- titre et texte-->
+	--b:#0099ff;
+	--r:#ff4060;
+	--o:#ff9020;
+  	--dim:#1a2438;
+	--text:black;	<!--#c5d4ef;-->
+	--muted:#3d5070;
+  	--p1:#00e5a0;
+	--p2:#0099ff;
+	--p3:#ff9020;
+  	--mono:'Share Tech Mono',monospace;
+	--sans:'Barlow',sans-serif;
+	}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;min-height:100vh;overflow-x:hidden;overflow: hidden;
+}}
+body::before{content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(0,229,160,.018) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,229,160,.018) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:24px 16px 80px;}
+
+header{margin-bottom:5px;padding-left:14px;border-left:3px solid var(--g);color:}
+header h1{font-family:var(--mono);font-size:17px;color:var(--g);letter-spacing:2px;text-shadow: 2px 2px 5px black;}
+header p{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.8px;}
+.header {position:fixed; top:0; left:0; width:100%; height:5%;
+              padding:10 10px; font-size:14px; border-top:0; z-index:1000;
+              display:flex; align-items:center; justify-content:center;
+              flex-wrap:wrap; text-align:center}
+
+
+.grid{display:grid;grid-template-columns:240px 1fr;gap:6px;align-items:start;}
+.col{display:flex;flex-direction:column;gap:6px;}
+
+.panel{background:var(--panelbg);border:1px solid var(--border);border-radius:4px;padding:12px;font-size:10px}
+.pt{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;text-shadow: 2px 2px 5px black;
+    border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:10px;}
+
+/* LCD */
+.lcd-shell{background:#070f07;border:2px solid #0f1e0f;border-radius:5px;padding:8px 7px;
+  box-shadow:inset 0 2px 12px rgba(0,0,0,.8);}
+#lcd{font-family:var(--mono);font-size:10px;line-height:1.8;color:#58d458;
+  white-space:pre;min-height:108px;text-shadow:0 0 5px rgba(88,212,88,.3);}
+#lcd .hl{background:#2d6e2d;color:#d4ffd4;text-shadow:none;}
+
+/* Buttons */
+.hwbtns{display:flex;flex-direction:column;gap:6px;}
+.hb{font-family:var(--mono);font-size:10px;padding:8px 11px;border-radius:3px;
+  border:1px solid var(--dim);background:var(--dim);color:var(--text);
+  cursor:pointer;letter-spacing:.5px;transition:border-color .1s,color .1s;text-align:left;user-select:none;}
+.hb:hover{border-color:var(--g);color:var(--g);}
+.hb:active{opacity:.65;}
+.hb-up{border-left:3px solid var(--g);}
+.hb-sel{border-left:3px solid var(--b);}
+.hb-dn{border-left:3px solid #445;}
+.hb-emg{border-left:3px solid var(--r);color:var(--r);background:#130608;border-color:#2a0a10;}
+.hb-emg:hover{border-color:var(--r);background:#1e080e;}
+.kb{font-size:9px;color:var(--muted);margin-top:6px;font-family:var(--mono);line-height:1.7;}
+
+/* 3 syringes */
+.syr-group{display:flex;flex-direction:column;gap:6px;}
+.syr-row{display:flex;align-items:center;gap:6px;}
+.syr-lbl{font-family:var(--mono);font-size:8px;width:22px;flex-shrink:0;}
+.syr{position:relative;height:22px;background:#080d18;border:1px solid var(--border);border-radius:3px;overflow:hidden;flex:1;}
+.syr-f{position:absolute;left:0;top:0;bottom:0;width:0%;transition:width .15s linear;}
+.syr-f.p1{background:linear-gradient(90deg,#003830,#00e5a022);border-right:2px solid var(--p1);}
+.syr-f.p2{background:linear-gradient(90deg,#003060,#0099ff22);border-right:2px solid var(--p2);}
+.syr-f.p3{background:linear-gradient(90deg,#302000,#ff902022);border-right:2px solid var(--p3);}
+.syr-t{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:8px;color:var(--text);z-index:2;}
+
+/* 3 motors */
+.motors{display:flex;gap:6px;justify-content:space-between;}
+.mcard{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.mlbl{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center;line-height:1.1;text-shadow: 1px 1px 1px black}
+
+/* Status */
+.sbar{font-family:var(--mono);font-size:10px;padding:8px 13px;border-radius:3px;
+  border-left:3px solid var(--g);background:#001508;color:var(--g);
+  display:flex;align-items:center;gap:6px;min-height:34px;transition:all .2s;}
+.sbar.warn{border-color:var(--r);background:#120406;color:var(--r);}
+.sbar.info{border-color:var(--b);background:#000f1e;color:var(--b);}
+@keyframes blink{50%{opacity:0}}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.dot.on{background:var(--g);}
+.dot.pulse{background:var(--g);animation:blink .65s infinite;}
+
+/* States */
+.states{display:flex;border:1px solid var(--border);border-radius:3px;overflow:hidden;}
+.st{flex:1;text-align:center;font-family:var(--mono);font-size:7.5px;letter-spacing:.3px;
+  padding:6px 2px;color:var(--muted);border-right:1px solid var(--border);
+  transition:all .2s;position:relative;}
+.st:last-child{border-right:none;}
+.st.on{background:#001508;color:var(--g);}
+.st.on::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--g);}
+
+/* Chips / selector buttons */
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
+.chip{font-family:var(--mono);font-size:9px;padding:4px 9px;border:1px solid var(--dim);
+  border-radius:3px;background:transparent;color:var(--muted);cursor:pointer;transition:all .1s;}
+.chip:hover{border-color:var(--b);color:var(--b);}
+.chip.on{border-color:var(--g);color:var(--g);background:#001508;}
+
+.mode-btn{font-family:var(--mono);font-size:9px;padding:5px 12px;border:1px solid var(--dim);
+  border-radius:3px;background:transparent;color:var(--muted);cursor:pointer;transition:all .1s;}
+.mode-btn:hover{border-color:var(--b);color:var(--b);}
+.mode-btn.on{border-color:var(--g);color:var(--g);background:#001508;}
+
+/* LV/HV input rows */
+.lhvgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px;}
+.lhvcard{background:#090d1a;border:1px solid var(--border);border-radius:3px;padding:9px;}
+.lhvcard.active{border-color:var(--g);}
+.lhv-name{font-family:var(--mono);font-size:8px;letter-spacing:2px;margin-bottom:5px;}
+.lhv-name.c1{color:var(--p1);}
+.lhv-name.c2{color:var(--p2);}
+.lhv-name.c3{color:var(--p3);}
+.lhv-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.lhv-lbl{font-family:var(--mono);font-size:8px;color:var(--muted);}
+.lhv-val{font-family:var(--mono);font-size:13px;}
+.lhv-val.lv{color:var(--b);}
+.lhv-val.hv{color:var(--o);}
+.lhv-val.mid{color:var(--g);}
+.lhv-status{font-family:var(--mono);font-size:8px;margin-top:4px;padding:2px 6px;
+  border-radius:2px;display:inline-block;}
+.lhv-status.done{background:#001508;color:var(--g);}
+.lhv-status.lv-set{background:#000f1e;color:var(--b);}
+.lhv-status.empty{background:var(--dim);color:var(--muted);}
+
+/* DoE run table */
+.doe-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:9px;margin-top:8px;}
+.doe-table th{color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--border);text-align:left;letter-spacing:1px;}
+.doe-table td{padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text);}
+.doe-table tr.active-run td{background:#001a0d;color:var(--g);}
+.doe-table tr.done-run td{color:var(--muted);}
+.doe-table .lv{color:var(--b);}
+.doe-table .hv{color:var(--o);}
+.doe-table .mid{color:var(--g);}
+
+/* Progress */
+.prog-group{display:flex;flex-direction:column;gap:5px;}
+.prog-row{display:flex;align-items:center;gap:7px;}
+.prog-lbl{font-family:var(--mono);font-size:8px;width:40px;flex-shrink:0;color:var(--muted);}
+.pbar{flex:1;height:5px;background:var(--dim);border-radius:3px;overflow:hidden;}
+.pbar-f{height:100%;width:0%;border-radius:3px;transition:width .2s linear;}
+.pbar-f.run{background:linear-gradient(90deg,#006040,var(--g));}
+.pbar-f.total{background:linear-gradient(90deg,var(--b),var(--g));}
+.prog-pct{font-family:var(--mono);font-size:8px;color:var(--muted);width:32px;text-align:right;}
+.prow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:5px;}
+.prow span{color:var(--text);}
+.sub{font-family:var(--mono);font-size:8px;color:var(--muted);margin-top:4px;line-height:1.9;}
+.sub b{color:var(--text);}
+
+/* Ratio bars */
+.ratio-group{display:flex;flex-direction:column;gap:5px;margin-top:6px;}
+.ratio-row{display:flex;align-items:center;gap:7px;}
+.ratio-lbl{font-family:var(--mono);font-size:8px;width:22px;flex-shrink:0;}
+.rbar{flex:1;height:14px;background:var(--dim);border-radius:3px;overflow:hidden;position:relative;}
+.rbar-f{height:100%;width:0%;border-radius:3px;transition:width .3s;}
+.rbar-f.p1{background:var(--p1);}
+.rbar-f.p2{background:var(--p2);}
+.rbar-f.p3{background:var(--p3);}
+.rbar-v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:8px;color:var(--bg);z-index:2;}
+
+/* Sensors */
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px;}
+.sc{background:#090d1a;border:1px solid var(--border);border-radius:3px;padding:8px;}
+.sn{font-family:var(--mono);font-size:7px;color:var(--muted);letter-spacing:2px;}
+.sv{font-family:var(--mono);font-size:15px;color:var(--b);margin-top:2px;}
+.su{font-family:var(--mono);font-size:7px;color:var(--muted);}
+
+/* Serial */
+.serial{font-family:var(--mono);font-size:12px;line-height:1.9;color:#1a3822;
+  background:#040804;border:1px solid #0b160b;border-radius:3px;
+  padding:7px 9px;height:325px;overflow-y:auto;margin-top:5px;}
+.sd{color:white;}.sh{color:yellow;}.se{color:#ff4060;font-weight:bold;}
+
+/* Action buttons */
+.arow{display:flex;gap:8px;flex-wrap:wrap;}
+.ab{font-family:var(--mono);font-size:10px;padding:8px 18px;border-radius:3px;
+  border:1px solid var(--dim);background:var(--dim);color:var(--text);
+  cursor:pointer;letter-spacing:.5px;transition:all .1s;}
+.ab:hover{border-color:var(--g);color:var(--g);}
+.ab.run{border-color:var(--b);color:var(--b);}
+.ab.run:hover{background:#000f1e;}
+
+.cfg-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px;}
+.cfg-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);white-space:nowrap;}
+.subinf{font-family:var(--mono);font-size:8px;color:var(--muted);margin-top:8px;line-height:1.9;}
+.subinf b{color:var(--text);}
+@media(max-width:700px){.grid{grid-template-columns:1fr;}.sgrid,.lhvgrid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="header">
+
+    <h1 style="line-height:1em" >DoE PUMPS — ARDUINO SIMULATOR — ARDUINO SIMULATOR</h1>
+
+
+    <div style="display:flex; align-items:center; gap:50px;">
+
+      <button style="background-color:#ADD8E6; color:#000080; border-radius:10px;
+                     height:30px; width:100px; cursor:pointer;
+                     transition:background-color 0.3s ease, transform 0.2s ease;"
+              onclick="window.location.href='00_PUMP_Menu.html';">
+        PumpLab™
+      </button>
+
+      <span style="margin:0; line-height:normal; display:flex; align-items:center; color:var(--g)">
+        © 2025 SciencExpert. Website designed and developed by
+        <a href="https://payhip.com/SciencExpert/sciencexpert"
+           target="_blank" rel="noopener noreferrer"
+           style="color:var(--secondary-color); text-decoration:none; margin-left:5px;">
+          <img src="images/SE_favicon.ico" alt="Icône"
+               style="height:16px; vertical-align:middle; margin-right:5px;">
+          SciencExpert™
+        </a>. All rights reserved. Unauthorized use or reproduction is prohibited.
+      </span>
+
+      <button style="background-color:#ADD8E6; color:#000080; border-radius:10px;
+                     height:30px; width:100px; cursor:pointer;
+                     transition:background-color 0.3s ease, transform 0.2s ease;"
+              onclick="location.reload();">
+        ♻️ Reset
+      </button>
+    </div>
+
+  </div>
+<div>.</div>
+
+</header>
+<div class="grid">
+
+  <!-- LEFT -->
+  <div class="col">
+
+    <div class="panel">
+      <div class="pt">Nokia PCD8544 LCD</div>
+      <div class="lcd-shell"><div id="lcd"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Buttons — pins 2 / 3 / 4</div>
+      <div class="hwbtns">
+        <button class="hb hb-up"  id="b-up">&#9650;  UP &nbsp;&nbsp;&nbsp;&nbsp; pin 2</button>
+        <button class="hb hb-sel" id="b-sel">&#9679;  SELECT  pin 3</button>
+        <button class="hb hb-dn"  id="b-dn">&#9660;  DOWN &nbsp;&nbsp; pin 4</button>
+        <button class="hb hb-emg" id="b-emg">&#9888;  EMERGENCY STOP</button>
+      </div>
+      <div class="kb">Keyboard: &uarr; &darr; Enter &nbsp;&middot;&nbsp; E = emergency</div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Syringes — 19 ml each</div>
+      <div class="syr-group">
+        <div class="syr-row">
+          <div class="syr-lbl" style="color:var(--p1)">P1</div>
+          <div class="syr"><div class="syr-f p1" id="syr1"></div><div class="syr-t" id="syt1">0.00 ml</div></div>
+        </div>
+        <div class="syr-row">
+          <div class="syr-lbl" style="color:var(--p2)">P2</div>
+          <div class="syr"><div class="syr-f p2" id="syr2"></div><div class="syr-t" id="syt2">0.00 ml</div></div>
+        </div>
+        <div class="syr-row">
+          <div class="syr-lbl" style="color:var(--p3)">P3</div>
+          <div class="syr"><div class="syr-f p3" id="syr3"></div><div class="syr-t" id="syt3">0.00 ml</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Steppers + EasyDriver</div>
+      <div class="motors">
+        <div class="mcard">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="28" fill="#0d1520" stroke="#1e2535" stroke-width="1.5"/>
+            <g id="mr1">
+              <circle cx="30" cy="30" r="17" fill="#111a28" stroke="#1d2a40" stroke-width="1"/>
+              <rect x="29" y="7" width="2" height="12" rx="1" fill="#00e5a0"/>
+              <rect x="29" y="41" width="2" height="12" rx="1" fill="#1e2535"/>
+              <rect x="7"  y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+              <rect x="41" y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+            </g>
+            <circle cx="30" cy="30" r="4" fill="#0c0f18" stroke="#00e5a0" stroke-width="1"/>
+          </svg>
+          <div class="mlbl" style="color:var(--p1)">P1<br><b id="ms1">0</b><small> s/s</small></div>
+        </div>
+        <div class="mcard">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="28" fill="#0d1520" stroke="#1e2535" stroke-width="1.5"/>
+            <g id="mr2">
+              <circle cx="30" cy="30" r="17" fill="#111a28" stroke="#1d2a40" stroke-width="1"/>
+              <rect x="29" y="7" width="2" height="12" rx="1" fill="#0099ff"/>
+              <rect x="29" y="41" width="2" height="12" rx="1" fill="#1e2535"/>
+              <rect x="7"  y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+              <rect x="41" y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+            </g>
+            <circle cx="30" cy="30" r="4" fill="#0c0f18" stroke="#0099ff" stroke-width="1"/>
+          </svg>
+          <div class="mlbl" style="color:var(--p2)">P2<br><b id="ms2">0</b><small> s/s</small></div>
+        </div>
+        <div class="mcard">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="28" fill="#0d1520" stroke="#1e2535" stroke-width="1.5"/>
+            <g id="mr3">
+              <circle cx="30" cy="30" r="17" fill="#111a28" stroke="#1d2a40" stroke-width="1"/>
+              <rect x="29" y="7" width="2" height="12" rx="1" fill="#ff9020"/>
+              <rect x="29" y="41" width="2" height="12" rx="1" fill="#1e2535"/>
+              <rect x="7"  y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+              <rect x="41" y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+            </g>
+            <circle cx="30" cy="30" r="4" fill="#0c0f18" stroke="#ff9020" stroke-width="1"/>
+          </svg>
+          <div class="mlbl" style="color:var(--p3);;">P3<br><b id="ms3">0</b><small> s/s</small></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /left -->
+
+  <!-- RIGHT -->
+  <div class="col">
+
+    <div class="sbar" id="sbar" style="display:none">
+      <div class="dot" id="dot"></div>
+      <span id="sbar-t">IDLE &mdash; choose DoE type, set LV/HV per pump, then press RUN</span>
+    </div>
+
+    <div class="panel" style="display:none">
+      <div class="pt">Firmware state</div>
+      <div class="states">
+        <div class="st on" id="st0">MENU</div>
+        <div class="st"   id="st1">SET LV/HV</div>
+        <div class="st"   id="st2">RATE P1</div>
+        <div class="st"   id="st3">RATE P2</div>
+        <div class="st"   id="st4">RECAP</div>
+        <div class="st"   id="st5">RUNNING</div>
+        <div class="st"   id="st6">DONE</div>
+      </div>
+    </div>
+
+    <!-- DoE type + LV/HV configuration -->
+    <div class="panel" style="display:none">
+      <div class="pt">DoE Configuration</div>
+
+      <div class="cfg-row">
+        <div class="cfg-lbl">DoE type:</div>
+        <button class="mode-btn on" id="doe2-btn" onclick="setDoeType(2)">2&sup3; — 8 runs</button>
+        <button class="mode-btn"    id="doe3-btn" onclick="setDoeType(3)">3&sup3; — 27 runs</button>
+      </div>
+
+      <div class="cfg-lbl" style="margin-bottom:6px;">
+        Pump to configure: &nbsp;
+        <button class="mode-btn" id="pc1-btn" onclick="selectPump(1)" style="margin-right:4px;">P1</button>
+        <button class="mode-btn" id="pc2-btn" onclick="selectPump(2)" style="margin-right:4px;">P2</button>
+        <button class="mode-btn" id="pc3-btn" onclick="selectPump(3)">P3</button>
+      </div>
+
+      <div class="cfg-lbl" style="margin-bottom:5px;">Flow rate presets — page 1 (ml/min):</div>
+      <div class="chips" id="chips1">
+        <button class="chip" data-v="0.00">0.00</button>
+        <button class="chip" data-v="0.05">0.05</button>
+        <button class="chip" data-v="0.10">0.10</button>
+        <button class="chip" data-v="0.20">0.20</button>
+      </div>
+      <div class="cfg-lbl" style="margin-bottom:5px;">Flow rate presets — page 2 (ml/min):</div>
+      <div class="chips" id="chips2">
+        <button class="chip" data-v="0.50">0.50</button>
+        <button class="chip" data-v="0.75">0.75</button>
+        <button class="chip" data-v="1.00">1.00</button>
+        <button class="chip" data-v="2.00">2.00</button>
+        <button class="chip" data-v="5.00">5.00</button>
+      </div>
+      <div class="sub" id="chip-hint" style="margin-bottom:8px;">
+        Click a value to set <b>LV</b> for the selected pump, then click again for <b>HV</b>
+      </div>
+
+      <!-- LV/HV cards per pump -->
+      <div class="lhvgrid" >
+        <div class="lhvcard" id="lhvc1">
+          <div class="lhv-name c1">PUMP 1</div>
+          <div class="lhv-row"><span class="lhv-lbl">LV (-)</span><span class="lhv-val lv" id="lv1">—</span></div>
+          <div class="lhv-row"><span class="lhv-lbl">HV (+)</span><span class="lhv-val hv" id="hv1">—</span></div>
+          <div id="lhv-status1" class="lhv-status empty">not set</div>
+        </div>
+        <div class="lhvcard" id="lhvc2">
+          <div class="lhv-name c2">PUMP 2</div>
+          <div class="lhv-row"><span class="lhv-lbl">LV (-)</span><span class="lhv-val lv" id="lv2">—</span></div>
+          <div class="lhv-row"><span class="lhv-lbl">HV (+)</span><span class="lhv-val hv" id="hv2">—</span></div>
+          <div id="lhv-status2" class="lhv-status empty">not set</div>
+        </div>
+        <div class="lhvcard" id="lhvc3">
+          <div class="lhv-name c3">PUMP 3</div>
+          <div class="lhv-row"><span class="lhv-lbl">LV (-)</span><span class="lhv-val lv" id="lv3">—</span></div>
+          <div class="lhv-row"><span class="lhv-lbl">HV (+)</span><span class="lhv-val hv" id="hv3">—</span></div>
+          <div id="lhv-status3" class="lhv-status empty">not set</div>
+        </div>
+      </div>
+
+      <div class="arow" style="margin-top:12px;">
+        <button class="ab run" id="btn-run">&#9654; RUN DoE</button>
+        <button class="ab"     id="btn-rst">&#8635; RESET</button>
+      </div>
+      <div class="subinf" style="margin-top:8px;">
+        Conversion: <b id="cv">—</b> steps&middot;s<sup>-1</sup> per ml&middot;min<sup>-1</sup>
+        &nbsp;&middot;&nbsp; Runs: <b id="n-runs">8</b>
+      </div>
+    </div>
+
+    <!-- Live pump flow rates -->
+    <div class="panel">
+      <div class="pt">Live pump flow rates (current run)</div>
+      <div class="ratio-group">
+        <div class="ratio-row">
+          <div class="mlbl" style="color:var(--p1)">P1</div>
+          <div class="rbar"><div class="rbar-f p1" id="rb1"></div><div class="rbar-v" id="rrv1">0.00</div></div>
+        </div>
+        <div class="ratio-row">
+          <div class="mlbl" style="color:var(--p2)">P2</div>
+          <div class="rbar"><div class="rbar-f p2" id="rb2"></div><div class="rbar-v" id="rrv2">0.00</div></div>
+        </div>
+        <div class="ratio-row">
+          <div class="mlbl" style="color:var(--p3)">P3</div>
+          <div class="rbar"><div class="rbar-f p3" id="rb3"></div><div class="rbar-v" id="rrv3">0.00</div></div>
+        </div>
+      </div>
+      <div class="sub" style="margin-top:6px;">
+        Run: <b id="cur-run">—</b> / <b id="tot-runs">—</b>
+        &nbsp;&middot;&nbsp; Level: <b id="run-levels">—</b>
+        &nbsp;&middot;&nbsp; Ref flow: <b id="ref-flow">—</b> ml/min
+      </div>
+    </div>
+
+    <!-- DoE run table -->
+    <div class="panel" style="display:none">
+      <div class="pt">DoE run table</div>
+      <div style="overflow-x:auto;">
+        <table class="doe-table" id="doe-table">
+          <thead>
+            <tr><th>#</th><th>P1</th><th>P2</th><th>P3</th><th>Level P1</th><th>Level P2</th><th>Level P3</th></tr>
+          </thead>
+          <tbody id="doe-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="panel" style="display:none">
+      <div class="pt">Progress</div>
+      <div class="prog-group">
+        <div class="prog-row">
+          <div class="prog-lbl">Run</div>
+          <div class="pbar"><div class="pbar-f run"   id="pb-run"></div></div>
+          <div class="prog-pct" id="pp-run">0%</div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-lbl">Total</div>
+          <div class="pbar"><div class="pbar-f total" id="pb-total"></div></div>
+          <div class="prog-pct" id="pp-total">0%</div>
+        </div>
+      </div>
+      <div class="prow">
+        <span>Time: <span id="p-t">0.0</span> s</span>
+        <span>Serial rows: <span id="p-meas">0</span></span>
+      </div>
+      <div class="sub">
+        Syringe fills: P1 <b id="inj1">0.00</b> ml &nbsp; P2 <b id="inj2">0.00</b> ml &nbsp; P3 <b id="inj3">0.00</b> ml
+      </div>
+    </div>
+
+    <!-- Sensors -->
+    <div class="panel">
+      <div class="pt">Sensors A0&ndash;A5 (simulated)</div>
+      <div class="sgrid">
+        <div class="sc"><div class="sn">TEMP &middot; A0</div><div class="sv" id="sv0">—</div><div class="su">degC</div></div>
+        <div class="sc"><div class="sn">POT &middot; A1</div><div class="sv"  id="sv1">—</div><div class="su">mV</div></div>
+        <div class="sc"><div class="sn">COND &middot; A2</div><div class="sv" id="sv2">—</div><div class="su">mS</div></div>
+        <div class="sc"><div class="sn">TURB &middot; A3</div><div class="sv" id="sv3">—</div><div class="su">NTU</div></div>
+        <div class="sc"><div class="sn">S4 &middot; A4</div><div class="sv"  id="sv4">—</div><div class="su">u</div></div>
+        <div class="sc"><div class="sn">S5 &middot; A5</div><div class="sv"  id="sv5">—</div><div class="su">u</div></div>
+      </div>
+    </div>
+
+    <!-- Serial log -->
+    <div class="panel">
+      <div class="pt">Serial monitor — PLX-DAQ 9600 baud</div>
+      <div class="serial" id="serial-log"></div>
+    </div>
+
+  </div><!-- /right -->
+</div>
+</div>
+
+<script>
+/* ================================================================
+   Colors
+================================================================ */
+ 
+// Couleurs par défaut
+let bg = "blue"; // couleur principale
+let panel = "#131825";
+let panelbg = "#BDBDBD";
+let border = "#1d2740";
+let g = "white"; //"#008679";  titre et texte
+let b = "#0099ff";
+let r = "#ff4060";
+let o = "#ff9020";
+let dim = "#1a2438";
+let text = "yellow";
+let p1 = "#00e5a0";
+let p2 = "#0099ff";
+let p3 = "#ff9020";
+
+// Fonction pour mettre à jour les CSS variables
+function setColors(c1, c2, c3, c4) {
+    const root = document.documentElement;
+    root.style.setProperty('--bg', c1);
+    root.style.setProperty('--panel', c2);
+    root.style.setProperty('--panelbg', c3);
+    root.style.setProperty('--border', c4);
+    root.style.setProperty('--g', g);
+    root.style.setProperty('--b', b);
+    root.style.setProperty('--r', r);
+    root.style.setProperty('--o', o);
+    root.style.setProperty('--dim', dim);
+    root.style.setProperty('--text', text);
+    root.style.setProperty('--p1', p1);
+    root.style.setProperty('--p2', p2);
+    root.style.setProperty('--p3', p3);
+}
+
+// Exemple : changer les couleurs
+setColors("blue", "#131825", "#BDBDBD", "#1d2740");
+/* ================================================================
+   CONSTANTS
+================================================================ */
+var V_TOTAL   = 19.0;
+var STEP_TOUR = 1600;
+var LONG_MAX  = 60;
+var RTOUR_MM  = 1.0 / 16;
+var CONV      = Math.round(STEP_TOUR * LONG_MAX / (RTOUR_MM * V_TOTAL * 60.0));
+var TOUR_MAX  = STEP_TOUR * LONG_MAX / RTOUR_MM;
+var NB_MES    = 10;
+document.getElementById('cv').textContent = CONV;
+
+/* ================================================================
+   STATE
+================================================================ */
+var doeType  = 2;          // 2 = 2^3 (8 runs), 3 = 3^3 (27 runs)
+var pumpSel  = 1;          // currently selected pump for LV/HV entry
+var running  = false;
+var niveau   = 0;
+var choice   = 0;
+
+// LV / HV per pump (mirrors VPumpLV[] VPumpHV[] in Arduino)
+var LV = [0, null, null, null];   // LV[1..3]
+var HV = [0, null, null, null];   // HV[1..3]
+var lvSet = [false, false, false, false];
+var hvSet = [false, false, false, false];
+
+// Current run state
+var runList   = [];   // list of {vp1,vp2,vp3,lev1,lev2,lev3} for all runs
+var runIdx    = 0;
+var vpump     = [0, 0, 0, 0];  // current per-pump rates
+var totalInj  = [0, 0, 0, 0];
+var measCnt   = 0;
+var elapsed   = 0;
+var dPump     = 0;
+var dMes      = 0;
+var runTimer  = null;
+
+// Step simulation
+var runTgt    = [0, 0, 0, 0];  // step targets for current run
+var runPos    = [0, 0, 0, 0];
+var runTick   = [0, 0, 0, 0];
+var runFastest = 1;
+
+// Menu mirrors Txt[5][6] — extended with rate page 2
+var MENUS = [
+  ["  DoE PUMPS",   " >DoE 2^3",  " >DoE 3^3",  " >Reset",    "",           ""],
+  ["SET LV/HV",     "=>Pump 1",   "=>Pump 2",   "=>Pump 3",   "",           ""],
+  ["FLOW RATE",     "0.00ml/m",   "0.05ml/m",   "0.10ml/m",   "0.20ml/m",   " >More..."],
+  ["FLOW RATE",     "0.50ml/m",   "0.75ml/m",   "1.00ml/m",   "2.00ml/m",   " <Back"],
+  ["  RECAP",       "",           "",           "",           " >Run",      " >Menu"]
+];
+// SelectV[1..4] = page1, SelectV[5..8] = page2
+var SEL_V  = [0, 0.00, 0.05, 0.10, 0.20, 0.50, 0.75, 1.00, 2.00];
+var MAX_CH = [3, 3, 5, 5, 5];
+
+// Update MENUS[1] to show which pump is being configured and its current state
+// mirrors Texte() / Txt[1] dynamic update in the Arduino
+function updatePumpMenu() {
+  var labels = ['SET LV/HV', '', '', ''];
+  for (var p = 1; p <= 3; p++) {
+    var status = !lvSet[p] ? ' LV?' :
+                 !hvSet[p] ? ' HV?' : ' DONE';
+    // Highlight current pump with arrow
+    var prefix = (p === pumpSel) ? '=>' : '  ';
+    labels[p] = prefix + 'Pump' + p + status;
+  }
+  MENUS[1][0] = labels[0];
+  MENUS[1][1] = labels[1];
+  MENUS[1][2] = labels[2];
+  MENUS[1][3] = labels[3];
+  // Also update rate page title to show which pump and which value (LV or HV)
+  var rateTitle = 'FLOW RATE';
+  if (pumpSel) {
+    rateTitle = !lvSet[pumpSel] ? 'P' + pumpSel + ' SET LV' : 'P' + pumpSel + ' SET HV';
+  }
+  MENUS[2][0] = rateTitle;
+  MENUS[3][0] = rateTitle;
+}
+
+/* ================================================================
+   MOTOR — JS rAF driven, SVG rotate(a,cx,cy)
+================================================================ */
+var mAngle = [0, 0, 0, 0];
+var mSps   = [0, 0, 0, 0];
+var mLast  = null;
+
+function mLoop(ts) {
+  if (mLast !== null) {
+    var dt = (ts - mLast) / 1000;
+    for (var p = 1; p <= 3; p++) {
+      if (mSps[p] > 0) {
+        mAngle[p] = (mAngle[p] + (mSps[p] / STEP_TOUR) * 360 * dt) % 360;
+      }
+      var el = document.getElementById('mr' + p);
+      if (el) el.setAttribute('transform', 'rotate(' + mAngle[p].toFixed(2) + ',30,30)');
+    }
+  }
+  mLast = ts;
+  requestAnimationFrame(mLoop);
+}
+requestAnimationFrame(mLoop);
+
+function motorSet(idx, sps) {
+  document.getElementById('ms' + idx).textContent = Math.round(sps);
+  mSps[idx] = sps;
+}
+
+/* ================================================================
+   LCD
+================================================================ */
+function escH(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function lcdDraw(lines, hlIdx) {
+  var html = '';
+  for (var i = 0; i < 6; i++) {
+    var line = (lines[i] || '').padEnd(14, ' ');
+    if (i === hlIdx) html += '<span class="hl">' + escH(line) + '</span>\n';
+    else             html += escH(line) + '\n';
+  }
+  document.getElementById('lcd').innerHTML = html;
+}
+
+function lcdMenu() {
+  lcdDraw(MENUS[niveau], choice >= 1 ? choice : -1);
+}
+
+function lcdRun(runN, totN) {
+  lcdDraw([
+    doeType === 2 ? "DoE 2^3 RUN" : "DoE 3^3 RUN",
+    "Run " + runN + "/" + totN,
+    "P1=>" + vpump[1].toFixed(2),
+    "P2=>" + vpump[2].toFixed(2),
+    "P3=>" + vpump[3].toFixed(2),
+    ""
+  ], -1);
+}
+
+/* ================================================================
+   FIRMWARE STATE
+================================================================ */
+function fwSt(n) {
+  for (var i = 0; i <= 6; i++)
+    document.getElementById('st' + i).classList.toggle('on', i === n);
+}
+
+function setStatus(msg, type) {
+  var bar = document.getElementById('sbar');
+  var dot = document.getElementById('dot');
+  bar.className = 'sbar' + (type ? ' ' + type : '');
+  dot.className = 'dot' + (type === 'run' ? ' pulse' : (type ? ' on' : ''));
+  document.getElementById('sbar-t').textContent = msg;
+}
+
+/* ================================================================
+   SENSORS
+================================================================ */
+var S_BASE  = [22.5, 512, 1.80, 14.0, 3.20, 0.90];
+var S_NOISE = [0.30, 20,  0.10,  1.0, 0.20, 0.05];
+function updateSensors() {
+  var v = S_BASE.map(function(b,i){ return b + (Math.random()-0.5)*S_NOISE[i]*2; });
+  for (var i = 0; i < 6; i++) document.getElementById('sv'+i).textContent = v[i].toFixed(2);
+  return v;
+}
+
+/* ================================================================
+   SERIAL LOG
+================================================================ */
+function serialAdd(msg, cls) {
+  var log = document.getElementById('serial-log');
+  var d   = document.createElement('div');
+  d.className = cls || 'sd';
+  d.textContent = msg;
+  log.appendChild(d);
+  while (log.children.length > 80) log.removeChild(log.firstChild);
+  log.scrollTop = log.scrollHeight;
+}
+serialAdd('LABEL,Temps,Pump1,Pump2,Pump3,Temp,Pot,Cond,Turb,S4,S5,Duree,DelaiMes', 'sh');
+
+function sendRow() {
+  var v = updateSensors();
+  measCnt++;
+  serialAdd('DATA,TIME,' + vpump[1].toFixed(2) + ',' + vpump[2].toFixed(2) + ',' +
+    vpump[3].toFixed(2) + ',' + v.map(function(x){return x.toFixed(2);}).join(',') + ',' +
+    dPump.toFixed(2) + ',' + dMes.toFixed(2));
+  document.getElementById('p-meas').textContent = measCnt;
+}
+
+/* ================================================================
+   DoE TYPE
+================================================================ */
+function setDoeType(t) {
+  doeType = t;
+  document.getElementById('doe2-btn').classList.toggle('on', t === 2);
+  document.getElementById('doe3-btn').classList.toggle('on', t === 3);
+  document.getElementById('n-runs').textContent = t === 2 ? '8' : '27';
+  setStatus('DoE ' + t + '^3 selected — set LV/HV for each pump', 'info');
+}
+
+/* ================================================================
+   PUMP SELECTOR for LV/HV entry
+================================================================ */
+function selectPump(p) {
+  pumpSel = p;
+  ['pc1-btn','pc2-btn','pc3-btn'].forEach(function(id,i){
+    document.getElementById(id).classList.toggle('on', i+1 === p);
+  });
+  for (var i = 1; i <= 3; i++) {
+    document.getElementById('lhvc' + i).classList.toggle('active', i === p);
+  }
+  var state = !lvSet[p] ? 'Set LV for P' + p :
+              !hvSet[p] ? 'LV set — now set HV for P' + p : 'P' + p + ' done — pick next pump';
+  setStatus(state, 'info');
+  updatePumpMenu();
+  niveau = 2; choice = 0; lcdMenu(); fwSt(2);
+}
+
+/* ================================================================
+   SET LV / HV — mirrors doMode() LV/HV assignment logic
+================================================================ */
+function setLvHv(v) {
+  var p = pumpSel;
+  if (!lvSet[p]) {
+    LV[p] = v;
+    lvSet[p] = true;
+    document.getElementById('lv' + p).textContent = v.toFixed(2);
+    document.getElementById('lhv-status' + p).className = 'lhv-status lv-set';
+    document.getElementById('lhv-status' + p).textContent = 'LV set — pick HV';
+    setStatus('P' + p + ' LV=' + v.toFixed(2) + ' — now click HV value (must be > LV)', 'info');
+    updatePumpMenu();
+    niveau = 2; choice = 0; lcdMenu(); fwSt(2);
+  } else if (!hvSet[p]) {
+    if (v <= LV[p]) {
+      setStatus('HV must be > LV (' + LV[p].toFixed(2) + ')! Pick a higher value.', 'warn');
+      return;
+    }
+    HV[p] = v;
+    hvSet[p] = true;
+    document.getElementById('hv' + p).textContent = v.toFixed(2);
+    var mid = ((LV[p] + HV[p]) / 2).toFixed(2);
+    document.getElementById('lhv-status' + p).className = 'lhv-status done';
+    document.getElementById('lhv-status' + p).textContent =
+      doeType === 3 ? 'done  mid=' + mid : 'done';
+    var allDone = lvSet[1] && hvSet[1] && lvSet[2] && hvSet[2] && lvSet[3] && hvSet[3];
+    if (allDone) {
+      buildRecap();
+      buildDoETable();
+      updatePumpMenu();
+      niveau = 4; choice = 0; lcdMenu(); fwSt(4);
+      setStatus('All LV/HV set — press RUN to start DoE', 'info');
+    } else {
+      buildDoETable();
+      updatePumpMenu();
+      niveau = 1; choice = 0; lcdMenu(); fwSt(1);
+      for (var i = 1; i <= 3; i++) {
+        if (!lvSet[i] || !hvSet[i]) { selectPump(i); break; }
+      }
+    }
+  } else {
+    setStatus('P' + p + ' already configured. Select another pump.', 'info');
+    updatePumpMenu();
+    niveau = 1; choice = 0; lcdMenu(); fwSt(1);
+  }
+}
+
+/* ================================================================
+   doMode() — exact translation of Arduino doMode()
+   Maps run index (0-based) to VPump[1..3]
+================================================================ */
+function doMode(runIdx) {
+  var vp = [0, 0, 0, 0];
+  if (doeType === 2) {
+    // 2^3: 8 runs — binary encoding, P1=LSB, P3=MSB
+    var idx = runIdx;
+    for (var p = 1; p <= 3; p++) {
+      vp[p] = (idx % 2 === 0) ? LV[p] : HV[p];
+      idx = Math.floor(idx / 2);
+    }
+  } else {
+    // 3^3: 27 runs — ternary encoding, P1=LSB, P3=MSB
+    // level 0 = LV, 1 = MID, 2 = HV
+    var idx = runIdx;
+    for (var p = 1; p <= 3; p++) {
+      var lvl = idx % 3;
+      idx = Math.floor(idx / 3);
+      if (lvl === 0)      vp[p] = LV[p];
+      else if (lvl === 2) vp[p] = HV[p];
+      else                vp[p] = (LV[p] + HV[p]) / 2;
+    }
+  }
+  return vp;
+}
+
+/* ================================================================
+   BUILD DoE TABLE
+================================================================ */
+function buildDoETable() {
+  if (!lvSet[1] || !lvSet[2] || !lvSet[3]) return;
+  var n = doeType === 2 ? 8 : 27;
+  var tbody = document.getElementById('doe-tbody');
+  tbody.innerHTML = '';
+  for (var r = 0; r < n; r++) {
+    var vp = doMode(r);
+    var levs = [1,2,3].map(function(p){
+      if (!hvSet[p]) return '?';
+      if (doeType === 2) {
+        return vp[p] === LV[p] ? '-' : '+';
+      } else {
+        if (Math.abs(vp[p] - LV[p]) < 0.001) return '-';
+        if (Math.abs(vp[p] - HV[p]) < 0.001) return '+';
+        return '0';
+      }
+    });
+    var tr = document.createElement('tr');
+    tr.id = 'doerow-' + r;
+    tr.innerHTML = '<td>' + (r+1) + '</td>' +
+      [1,2,3].map(function(p){ return '<td>' + (hvSet[p] ? vp[p].toFixed(2) : '?') + '</td>'; }).join('') +
+      levs.map(function(l){
+        var cls = l==='-'?'lv':l==='+'?'hv':l==='0'?'mid':'';
+        return '<td class="' + cls + '">' + l + '</td>';
+      }).join('');
+    tbody.appendChild(tr);
+  }
+}
+
+function buildRecap() {
+  MENUS[4][1] = 'DoE ' + doeType + '^3';
+  MENUS[4][2] = (doeType===2?'8':'27') + ' runs';
+  MENUS[4][3] = 'LV/HV set';
+}
+
+/* ================================================================
+   RUN — mirrors Run() Synchro==2/3 block
+================================================================ */
+function doRun() {
+  if (running) return;
+  var allSet = lvSet[1]&&hvSet[1]&&lvSet[2]&&hvSet[2]&&lvSet[3]&&hvSet[3];
+  if (!allSet) { setStatus('Set LV and HV for all 3 pumps first!', 'warn'); return; }
+
+  running  = true;
+  runIdx   = 0;
+  measCnt  = 0;
+  totalInj = [0, 0, 0, 0];
+
+  var nRuns = doeType === 2 ? 8 : 27;
+  document.getElementById('tot-runs').textContent = nRuns;
+
+  // Reference speed = max(LV+HV) across pumps — mirrors Arduino VPump[0] calc
+  var ref = 0;
+  for (var p = 1; p <= 3; p++) {
+    var s = LV[p] + HV[p];
+    if (s > ref) ref = s;
+  }
+  document.getElementById('ref-flow').textContent = ref.toFixed(2);
+
+  // Delay_Pump per run (constant for all runs) — mirrors Arduino formula
+  dPump = 2 * V_TOTAL / (nRuns * ref);   // minutes
+  dMes  = 60.0 * dPump / NB_MES;         // seconds
+
+  fwSt(5);
+  setStatus('RUNNING DoE ' + doeType + '^3 — ' + nRuns + ' runs', 'run');
+  startRun();
+}
+
+function startRun() {
+  if (runIdx >= (doeType === 2 ? 8 : 27)) { finishRun(); return; }
+
+  var vp = doMode(runIdx);
+  vpump[1] = vp[1]; vpump[2] = vp[2]; vpump[3] = vp[3];
+
+  // Reference (fastest) pump
+  var maxV = Math.max(vpump[1], vpump[2], vpump[3]);
+  runFastest = vpump[1] >= vpump[2] && vpump[1] >= vpump[3] ? 1 :
+               vpump[2] >= vpump[3] ? 2 : 3;
+
+  // Step targets — mirrors pos[i] += Delay_Pump * VPump[i] * step_Tour * Long_Max / (V_total * Rtour_mm)
+  for (var p = 1; p <= 3; p++) {
+    runTgt[p] = dPump * vpump[p] * STEP_TOUR * LONG_MAX / (V_TOTAL * RTOUR_MM);
+  }
+  runPos = [0, 0, 0, 0];
+  elapsed = 0;
+
+  // Simulation speed proportional to dPump
+  var SIM_TICKS = Math.max(4, Math.min(80, Math.round(40 * dPump / 0.63)));
+  for (var p = 1; p <= 3; p++) {
+    runTick[p] = runTgt[p] > 0 ? runTgt[p] / SIM_TICKS : 0;
+  }
+
+  var measEvery = runTgt[runFastest] / NB_MES;
+  var nextMeasP = measEvery;
+
+  // Motors
+  for (var p = 1; p <= 3; p++) motorSet(p, vpump[p] * CONV);
+
+  // Update LCD, table highlight, ratio bars, run info
+  lcdRun(runIdx + 1, doeType === 2 ? 8 : 27);
+  updateRatioBars(maxV);
+  document.getElementById('cur-run').textContent = runIdx + 1;
+
+  // Level labels for status
+  var levStr = [1,2,3].map(function(p){
+    if (doeType === 2) return vpump[p] === LV[p] ? 'P'+p+':-' : 'P'+p+':+';
+    if (Math.abs(vpump[p]-LV[p])<0.001) return 'P'+p+':-';
+    if (Math.abs(vpump[p]-HV[p])<0.001) return 'P'+p+':+';
+    return 'P'+p+':0';
+  }).join(' ');
+  document.getElementById('run-levels').textContent = levStr;
+
+  // Highlight current row in DoE table
+  document.querySelectorAll('#doe-tbody tr').forEach(function(r,i){
+    r.classList.remove('active-run');
+    if (i < runIdx) r.classList.add('done-run');
+  });
+  var activeRow = document.getElementById('doerow-' + runIdx);
+  if (activeRow) activeRow.classList.add('active-run');
+
+  runTimer = setInterval(function() {
+    for (var p = 1; p <= 3; p++) {
+      runPos[p] = Math.min(runPos[p] + runTick[p], runTgt[p]);
+    }
+    elapsed = (runPos[runFastest] / runTgt[runFastest]) * dPump * 60;
+
+    var runPct = Math.min(100, runPos[runFastest] / runTgt[runFastest] * 100);
+    var totPct = Math.min(100, (runIdx + runPct/100) / (doeType===2?8:27) * 100);
+
+    document.getElementById('pb-run').style.width   = runPct.toFixed(1) + '%';
+    document.getElementById('pp-run').textContent   = Math.round(runPct) + '%';
+    document.getElementById('pb-total').style.width = totPct.toFixed(1) + '%';
+    document.getElementById('pp-total').textContent = Math.round(totPct) + '%';
+    document.getElementById('p-t').textContent      = elapsed.toFixed(1);
+
+    // Syringe fills — cumulative, using time fraction
+    var timeFrac = runTgt[runFastest] > 0 ? Math.min(1, runPos[runFastest] / runTgt[runFastest]) : 0;
+    for (var p = 1; p <= 3; p++) {
+      var stepInj = timeFrac * dPump * vpump[p];
+      var cumInj  = totalInj[p] + stepInj;
+      var syrPct  = Math.min(100, cumInj / V_TOTAL * 100);
+      document.getElementById('syr'+p).style.width = syrPct.toFixed(1) + '%';
+      document.getElementById('syt'+p).textContent = cumInj.toFixed(2) + ' ml';
+      document.getElementById('inj'+p).textContent = cumInj.toFixed(2);
+    }
+
+    if (runPos[runFastest] >= nextMeasP) {
+      sendRow();
+      nextMeasP += runTgt[runFastest] / NB_MES;
+    }
+
+    if (runPos[runFastest] >= runTgt[runFastest]) {
+      clearInterval(runTimer);
+      sendRow();
+      for (var p = 1; p <= 3; p++) totalInj[p] += dPump * vpump[p];
+
+      // ── CHECK : seringue pleine en fin de run ────────────────────
+      var nRuns = doeType === 2 ? 8 : 27;
+      for (var p = 1; p <= 3; p++) {
+        if (totalInj[p] >= V_TOTAL && runIdx + 1 < nRuns) {
+          running = false;
+          for (var pp = 1; pp <= 3; pp++) motorSet(pp, 0);
+          serialAdd('!! ALERTE : seringue P' + p + ' pleine (' + totalInj[p].toFixed(2) +
+            ' ml) — plan interrompu après run ' + (runIdx+1) + '/' + nRuns + ' !!', 'se');
+          setStatus('!! SYRINGE P' + p + ' PLEINE — DoE interrompu run ' + (runIdx+1) + '/' + nRuns, 'warn');
+          lcdDraw(["!! ALERTE !!", "Seringue P"+p, "PLEINE "+V_TOTAL+"ml", "Plan arrete", "run "+(runIdx+1)+"/"+nRuns, ""], -1);
+          fwSt(0);
+          return;
+        }
+      }
+      // ─────────────────────────────────────────────────────────────
+
+      runIdx++;
+      startRun();
+    }
+  }, 50);
+}
+
+function finishRun() {
+  running = false;
+  for (var p = 1; p <= 3; p++) motorSet(p, 0);
+  document.getElementById('pb-run').style.width   = '100%';
+  document.getElementById('pb-total').style.width = '100%';
+  document.getElementById('pp-run').textContent   = '100%';
+  document.getElementById('pp-total').textContent = '100%';
+  document.querySelectorAll('#doe-tbody tr').forEach(function(r){
+    r.classList.remove('active-run'); r.classList.add('done-run');
+  });
+  fwSt(6);
+  serialAdd('// DoE ' + doeType + '^3 TERMINE — ' + (doeType===2?8:27) + ' runs OK — toutes les seringues dans les limites', 'sh');
+  setStatus('DoE ' + doeType + '^3 DONE — ' + (doeType===2?8:27) + ' runs completed', '');
+  lcdDraw(["  DoE DONE !", "", "  all runs", "  complete", "", ""], -1);
+  setTimeout(function(){ niveau=0;choice=0;lcdMenu();fwSt(0);setStatus('IDLE — ready for next DoE',''); }, 3000);
+}
+
+function updateRatioBars(maxV) {
+  for (var p = 1; p <= 3; p++) {
+    var pct = maxV > 0 ? Math.min(100, vpump[p] / maxV * 100) : 0;
+    document.getElementById('rb'+p).style.width  = pct.toFixed(1) + '%';
+    document.getElementById('rrv'+p).textContent = vpump[p].toFixed(2);
+  }
+}
+
+/* ================================================================
+   RESET
+================================================================ */
+function doReset() {
+  if (runTimer) { clearInterval(runTimer); runTimer = null; }
+  running = false;
+  LV = [0,null,null,null]; HV = [0,null,null,null];
+  lvSet = [false,false,false,false]; hvSet = [false,false,false,false];
+  vpump = [0,0,0,0]; totalInj = [0,0,0,0];
+  measCnt = 0; runIdx = 0;
+
+  for (var p = 1; p <= 3; p++) {
+    motorSet(p, 0);
+    document.getElementById('syr'+p).style.width  = '0%';
+    document.getElementById('syt'+p).textContent  = '0.00 ml';
+    document.getElementById('inj'+p).textContent  = '0.00';
+    document.getElementById('rb'+p).style.width   = '0%';
+    document.getElementById('rrv'+p).textContent  = '0.00';
+    document.getElementById('lv'+p).textContent   = '—';
+    document.getElementById('hv'+p).textContent   = '—';
+    document.getElementById('lhv-status'+p).className = 'lhv-status empty';
+    document.getElementById('lhv-status'+p).textContent = 'not set';
+    document.getElementById('lhvc'+p).classList.remove('active');
+  }
+  document.getElementById('pb-run').style.width   = '0%';
+  document.getElementById('pb-total').style.width = '0%';
+  document.getElementById('pp-run').textContent   = '0%';
+  document.getElementById('pp-total').textContent = '0%';
+  document.getElementById('p-t').textContent      = '0.0';
+  document.getElementById('p-meas').textContent   = '0';
+  document.getElementById('cur-run').textContent  = '—';
+  document.getElementById('tot-runs').textContent = '—';
+  document.getElementById('run-levels').textContent = '—';
+  document.getElementById('doe-tbody').innerHTML  = '';
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+  ['pc1-btn','pc2-btn','pc3-btn'].forEach(function(id){ document.getElementById(id).classList.remove('on'); });
+  fwSt(0); niveau = 0; choice = 0;
+  setStatus('IDLE — choose DoE type, set LV/HV per pump, then press RUN', '');
+  lcdDraw(["  Reset done", "  Menu 10s..", "", "", "", ""], -1);
+  setTimeout(function(){ lcdMenu(); }, 2000);
+}
+
+/* ================================================================
+   EMERGENCY
+================================================================ */
+function doEmerg() {
+  if (!running) return;
+  clearInterval(runTimer); runTimer = null;
+  running = false;
+  for (var p = 1; p <= 3; p++) motorSet(p, 0);
+  fwSt(0); niveau = 0; choice = 0;
+  setStatus('!! EMERGENCY STOP !!', 'warn');
+  lcdDraw(["!! STOP !!", "Emergency", "stop", "", "", ""], -1);
+  setTimeout(function(){ lcdMenu(); setStatus('IDLE — emergency stop triggered',''); }, 2500);
+}
+
+/* ================================================================
+   BUTTON HANDLERS — mirrors Select_menu()
+================================================================ */
+function btnUP() {
+  if (running) return;
+  var mx = MAX_CH[niveau] || 3;
+  choice = (choice >= mx) ? 1 : choice + 1;
+  lcdMenu();
+}
+function btnDN() {
+  if (running) return;
+  var mx = MAX_CH[niveau] || 3;
+  choice = (choice <= 1) ? mx : choice - 1;
+  lcdMenu();
+}
+function btnSEL() { if (!running) runProg(); }
+
+/* ================================================================
+   PROGRAMME() — mirrors Programme()
+================================================================ */
+function runProg() {
+  /* niveau 0 — main menu */
+  if (niveau === 0) {
+    if      (choice === 1) { setDoeType(2); niveau=1; choice=0; lcdMenu(); fwSt(1); }
+    else if (choice === 2) { setDoeType(3); niveau=1; choice=0; lcdMenu(); fwSt(1); }
+    else if (choice === 3) { doReset(); }
+    return;
+  }
+  /* niveau 1 — pump LV/HV selection
+     Selecting a pump goes to rate page 1 (selectPump handles navigation) */
+  if (niveau === 1) {
+    if (choice === 1) selectPump(1);
+    if (choice === 2) selectPump(2);
+    if (choice === 3) selectPump(3);
+    return;
+  }
+  /* niveau 2 — rate presets page 1 (SEL_V[1..4] = 0.00,0.05,0.10,0.20) */
+  if (niveau === 2) {
+    if (choice >= 1 && choice <= 4) setLvHv(SEL_V[choice]);
+    else if (choice === 5) { niveau=3; choice=0; updatePumpMenu(); lcdMenu(); fwSt(3); }
+    return;
+  }
+  /* niveau 3 — rate presets page 2 (SEL_V[5..8] = 0.50,0.75,1.00,2.00 + 5.00 chip only) */
+  if (niveau === 3) {
+    if (choice >= 1 && choice <= 4) setLvHv(SEL_V[choice + 4]);
+    else if (choice === 5) { niveau=2; choice=0; updatePumpMenu(); lcdMenu(); fwSt(2); }
+    return;
+  }
+  /* niveau 4 — recap */
+  if (niveau === 4) {
+    if      (choice === 4) doRun();
+    else if (choice === 5) { niveau=0; choice=0; lcdMenu(); fwSt(0); setStatus('IDLE — ready',''); }
+    return;
+  }
+}
+
+/* ================================================================
+   EVENT BINDINGS
+================================================================ */
+document.getElementById('b-up').addEventListener('click',  btnUP);
+document.getElementById('b-sel').addEventListener('click', btnSEL);
+document.getElementById('b-dn').addEventListener('click',  btnDN);
+document.getElementById('b-emg').addEventListener('click', doEmerg);
+document.getElementById('btn-run').addEventListener('click', doRun);
+document.getElementById('btn-rst').addEventListener('click', doReset);
+
+['chips1','chips2'].forEach(function(id) {
+  document.getElementById(id).addEventListener('click', function(e) {
+    var c = e.target.closest('.chip');
+    if (c) setLvHv(parseFloat(c.dataset.v));
+  });
+});
+
+document.addEventListener('keydown', function(e) {
+  if      (e.key === 'ArrowUp')            { btnUP();   e.preventDefault(); }
+  else if (e.key === 'ArrowDown')          { btnDN();   e.preventDefault(); }
+  else if (e.key === 'Enter')              { btnSEL();  e.preventDefault(); }
+  else if (e.key === 'e' || e.key === 'E') { doEmerg(); }
+});
+
+/* ================================================================
+   BOOT
+================================================================ */
+setInterval(function(){ if (!running) updateSensors(); }, 1500);
+lcdDraw(["  DoE PUMPS", "  2^3 / 3^3", "  Ready !", "", "", ""], -1);
+serialAdd('// Setup complete — DoE pumps ready', 'sh');
+setTimeout(function(){ niveau=0; choice=0; lcdMenu(); fwSt(0); }, 2000);
+setDoeType(2);
+pumpSel = 1;
+document.getElementById('pc1-btn').classList.add('on');
+document.getElementById('lhvc1').classList.add('active');
+updatePumpMenu();
+</script>
+</body>
+</html>

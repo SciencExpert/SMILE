@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Independent 3-pump syringe controller</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
+</head>
+<body>
+<div class="wrap">
+
+<!--
+  _______________________________________
+         header
+  _______________________________________
+  -->
+<header>
+  <div class="header">
+
+    <h1 style="line-height:1em" >Independent 3-pump syringe controller — ARDUINO SIMULATOR</h1>
+
+
+    <div style="display:flex; align-items:center; gap:50px;">
+
+      <button style="background-color:#ADD8E6; color:#000080; border-radius:10px;
+                     height:30px; width:100px; cursor:pointer;
+                     transition:background-color 0.3s ease, transform 0.2s ease;"
+              onclick="window.location.href='00_PUMP_Menu.html';">
+        PumpLab™
+      </button>
+
+      <span style="margin:0; line-height:normal; display:flex; align-items:center; color:var(--g)">
+        © 2025 SciencExpert. Website designed and developed by
+        <a href="https://payhip.com/SciencExpert/sciencexpert"
+           target="_blank" rel="noopener noreferrer"
+           style="color:var(--secondary-color); text-decoration:none; margin-left:5px;">
+          <img src="images/SE_favicon.ico" alt="Icône"
+               style="height:16px; vertical-align:middle; margin-right:5px;">
+          SciencExpert™
+        </a>. All rights reserved. Unauthorized use or reproduction is prohibited.
+      </span>
+
+      <button style="background-color:#ADD8E6; color:#000080; border-radius:10px;
+                     height:30px; width:100px; cursor:pointer;
+                     transition:background-color 0.3s ease, transform 0.2s ease;"
+              onclick="location.reload();">
+        ♻️ Reset
+      </button>
+    </div>
+
+  </div>
+
+<div> </div>
+</header>
+<div class="grid">
+
+  <!-- =========================================LEFT ========================================= -->
+  <div class="col">
+
+    <div class="panel">
+      <div class="pt">Nokia PCD8544 LCD</div>
+      <div class="lcd-shell"><div id="lcd"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Buttons — pins 2 / 3 / 4</div>
+      <div class="hwbtns">
+        <button class="hb hb-up"  id="b-up">&#9650;  UP &nbsp;&nbsp;&nbsp;&nbsp; pin 2</button>
+        <button class="hb hb-sel" id="b-sel">&#9679;  SELECT  pin 3</button>
+        <button class="hb hb-dn"  id="b-dn">&#9660;  DOWN &nbsp;&nbsp; pin 4</button>
+        <button class="hb hb-emg" id="b-emg">&#9888;  EMERGENCY STOP</button>
+      </div>
+      <div class="kb">Keyboard: &uarr; &darr; Enter &nbsp;&middot;&nbsp; E = emergency</div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Syringes — 19 ml each</div>
+      <div class="syr-group">
+        <div class="syr-row" style="margin:0px;padding:0px">
+          <div class="mlbl" style="color:var(--p1)">P1 .</div>
+          <div class="syr"><div class="syr-f p1" id="syr1"></div><div class="syr-t" id="syt1">0.00 ml</div></div>
+        </div>
+        <div class="syr-row" style="margin:0px;padding:0px">
+          <div class="mlbl" style="color:var(--p2)">P2 .</div>
+          <div class="syr"><div class="syr-f p2" id="syr2"></div><div class="syr-t" id="syt2">0.00 ml</div></div>
+        </div>
+        <div class="syr-row" style="margin:0px;padding:0px">
+          <div class="mlbl" style="color:var(--p3)">P3 .</div>
+          <div class="syr"><div class="syr-f p3" id="syr3"></div><div class="syr-t" id="syt3">0.00 ml</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="pt">Steppers + EasyDriver</div>
+      <div class="motors">
+        <div class="mcard">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="28" fill="#0d1520" stroke="#1e2535" stroke-width="1.5"/>
+            <g class="mrotor" id="mr1">
+              <circle cx="30" cy="30" r="17" fill="#111a28" stroke="#1d2a40" stroke-width="1"/>
+              <rect x="29" y="7" width="2" height="12" rx="1" fill="#00e5a0"/>
+              <rect x="29" y="41" width="2" height="12" rx="1" fill="#1e2535"/>
+              <rect x="7"  y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+              <rect x="41" y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+            </g>
+            <circle cx="30" cy="30" r="4" fill="#0c0f18" stroke="#00e5a0" stroke-width="1"/>
+          </svg>
+          <div class="mlbl" style="color:var(--p1)">P1<br><b id="ms1">0</b> step/s</div>
+        </div>
+        <div class="mcard">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="28" fill="#0d1520" stroke="#1e2535" stroke-width="1.5"/>
+            <g class="mrotor" id="mr2">
+              <circle cx="30" cy="30" r="17" fill="#111a28" stroke="#1d2a40" stroke-width="1"/>
+              <rect x="29" y="7" width="2" height="12" rx="1" fill="#0099ff"/>
+              <rect x="29" y="41" width="2" height="12" rx="1" fill="#1e2535"/>
+              <rect x="7"  y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+              <rect x="41" y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+            </g>
+            <circle cx="30" cy="30" r="4" fill="#0c0f18" stroke="#0099ff" stroke-width="1"/>
+          </svg>
+          <div class="mlbl" style="color:var(--p2)">P2<br><b id="ms2">0</b><small> step/s</small></div>
+        </div>
+        <div class="mcard" height="100">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="28" fill="#0d1520" stroke="#1e2535" stroke-width="1.5"/>
+            <g class="mrotor" id="mr3">
+              <circle cx="30" cy="30" r="17" fill="#111a28" stroke="#1d2a40" stroke-width="1"/>
+              <rect x="29" y="7" width="2" height="12" rx="1" fill="#ff9020"/>
+              <rect x="29" y="41" width="2" height="12" rx="1" fill="#1e2535"/>
+              <rect x="7"  y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+              <rect x="41" y="29" width="12" height="2" rx="1" fill="#1e2535"/>
+            </g>
+            <circle cx="30" cy="30" r="4" fill="#0c0f18" stroke="#ff9020" stroke-width="1"/>
+          </svg>
+          <div class="mlbl" style="color:var(--p3)">P3<br><b id="ms3">0</b><small> step/s</small></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /left -->
+
+
+  <!-- =========================================RIGHT ========================================= -->
+  <div class="col">
+       <div class="sbar" id="sbar" style="display:none">
+	 <div class="dot" id="dot"></div>
+       <span id="sbar-t">IDLE &mdash; configure pumps then press RUN</span>
+    </div>
+
+
+    <div class="panel" style="display:none">
+      <div class="pt">Firmware state</div>
+      <div class="states">
+        <div class="st on" id="st0">MENU</div>
+        <div class="st"   id="st1">SET PUMP</div>
+        <div class="st"   id="st2">RATE P1</div>
+        <div class="st"   id="st3">RATE P2</div>
+        <div class="st"   id="st4">RECAP</div>
+        <div class="st"   id="st5">RUNNING</div>
+        <div class="st"   id="st6">DONE</div>
+      </div>
+    </div>
+
+    <!-- Pump speed cards -->
+    <div class="panel" >
+      <div class="pt">Pump flow rates (ml/min)</div>
+      <div class="pump-cards">
+        <div class="pcard" id="pc1">
+          <div class="pc-name c1">PUMP 1</div>
+          <div class="pc-val c1"><span id="pv1">0.00</span><span>ml / min</span></div>
+        </div>
+        <div class="pcard" id="pc2">
+          <div class="pc-name c2">PUMP 2</div>
+          <div class="pc-val c2"><span id="pv2">0.00</span><span>ml / min</span></div>
+        </div>
+        <div class="pcard" id="pc3">
+          <div class="pc-name c3">PUMP 3</div>
+          <div class="pc-val c3"><span id="pv3">0.00</span><span>ml / min</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rate selector -->
+    <div class="panel" style="display:none">
+      <div class="pt">Configure pump</div>
+      <div class="ptabs">
+        <button class="ptab" id="pt1" onclick="selectPump(1)">PUMP 1</button>
+        <button class="ptab" id="pt2" onclick="selectPump(2)">PUMP 2</button>
+        <button class="ptab" id="pt3" onclick="selectPump(3)">PUMP 3</button>
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip" data-v="0.05">0.05</button>
+        <button class="chip" data-v="0.10">0.10</button>
+        <button class="chip" data-v="0.20">0.20</button>
+        <button class="chip" data-v="0.50">0.50</button>
+        <button class="chip" data-v="0.75">0.75</button>
+        <button class="chip" data-v="1.00">1.00</button>
+        <button class="chip" data-v="2.00">2.00</button>
+        <button class="chip" data-v="5.00">5.00</button>
+      </div>
+      <div class="arow">
+        <button class="ab run" id="btn-run">&#9654; RUN ALL</button>
+        <button class="ab"     id="btn-rst">&#8635; RESET</button>
+      </div>
+      <div class="subinf" style="margin-top:8px;">
+        Conversion: <b id="cv">—</b> steps&middot;s<sup>-1</sup> per ml&middot;min<sup>-1</sup>
+        &nbsp;&middot;&nbsp; tour_max: <b id="tm">—</b> steps
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="panel">
+      <div class="pt">Pump progress</div>
+      <div class="prog-group">
+        <div class="prog-row">
+          <div class="mlbl" style="color:var(--p1);margin:0px;padding:0px">P1</div>
+          <div class="pbar"><div class="pbar-f p1" id="pb1"></div></div>
+          <div class="prog-pct" id="pp1">0%</div>
+        </div>
+        <div class="prog-row">
+          <div class="mlbl" style="color:var(--p2);margin:0px;padding:0px">P2</div>
+          <div class="pbar"><div class="pbar-f p2" id="pb2"></div></div>
+          <div class="prog-pct" id="pp2">0%</div>
+        </div>
+        <div class="prog-row">
+          <div class="mlbl" style="color:var(--p3);margin:0px;padding:0px">P3</div>
+          <div class="pbar"><div class="pbar-f p3" id="pb3"></div></div>
+          <div class="prog-pct" id="pp3">0%</div>
+        </div>
+      </div>
+      <div class="prow" style="margin:0px;padding:0px">
+        <span>Time: <span id="p-t">0.0</span> s</span>
+        <span>ETA: <span id="p-eta">—</span></span>
+        <span>Serial rows: <span id="p-meas">0</span></span>
+      </div>
+      <div class="sub" style="margin:0px;padding:0px">
+        Ref pump: <b id="p-ref">—</b>
+        &nbsp;&middot;&nbsp; Steps: <b id="p-stp">0</b> / <b id="p-tgt">—</b>
+      </div>
+    </div>
+
+    <!-- Sensors -->
+    <div class="panel">
+      <div class="pt">Sensors A0&ndash;A5 (simulated)</div>
+      <div class="sgrid">
+        <div class="sc"><div class="sn">TEMP &middot; A0</div><span class="sv" id="sv0">—</span><span class="su"> degC</span></div>
+        <div class="sc"><div class="sn">POT &middot; A1</div><span class="sv"  id="sv1">—</span><span class="su"> mV</span></div>
+        <div class="sc"><div class="sn">COND &middot; A2</div><span class="sv" id="sv2">—</span><span class="su"> mS</span></div>
+        <div class="sc"><div class="sn">TURB &middot; A3</div><span class="sv" id="sv3">—</span><span class="su"> NTU</span></div>
+        <div class="sc"><div class="sn">S4 &middot; A4</div><span class="sv"  id="sv4">—</span><span class="su"> u</span></div>
+        <div class="sc"><div class="sn">S5 &middot; A5</div><span class="sv"  id="sv5">—</span><span class="su"> u</span></div>
+      </div>
+    </div>
+
+    <!-- Serial log -->
+    <div class="panel" >
+      <div class="pt">Serial monitor — PLX-DAQ 9600 baud</div>
+      <div class="serial" id="serial-log" style="color:white; height:230px"></div>
+    </div>
+
+  </div><!-- /right -->
+</div>
+</div>
+
+<script>
+
+/* ================================================================
+   Colors
+================================================================ */
+ 
+// Couleurs par défaut
+let bg = "#85087A"; // couleur principale
+let panel = "#131825";
+let panelbg = "#BDBDBD";
+let border = "#1d2740";
+let g = "white"; //"#008679";  titre et texte
+let b = "#0099ff";
+let r = "#ff4060";
+let o = "#ff9020";
+let dim = "#1a2438";
+let text = "yellow";
+let p1 = "#00e5a0";
+let p2 = "#0099ff";
+let p3 = "#ff9020";
+
+// Fonction pour mettre à jour les CSS variables
+function setColors(c1, c2, c3, c4) {
+    const root = document.documentElement;
+    root.style.setProperty('--bg', c1);
+    root.style.setProperty('--panel', c2);
+    root.style.setProperty('--panelbg', c3);
+    root.style.setProperty('--border', c4);
+    root.style.setProperty('--g', g);
+    root.style.setProperty('--b', b);
+    root.style.setProperty('--r', r);
+    root.style.setProperty('--o', o);
+    root.style.setProperty('--dim', dim);
+    root.style.setProperty('--text', text);
+    root.style.setProperty('--p1', p1);
+    root.style.setProperty('--p2', p2);
+    root.style.setProperty('--p3', p3);
+}
+
+// Exemple : changer les couleurs
+setColors("#85087A", "#131825", "#BDBDBD", "#1d2740");
+
+/* ================================================================
+   CONSTANTS — mirrors Arduino compile-time values
+================================================================ */
+var V_TOTAL   = 19.0;
+var STEP_TOUR = 1600;
+var LONG_MAX  = 60;
+var RTOUR_MM  = 1.0 / 16;
+var CONV      = Math.round(STEP_TOUR * LONG_MAX / (RTOUR_MM * V_TOTAL * 60.0));
+var TOUR_MAX  = STEP_TOUR * LONG_MAX / RTOUR_MM;
+var NB_MES    = 10;
+
+document.getElementById('cv').textContent = CONV;
+document.getElementById('tm').textContent = TOUR_MAX.toLocaleString();
+
+/* ================================================================
+   STATE
+================================================================ */
+var vpump     = [0, 0.0, 0.0, 0.0]; // vpump[1..3]  mirrors VPump[1..3]
+var vpump0    = 0.0;                 // reference (fastest) mirrors VPump[0]
+var pumpNum   = 1;                   // currently selected pump for config
+var running   = false;
+var niveau    = 0;
+var choice    = 0;
+
+var elapsed   = 0, measCnt = 0;
+var dPump     = 0, dMes    = 0;
+var tgtPos    = 0;                   // reference pump target steps
+var curPos    = [0, 0.0, 0.0, 0.0]; // per-pump position
+var maxPos    = [0, 0.0, 0.0, 0.0]; // per-pump target (proportional)
+var runTimer  = null;
+
+/* Menu text — mirrors Txt[5][6] */
+var MENUS = [
+  ["3-PUMP FIXED",  " >Set Pump 1", " >Set Pump 2", " >Set Pump 3", " >Recap/Run", " >Reset"],
+  ["SELECT PUMP",   "P1:0.00ml/m",  "P2:0.00ml/m",  "P3:0.00ml/m",  " >Recap",     "Run"],
+  ["FLOW RATE",     "0.05 ml/m",    "0.10 ml/m",    "0.20 ml/m",    "0.50 ml/m",   " >More..."],
+  ["FLOW RATE",     "0.75 ml/m",    "1.00 ml/m",    "2.00 ml/m",    " >Adjust",    " <Back"],
+  ["  RECAP",       "P1:----",      "P2:----",      "P3:----",      " >Run",       " >Menu"]
+];
+var SEL_V  = [0, 0.05, 0.10, 0.20, 0.50, 0.75, 1.00, 2.00, 5.00];
+var MAX_CH = [5, 5, 5, 4, 5];
+
+/* ================================================================
+   LCD
+================================================================ */
+function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function lcdDraw(lines, hlIdx) {
+  var html = '';
+  for (var i = 0; i < 6; i++) {
+    var line = (lines[i] || '').padEnd(14, ' ');
+    if (i === hlIdx) html += '<span class="hl">' + escH(line) + '</span>\n';
+    else             html += escH(line) + '\n';
+  }
+  document.getElementById('lcd').innerHTML = html;
+}
+
+function lcdMenu() {
+  var hl = (choice >= 1) ? choice : -1;
+  lcdDraw(MENUS[niveau], hl);
+}
+
+function lcdRunning() {
+  lcdDraw([
+    "   RUNNING",
+    "   pumps",
+    "P1=>" + vpump[1].toFixed(2),
+    "P2=>" + vpump[2].toFixed(2),
+    "P3=>" + vpump[3].toFixed(2),
+    ""
+  ], -1);
+}
+
+function updateMenuSpeeds() {
+  MENUS[1][1] = "P1:" + vpump[1].toFixed(2) + "ml/m";
+  MENUS[1][2] = "P2:" + vpump[2].toFixed(2) + "ml/m";
+  MENUS[1][3] = "P3:" + vpump[3].toFixed(2) + "ml/m";
+  MENUS[4][1] = "P1:" + vpump[1].toFixed(2) + "ml/m";
+  MENUS[4][2] = "P2:" + vpump[2].toFixed(2) + "ml/m";
+  MENUS[4][3] = "P3:" + vpump[3].toFixed(2) + "ml/m";
+}
+
+/* ================================================================
+   FIRMWARE STATE INDICATOR
+================================================================ */
+function fwSt(n) {
+  for (var i = 0; i <= 6; i++)
+    document.getElementById('st' + i).classList.toggle('on', i === n);
+}
+
+/* ================================================================
+   STATUS BAR
+================================================================ */
+function setStatus(msg, type) {
+  var bar = document.getElementById('sbar');
+  var dot = document.getElementById('dot');
+  bar.className = 'sbar' + (type ? ' ' + type : '');
+  dot.className = 'dot' + (type === 'run' ? ' pulse' : (type ? ' on' : ''));
+  document.getElementById('sbar-t').textContent = msg;
+}
+
+/* ================================================================
+   SENSORS
+================================================================ */
+var S_BASE  = [22.5, 512, 1.80, 14.0, 3.20, 0.90];
+var S_NOISE = [0.30, 20,  0.10,  1.0, 0.20, 0.05];
+
+function updateSensors() {
+  var v = S_BASE.map(function(b, i){ return b + (Math.random() - 0.5) * S_NOISE[i] * 2; });
+  for (var i = 0; i < 6; i++) document.getElementById('sv' + i).textContent = v[i].toFixed(2);
+  return v;
+}
+
+/* ================================================================
+   SERIAL LOG  — mirrors impression()
+================================================================ */
+function serialAdd(msg, cls) {
+  var log  = document.getElementById('serial-log');
+  var line = document.createElement('div');
+  line.className = cls || 'sd';
+  line.textContent = msg;
+  log.appendChild(line);
+  while (log.children.length > 80) log.removeChild(log.firstChild);
+  log.scrollTop = log.scrollHeight;
+}
+
+serialAdd('LABEL,Temps,Pump1,Pump2,Pump3,Temp,Pot,Cond,Turb,S4,S5,Duree,DelaiMes', 'sh');
+
+function sendRow() {
+  var v = updateSensors();
+  measCnt++;
+  var row = 'DATA,TIME,' +
+    vpump[1].toFixed(2) + ',' +
+    vpump[2].toFixed(2) + ',' +
+    vpump[3].toFixed(2) + ',' +
+    v.map(function(x){ return x.toFixed(2); }).join(',') + ',' +
+    dPump.toFixed(2) + ',' + dMes.toFixed(2);
+  serialAdd(row);
+  document.getElementById('p-meas').textContent = measCnt;
+}
+
+/* ================================================================
+   MOTOR ANIMATION
+================================================================ */
+function motorSet(idx, sps) {
+  document.getElementById('ms' + idx).textContent = Math.round(sps);
+  var r = document.getElementById('mr' + idx);
+  if (sps > 0) {
+    var period = Math.max(0.05, STEP_TOUR / sps).toFixed(3) + 's';
+    r.style.setProperty('--ms', period);
+    r.classList.add('spin');
+  } else {
+    r.classList.remove('spin');
+  }
+}
+
+/* ================================================================
+   PUMP CARD HIGHLIGHT
+================================================================ */
+function highlightPump(p) {
+  pumpNum = p;
+  for (var i = 1; i <= 3; i++) {
+    var pc = document.getElementById('pc' + i);
+    pc.className = 'pcard' + (i === p ? ' active-p' + i : '');
+  }
+  document.querySelectorAll('.ptab').forEach(function(t){ t.className = 'ptab'; });
+  document.getElementById('pt' + p).className = 'ptab sel' + p;
+  // clear chip selection
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+  // highlight chip matching current speed
+  document.querySelectorAll('.chip').forEach(function(c){
+    if (parseFloat(c.dataset.v) === vpump[p]) c.classList.add('on');
+  });
+  // navigate LCD to rate selection
+  niveau = 2; choice = 0; lcdMenu(); fwSt(2);
+  setStatus('Configure Pump ' + p + ' — choose a flow rate', 'info');
+}
+
+function selectPump(p) { highlightPump(p); }
+
+/* ================================================================
+   RATE CHIP CLICK
+================================================================ */
+function setRate(v) {
+  vpump[pumpNum] = v;
+  document.getElementById('pv' + pumpNum).textContent = v.toFixed(2);
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.classList.toggle('on', parseFloat(c.dataset.v) === v);
+  });
+  updateMenuSpeeds();
+  // go back to pump selection level
+  niveau = 1; choice = 0; lcdMenu(); fwSt(1);
+  setStatus('Pump ' + pumpNum + ' = ' + v.toFixed(2) + ' ml/min. Choose next pump or RUN.', 'info');
+}
+
+/* ================================================================
+   RUN  — mirrors Run() Synchro==0 block
+================================================================ */
+function doRun() {
+  if (running) return;
+  var anySet = vpump[1] > 0 || vpump[2] > 0 || vpump[3] > 0;
+  if (!anySet) { setStatus('Set at least one pump flow rate!', 'warn'); return; }
+
+  running   = true;
+  elapsed   = 0;
+  measCnt   = 0;
+  curPos    = [0, 0.0, 0.0, 0.0];
+
+  // Find fastest pump — mirrors VPump[0] selection
+  vpump0 = Math.max(vpump[1], vpump[2], vpump[3]);
+  var refP = vpump[1] >= vpump[2] && vpump[1] >= vpump[3] ? 1 :
+             vpump[2] >= vpump[3] ? 2 : 3;
+
+  dPump  = V_TOTAL / vpump0;                      // minutes
+  dMes   = 60.0 * dPump / NB_MES;                 // seconds
+
+  // Per-pump step targets — each pump's target is proportional to its speed
+  for (var p = 1; p <= 3; p++) {
+    maxPos[p] = vpump[p] > 0
+      ? Math.round(dPump * vpump[p] * STEP_TOUR * LONG_MAX / (V_TOTAL * RTOUR_MM))
+      : 0;
+  }
+  tgtPos = maxPos[refP];
+
+  // Speeds
+  for (var p = 1; p <= 3; p++) motorSet(p, vpump[p] * CONV);
+
+  fwSt(5);
+  setStatus('RUNNING — P1:' + vpump[1].toFixed(2) + ' P2:' + vpump[2].toFixed(2) + ' P3:' + vpump[3].toFixed(2), 'run');
+  document.getElementById('p-ref').textContent = 'P' + refP + ' (' + vpump0.toFixed(2) + ' ml/m)';
+  document.getElementById('p-tgt').textContent = tgtPos.toLocaleString();
+  lcdRunning();
+  updateMenuSpeeds();
+  niveau = 1; // stay in running screen
+
+  // Each pump gets its own steps-per-tick so the simulation always
+  // finishes in ~20 real seconds regardless of the actual flow rates.
+  // The reference pump (fastest) drives 400 ticks to completion.
+  // Slower pumps have proportionally fewer steps per tick, so their
+  // syringe fills more slowly — exactly like setMaxSpeed in Arduino.
+  var SIM_TICKS = 400;
+  var tick = [0, 0, 0, 0];                         // steps per tick per pump
+  for (var p = 1; p <= 3; p++) {
+    tick[p] = maxPos[p] / SIM_TICKS;               // proportional to flow rate
+  }
+
+  var measEvery = tgtPos / NB_MES;                 // ref pump step threshold
+  var nextMeasP = measEvery;
+
+  runTimer = setInterval(function() {
+
+    // Each pump advances at its own independent speed
+    for (var p = 1; p <= 3; p++) {
+      if (vpump[p] > 0 && maxPos[p] > 0) {
+        curPos[p] = Math.min(curPos[p] + tick[p], maxPos[p]);
+      }
+    }
+
+    // Simulated time driven by reference pump progress
+    elapsed = (curPos[refP] / tgtPos) * dPump * 60;
+    var rem = Math.max(0, dPump * 60 - elapsed);
+
+    // Update each pump UI independently.
+    // pct and inj are relative to tgtPos (the reference pump's target),
+    // NOT to maxPos[p] (each pump's own target).
+    // Reason: all pumps run for the same duration dPump.
+    // The fastest pump empties 100% of its syringe.
+    // A slower pump delivers (vpump[p]/vpump0) * V_TOTAL ml — less than full.
+    // Dividing curPos[p] by maxPos[p] would always give 100% at completion
+    // because tick[p] = maxPos[p]/SIM_TICKS so curPos reaches maxPos in 400 ticks.
+    // The correct denominator is tgtPos so slower pumps show a lower fill %.
+    for (var p = 1; p <= 3; p++) {
+      var pct = vpump[p] > 0 ? Math.min(100, curPos[p] / tgtPos * 100) : 0;
+      var inj = pct / 100 * V_TOTAL;
+      document.getElementById('pb' + p).style.width  = pct.toFixed(1) + '%';
+      document.getElementById('pp' + p).textContent  = Math.round(pct) + '%';
+      document.getElementById('syr' + p).style.width = pct.toFixed(1) + '%';
+      document.getElementById('syt' + p).textContent = inj.toFixed(2) + ' ml';
+    }
+
+    document.getElementById('p-t').textContent   = elapsed.toFixed(1);
+    document.getElementById('p-eta').textContent  = rem > 0 ? rem.toFixed(0) + ' s' : 'Done';
+    document.getElementById('p-stp').textContent  = Math.round(curPos[refP]).toLocaleString();
+
+    lcdRunning();
+
+    // Serial row every 10% of reference pump progress
+    if (curPos[refP] >= nextMeasP) {
+      sendRow();
+      nextMeasP += measEvery;
+    }
+
+    // Done when reference pump reaches its target
+    if (curPos[refP] >= tgtPos) { clearInterval(runTimer); onDone(); }
+  }, 50);
+}
+
+function onDone() {
+  running = false;
+  for (var p = 1; p <= 3; p++) {
+    motorSet(p, 0);
+    // Each pump shows its own actual injected volume, proportional to its flow rate
+    var pct = vpump[p] > 0 && vpump0 > 0 ? Math.min(100, vpump[p] / vpump0 * 100) : 0;
+    var inj = vpump[p] > 0 && vpump0 > 0 ? vpump[p] / vpump0 * V_TOTAL : 0;
+    document.getElementById('pb' + p).style.width  = pct.toFixed(1) + '%';
+    document.getElementById('pp' + p).textContent  = Math.round(pct) + '%';
+    document.getElementById('syr' + p).style.width = pct.toFixed(1) + '%';
+    document.getElementById('syt' + p).textContent = inj.toFixed(2) + ' ml';
+  }
+  document.getElementById('p-eta').textContent = 'Done';
+  fwSt(6);
+  setStatus('DONE — ' + V_TOTAL.toFixed(1) + ' ml injected by fastest pump', '');
+  serialAdd('// ── INJECTION COMPLETE ──────────────────────────────', 'sh');
+  serialAdd('// Pump 1 : ' + vpump[1].toFixed(2) + ' ml/min → ' + (vpump[1] > 0 ? (vpump[1] / vpump0 * V_TOTAL).toFixed(2) : '0.00') + ' ml delivered', 'sh');
+  serialAdd('// Pump 2 : ' + vpump[2].toFixed(2) + ' ml/min → ' + (vpump[2] > 0 ? (vpump[2] / vpump0 * V_TOTAL).toFixed(2) : '0.00') + ' ml delivered', 'sh');
+  serialAdd('// Pump 3 : ' + vpump[3].toFixed(2) + ' ml/min → ' + (vpump[3] > 0 ? (vpump[3] / vpump0 * V_TOTAL).toFixed(2) : '0.00') + ' ml delivered', 'sh');
+  serialAdd('// Duration : ' + dPump.toFixed(2) + ' min  |  Measurements : ' + measCnt, 'sh');
+  serialAdd('// ── END OF RUN ──────────────────────────────────────', 'sh');
+  lcdDraw(["   DONE !", "", "   " + V_TOTAL.toFixed(1) + " ml", "   done", "", ""], -1);
+  setTimeout(function() {
+    niveau = 0; choice = 0; lcdMenu(); fwSt(0);
+    setStatus('IDLE — configure pumps then press RUN', '');
+  }, 3000);
+}
+
+/* ================================================================
+   RESET  — mirrors Reset()
+================================================================ */
+function doReset() {
+  if (runTimer) { clearInterval(runTimer); runTimer = null; }
+  running = false;
+  vpump = [0, 0.0, 0.0, 0.0];
+  for (var p = 1; p <= 3; p++) {
+    motorSet(p, 0);
+    document.getElementById('pv' + p).textContent   = '0.00';
+    document.getElementById('pb' + p).style.width   = '0%';
+    document.getElementById('pp' + p).textContent   = '0%';
+    document.getElementById('syr' + p).style.width  = '0%';
+    document.getElementById('syt' + p).textContent  = '0.00 ml';
+    document.getElementById('pc' + p).className     = 'pcard';
+  }
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+  document.querySelectorAll('.ptab').forEach(function(t){ t.className = 'ptab'; });
+  document.getElementById('p-t').textContent    = '0.0';
+  document.getElementById('p-eta').textContent  = '—';
+  document.getElementById('p-stp').textContent  = '0';
+  document.getElementById('p-tgt').textContent  = '—';
+  document.getElementById('p-ref').textContent  = '—';
+  document.getElementById('p-meas').textContent = '0';
+  elapsed = 0; measCnt = 0;
+  updateMenuSpeeds();
+  fwSt(0); niveau = 0; choice = 0;
+  setStatus('IDLE — configure pumps then press RUN', '');
+  lcdDraw(["  Reset done", "  Menu 10s..", "", "", "", ""], -1);
+  setTimeout(function() { lcdMenu(); }, 2000);
+}
+
+/* ================================================================
+   EMERGENCY
+================================================================ */
+function doEmerg() {
+  if (!running) return;
+  clearInterval(runTimer); runTimer = null;
+  running = false;
+  for (var p = 1; p <= 3; p++) motorSet(p, 0);
+  fwSt(0); niveau = 0; choice = 0;
+  setStatus('!! EMERGENCY STOP !!', 'warn');
+  lcdDraw(["!! STOP !!", "Emergency", "stop", "", "", ""], -1);
+  setTimeout(function() { lcdMenu(); setStatus('IDLE — emergency stop triggered', ''); }, 2500);
+}
+
+/* ================================================================
+   HW BUTTON HANDLERS  — mirrors Select_menu()
+================================================================ */
+function btnUP() {
+  if (running) return;
+  var mx = MAX_CH[niveau] || 5;
+  choice = (choice >= mx) ? 1 : choice + 1;
+  lcdMenu();
+}
+function btnDN() {
+  if (running) return;
+  var mx = MAX_CH[niveau] || 5;
+  choice = (choice <= 1) ? mx : choice - 1;
+  lcdMenu();
+}
+function btnSEL() { if (!running) runProg(); }
+
+/* ================================================================
+   PROGRAMME()  — mirrors Programme()
+================================================================ */
+function runProg() {
+
+  /* niveau 0 — main menu */
+  if (niveau === 0) {
+    if      (choice === 1) { highlightPump(1); }
+    else if (choice === 2) { highlightPump(2); }
+    else if (choice === 3) { highlightPump(3); }
+    else if (choice === 4) { updateMenuSpeeds(); niveau = 4; choice = 0; lcdMenu(); fwSt(4); }
+    else if (choice === 5) { doReset(); }
+    return;
+  }
+
+  /* niveau 1 — pump selection + live speeds */
+  if (niveau === 1) {
+    if      (choice === 1) { highlightPump(1); }
+    else if (choice === 2) { highlightPump(2); }
+    else if (choice === 3) { highlightPump(3); }
+    else if (choice === 4) { updateMenuSpeeds(); niveau = 4; choice = 0; lcdMenu(); fwSt(4); }
+    else if (choice === 5) { doRun(); }
+    return;
+  }
+
+  /* niveau 2 — flow rate presets page 1 (SelectV[1..4]) */
+  if (niveau === 2) {
+    if (choice >= 1 && choice <= 4) setRate(SEL_V[choice]);
+    else if (choice === 5)          { niveau = 3; choice = 0; lcdMenu(); fwSt(3); }
+    return;
+  }
+
+  /* niveau 3 — flow rate presets page 2 (SelectV[5..7]) */
+  if (niveau === 3) {
+    if (choice >= 1 && choice <= 3) setRate(SEL_V[choice + 4]);
+    else if (choice === 4)          setStatus('Adjust: click a chip above for fine control', 'info');
+    else if (choice === 5)          { niveau = 2; choice = 0; lcdMenu(); fwSt(2); }
+    return;
+  }
+
+  /* niveau 4 — recap */
+  if (niveau === 4) {
+    if      (choice === 0) { updateMenuSpeeds(); lcdMenu(); fwSt(4); }
+    else if (choice === 4) { doRun(); }
+    else if (choice === 5) { niveau = 0; choice = 0; lcdMenu(); fwSt(0); setStatus('IDLE — configure pumps then press RUN', ''); }
+    return;
+  }
+}
+
+/* ================================================================
+   EVENT BINDINGS
+================================================================ */
+document.getElementById('b-up').addEventListener('click',  btnUP);
+document.getElementById('b-sel').addEventListener('click', btnSEL);
+document.getElementById('b-dn').addEventListener('click',  btnDN);
+document.getElementById('b-emg').addEventListener('click', doEmerg);
+document.getElementById('btn-run').addEventListener('click', doRun);
+document.getElementById('btn-rst').addEventListener('click', doReset);
+
+document.getElementById('chips').addEventListener('click', function(e) {
+  var c = e.target.closest('.chip');
+  if (c) setRate(parseFloat(c.dataset.v));
+});
+
+document.addEventListener('keydown', function(e) {
+  if      (e.key === 'ArrowUp')            { btnUP();   e.preventDefault(); }
+  else if (e.key === 'ArrowDown')          { btnDN();   e.preventDefault(); }
+  else if (e.key === 'Enter')              { btnSEL();  e.preventDefault(); }
+  else if (e.key === 'e' || e.key === 'E') { doEmerg(); }
+});
+
+/* ================================================================
+   BOOT + CONTINUOUS SENSOR REFRESH
+================================================================ */
+setInterval(function(){ if (!running) updateSensors(); }, 1500);
+
+lcdDraw(["3-PUMP FIXED", "  v1.0", "  Ready !", "", "", ""], -1);
+serialAdd('// Setup complete — 3 pumps ready', 'sh');
+setTimeout(function() {
+  niveau = 0; choice = 0; lcdMenu(); fwSt(0);
+}, 2000);
+</script>
+<link rel="stylesheet" type="text/css" href="css/css0.css">
+<style>
+/* ── Syringe bars — improved readability ── */
+.syr-row {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-bottom: 8px;
+}
+.syr {
+  position: relative;
+  flex: 1;
+  height: 20px;
+  background: #1a2438;
+  border: 1.5px solid #2d3f60;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+.syr-f {
+  height: 100%;
+  width: 0%;
+  border-radius: 13px;
+  transition: width 0.15s linear;
+}
+.syr-f.p1 { background: linear-gradient(90deg, #009f6f, #00e5a0); box-shadow: 0 0 8px #00e5a050; }
+.syr-f.p2 { background: linear-gradient(90deg, #006ec0, #0099ff); box-shadow: 0 0 8px #0099ff50; }
+.syr-f.p3 { background: linear-gradient(90deg, #c06000, #ff9020); box-shadow: 0 0 8px #ff902050; }
+.syr-t {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ── Pump progress bars — improved readability ── */
+.prog-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 0px;
+}
+.pbar {
+  position: relative;
+  flex: 1;
+height: 10px;
+  background: #1a2438;
+  border: 1.5px solid #2d3f60;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+.pbar-f {
+  height: 100%;
+  width: 0%;
+  border-radius: 13px;
+  transition: width 0.15s linear;
+}
+.pbar-f.p1 { background: linear-gradient(90deg, #009f6f, #00e5a0); box-shadow: 0 0 8px #00e5a050; }
+.pbar-f.p2 { background: linear-gradient(90deg, #006ec0, #0099ff); box-shadow: 0 0 8px #0099ff50; }
+.pbar-f.p3 { background: linear-gradient(90deg, #c06000, #ff9020); box-shadow: 0 0 8px #ff902050; }
+.prog-pct {
+  min-width: 38px;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+
+</style>
+</body>
+</html>
