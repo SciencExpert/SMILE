@@ -1,3 +1,14 @@
+//=====================================================
+// 		The Goniometer Programme
+// Electronic for Chemists Project
+// ---------------------------------------
+// Design by SciencExpert
+// Version 5.02– Mars 2026
+// Author : Gerard Bacquet
+//=====================================================
+// =========================
+// REQUIRED LIBRARIES
+// =========================
 #include <Servo.h>
 #include <Wire.h>
 #include <SPI.h>
