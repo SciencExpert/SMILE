@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--
+_______________________________________
+ 	Molecule Properties
+	Sub programm of MolMate
+---------------------------------------
+  Design by SciencExpert
+  Version 20251130-V4 //Decembre 2025
+ 	MATE Project
+  SciencExpert Edition 2025
+  Author : Gérard Bacquet
+  Contact@sciencexpert.fr 
+---------------------------------------
+https://payhip.com/SciencExpert
+_______________________________________
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OrganoMate-Cluster</title>
+  	<link rel="icon" href="images/SE_favicon.ico" />
+<style>
+.tabs{display:flex;background:#1e293b;padding:0 16px}
+.tab{padding:12px 24px;color:#94a3b8;cursor:pointer;border-bottom:3px solid transparent;font-weight:500}
+.tab.active{color:white;border-bottom-color:#3b82f6}
+.tab:hover{color:#e2e8f0}
+.container{max-width:1400px;margin:0 auto;padding:16px}
+.card{background:white;border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+
+#log{background:#0f172a;color:#22d3ee;padding:12px;border-radius:8px;height:140px;overflow-y:auto;font-family:monospace;font-size:12px;white-space:pre-wrap}
+
+
+.smiles-cell{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:monospace;font-size:11px}
+.status{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500}
+.status-waiting{background:#fef3c7;color:#92400e}
+.status-running{background:#dbeafe;color:#1e40af}
+.status-done{background:#dcfce7;color:#166534}
+.status-error{background:#fee2e2;color:#991b1b}
+.input-group{display:flex;flex-direction:column;gap:4px;flex:1}
+.help-text{font-size:11px;color:#64748b}
+.stats{display:flex;gap:16px;flex-wrap:wrap}
+.stat{text-align:center;padding:10px 16px;background:#f8fafc;border-radius:8px}
+.stat-value{font-size:24px;font-weight:700;color:#1e40af}
+.stat-label{font-size:11px;color:#64748b}
+.hidden{display:none!important}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.info-box{background:#dbeafe;border:1px solid #3b82f6;padding:12px;border-radius:8px;font-size:13px;margin-bottom:12px}
+.warning-box{background:#fef3c7;border:1px solid #f59e0b;padding:12px;border-radius:8px;font-size:13px;margin-bottom:12px}
+.cluster-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.cluster-item{display:flex;align-items:center;gap:4px;font-size:12px;background:#f0f9ff;padding:4px 8px;border-radius:4px}
+.cluster-dot{width:12px;height:12px;border-radius:50%}
+.results-table{max-height:300px;overflow-y:auto}
+/* DEMO BANNER */
+  .demo-banner {
+
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 1px;
+  }
+</style>
+
+<link href="css/css0.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- =======================================================================================
+					Index
+     ======================================================================================= -->
+
+<div class="demo-banner">🧪 VERSION DÉMO — Show Only - More detail, read the Ebook</div>
+<div id="container" class="container">
+  <!-- ==================== LEFT PANEL: DATA MANAGEMENT ==================== -->
+<div id="leftPanel" class="panel">
+  <h1 style="text-align:center; margin-bottom: 0em;">Chemio Info - Demo</h1>
+
+
+
+  <div class="controls" style="
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 0em;">
+    
+    <label for="compound-id" style="flex-shrink: 0;">CID / Name / SMILES :</label>
+    <input type="text" id="compound-id" placeholder="NOT ACTIVE IN DEMO VERSION" style="flex-grow: 1; width:100px; padding: 6px;" />
+    
+    <button class="any-button" id="fetch-btn" style="display:none; padding: 6px 12px;">🔍 Search</button>
+
+    <label for="molFile" style="margin-left: 10px; flex-shrink: 0;">or load a .mol file</label>
+    <input type="file" id="molFile" accept=".mol,.sdf" onchange="handleMolFileChange(this);runSearch()" style="display:none"   />
+
+<input id="smilesInput" type="text" placeholder="NOT ACTIVE IN DEMO VERSION" style="display:none">
+    
+    <button id="loadBtn" class="any-button" title="Import the data in json Format"
+      onclick="document.getElementById('molFile').click();" style="padding: 6px 12px;">
+      📂 Import .mol file
+    </button>
+  </div>
+
+<!-- Bouton necessaire mais a masquer --->
+<div style="display:none">
+			<button id="sendToClusterBtn" class="any-button" onclick="sendToCluster()" >📊 Envoyer au Clustering →</button>
+			<button id="exportBtn" class="btn-success" onclick="exportCSV()">📥 CSV</button>
+			<button id="exportSdfBtn" class="btn-secondary" onclick="exportSDF()">📥 SDF</button>
+</div>
+<!-- ==========================================usual Manuel===========================================================-->  
+  <div id="outputLeft" style="padding: 5px; background: #f9fafb; border-radius: 6px; min-height: 150px; text-align:justify">
+
+  <hr><h1 style="text-align:center;line-height:0.5">ChemioInfo  User Manual</h1><hr>
+  <p><strong>ChemioInfo</strong> performs molecular similarity searches, extracts molecular properties, applies dimensionality reduction (PCA/UMAP), 
+and conducts clustering using PubChem data in order to highlight meaningful chemical groups and support molecule selection for research or screening.</p>
+
+  <h3>Work Flow</h3>
+<p>
+  <strong>1️⃣ Search:</strong> Enter SMILES, CID, name, or import a MOL/SDF file.<br>
+  <strong>2️⃣ Similarity Scan:</strong> Tune the Tanimoto threshold (70–98%) and refine your result set.<br>
+  <strong>3️⃣ Key Descriptors:</strong> Get a first selection with instantly view of MW, XLogP, TPSA, HBD/HBA, Rotatable Bonds, and Complexity of alternative molecule.<br>
+  <strong>4️⃣ Smart Clustering:</strong> Map all selected molecules with PCA or UMAP and choose your cluster count (K).<br>
+  <strong>5️⃣ Insights:</strong> Reveal the closest analogs within the final, optimized cluster.
+</p>
+
+
+  <h3>Final Applications</h3>
+  <p>ChemioInfo can be used for lead discovery, scaffold hopping, and drug repurposing, as well as for gaining insights into toxicity and ADME profiles. 
+It also supports the analysis and optimization of chemical libraries to guide better decision-making in research and development.</p>
+
+
+
+
+
+
+
+  </div>
+
+<!-- ==========================================End usual Manuel===========================================================-->  
+</div>
+
+
+ <!-- ==================== RIGHT PANEL: VISUALIZATION ==================== -->
+
+  <div id="rightPanel" class="panel">
+
+
+
+    <!-- ===============================Header with Manual Link, Title, and Analyze Button========================================= -->
+<div id="header" style="display: flex; align-items: center; justify-content: space-between; position: relative; width: 100%; margin: 0; padding: 0; line-height:0.5">
+
+  <!-- User Manual Link (Gauche) -->
+  <h3 style="margin: 0;">
+<span class="popup-toggle" onclick="toggleManualPopup(true)" title="Open the user manual" style="cursor: pointer; width:150px">
+      📘 User Manual
+    </span>
+  </h3>
+
+  <!-- Titre principal (Centré) -->
+  <div style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <h1 style="margin: 0; text-align: center;">
+     Similarity Dashboard
+    </h1>
+    <div class="row" style="display: none;">
+      <label>Number of objects detected:</label>
+      <strong id="count">0</strong>
+    </div>
+  </div>
+
+      <!-- ebook Button (Right) -->
+<span class="popup-toggle" title="Read MoleMate's ebook" 
+      onclick="window.open('statics/MoleMate_ebook.html', '_blank')">
+   📕 Ebook
+      </span>
+</div>
+
+   
+<!--   ==================Les curseurs d'entete ================>
+
+
+
+
+
+   
+ <!-- ===============================Bouton selecteur========================================= -->
+<div style="display: flex; align-items: center; justify-content: space-between; position: relative; width: 100%; margin:0;padding:0">
+
+<button  id="Intro" style="background-color:transparent" style="display:block">
+</button>
+
+<button class="tab" id="search" style="display:none; background-color: var(--primary-color)"
+        onclick="showTab('search'); Hide(); document.getElementById('Search-content').style.display='block'">
+  1️⃣ ChimioScan
+</button>
+
+<button class="tab" id="found" style="display:none; background-color:brown"
+        onclick="showTab('found'); Hide(); document.getElementById('Show-content').style.display='block'">
+  2️⃣ Scan Insights
+</button>
+
+<button class="tab" id="cluster"  style="display:none; background-color:red"
+        onclick="showTab('cluster'); Hide(); document.getElementById('Cluster-content').style.display='block'">
+  3️⃣ ChemioClusters
+</button>
+
+<button class="tab" id="cluster2" style="display:none; background-color:blue"
+        onclick="showTab('cluster2'); Hide(); document.getElementById('Cluster2-content').style.display='block'">
+  4️⃣ Cluster Insights
+</button>
+
+</div>
+
+
+    <!-- ===============================Div associé ========================================= -->
+	<!-- =====DIV 0 :intro ===== -->
+	<div id="intro" style="display:block; text-align:justify; line-height:1.2">
+<hr><h1> Molecule</h1><hr>
+<p><strong>Molecule Name: </strong>It is the common or IUPAC name of the compound for identification.<br>
+<strong>SMILES: </strong>It is a text string encoding a molecular structure (atoms, bonds, rings).<br>
+<strong>CID: </strong>It is the PubChem identifier for a molecule, used to fetch structure and properties.<br>
+<strong>MOL: </strong>It is a chemical file format that stores a molecule's 2D or 3D structure used for visualization and computational analysis. Confirm loading with <strong>"ENTER"</strong> on CID box
+</p>
+</p>
+<hr><h1>Tanimoto Selection Protocol</h1><hr>
+<p>The Tanimoto selection protocol compares 2D molecular fingerprints (structural patterns, not physicochemical properties) between more than 1M compounds in the PubChem DataBase. 
+It computes a Tanimoto similarity score and selects molecules whose 2D structural features are most similar to the chosen reference.
+
+<hr><h1>Clustering Approach (PCA/UMAP)</h1><hr>
+<p>The clustering uses the properties (MW, XLogP, TPSA, complexity, etc.) to describe each compound numerically. <strong>PCA & UMAP</strong> reduces the multidimensional 
+property vectors into 2D space, allowing molecules with similar  profiles to group together. Clusters reveal families based on shared physicochemical features.<br>
+<strong>PCA</strong> is a linear dimensionality-reduction method that transforms molecular property data into a smaller set of components.
+It preserves the largest variance in the dataset and produces results that are easy to interpret.<br>
+<strong>UMAP</strong> is a non-linear dimensionality-reduction method that builds a graph based on local relationships between molecules.
+It preserves local structure, meaning it groups very similar molecules tightly together.</p>
+</div>
+
+	<!-- =====DIV 1 : log ===== -->
+	<div id="Search-content" style="display:none">
+
+<!-- TAB 1: SEARCH -->
+	<div id="tab-search" style="width:100%">
+  <!-- ====================tanimoto================ -->
+  <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;margin:0px;padding:0px;">
+    <h3>⚙️ Parameters</h3>
+    <div>  <!-- DIV 2 fermée ici -->
+      <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;margin:0px;padding:0px">  <!-- DIV 3 fermée ici -->
+        
+<label>Seuil Tanimoto (%)</label>
+        <select id="threshold" style="width:80px; margin-right:10px" onchange="runSearch()">
+         <option value="98">98%</option> <option value="95">95%</option><option value="90">90%</option><option value="85" selected>85%</option><option value="80">80%</option><option value="70">70%</option>
+        </select>
+        
+        <label>Max Simili</label>
+        <select id="maxRecords" style="width:80px; margin-right:10px" " onchange="runSearch()">
+          <option value="50">50</option><option value="100" selected>100</option><option value="200">200</option><option value="500">500</option>
+        </select>
+        
+        <div class="input-group" style="display:none">
+          <label>&nbsp;</label>
+          <button id="btnRun" class="btn-primary" onclick="runSearch()">▶️ Lancer la recherche</button>
+        </div>
+        <span id="statusBadge" class="status status-waiting" style="display:none">On progress</span>
+
+
+<button onclick="runThresholdStudy()" class="any-button" style="padding:5px 5px;border-radius:6px; width:150px" title="Scan all values for a Tanimoto index from 98% (Very High) to 70% (Very Low)">🔍 Tanimoto Scan</button>
+
+
+      </div>  <!-- FIN DIV 3 -->
+    </div>    <!-- FIN DIV 2 -->
+  </div>      <!-- FIN div principal parameters -->
+
+  <!-- ====================log ================== -->
+  <div id="log" style="height:80%">Ready ... Select A Molecule .mol.</div>
+  
+  <!-- ====================Résultats de search tanimoto================== -->
+<div style="display: flex; align-items: center; gap: 20px; flex-wrap: nowrap;justify-content:flex-end;">
+
+    <h3>✅ Results</h3>
+   <div class="stats" id="statsBox" style="display:none">
+      <div class="stat"><div class="stat-value" id="statMatches">0</div><div class="stat-label">Compounds</div></div>
+      <div class="stat"><div class="stat-value" id="statThreshold">-</div><div class="stat-label">Treshold</div></div>
+
+
+    </div>
+
+<button id="STBnt" class="any-button" style="float:right;height:30px; width:200px" onclick="runSearch();document.getElementById('found').click(); document.getElementById('found').style.display='block'"> Show Tab Results ➯</button>
+
+
+
+
+
+
+
+  </div>  <!-- FIN controls -->
+	<div id="plotScan"></div>
+</div>    <!-- FIN tab-search -->
+
+
+
+
+
+
+	</div>
+
+	<!-- ===============================================================================================================================DIV 2 : Show Simili tab ===== -->
+	<div id="Show-content" style="
+  display: flex;           /* active flexbox */
+  flex-direction: column;  /* empile les enfants verticalement */
+  align-items: center;     /* centre horizontalement tous les enfants */
+  justify-content: center; /* centre verticalement si la hauteur est fixée */
+  text-align: center;      /* centre texte à l'intérieur des enfants */
+
+">
+		<div  id="results" style="height:100%x"></div>
+	</div>
+
+	<!-- ==============================================================================================================================Div 3:  Run Cluster ===== -->
+	<div id="Cluster-content" style="display:none"> 
+
+<!-- ====================Clusterisation ================== -->
+
+	<div id="tab-cluster"  style="display:flex; align-items: center; justify-content: space-between; width: 100%;margin:0px;padding:0px;">
+
+		<div class="info-box" style="margin:0; padding:0;display:none">
+		<strong>💡 Data:</strong> <span id="dataSourceInfo">No data - Load SDF file.</span>
+		</div>
+
+		<p>📁 Load a SDF files:
+		<input type="file" id="sdfFileInput" accept=".sdf,.mol" onchange="loadSdfFile(this.files[0])"></p>
+		
+		<button class="any-button" onclick="downloadClusterCSV()" id="dlClusterBtn" style="display:none;width:180px; background-color:red">📥 Load Result (cvs)</button>
+</div>
+<div>
+
+<!-- Clustering Parameters  -->
+  <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;margin:0px;padding:0px;">
+		⚙️ Parameters
+
+<!-- Method-->
+				<label>Method</label>
+				<select id="reductionMethod" style="width:100px" onchange="runClustering()">
+				<option value="pca">PCA (Fast)</option>
+				<option value="umap">UMAP (Best)</option>
+				</select>
+<!-- Number of cluster-->	
+				<label>#Clusters (K)</label>
+				<input id="nClusters" style="width:50px" type="number" value="5" min="2" max="20" onchange="runClustering()">
+
+<!-- Bouton pour lancement clustering -->
+				<div style="display:none">
+				<button class="any-button" onclick="runClustering()">🚀 Run</button>
+				<span id="clusterStatus" class="status status-waiting">En attente</span>
+				</div>
+			<button class="any-button"  onclick="document.getElementById('C0').click();showTab('cluster2');; Hide(); document.getElementById('Cluster2-content').style.display='block'" id="Cluster0" style="width:180px" >Ref. Cluster Data ➯</button>
+
+		</div>
+	</div>
+
+<!-- ============================Graphe ================================== -->
+		<div style="padding:0;margin:0">
+		<div id="clusterLegend" class="cluster-legend"></div>
+		<div id="plot"></div>
+
+		</div>
+<!-- ============================load cluster result ================================== -->
+</div>
+	<!-- =====Div 4 :  Cluster list===== -->
+	<div id="Cluster2-content" style="display:none"> </div>
+
+ <!-- ===============================Autres divs ========================================= -->
+
+<div>
+</div><!-- ============================loaders ================================== -->
+</div><!-- end of container -->
+
+
+<!-- ==================== FOOTER ==================== -->
+<div id="footer" 
+     style="position: fixed; bottom: 0; left: 0; width: 100%; background:var(--primary-color); padding: 8px 10px; font-size: 14px; border-top: 0px solid #ccc; z-index: 1000; text-align: center;">
+
+  <!-- Main Title -->
+  <div style="width: 100%; font-size:1.5em; color:var(--secondary-color);line-height: 0em; margin: 5px">
+    MolMate&trade; -  Chemio Info - DEMO
+  </div>
+
+  <!-- Controls Row -->
+  <div style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: nowrap;">
+
+    <!-- StatMate Button -->
+    <button style="background-color: var(--secondary-color); color: var(--primary-color); border-radius:10px; height:30px; width:100px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;" 
+            onclick="window.location.href='00_Organo_Menu.html'">
+      OrganoMate&trade;
+    </button>
+
+    <!-- Copyright Notice -->
+    <span style="color:#EBA4E4">
+      © 2025 SciencExpert. Website designed and developed by  
+      <a href="https://payhip.com/SciencExpert/sciencexpert" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         style="color:#EBA4E4; text-decoration:none;">
+        <img src="images/SE_favicon.ico" 
+             alt="Icône" 
+             style="height:16px; vertical-align:middle; margin-right:5px;">
+        SciencExpert™
+      </a>. 
+      All rights reserved. Unauthorized use or reproduction is prohibited.
+    </span>
+
+    <!-- Reset Button -->
+    <button style="background-color: var(--secondary-color); color: var(--primary-color); border-radius:10px; height:30px; width:100px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;" 
+            onclick="location.reload();">
+      ♻️ Reset
+    </button>
+  </div>
+</div>
+
+
+
+<!-- ============================================================= -->
+<!-- ==========================Program============================ -->
+<!-- ============================================================= -->
+<script> // Définir la couleur principale
+document.documentElement.style.setProperty('--primary-color', '#0F701A');</script>
+</body>
+</html>
