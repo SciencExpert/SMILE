@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<!--
+_______________________________________
+  	MoleMate DEMO Ebook
+---------------------------------------
+ 	MATE Project
+  SciencExpert Edition 2025
+  Author : Gérard Bacquet
+  Contact@sciencexpert.fr 
+---------------------------------------
+https://payhip.com/SciencExpert
+_______________________________________
+-->
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SciencExpert - MoleMate Ebook</title>
+<link rel="icon" href="../images/SE_favicon.ico" />
+<style>
+
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0; padding: 0;
+    height: 100%; width: 100%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    font-family: Arial, sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+
+  }
+  .book-container {
+    position: relative;
+    top:-10px;
+    width: 100vw;
+    max-width: 90%;
+    height: 90%;
+    perspective: 2200px;
+    border-radius: 18px;
+    user-select: none;
+background: linear-gradient(to right, white 20%, #CCCC 50%, white 80%);
+  }
+  .spine {
+    position: absolute;
+    width: 5px;
+    height: 90%;
+    background:#cccc;
+    border-radius: 3px;
+    top: 5%;
+    left: 51%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    z-index: 30;
+  }
+  .page {
+    width: 50%;
+    height: 100%;
+    border-radius: 18px;
+    border: solid 1px #cccc;
+    padding: 16px 16px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0%;
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    cursor: default;
+    background: white;
+  }
+  .cover {
+    left: 10;
+    transform-origin: right;
+    z-index: 20;
+    box-shadow: inset -10px 0 15px -10px rgba(0,0,0,0.2), 
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.left {
+    left: 0;
+    transform-origin: right center;
+    z-index: 20;
+    box-shadow: inset -10px 0 15px -10px rgba(0,0,0,0.2), 
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.right {
+    right: 0;
+    transform-origin: left center;
+    z-index: 40;
+    box-shadow: inset 10px 0 15px -10px rgba(0,0,0,0.2),
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.transparent {
+	width:60%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    box-shadow: none;
+    border: solid 0px black;
+  border-radius: 0px;
+  }
+  @keyframes flipRightForward {
+    0%   { transform: rotateY(0) translateX(0); box-shadow: 0 5px 18px rgba(0,0,0,0.25);}
+    40%  { transform: rotateY(-110deg) translateX(-10%); box-shadow: inset 8px 0 20px rgba(0,0,0,0.6);}
+    100% { transform: rotateY(-180deg) translateX(-20%); box-shadow: inset 12px 0 30px rgba(0,0,0,0.7);}
+  }
+  @keyframes flipLeftForward {
+    0%   { transform: rotateY(0) translateX(0); box-shadow: 0 5px 18px rgba(0,0,0,0.25);}
+    40%  { transform: rotateY(110deg) translateX(10%); box-shadow: inset -8px 0 20px rgba(0,0,0,0.6);}
+    100% { transform: rotateY(180deg) translateX(20%); box-shadow: inset -12px 0 30px rgba(0,0,0,0.7);}
+  }
+  .flip-right {
+    animation: flipRightForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+  .flip-left {
+    animation: flipLeftForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: #a52a2a;
+    color: white;
+    font-size: 2.2em;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    user-select: none;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+    z-index: 110;
+  }
+  .nav-btn:hover {
+    background-color: #d97474;
+  }
+  .nav-left {
+    left: -80px;
+  }
+  .nav-right {
+    right: -80px;
+  }
+  .page h1 {
+    margin: 0 0 20px;
+    color: #a52a2a;
+    font-size:1.2em;
+  }
+  .page h2 {
+    margin: 0 0 0px;
+    color: #a52a2a;
+    font-size:1em;
+  }
+  .page p {
+    margin: 0 0 20px;
+    color: black;
+    font-size:0.8em;
+text-align:justify;
+line-height:1.3em;
+  }
+  .page ul {
+    margin: 0px;
+padding:0px;
+    color: black;
+    font-size:1em;
+text-align:justify;
+line-height:1.3em;
+  }
+  .page li {
+    margin-left: 30px;
+padding:0px;
+    color: black;
+text-align:justify;
+    font-size:1em;
+line-height:1.1em;
+  }
+
+.book-container {
+  display: flex;  /* Ajoute flex pour que l'img enfant prenne 100% height */
+  align-items: stretch;  /* Force les enfants à s'étirer en hauteur */
+  /* tes autres styles... */
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 0.9em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #333;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 -1px 0 #bbb;
+  white-space: nowrap;
+}
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.6em; /* taille du texte */
+    text-align: center;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0px;
+padding-top:0;
+padding-bottom:0;
+margin:0;
+line-height:1em;
+  }
+  th {
+    background-color: #f5f5f5;
+  }
+  tr:nth-child(even) td {
+    background-color: #fafafa;
+  }
+
+.header-line {
+  display: flex;
+  align-items: center;   /* verticalement centré */
+  justify-content: space-between; /* titre à gauche, lien à droite */
+  gap: 16px;
+  padding: 0 8px;
+}
+
+/* Optionnel : pour éviter que le titre soit trop large et empêche la page d'être lisible */
+.header-line h2 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: normal;
+  text-align: left;
+  flex: 1 0 auto;
+}
+
+/* Pour aligner le lien à droite */
+.header-line span {
+  margin-left: auto;
+}
+
+/* Pour styliser le lien éventuellement */
+.header-line a {
+  text-decoration: none;
+  color: #A52A2A;
+  font-weight: bold;
+  font-size: .95em;
+}
+
+.continue {
+
+background-color:transparent;
+  text-align: center;
+  margin: 0px 0;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #ccc;
+    z-index: 110;
+    cursor: pointer;
+}
+
+.continue span {
+  padding: 0 10px;
+  background: #fff;
+  color: #ccc;
+    cursor: pointer;
+}
+
+/* overlay full-screen (hidden by default) */
+  .img-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.65);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+  }
+  .img-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* wrapper to limit image size */
+  .img-overlay .img-wrap {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  /* cloned image styling */
+  .img-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border-radius: 6px;
+    cursor: zoom-out;
+    transition: transform .25s ease;
+    transform: scale(1);
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* small vignette: original images keep cursor */
+  img {
+    cursor: zoom-in;
+  }
+
+  /* optional: when overlay open, slightly scale image for subtle effect */
+  .img-overlay.open img {
+    transform: scale(1);
+  }
+
+
+
+.footer {
+
+font-size:0.8em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;                  /* occupe toute la largeur */
+  display: flex;
+  justify-content: space-between; /* titre à gauche, page à droite */
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  background: transparent;             /* fond blanc pour masquer le contenu derrière */
+  border-top: 2px solid #ccc;    /* petite bordure au-dessus */
+}
+
+.footer h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.footer span {
+  font-weight: bold;
+}
+
+
+</style>
+</head>
+<body>
+
+
+<!-------------------------------------------------------------------------------------------
+			Cover
+--------------------------------------------------------------------------------------------->
+<template id="page--1"> 
+
+  <img
+    src="../images/MoleMate_bookcover.png"
+    alt="Illustration"
+    style="width:100%; height:100vh; object-fit:cover; display:block; margin:0; padding:0;"
+  >
+
+</template>
+
+
+<!-------------------------------------------------------------------------------------------
+			Introduction et table of content
+--------------------------------------------------------------------------------------------->
+<template id="page-0">
+<div style="text-align:center">
+<h1 style="
+  font-style: italic;
+  font-family: 'Georgia'; 
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: #2c2c2c;
+  margin: 20px 0;margin-left:60px;line-height:0.0em
+">
+MoleMate<span style="font-size : 0.8em">&trade;</span>
+</h1>
+<span style="  font-style: italic;
+  font-family: 'Georgia'; ">
+Data knows more than you think</span><br>
+<img src="../images/MoleMate_bookcover.png" alt="Illustration" style=" width:55%;"> <br>
+
+ <hr><span style="  font-style: italic;
+  font-family: 'Georgia'; "
+<span>SciencExpert Ed.</span><br>
+<span style="  font-style: italic; font-family: 'Georgia'; ">2025</span>
+</span>
+</div>
+
+
+</template>
+
+
+
+<!--=========================================================================================--->
+<!--			Chapter 01 :  CopyRight et menu					     --->
+<!--=========================================================================================--->
+
+
+<template id="page-1">
+        <h1>Copyright</h1>
+      
+<p>Cover illustration by SciencExpert™<br>
+This eBook is distributed in the online edition of SciencExpert™ <br>
+Registration date : December 2025<br>
+
+Correspondence contact-at-sciencexpert.fr<br>
+© SciencExpert - 2025</p>
+
+<p>The use of general descriptive names, trademarks, etc., in this eBook, even if the former are not especially identified, is not to be taken as a sign that such names, as understood by the Trade Marks and Merchandise Marks Act in various countries, may accordingly be used freely by anyone.</p>
+<p>While the advice and information in this eBook are believed to be true and accurate at the date of going to edition, neither the authors nor the editor nor the publisher can accept any legal responsibility for any errors or omissions that may be made. SciencExpert™ makes no warranty, express or implied, with respect to the material contained herein.</p>
+<p>This research, publication and edition received no external funding. Data are available upon request from SciencExpert™ correspondence address. The author declare no conflict of interest.</p>
+<p>All rights reserved. No part of this eBook may be reproduced or transmitted in any form or by any means, electronic or mechanical, including photocopying or by any information storage and retrieval system; without permission in writing from the publisher</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="-0"></a></h2><a href="../00_Organo_Menu.html">DEMO</a><span>Page 2</span></div>
+</template>
+
+<!-------------------------Page3--------->
+
+<template id="page-2">
+      <div style="font-size:0.8em;line-height:1.5em">
+<!-- ===================================================================================== -->
+<!-- ===========================Table of content========================================== -->
+<!-- ===================================================================================== -->
+
+<h1>Table of content</h1>
+<div class="header-line"><h2>Chapter 1: Chemometrics: Turning Chemical Data into Knowledge</h2><span><a href="#page-4" data-page="4">Page<span style="display:inline-block; width:3ch; text-align:right;">4</span></a></span></div>
+	<div  style="font-size:0.8em;padding-left:100px;line-height:1.2em;">
+	<div  style=";border-left:5px solid black;border-radius:10px;">
+		<div class="header-line"><h2>🧮 Base of chemometrics</h2><span><a href="#page-4" data-page="4">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">4</span></a></span></div>
+		<div class="header-line"><h2>📓 Value of Chemical Databases</h2><span><a href="#page-7" data-page="7">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">7</span></a></span></div>
+		<div class="header-line"><h2>💻 Practical Applications Enabled by Chemical Databases</h2><span><a href="#page-8" data-page="8">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">8</span></a></span></div>
+		<div class="header-line"><h2>🚩 Challenges of Scale and Heterogeneity</h2><span><a href="#page-9" data-page="9">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">9</span></a></span></div>
+		<div class="header-line"><h2>📀 Role of Chemometric Software</h2><span><a href="#page-10" data-page="10">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">10</span></a></span></div>
+	</div>
+	</div>
+
+<div class="header-line"><h2>Chapter 2 : Science in Action-The MoleMate™ Approach</h2><span><a href="#page-12" data-page="12">Page<span style="display:inline-block; width:3ch; text-align:right;">12</span></a></span></div>
+
+	<div  style="font-size:0.8em;padding-left:100px;line-height:1.2em;">
+	<div  style=";border-left:5px solid black;border-radius:10px;">
+		<div class="header-line"><h2>⚗️ Front Page</h2><span><a href="#page-12" data-page="12">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">12</span></a></span></div>
+		<div class="header-line"><h2>👩‍🏫 One Entry Point</h2><span><a href="#page-13" data-page="13">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">13</span></a></span></div>
+	</div>
+	</div>
+
+
+<div class="header-line"><h2 style="color:#85087A">Chapter 3: MoleMate™ Finger-Print: Molecular Intelligence Engine</h2><span><a href="#page-14" data-page="14">Page<span style="display:inline-block; width:3ch; text-align:right;">14</span></a></span></div>
+	<div  style="font-size:0.8em;padding-left:100px;line-height:1.2em;">
+	<div  style=";border-left:5px solid #85087A;border-radius:10px;">
+		<div class="header-line"><h2>⚠️ Hazard Statement</h2><span><a href="#page-16" data-page="16">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">16</span></a></span></div>
+		<div class="header-line"><h2>🔀 Synonyms Extraction & Naming</h2><span><a href="#page-18" data-page="18">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">18</span></a></span></div>
+		<div class="header-line"><h2>🔬 PhysicoChemical Properties</h2><span><a href="#page-20" data-page="20">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">20</span></a></span></div>
+		<div class="header-line"><h2>📈 Spectrum</h2><span><a href="#page-22" data-page="22">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">22</span></a></span></div>
+		<div class="header-line"><h2>🔗 Link</h2><span><a href="#page-24" data-page="24">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">24</span></a></span></div>
+	</div>
+	</div>
+
+<div class="header-line"><h2 style="color:#7D2514">Chapter 4: MoleMate™ Draw: From Sketch to Science</h2><span><a href="#page-26" data-page="26">Page<span style="display:inline-block; width:3ch; text-align:right;">26</span></a></span></div>
+	<div  style="font-size:0.8em;padding-left:100px;line-height:1.2em;">
+		<div  style=";border-left:5px solid #7D2514;border-radius:10px;">
+		<div class="header-line"><h2>✏️ Drawing</h2><span><a href="#page-28" data-page="28">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">28</span></a></span></div>
+		<div class="header-line"><h2>📷 Visualizing Molecular Shape and Structure</h2><span><a href="#page-30" data-page="30">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">30</span></a></span></div>
+		<div class="header-line"><h2>📸 Visualizing Molecular properties</h2><span><a href="#page-32" data-page="32">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">32</span></a></span></div>
+	</div>
+	</div>
+
+<div class="header-line"><h2 style="color:#0ea5e9">Chapter 5: MoleMate™ Spectrum: Spectra Start with Structure</h2><span><a href="#page-34" data-page="34">Page<span style="display:inline-block; width:3ch; text-align:right;">34</span></a></span></div>
+	<div  style="font-size:0.8em;padding-left:100px;line-height:1.2em;">
+	<div  style=";border-left:5px solid #0ea5e9;border-radius:10px;">
+		<div class="header-line"><h2>📈 IR simulator</h2><span><a href="#page-36" data-page="36">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">36</span></a></span></div>
+		<div class="header-line"><h2>📈 ¹H NMR simulator</h2><span><a href="#page-40" data-page="40">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">40</span></a></span></div>
+		<div class="header-line"><h2>📈 ¹³C NMR simulator</h2><span><a href="#page-44" data-page="44">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">44</span></a></span></div>
+		<div class="header-line"><h2>📈 Mass Spectroscopy</h2><span><a href="#page-50" data-page="50">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">50</span></a></span></div>
+		</div>
+	</div>
+
+<div class="header-line"><h2 style="color:red">Chapter 6 : MoleMate™ ChemioInfo: The Property Clusters</h2><span><a href="#page-56" data-page="56">Page<span style="display:inline-block; width:3ch; text-align:right;">56</span></a></span></div>
+
+	<div  style="font-size:0.8em;padding-left:100px;line-height:1.2em;">
+	<div  style=";border-left:5px solid red;border-radius:10px;">
+		<div class="header-line"><h2>🤔 Interest and purpose</h2><span><a href="#page-56" data-page="56">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">56</span></a></span></div>
+		<div class="header-line"><h2>🔀 Tanimoto</h2><span><a href="#page-58" data-page="58">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">58</span></a></span></div>
+		<div class="header-line"><h2>🗺️ Principal Composant Analysis Cluster</h2><span><a href="#page-59" data-page="59">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">59</span></a></span></div>
+		<div class="header-line"><h2>🌐 Uniform Manifold Approximation and Projection</h2><span><a href="#page-60" data-page="60">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">60</span></a></span></div>
+		
+	</div>
+	</div>
+<div class="header-line"><h2>Paper Review</h2><span><a href="#page-63" data-page="63">Page<span style="display:inline-block; width:3ch; text-align:right;">62</span></a></span></div>
+
+<div class="header-line"><h2>Demo</h2><span><a  href="../00_Organo_Menu.html"><span style="display:inline-block; width:10ch; text-align:right;">Demo</span></a></span></div>
+
+
+
+
+
+<div class="header-line"><h2>About the author</h2><span><a href="https://www.linkedin.com/in/bacquetgerard/"  target="_blank"><span style="display:inline-block; width:10ch; text-align:right;">Linkedin</span></a></span></div>
+<div class="header-line"><h2>About SciencExpert</h2><span><a href="https://payhip.com/SciencExpert/sciencexpert"  target="_blank">Page<span style="display:inline-block; width:3ch; text-align:right;">Web</span></a></span></div>
+</div>
+
+
+<div class="footer"><h2><a href="#page-3" data-page="-0"> </a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 3</span></div>
+</template>
+
+
+
+<!--=========================================================================================--->
+<!--==============================   Chapitre 1     ==========Page 4=========================--->
+<!--=========================================================================================--->
+
+<template id="page-3">
+      <h1> Chapter 1: Chemometrics: <br>Turning Chemical Data into Knowledge </h1>
+<div style="text-align:justify">
+<h2>1.1. The base of chemometrics </h2>
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+Chemometrics is the science of extracting relevant information from chemical data by applying mathematical, statistical, and computational methods. As modern analytical chemistry produces increasingly complex and high-dimensional datasets, chemometrics has become essential for interpreting measurements, understanding underlying chemical phenomena, and supporting reliable decision-making.
+
+<br>One of the foundational principles of chemometrics is multivariate data analysis. Unlike univariate approaches, which examine one variable at a time, chemometric methods consider all variables simultaneously. This is particularly important for analytical techniques such as NMR, IR, Raman spectroscopy, mass spectrometry, and chromatography, where each measurement may contain hundreds or thousands of correlated variables.
+
+<br>A classical example is Principal Component Analysis (PCA), widely used to explore spectral data. PCA allows chemists to visualize similarities and differences between samples,
+ detect outliers, and identify dominant sources of variation. For instance, PCA is commonly applied in quality control to distinguish compliant products from off-specification batches, 
+or in food and pharmaceutical analysis to detect adulteration or counterfeit products.
+</div>
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2></h2><span>Page 4</span></div>
+</template>
+<!-------------------------Page5--------->
+
+<template id="page-4">  
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+<br>Another cornerstone of chemometrics is regression modeling, such as Partial Least Squares (PLS). PLS models are extensively used to correlate spectral data with chemical or physical properties, including concentration, purity, or biological activity. In pharmaceutical development, PLS models enable real-time process monitoring (PAT – Process Analytical Technology) by predicting critical quality attributes directly from spectroscopic measurements, reducing the need for time-consuming laboratory analyses.
+
+<br>Chemometrics also plays a central role in chemical identification and structure–property relationships. Multivariate pattern recognition techniques are applied to spectral libraries to identify unknown compounds based on similarity to known references. In mass spectrometry, chemometric classification methods help distinguish compounds with overlapping fragmentation patterns, while in NMR spectroscopy they assist in resolving complex mixtures and confirming molecular structures.
+
+<br>In the context of chemical databases and molecular informatics, chemometrics supports the analysis of large collections of molecules by converting chemical structures into numerical descriptors. 
+These descriptors can represent physicochemical properties, topological indices, or spectral features.
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 5</span></div>
+
+</template>
+
+<!-------------------------------------------------------------------------------------------
+			Chapter 1: suite
+---------------------------------------------------------------------------------Page6------>
+
+<template id="page-5"> 
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+Clustering and similarity analysis are then used to group molecules with comparable properties, 
+supporting applications such as:<ul>
+
+<li>lead discovery and optimization in drug development</li>
+
+<li>identification of functional analogs or safer substitutes</li>
+
+<li>exploration of structure–activity relationships (SAR)</li></ul>
+
+<br>With the rise of machine learning, chemometrics has expanded to include advanced classification algorithms, such as support vector machines, random forests, and neural networks. These methods are increasingly used to predict toxicity, reactivity, or environmental impact, enabling safer and more sustainable chemical design.
+
+<br><br>Overall, chemometrics provides a rigorous framework that connects experimental data, molecular structure, and chemical knowledge. It transforms raw measurements into interpretable models, accelerates research workflows, and reduces uncertainty—making it a foundational discipline for data-driven chemistry.
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 6</span></div> 
+</template>
+
+<!------------------------------>
+<template id="page-6">
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+<h2>1.2. Chemical Databases and the Value of Structured Information </h2>
+ <div style="text-align:justify">
+
+The rapid expansion of chemical knowledge has led to the emergence of large, open-access chemical databases that are now indispensable to modern chemists. Among them, PubChem has become a central reference, aggregating tens of millions of chemical structures and linking them to physicochemical properties, biological activities, toxicological data, safety information, and curated references from the scientific literature. Such databases form the backbone of data-driven chemistry.
+
+<br><br>A key strength of databases like PubChem lies in their use of standardized molecular identifiers, including Compound Identification numbers (CID), molecular formulas, SMILES strings, Mol files, and InChI/InChIKey representations. These standardized formats enable interoperability between experimental data, computational tools, regulatory systems, and chemometric workflows. They allow chemical information to be consistently stored, queried, and analyzed across platforms and disciplines.
+
+<br><br>From a chemometric perspective, structured databases provide the raw material for multivariate analysis and modeling. Molecular structures can be translated into numerical descriptors—such as molecular weight, polarity, functional groups, or spectral features—which serve as inputs for chemometric methods. This enables similarity analysis, clustering, classification, and property prediction at scales that would be impossible using manual approaches.
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 7</span></div> 
+</template>
+
+<!------------------page8 -----chapitre 1.2-------->
+
+<template id="page-7"> 
+
+<h2>1.3. Practical Applications Enabled by Chemical Databases</h2>
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+Chemical databases support a wide range of practical applications when combined with chemometric methods:
+
+<br><br>👀 <strong>Compound identification</strong>: Spectral data (NMR, IR, MS) can be compared against reference spectra stored in databases to confirm molecular identity or narrow down candidate structures using pattern recognition techniques.
+
+<br><br>☠️ <strong>Safety and risk assessment</strong>: Access to hazard statements, toxicity data, and regulatory classifications allows chemists to assess risks early in the development process. Chemometric models can further correlate structural features with toxicological outcomes, supporting safer chemical design.
+
+<br><br>💊 <strong>Drug discovery and bioactivity analysis</strong>: PubChem bioassay data enable structure–activity relationship (SAR) studies, where chemometric regression and classification models identify molecular features associated with biological effects.
+
+<br><br>🔂 <strong>Substance substitution and sustainability:</strong> By clustering molecules based on structural and physicochemical similarity, chemometric analysis of database content helps identify alternative compounds with comparable performance but improved safety or environmental profiles.
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 8</span></div> 
+</template>
+
+<!-------------------------Page9--------->
+
+<template id="page-8">
+<h2>1.4. Challenges of Scale and Heterogeneity</h2>
+<div style="text-align:justify;font-size:1.1em;line-height:1.3em">
+
+<br><br>Chemical databases support a wide range of practical applications when combined with chemometric methods:
+<br><br>Despite their richness, chemical databases present significant challenges. The volume of data is immense, and information is often distributed across multiple records, formats, and levels of curation. Spectral data, safety annotations, and property values may originate from different sources, with varying degrees of completeness and reliability.
+
+<br><br>Manual navigation of such databases is therefore inefficient and prone to error. Extracting relevant information for a single molecule—such as its identifiers, safety phrases, available spectra, and structurally similar compounds—often requires switching between multiple tools and interpreting heterogeneous data representations. This fragmentation limits the effective use of chemometric techniques, which rely on well-organized, consistent input data.
+
+
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 9</span></div> 
+</template>
+
+<!-------------------------------------------------------------------------------------------
+			1.4.Challenges of Scale and Heterogeneity
+----------------------------------------------------------------------------------------page10--->
+
+<template id="page-9">
+<h2>1.5. the Role of Chemometric Software in Structuring Chemical Knowledge</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+<br>This is where intelligent chemometric software becomes critical. By integrating chemical databases with chemometric methods, such software transforms raw, heterogeneous data into structured, analyzable information. It acts as an interface between large-scale chemical knowledge repositories and the end user, ensuring that data are accessible, reliable, and ready for multivariate analysis.
+
+<br><br>In this context, chemometric software enables:
+
+<br><br>✅ <strong>seamless retrieval</strong> of molecular data using any standard identifier
+
+<br><br>✅ <strong>harmonization</strong> of structural, spectral, and safety information
+
+<br><br>✅ <strong>conversion</strong> of chemical data into numerical representations suitable for modeling
+
+<br><br>✅ <strong>application of clustering</strong> and similarity analysis to explore chemical space
+
+<br><br>By embedding chemometric principles directly into database exploration, these tools make it possible to move from data access to knowledge generation and ultimately to informed decision-making.
+  
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 10</span></div> 
+</template>
+
+
+
+<!-------------------------------------page-11--->
+<template id="page-10">
+
+<h2>1.6. Key References in Chemometrics Literature</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+[1} Massart, D. L., Vandeginste, B. G. M., Buydens, L. M. C., De Jong, S., Lewi, P. J., & Smeyers-Verbeke, J.
+Handbook of Chemometrics and Qualimetrics, Elsevier, 1997.<br>
+
+[2] Brereton, R. G.
+Chemometrics: Data Analysis for the Laboratory and Chemical Plant, Wiley, 2003.<br>
+
+[3] Wold, S., Esbensen, K., & Geladi, P.
+“Principal Component Analysis,” Chemometrics and Intelligent Laboratory Systems, 2(1–3), 1987.</br>
+
+[4] Geladi, P., & Kowalski, B. R.
+“Partial Least-Squares Regression: A Tutorial,” Analytica Chimica Acta, 185, 1986.</br>
+
+[5] Otto, M.
+Chemometrics: Statistics and Computer Application in Analytical Chemistry, Wiley-VCH, 2017.</br>
+
+[6] Bro, R., & Smilde, A. K.
+“Principal Component Analysis,” Analytical Methods, 6, 2014.</li></br>
+
+[7] Kim, S. et al.
+“PubChem 2023 update,” Nucleic Acids Research, Database Issue.<br>
+
+[8] Heller, S. R., McNaught, A., Stein, S., Tchekhovskoi, D., & Pletnev, I.
+“InChI – the worldwide chemical structure identifier standard,” Journal of Cheminformatics, 2015.<br>
+
+[9] Willett, P.
+“Similarity-based virtual screening using 2D fingerprints,” Drug Discovery Today, 2006.<br>
+
+[10] Bajorath, J.
+“Chemoinformatics and computational chemical biology,” Methods in Molecular Biology, 2011.<br>
+
+[11] Varnek, A., & Baskin, I.
+“Machine learning methods for property prediction in chemoinformatics,” Journal of Chemical Information and Modeling, 2012.
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 1</span><span>Page 11</span></div> 
+</template>
+
+
+<!---===============================================================================---->
+<!--				Chapter 2	Page 12				    ---->
+<!---===============================================================================---->
+
+<!----------------------------------------page12 ------>
+<template id="page-11"> 
+<div style="text-align:justify">
+<h1>Chapter 2 : Science in Action<br><i>The MoleMate™ Approach</i></h1>
+Chemometrics and large chemical databases provide unprecedented access to chemical knowledge, but their true value emerges only when data can be accessed, interpreted, and transformed into actionable insights—quickly and reliably. The challenge is no longer the availability of information, but the ability to navigate complexity, connect heterogeneous data sources, and apply chemometric intelligence without friction.
+
+<br>This is precisely where <strong>MoleMate™ </strong> comes into play.
+
+<img src="../images/cover2.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 12</span></div> 
+</template>
+
+<!-------------------------Page13--------->
+
+<template id="page-12">
+<div style="text-align:justify">
+<br><strong>MoleMate™ </strong> is designed as a practical embodiment of chemometric principles applied to real-world chemical workflows. It connects structured chemical databases such as PubChem with advanced
+ chemometric analysis in a single, intuitive environment. By removing technical barriers between data retrieval, safety assessment, spectral interpretation, and molecular similarity analysis, 
+<strong>MoleMate™ </strong> enables chemists to move seamlessly from molecular identification to informed decision-making.
+<br><strong>MoleMate™ </strong>applies proven chemometric methods to transform chemical data into insight. By leveraging multivariate analysis, similarity metrics, and clustering techniques,
+ it allows users to explore chemical space, identify patterns, and compare molecules based on structure, properties, and spectral behavior.
+
+<h4>One Entry Point to Chemical Knowledge</h4>
+
+Access comprehensive molecular data using the format that suits you:<br>
+
+<strong>CID numbers</strong> - <strong>SMILES</strong> strings - <strong>Mol files</strong> - <strong>Drawn chemical</strong> structures
+
+<br><strong>MoleMate™ </strong>automatically retrieves and harmonizes structural, physicochemical, and reference data from trusted databases, eliminating the need to navigate multiple tools.
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 2</span><span>Page 13</span></div> 
+</template>
+
+
+
+<!--=========================================================================================--->
+<!-- 			Chapter 3 : Finger-Print			page 13		    --->
+<!--=========================================================================================--->
+<template id="page-13">
+<div style="text-align:justify">
+  <h1>Chapter 3 :  MoleMate™ Finger-Print<br><i>The Molecular Intelligence Engine<i></h1>
+<h2>3.1 Finger-Print Front Page</h2><br>
+<strong>MoleMate Finger-Print</strong> allows users to search, analyze, and collect data from the PubChem database. 
+The application supports multiple input formats (CID, compound name, SMILES, and MOL/SDF files) and, from an automatic compound identification via PubChem, displays detailed molecular identification & hazard data, 
+synomyms, physicochemical properties, 2D/3D structures, and downloadable resources.
+
+<h3><u>Searching for a Compound</u> : The application detects the input type</h3>
+Search by <strong>CID or Name or SMILES</strong> : Enter a PubChem CID (numeric) or compound name in the main input field and click <kbd>Enter</kbd> . The system validates the format before querying PubChem.<br>
+<strong>Load MOL/SDFL file</strong> : Select a .mol or .sdf file from your computer and the application will extract the CID if present.
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 14</span></div> 
+</template>
+<!-------------------------Page15 FrontPage--------->
+<template id="page-14">
+
+<h3 style:"margin:0;padding:0;line-height:0.5em"><u>Displayed Information</u></h3>
+
+<img src="../images/Fingerprint_FrontPage.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+<div style="text-align:justify">
+All data are retrieved directly from PubChem : <strong>CID</strong> - <strong>Common Name</strong> - <strong>IUPAC Name</strong>
+<strong>CAS Numbers & RNCAS</strong>
+<br> Known Physicochemical Properties are also displayed : <strong> Molecular Formula</strong> - <strong>Molecular Weight (g/mol)</strong>
+<strong>Exact Mass</strong> - <strong>Lipophilicity (XLogP) </strong> - <strong>Topological Polar Surface Area </strong> -
+<strong>Hydrogen Bond Donors / Acceptors</strong> - <strong>Rotatable Bond Count</strong> - <strong>Structural Complexity</strong> -
+<strong>Electric Charge</strong>
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 15</span></div> 
+</template>
+
+<!-------------------------Page16 Hazard--------->
+<template id="page-15"> 
+<h2>3.2 Finger-Print , Hazard Statement Page</h2>
+<img src="../images/Fingerprint_HazardPage.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:0; padding:0;"> 
+<br>
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+
+While this wealth of information exists, it is scattered across records, classifications, and multiple regulatory frameworks. Manually locating all relevant hazard statements, safety phrases, and exposure guidelines for a given compound can be time-consuming and prone to oversight—especially for complex molecules or mixtures.
+
+<br><strong>MoleMate™</strong> solves this challenge by automatically aggregating and interpreting safety data for any molecule of interest—whether identified by CID, SMILES, Mol file, or drawn structure. 
+
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 16</span></div> 
+</template>
+
+
+<!-------------------------Page17--------->
+
+<template id="page-16">
+<div style="text-align:justify">
+The software extracts GHS hazard codes, signal words, precautionary statements, and integrated toxicological indicators, presenting them in a clear, unified risk summary. This enables chemists, safety officers, and decision-makers to:
+Key elements of this structured safety information include:
+
+<br><strong>GHS Hazard Classifications</strong>: standardized hazard classes and categories (e.g., flammability, acute toxicity, corrosivity) with associated hazard statements (H-codes), signal words, and pictograms that communicate the type and severity of chemical risks. 
+PubChem
+
+<br><strong>Precautionary Statements</strong>: recommended measures for safe handling, storage, response to exposure, and disposal, tied to GHS standards. 
+PubChem
+
+<br><strong>Laboratory Chemical Safety Summaries (LCSS)</strong>: consolidated safety profiles based on established practices like those described in Prudent Practices in the Laboratory: Handling and Management of Chemical Hazards. These synthesize hazard data, exposure guidelines, and handling recommendations. 
+Guides de la bibliothèque Stanford
+
+<br><strong>Toxicological and Regulatory Data</strong>: health effect metrics such as reference doses or chronic exposure guidelines (e.g., from EPA IRIS and PPRTV), carcinogenicity listings under statutes like California’s Proposition 65, and environmental hazard designations. 
+OUP Academic
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 17</span></div> 
+</template>
+
+
+<!--------------------------------------------------------Page18---------->
+
+<template id="page-17">
+  <h2>3.3 Finger-Print , Synonym Extraction and Chemical Naming</h2>
+<img src="../images/Fingerprint_NamingPage.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+<div style="text-align:justify">
+
+Accurate chemical identification relies not only on structural representations, but also on the ability to recognize and manage the many names by which a molecule is known.
+ Public chemical databases provide extensive collections of chemical synonyms, which are essential for search, cross-referencing, regulatory work, and communication between disciplines.
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 18</span></div> 
+</template>
+
+
+<!-------------------------Page19--------->
+
+<template id="page-18">
+
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+<strong><u>Sources of Synonyms</u></strong>
+<br><strong>MoleMate™</strong> aggregates synonyms from a wide range of authoritative and community-driven sources. These include:
+<br>➡️ <strong>Depositor-provided names:</strong> Chemical names submitted by data contributors,i.e. research institutions,companies & regulatory agencies.
+<br>➡️ <strong>Scientific and regulatory databases:</strong> Including resources such as MeSH, ChEBI, FDA Substance Registration System (SRS), EPA databases...
+<br>➡️ <strong>Literature-derived names:</strong> Common or historical names extracted from patents, publications, and technical documentation.
+<br>➡️ <strong>Trade names and commercial identifiers</strong>: Where available, particularly for pharmaceuticals, agrochemicals, and industrial substances.
+<br>
+<br>As a result, a  compound is associated with a larege number of synonyms, due to these differences.<strong>MoleMate™</strong> gives all these synonyms.
+
+<br><br><strong><u>Common Name vs. IUPAC Name</u></strong>
+
+Among the available synonyms, two categories are particularly important:
+
+<br>➡️ <strong>Common names</strong> : 
+These are widely used, human-readable names that are often preferred in laboratory practice, education, and industry.They may be ambiguous or shared by different compounds in different contexts.
+
+<br>➡️ <strong>IUPAC name</strong> : 
+The IUPAC name is the systematic, unambiguous name defined by the rules of the International Union of Pure and Applied Chemistry.
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 19</span></div> 
+</template>
+
+
+<!-------------------Physicochimie--Page20--------->
+
+<template id="page-19">
+<div style="text-align:justify">
+  <h2>3.4 Finger-Print , Physicochemical Profile</h2>
+<img src="../images/Fingerprint_PropertiesPage.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+<strong>MoleMate™</strong>  aggregates physical and physicochemical data from multiple authoritative sources, including experimental studies, curated reference databases, and validated computational predictions. These data are linked to a unique compound identifier (CID), ensuring consistency across different datasets and applications.
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 20</span></div> 
+</template>
+
+
+<!-------------------------Page21--------->
+
+<template id="page-20">
+ 
+<div style="text-align:justify">
+<strong><u>Key categories of physical data available in PubChem include:</u></strong></br>
+
+➡️ <strong>Basic physicochemical properties</strong> :
+Molecular weight, exact mass, elemental composition, formal charge, and isotopic information.<br>
+
+➡️ <strong>Thermodynamic and phase properties</strong> :
+Melting point, boiling point, density, vapor pressure, and solubility, when available from experimental sources.<br>
+
+➡️ <strong>Chemical behavior indicators</strong> :
+pKa values, partition coefficients (logP, logD), polar surface area, refractivity, and hydrogen bond donor/acceptor counts.<br>
+
+➡️ <strong>Structural and conformational descriptors</strong>:
+Rotatable bonds, ring systems, and topological indices that are widely used in chemometrics and cheminformatics.<br>
+
+<br><strong><u>These properties may originate from:</u></strong>
+<br>➡️ <strong>Peer-reviewed</strong>  literature and handbooks
+<br>➡️ <strong>Regulatory submissions</strong>  and technical reports
+<br>➡️ <strong>Curated databases</strong> integrated into PubChem
+<br>➡️ <strong>Calculated property</strong>  models, clearly identified as such
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 21</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!------spectro------------------------------------------Page22---------->
+
+<template id="page-21">
+
+<div style="text-align:justify">
+  <h2>3.5 Finger-Print , Spectroscopy</h2>
+<img src="../images/Fingerprint_SpectrumPage.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+<strong>MoleMate™</strong> provides access to spectroscopic data when available, either as experimental reference spectra or as links to external spectral repositories. These data are associated with a unique Compound Identifier (CID), ensuring traceability between structure, properties, and spectra..
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 22</span></div> 
+</template>
+
+<!-------------------------Page23--------->
+<template id="page-22">
+<div style="text-align:justify">
+<strong><u>The main spectroscopic data accessible include:</u></strong>
+<br>➡️ <strong>Nuclear Magnetic Resonance (NMR)</strong>
+Information related to ¹H and ¹³C NMR spectra, including chemical shift references, peak assignments, or links to external databases and publications where full spectra are available.
+<br>➡️ <strong>Infrared (IR) Spectroscopy</strong>
+Vibrational band information and references to IR spectra used for functional group identification and compound verification.
+<br>➡️ <strong>Mass Spectrometry (MS)</strong>
+Molecular ion information, fragmentation patterns, exact mass data, and links to spectral libraries or experimental studies.
+<br><br><strong><u>These spectroscopic datasets originate from:</u></strong>
+<br>➡️ <strong>Curated reference</strong> databases and spectral libraries
+<br>➡️ <strong>Peer-reviewed</strong> scientific literature
+<br>➡️ <strong>Depositor</strong>-submitted experimental data
+<br>➡️ <strong>Linked external</strong> resources specialized in spectroscopy
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 23</span></div> 
+</template>
+
+<!--=========================================================================================--->
+<!-----------------Link--Page24--------->
+<template id="page-23">
+<div style="text-align:justify">
+  <h2>3.6 Finger-Print , Links</h2>
+<img src="../images/Fingerprint_LinkPage.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+<strong>MoleMate™</strong> not only provides internal chemometric analysis and spectral simulations but also serves as a central hub for exploring a molecule across multiple trusted external resources. For every molecule—identified by CID, SMILES, Mol file, or hand-drawn structure—Mole Mate dynamically generates links to a wide variety of external databases and portals, making it possible to navigate chemical knowledge efficiently.
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 24</span></div> 
+</template>
+
+
+<!-------------------------Page25--------->
+
+<template id="page-24">
+<strong><u>Categories of Links:</u></strong>
+<div style="text-align:justify;font-size:0.8em">
+<strong><u>Basic Chemical Databases</u></strong>
+<br>🔗 PubChem: central repository for structure, properties, and bioactivity.
+<br>🕷️ ChemSpider: complementary structural and property data.
+<br>📚 CAS : standardized identifiers and regulatory information.
+<br>🧪 ChEMBL: bioactivity and pharmacological data.
+<hr>
+<strong><u>Suppliers</u></strong>
+<br>🛒 Suppliers 🛒 Sigma-Aldrich	🛒 Fisher Scientific	🛒 TCI Chemicals
+<hr>
+<strong><u>Safety and Regulatory</u></strong>
+<br>⚠️ European Chemicals Agency (ECHA) for CLP/GHS classifications.
+<br>🏥 ChemIDplus (NIH) for toxicology and hazard information.
+<br>🛡️ EPA ToxCast for environmental and toxicological data.
+<hr>
+<strong><u>Pharmaceutical & Drug Databases</u></strong>
+<br>💊 Pharmaceutical & Drug Database pharmacological & clinical.
+<br>🧬 Human Metabolome Database metabolite profiles.
+<br>🔬 KEGG Compound biochemical pathways and molecular context.
+<hr>
+<strong><u>Literature & Research</u></strong>
+<br>📚 Google Scholar	📰 PubMed	🔬 ScienceDirect	📙 PubChem Literature
+📖 Wikipedia	🌐 Wikidata	📙 ChemicalBook	📙 Patents ...
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 3</span><span>Page 25</span></div> 
+</template>
+
+
+
+
+<!--======================================================================================--->
+<!--			Chapter4 Draw 			page 26				--->
+<!--======================================================================================--->
+
+<template id="page-25">
+<h1>Chapter 4 : MoleMate™ Draw<br><i>From Sketch to Science</i></h1>
+<img src="../images/Draw_FrontPage.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+<div style="text-align:justify;font-size:0.8em">
+
+	<strong>OrganoMate-Draw</strong> is an interactive chemiometric analysis and visualisation tool. It enables users to:<br>
+	<span style="font-size:1em">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✍🏻 Draw chemical structures in 2D<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp📁 Import an existing molecule for slight modifications.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp💾 Export your design in  molecular files (MOL, SDF)<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp🔎 Search chemical information and fingerprints<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp👀 Visualize molecules in 2D and 3D <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp🔬 Explore molecular and atomic properties.
+	</span>
+</div>	
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 26</span></div> 
+
+</template>
+
+<!-------------------------Page27--------->
+
+<template id="page-26">
+<div style="text-align:justify;font-size:0.8em;line-height:1em">
+<h3 style="line-height:0em">How to start ? Drawing & Search a Molecule</h3>
+
+	1️⃣ Use the <strong>drawing tools</strong> to create a molecule with atoms, bonds, rings, charges ...<br>
+	2️⃣ <strong>Press</strong> <span class="any-button" style="font-size:0.8em"><kbd>🔎 Search</kbd></span> button to run the programme and search for your drawing among the one million compounds in the PubChem database.<br>
+	3️⃣ <strong> Click</strong> <span class="any-button" style="font-size:0.8em"><kbd>♻️ Reset</kbd></span> button to clear the drawing area for a new trial.<br>
+	4️⃣ <strong> Click</strong> <span class="add-button" style="font-size:0.8em"><kbd>📁 MOL</kbd></span> to load an existing file to start with. 
+</div>
+<div style="text-align:justify;font-size:0.8em;line-height:1em">
+
+
+This panel provides data visualization and analysis tools, organized into tabs:
+<hr><h1>👋 Finger Print : chemical information & results </h1><hr>
+This view provides all the data necessary for unambiguous chemical identification from a PubChem database lookup. The view updates automatically when a new molecule is detected.<br>
+⚠️ If the molecule does not exist in the PubChem database, the 2D/3D view and properties view cannot be displayed.
+<hr><h1 style="color:blue">👀 2D & 3D View : interactive visualization</h1><hr>
+This section allows interactive 3D visualizations of the molecule : <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <strong>2D Line</strong> (simple skeletal representation) // <strong>Ball & Stick</strong> (classic atomic spheres & bonds)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <strong>Space‑Filling</strong> (Van der Waals surface) //<strong>Licorice</strong> (thick bonds representation)<br>
+Molecule can be <strong>Rotated</strong> (click & drag) & <strong>Zoomed</strong> (mouse wheel). Standard CPK (Corey-Pauling-Koltun) colors legend is displayed for atom types.
+<hr><h1 style="color:red">🔬 Properties View : atomic property mapping</h1><hr>
+This advanced view displays the mapping of atomic and molecular properties onto the 3D structure. <strong>Fifteen properties</strong> can be highlighted at the atomic level: <br>
+Atoms organisation - Van der Waals radius - Bond count) - Electronegativity - Polarizability - Partial charge - Effective electronegativity - Inductive effect 
+- Hydrophobicity - Electrostatic potential (ESP) - Steric accessibility - Ionization energy (ALIE) 
+- Fukui reactivity - Electron density (ρ).<br>
+
+Select a property from the drop-down list and the molecule will update with a color scale according to your request. Click on an atom to display detailed information.
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 27</span></div> 
+</template>
+
+<!--=========================================================================================--->
+
+<!-----------3.1 Kekulé---page 27----->
+<template id="page-27">
+<h2> 4.1. How to Draw a Molecule Using MoleMate™ Draw</h2>
+<div style="text-align:justify;font-size:0.8em;line-height:1em">
+<strong>MoleMate™ Draw</strong> is an interactive chemical drawing toolkit that allows users to create,edit, and export molecular structures directly in a web interface.<br><br>
+
+
+<h2>4.1.1. Starting a New Structure</h2>
+<ul>
+  <li>Ensure the canvas is empty by clicking<kbd>♻️ Reset</kbd></span> button to clear &  start a new drawing.</li>
+<li> You can also click on <kbd>📁 MOL</kbd></span> to load an existing file to start with (here is vaniline). 
+  <li>The default atom is carbon (C), which is commonly used as a starting point.</li>
+</ul>
+<img src="../images/Draw_screen.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:0; padding:0;"> 
+
+<h2>4.1.2. Adding Atoms</h2>
+<ul>
+  <li>Click once on the canvas to place a carbon atom.</li>
+  <li>To change the atom type, select an element from the periodic table toolbar
+      or type the element symbol (e.g. <strong>O</strong>, <strong>N</strong>, <strong>Cl</strong>).</li>
+  <li>Click on an existing atom to replace it with the selected element.</li>
+</ul>
+
+<h2>4.1.3. Drawing Bonds</h2>
+<ul>
+  <li>Click and drag from one atom to another to create a bond.</li>
+  <li>Use the bond toolbar to choose:
+    <ul>
+      <li>Single bond</li>
+      <li>Double bond</li>
+      <li>Triple bond</li>
+      <li>Aromatic bond</li>
+    </ul>
+  </li>
+  <li>Click on an existing bond to cycle through bond types.</li>
+</ul>
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 28</span></div> 
+</template>
+
+
+<!-------------------------Page29--------->
+
+<template id="page-28">
+ <div style="text-align:justify;font-size:1em;line-height:1.3em">
+<h2>4.1.4. Building Common Structures</h2>
+<ul>
+<li> Click on <kbd>📁 MOL</kbd></span> to load an existing file to start with (here is vaniline). 
+  <li> Or use ring templates (benzene, cyclohexane, etc.) from the ring toolbar.</li>
+  <li>Click on the canvas or an atom to insert a ring system.</li>
+  <li>Rings can be fused or substituted by adding atoms and bonds.</li>
+</ul>
+<br>
+<h2>4.1.5. Editing and Modifying the Structure</h2>
+<ul>
+  <li>Select atoms or bonds by clicking on them.</li>
+  <li>Use <strong>Delete</strong> or the eraser tool to remove selected elements.</li>
+  <li>Drag atoms to adjust geometry and improve readability.</li>
+</ul>
+<br>
+<h2>4.1.6. Adding Charges and Isotopes</h2>
+<ul>
+  <li>Select an atom and open the atom properties panel.</li>
+  <li>Assign formal charges (e.g. +1, −1).</li>
+  <li>Specify isotopes when needed for labeling or mechanistic studies.</li>
+</ul>
+<br>
+
+<h2>4.1.7. Best Practices</h2>
+<div class="warning">
+  Always double-check stereochemistry, bond types, and charges before exporting,
+  especially for complex or chiral molecules.
+</div>
+
+<ul>
+  <li>Draw molecules in a clear, uncluttered layout.</li>
+  <li>Use standard conventions for aromaticity and functional groups.</li>
+  <li>Verify the structure against known references when possible.</li>
+</ul>
+
+<br><br>
+<strong>Press</strong> <span class="any-button" style="font-size:0.8em"><kbd>🔎 Search</kbd></span> button to run the programme and search for your drawing among the one million compounds in the PubChem database.<br>
+
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 29</span></div> 
+</template>
+
+<!--=========================================================================================--->
+<!-------------------View-------------------------------Page30---------->
+
+<template id="page-29">
+<h2> 4.2 Visualizing Molecular Shape and Structure</h2>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+
+<strong>Press</strong> <span class="any-button" style="font-size:0.8em"><kbd>🔎 Search</kbd></span> button to run the programme and search for your drawing among the one million compounds in the PubChem database.
+<br>➡️ <strong>Load</strong> Mol and SDF format of the molecule for further investigation
+<br>➡️ <strong>Get</strong> PubChem information about the molecule if it has been recorded
+</div>
+<img src="../images/Draw_molview.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:auto; padding:0;"> 
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 30</span></div> 
+</template>
+
+
+<!-------------------------Page31--------->
+<template id="page-30">
+Several views are available :
+<div style="text-align:justify; line-height: 1.3em">
+
+      		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚪  The <strong>2D Line view</strong> representation is commonly used in organic chemistry.
+Atoms are represented as small points (often implicit for carbon), and bonds are shown
+as thin lines. This view is ideal for quick structure sketching and clear visualization of connectivity and functional groups,
+
+      		<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🔵  The <strong>Ball-and-Stick</strong> represents atoms as small spheres and bonds as thin cylinders.
+This visualization highlights molecular geometry and bond angles while keeping
+the structure readable. It is  used for understanding 3D molecular shape, teaching stereochemistry, visualizing conformations;
+ 
+      		<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🍭 The <strong>Space-Filling</strong> model displays atoms as spheres scaled to their van der Waals radii.
+Bonds are not explicitly shown; instead, atoms appear as overlapping spheres.
+This view emphasizes actual molecular volume, steric effects and crowding, surface accessibility and packing;
+
+      		<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🌀 The <strong>Licorice</strong> representation uses thick, colored sticks for bonds and atoms,
+with uniform thickness. It combines clarity with strong color contrast and is particularly useful for comparing atom types visually , analyzing molecular backbones and displaying complex structures clearly.
+
+
+<br><br><strong>MoleMate™ Draw</strong> follows CPK standards atomic color convention:
+	<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;border:0px solid black" >
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+   		<span style="width:14px;height:14px;border-radius:50%;background:#FFFFFF;border:1px solid #ccc;"></span> H</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#909090;"></span> C</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#3050F8;"></span> N</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#FF0D0D;"></span> O</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#90E050;"></span> F</span>
+  
+		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#1FF01F;"></span> Cl</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#A62929;"></span> Br</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#940094;"></span> I</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#FF8000;"></span> P</span>
+  
+		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#FFFF30;"></span> S</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;width:40px;">
+    		<span style="width:14px;height:14px;border-radius:50%;background:#FFB5B5;"></span> B</span>
+
+  		<span style="display:flex;align-items:center;gap:1px;">
+ 		<span style="width:14px;height:14px;border-radius:50%;background:#ff1493;border:1px solid #ccc;"></span> Other</span>
+
+	</div>
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 31</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-------------------------Page32--------->
+
+<template id="page-31">
+<h2> 4.3 Visualizing Molecular properties</h2>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+This advanced view displays the mapping of atomic and molecular properties onto the 3D structure. Fifteen properties can be highlighted at the atomic level:
+<br>Atoms organisation - Van der Waals radius - Bond count) - Electronegativity - Polarizability - Partial charge - Effective electronegativity - Inductive effect - Hydrophobicity - Electrostatic potential (ESP) - Steric accessibility - Ionization energy (ALIE) - Fukui reactivity - Electron density (ρ).
+
+
+<img src="../images/Draw_Propertyview.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:auto; padding:0;">
+
+User selects a property from the drop-down list and the molecule will update with a color scale according to the request. When we click on an atom we display detailed information. 
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 32</span></div> 
+</template>
+
+
+<!-------------------------Page33--------->
+
+<template id="page-32">
+<div style="text-align:justify;font-size:0.75em;line-height:1.4em">
+
+  ✔️ <strong>Element (CPK): </strong>Atoms are colored according to the standard CPK color convention. This representation facilitates quick identification of atomic species within the molecular structure;
+
+  <br>✔️ <strong>Van der Waals Radius: </strong>Atoms are represented with sizes and colors proportional to their Van der Waals radii, 
+reflecting non-bonded interaction distances and providing insight into molecular packing and steric effects;
+
+  <br>✔️ <strong>Degree (bonds):</strong> Atoms are colored based on the number of covalent bonds connected to each atom. 
+This highlights connectivity patterns and local coordination environments;
+
+  <br>✔️ <strong>Electronegativity:</strong> Atoms are colored according to their electronegativity values, indicating their tendency to attract electrons within chemical bonds 
+and revealing bond polarity trends;
+
+  <br>✔️ <strong>Polarizability:</strong> Visualization of atomic polarizability, representing how easily an atom’s electron cloud can be distorted by external electric fields, 
+which influences intermolecular interactions;
+
+ <br>✔️ <strong>Partial Charge</strong>: Atoms are colored based on their partial atomic charges derived from electronic structure calculations, reflecting local electron excess or deficiency within the molecule.",
+
+  <br>✔️ <strong>Effective Electronegativity:</strong> Displays electronegativity values adjusted for the chemical environment, accounting for neighboring atoms rather than isolated atomic properties;
+
+  <br>✔️ <strong>Inductive Effect</strong>: Visualization of electron-withdrawing/donating effects transmitted through sigma bonds, 
+illustrating how substituents influence electron distribution across the molecular framework;
+
+  <br>✔️ <strong>Hydrophobicity</strong>: Atoms are colored according to their hydrophobic or hydrophilic character, providing insight into solvent interactions,
+ molecular recognition, and binding behavior;
+
+  <br>✔️ <strong>Electrostatic Potential (ESP)</strong>: Displays the molecular electrostatic potential, highlighting regions of 
+positive & negative potential relevant to non-covalent interactions;
+
+  <br>✔️ <strong>Steric Accessibility:</strong> Represents the spatial accessibility of atoms within the molecular structure,
+ indicating how exposed or shielded they are to approaching reactants or interacting species;
+
+  <br>✔️ <strong>Ionization Energy (ALIE)</strong>: Visualization of the Average Local Ionization Energy, identifying regions where electron removal is
+energetically favorable and thus prone to electrophilic reactions;
+
+  <br>✔️ <strong>Fukui Reactivity:</strong> Displays Fukui functions derived from conceptual density functional theory, highlighting atomic sites susceptible to nucleophilic;
+ electrophilic, or radical attacks;
+
+  <br>✔️ <strong>Electron Density (ρ)</strong>: Visualization of the electron density distribution across the molecule, providing fundamental insight into bonding, charge localization, 
+and overall electronic structure.
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 4</span><span>Page 33</span></div> 
+</template>
+
+
+
+
+<!------================================================================
+		Chapitre 5 Spectrum
+=======================================================-Page34--------->
+
+
+<template id="page-33">
+<h1>Chapter 5 : MoleMate™ Spectrum<br><i>Spectra Start with Structure</i></h1>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<strong>MoleMate™ Spectrum</strong> is designed to transform a molecular structure into actionable spectroscopic insight. Starting from a Mol file, SMILES, CID, or compound name, the software simulates key analytical spectra—IR, ¹H NMR, ¹³C NMR, and Mass Spectrometry—for organic molecules. Its purpose is to support structure interpretation, compound identification, 
+learning, and early-stage analysis by providing fast, structure-based spectral predictions alongside available reference data and safety information.
+<img src="../images/Spectrum_FrontPage.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:auto; padding:0;">
+
+<strong>Enter a compound:</strong> You can search by CID number, compound name, or SMILES notation.<br>
+		    <strong>Press</strong> <kbd>Enter</kbd> after typing to search automatically<br>
+-------------------or-------------------<br> 
+                    <strong>Import a file:</strong> Click "Import .mol file" to load molecular data from a .mol or .sdf file.</p>
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 34</span></div> 
+</template>
+
+
+<!-------------------------Page35--------->
+
+<template id="page-34">
+<div style="text-align:justify;font-size:1em;line-height:1.4em">
+
+ <h3 style="texte-align:center;line-height:0.2em">✅ Information on the left panel</h3>
+
+<strong>MoleMate™ - Molecule Spectra </strong> responses :Name - IUPAC Name - CAS Number - Molecular Formula - Molecular Weight - Lipophilicity - H bonding - 
+H-Bond Donor - Bond Acceptors - Rotatable Bonds- Complexity & Electric Charge	
+
+                    
+                    <h3 style="texte-align:center;line-height:0.2em">📊 Available and Simulated Spectra on the right panel</h3>
+ 
+                        <strong>Spectrum:</strong> Overview of available real spectroscopic data on the web (if any)<br>
+                         <strong>RMN H1:</strong> Simulated Proton Nuclear Magnetic Resonance<br>
+                        <strong>RMN C13:</strong> Simulated Carbon-13 Nuclear Magnetic Resonance<br>
+                        <strong>IR:</strong>Simulated Infrared Spectroscopy<br>
+                        <strong>Mass Spectrum:</strong>Simulated  Mass Spectrometry data<br>
+                        <strong>HAZARD:</strong> Existing safety information and hazard classification<br>
+
+               <h3>⚠️ Watch out</h3>It is <strong><u>simulated spectra</u></strong>. Click on any spectrum tab to view detailed analysis
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 35</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-==============IR=====================-->
+<!-------------------------Page36--------->
+
+<template id="page-35">
+<h2>5.1 IR simulator</h1>
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+
+<strong><u>5.1.1 Infrared (IR) Spectroscopy – Short Introduction</u></strong>
+<br><br>Infrared (IR) spectroscopy is an analytical technique based on the interaction between infrared radiation and molecular vibrations. When a molecule absorbs IR light, specific bonds vibrate by stretching or bending at characteristic frequencies. An absorption occurs only if the vibration produces a change in the molecular dipole moment, which makes IR spectroscopy particularly sensitive to polar bonds.
+<br><br>The resulting IR spectrum consists of absorption bands that correspond to these vibrational modes. Stretching vibrations (such as C–H, O–H, or N–H) typically appear at higher wavenumbers, while bending vibrations occur at lower wavenumbers. Functional groups give rise to characteristic absorption regions, allowing rapid identification, while the complex pattern in the fingerprint region (below ~1500 cm⁻¹) is unique to each molecule.
+<br><br>In practice, IR spectroscopy is widely used for functional group identification, compound verification, purity control, and comparison of unknown samples with reference spectra. It is a fast, non-destructive technique and remains one of the most powerful tools for confirming molecular structure in both research and industrial laboratories.
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 36</span></div> 
+</template>
+
+
+<!-------------------------Page37--------->
+
+<template id="page-36">
+<strong><u>5.1.2 MoleMate™ - Molecule IR Spectra</u></strong><br>
+<div style="text-align:justify;font-size:0.8em;line-height:1.4em">
+
+
+<strong>MoleMate™ - Molecule Spectra </strong> simulates an infrared (IR) spectrum of an organic molecule starting from a MOL structure file.
+It follows a chemically informed, rule-based approach grounded in spectroscopic literature rather than ab initio quantum calculations.
+
+<br><br>The workflow mirrors how an experimental IR spectrum is interpreted:
+
+<div style="width:100%; border:1px solid black; background-color :#ccc;text-align:center">Structure ▶️ Functional groups ▶️ Vibrational modes ▶️ Absorption bands ▶️ Spectrum</div>
+
+<br>
+<div>1️⃣  <strong><u>Step 1 – User Interface and Instrument Settings</u></strong>
+
+<br>When the page loads, the script dynamically creates the IR analysis interface (plot area, buttons, sensitivity selector).
+
+<br>The equipment-dependent spectral appearance is introduced into the simulation. A “sensitivity” parameter is exposed to the user, representing different IR instruments:
+
+<div style="margin-left:100px">
+    🔴 <strong>Low sensitivity</strong> → basic FT-IR or mobile sensors
+<br>🟡 <strong>Average</strong>  → ATR-FTIR
+<br>🟢 <strong>High</strong>  → FT-IR with MCT detector
+
+</div>
+The selected sensitivity directly modifies band width and sharpness, mimicking the detector performance, the optical resolution, the signal-to-noise ratio
+</div>
+
+<img src="../images/Spectrum_IR.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:auto; padding:0;">
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 37</span></div> 
+</template>
+
+
+
+<!--=========================================================================================--->
+
+<!-------------------------Page38--------->
+
+<template id="page-37">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+
+	2️⃣  <strong>Step 2 – Parsing the MOL File (Structure Extraction)</strong>
+
+<br> <strong>MoleMate™ - Spectrum</strong> performs a minimal but robust parsing of MOL files. Then it extracts:
+<div style="margin-left:100px">
+⚽ Atom list (element + 3D coordinates)
+<br>➡️ Bond list (connected atoms + bond order)
+<br>📝 Builds a data structure representing the molecular graph.
+</div>
+This step provides the chemical connectivity required for functional group recognition.
+
+<br><br>	3️⃣ <strong> Step 3 – Functional Group Detection (Chemical Intelligence)</strong>
+<br> From the parsing, an adjacency matrix is constructed from the bond list. The algorithm identifies:
+<div style="margin-left:100px">
+💬 Aromatic rings (cycle detection)
+<br>💬 Carbonyl environments (C=O classification)
+<br>💬 Alcohols vs phenols
+<br>💬 Amines (primary, secondary, aromatic)
+<br>💬 Esters, acids, amides, anhydrides
+<br>💬 Halides, nitriles, ethers, thiols
+<br>💬 C–H environments (sp² vs sp³)
+</div>
+Each detection rule is explicitly based on spectroscopic literature, <strong><u>not heuristics.</u></strong>
+This mirrors how a chemist mentally interprets a structure before reading an IR spectrum.
+
+
+<br><br>4️⃣  <strong>Step 4 – Mapping Functional Groups to Vibrational Modes</strong>
+
+<br>The GROUPMODES table created at step3  is the spectroscopic knowledge base of the script. For each functional group, it defines:
+<div style="margin-left:100px">
+🗨️ Characteristic wavenumbers (cm⁻¹)
+<br>🗨️ Band assignments (stretching, bending, overtones)
+<br>🗨️ Relative intensities (based on molar absorption coefficients ε)
+<br>🗨️ Typical bandwidths
+<br>🗨️ Broad vs sharp bands (e.g., hydrogen bonding)
+</div>
+This database is built from reference textbooks and review literature <i>(Colthup, Socrates, Smith, Pavia, etc.).</i>
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 38</span></div> 
+</template>
+
+
+<!-------------------------Page39--------->
+
+<template id="page-38">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+5️⃣  <strong>Step 5 – Building the Spectrum (Physics-Inspired Modeling)</strong>
+
+<br>For each detected functional group a multiple vibrational modes are instantiated.
+<br>In order to simulate reality , small random shifts are applied to the Wavenumber band (chemical environment variability simulation); intensity (experimental variability simulation) and have a gaussian Line Shapes
+<br>Each absorption band is modeled as a Gaussian function. The center is the characteristic wavenumber, gaussian width is the intrinsic bandwidth × instrument sensitivity and the height is function of ε and group count
+<br> At the end, this step reproduces the peak broadening, band overlap and gives realistic spectral envelopes. Additionally a background noise is added and close peaks attenuate each other (vibrational coupling effect). This avoids producing unrealistically “perfect” spectra.
+<br><br>6️⃣ <strong>Step 6 – From Absorbance to Transmittance</strong>
+
+<br>After summing all Gaussian bands:
+<div style="margin-left:100px">
+    ✅ The spectrum is normalized
+<br>✅ Converted into transmittance (standard IR presentation)
+<br>✅ The x-axis is inverted (4000 → 400 cm⁻¹), following IUPAC conventions
+</div>
+
+
+<br><br>7️⃣ <strong>Step 7 – Interactive Visualization and Interpretation</strong>
+<br>The spectrum is rendered as a smooth filled curve. The strongest absorption bands are automatically annotated. By clicking on a band displays:
+<div style="margin-left:100px">
+👨‍💻 Wavenumber
+
+<br>📊 Vibrational assignment
+
+<br>📚 Corresponding functional group
+</div>
+A results table is also generated listing all simulated peaks.<br><br>
+
+<div  style="padding-left: 5px;border-left:5px solid #0ea5e9;border-radius:10px;">
+<strong><i>These steps transform molecular connectivity into an interpretable IR spectrum using chemical rules, 
+spectroscopic literature, and instrument-aware signal modeling—bridging theory and experimental practice.</i></strong>
+</div>
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 39</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-----------------RMN 1H --------Page40--------->
+<template id="page-39">
+<h2>5.2 Proton Nuclear Magnetic Resonance (¹H NMR) Spectroscopy</h1>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+
+<strong><u>5.2.1. Proton Nuclear Magnetic Resonance  Theory</strong></u>
+<br>Proton Nuclear Magnetic Resonance (¹H NMR) spectroscopy is based on the interaction between nuclear spins and an external magnetic field. Hydrogen nuclei (¹H) possess a nuclear spin (I = ½) and a magnetic moment. When placed in a strong magnetic field, these spins align either with or against the field, creating distinct energy levels. Absorption of radiofrequency (RF) radiation induces transitions between these energy levels, producing the NMR signal.
+<br>The exact resonance frequency of a proton depends on its electronic environment. Electrons surrounding the nucleus generate local magnetic fields that shield or deshield the proton from the external field. This effect gives rise to the chemical shift (δ), expressed in parts per million (ppm), which provides direct information about the chemical environment of each proton.
+<br>In addition, magnetic interactions between neighboring protons lead to spin–spin coupling, producing signal splitting patterns (doublets, triplets, multiplets). The spacing between these lines, known as the coupling constant (J, in Hz), reflects the number and spatial relationship of adjacent nuclei. Together, chemical shifts and coupling patterns encode detailed structural information.
+<br><br>
+<strong><u>5.2.2. Practical Aspects of ¹H NMR</strong></u>
+<br>In practice, ¹H NMR spectra are recorded by dissolving a sample in a deuterated solvent (such as CDCl₃ or DMSO-d₆) to avoid interference from solvent protons and to provide a stable magnetic lock signal. Spectra are typically acquired on instruments operating at 400–600 MHz or higher, where increased magnetic field strength improves resolution and sensitivity.
+<br><br>Key practical features of a ¹H NMR spectrum include:
+<div style="margin-left:50px">
+    ✅Chemical shift positions, indicating functional groups and electronic environments
+<br>✅Signal integration, proportional to the number of equivalent protons
+<br>✅Multiplicity, revealing the number of neighboring protons through coupling
+<br>✅Line width & shape, influenced by instrument tuning, purity, and molecular dynamics
+<br>✅Proper shimming, temperature control, and solvent choice are essential for obtaining high-quality spectra.
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue</span><span>Page 40</span></div> 
+</template>
+
+
+<!-------------------------Page41--------->
+<template id="page-40">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+
+<img src="../images/Spectrum_1HRMN.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:auto; padding:0;">
+<strong><u>5.2.3.Final Applications of ¹H NMR</strong></u>
+<br>¹H NMR spectroscopy is one of the most widely used analytical techniques in chemistry due to its versatility and rich information content. Its main applications include:
+<div style="margin-left:45px">
+    ✅ Structure elucidation of  molecules, from small compounds to complex natural products
+<br>✅ Compound identification and verification, by comparison with reference spectra
+<br>✅ Purity assessment and impurity detection in research and industrial settings
+<br>✅ Real-time monitoring & observation of reactant consumption & product formation
+<br>✅ Conformational & dynamic studies,exchange processes and molecular interactions
+</div>
+<br>Because it is non-destructive, highly informative, and broadly applicable, ¹H NMR remains a cornerstone technique in organic chemistry, pharmaceutical research, materials science, and chemical education.
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 41</span></div> 
+</template>
+
+<!--=========================================================================================--->
+<!-----------------RMN 1H suite--------Page42--------->
+<template id="page-41">
+<strong><u>5.2.4. MoleMate™ - Molecule ¹H NMR Spectra</u></strong>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<strong>MoleMate™ Spectrum</strong> simulates a proton NMR (¹H NMR) spectrum starting from a MOL molecular structure file.
+It follows a hybrid, chemically informed approach, combining:
+<div style="margin-left:50px">
+    ✅Empirical NMR rules from the literature
+<br>✅Local chemical environment analysis
+<br>✅Spin–spin coupling (J-couplings) modeling
+<br>✅Instrument-dependent spectral effects
+</div>The goal is to simulate a ¹H NMR spectrum, including prediction, interpretation & recording.
+
+<br><br><div>1️⃣  <strong><u>Step 1 – User Interface and Experimental Parameters</u></strong>
+<br>At initialization, <strong>MoleMate™</strong> builds an interactive NMR interface allowing the user to select:
+<div style="margin-left:50px">
+    🧪 Solvent (CDCl₃, DMSO-d₆, D₂O, CD₃OD)
+<br>🧪 Spectrometer frequency (400, 500, 600 MHz)
+<br>🧪 Line width (Hz) – peak broadening
+<br>🧪 Chemical shift range (ppm)
+</div>
+These parameters directly influence the final spectrum, reproducing real experimental condition
+<br><br>
+
+	2️⃣  <strong><u>Step 2 – Parsing the MOL File</u> (Structure Extraction)</strong>
+<br><strong>MoleMate™</strong> reads the MOL file and extracts:
+<div style="margin-left:50px">
+⚽ Atom list (element + 3D coordinates)
+<br>➡️ Bond connectivity and bond order
+</div>
+From this, the script constructs a connectivity graph of the molecule. Implicit hydrogens are estimated using standard valence rules, which is essential for proton counting and integration.
+
+
+<br><br>3️⃣ <strong> <u>Step 3 – Aromaticity and Ring Detection</u> (Chemical Intelligence)</strong>
+<br><strong>MoleMate™</strong> detects:
+<div style="margin-left:50px">
+    💬 Aromatic carbons (explicit aromatic bonds or heuristic rules)
+<br>💬 Ring systems (3–8 membered) using graph traversal
+<br>💬 Correct aromatic chemical shifts
+<br>💬 Ring current (anisotropy) effects
+<br>💬 Aromatic coupling patterns (ortho/meta/para)
+</div>
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 42</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-------------------------Page43--------->
+<template id="page-42">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+4️⃣  <strong><u>Step 4 – Chemical Shift Prediction</u> (δ, ppm)</strong>
+<br>Each proton group is assigned a base chemical shift using validated empirical tables:
+<div style="margin-left:50px">
+🗨️ Alkyl, alkenyl, aromatic, aldehydic, acidic, heteroatom-bound protons
+<br>🗨️ α and β substituent effects (O, N, halogens, carbonyls, nitro, etc.)
+<br>🗨️ Solvent-dependent shifts
+<br>🗨️ Aromatic substituent activation/deactivation
+<br>🗨️ Pseudo-quantum geometric corrections (distance-based shielding effects)
+</div>
+Shifts are refined using a HOSE-code database
+
+<br><br>
+5️⃣  <strong><u>Step 5 – Proton Grouping and Integration</u></strong>
+<br>Hydrogens attached to the same heavy atom are grouped into a single resonance:
+<div style="margin-left:50px">
+    🗨️ CH₃, CH₂, CH, OH, NH groups
+<br>🗨️ Integration values correspond to the number of equivalent protons
+</div>
+This mirrors how experimental spectra display integrated signal areas.
+
+<br><br>6️⃣ <strong><u>Step 6 – Spin–Spin Coupling and Multiplicity</u></strong>
+<br>The script computes J-couplings using several mechanisms:
+<div style="margin-left:50px">
+    🗨️ Geminal coupling (~13 Hz)
+<br>🗨️ Vicinal coupling using a Karplus-type relationship when geometry is available
+<br>🗨️ Aromatic couplings (ortho, meta, para) & Long-range allylic and W-couplings
+</div>
+From these couplings, the script determines:
+<div style="margin-left:50px">
+    🗨️ Multiplicity (s, d, t, q, m)
+<br>🗨️ Associated J values (Hz)
+</div>
+This reproduces realistic splitting patterns seen in experimental ¹H NMR spectra.
+
+<br><br>7️⃣ <strong><u>Final Spectrum Construction</u> (Signal Physics)</strong>
+<br>
+Resonances are rendered using a Lorentzian line shape, reflecting true NMR signal with:
+
+<div style="margin-left:50px">
+📈 Line width (Hz) → converted to ppm using spectrometer frequency
+<br>📈 Magnetic field strength (MHz) → affects resolution and splitting
+<br>📈 Signal overlap and broadening are naturally reproduced
+</div>
+All split components are summed point-by-point to generate the full spectrum.
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 43</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-----------------RMN c --------Page44--------->
+<template id="page-43">
+<h2>5.3 Carbon-13 Nuclear Magnetic Resonance Spectroscopy</h1><br>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<strong><u>5.3.1. Carbon-13 Nuclear Magnetic Resonance  Theory</strong></u>
+
+<br>Carbon-13 Nuclear Magnetic Resonance (¹³C NMR) spectroscopy is based on the same physical principles as proton NMR but focuses on the ¹³C isotope, 
+which has a nuclear spin of ½ and is NMR-active. Although carbon is a central element in organic molecules, only about 1.1% of natural carbon is ¹³C, making ¹³C NMR inherently 
+less sensitive than ¹H NMR.
+<br><br>When placed in a strong magnetic field, ¹³C nuclei absorb radiofrequency radiation at frequencies determined by their electronic environment. 
+The surrounding electrons shield the carbon nucleus to varying degrees, leading to chemical shifts (δ) that are highly sensitive to functional groups, hybridization state, and bonding patterns. 
+As a result, ¹³C NMR spectra typically span a wide range (0–220 ppm), providing excellent chemical dispersion.
+<br><br>
+<strong><u>5.3.2. Practical Aspects of ¹³C NMR</strong></u>
+<br>In practice, ¹³C NMR spectra are acquired using Fourier Transform NMR (FT-NMR) techniques and usually require longer acquisition times than ¹H NMR due to lower sensitivity. To simplify spectra and improve signal-to-noise ratio, most ¹³C NMR experiments are recorded with proton decoupling, which removes carbon–hydrogen coupling and results in single, sharp peaks for each unique carbon environment.
+Key practical characteristics of ¹³C NMR include:
+<div style="margin-left:50px">
+✅Broad chemical shift range, allowing clear distinction between different carbon types
+<br>✅ Decoupled spectra, where each signal corresponds to a chemically distinct carbon
+<br>✅ Lower sensitivity, requiring higher sample concentration or longer acquisition times
+<br>✅ Signal intensity not directly proportional to carbon count, due to relaxation effects and Nuclear Overhauser Enhancement (NOE)
+<br>✅ Specialized experiments such as DEPT can be used to differentiate between CH₃, CH₂, CH, and quaternary carbons, adding further structural insight.
+</div>
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 44</span></div> 
+</template>
+
+
+<!-------------------------Page45--------->
+<template id="page-44">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<img src="../images/Spectrum_C13.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:auto; padding:0;">
+<strong><u>5.3.3. Applications of ¹³C NMR</strong></u>
+<br>¹³C NMR spectroscopy is a powerful complementary technique to ¹H NMR and is essential for comprehensive structural analysis. Its main applications include:
+<div style="margin-left:50px">
+    ✅ Confirmation of molecular skeletons : number & types of ¹³C environments
+<br>✅ Group identification : carbonyls, aromatics, heteroatom-substituted carbons
+<br>✅ Structural validation of proposed molecular structures alongside ¹H NMR and IR data
+<br>✅ Analysis of complex molecules, where proton spectra may be crowded or ambiguous
+<br>✅ Quality control & purity assessment in pharmaceuticals and materials chemistry
+</div>
+By providing a clear and systematic view of the carbon framework, ¹³C NMR plays a crucial role in organic synthesis, natural product characterization, polymer analysis, and chemical education.
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 45</span></div> 
+</template>
+
+<!--=========================================================================================--->
+<!-----------------RMN c Suite --------Page46--------->
+<template id="page-45">
+<strong><u>5.3.4. MoleMate™ - ¹³C NMR spectroscopy</strong></u>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<strong>MoleMate™ RMNC13™ Spectrum</strong> simulates a carbon-13 NMR (¹³C NMR) spectrum starting from a molecular description handled directly in JavaScript (atom list, bonding, environments).​
+It follows a hybrid, chemically informed approach, combining:​
+
+<div style="margin-left:50px">
+    ✅ Empirical ¹³C NMR rules from literature (Pretsch, Kalinowski, Grant–Paul) 
+<br>✅ Local chemical environment analysis (substituents, hybridization, rings) 
+<br>✅ Carbon-type classification and intensity modeling (CH₃, CH₂, CH, Cq) 
+<br>✅ Instrument-dependent spectral and “equipment” effects (line broadening, noise,...) </div>
+The goal is to simulate a ¹³C NMR spectrum, from prediction and assignment table to a visually realistic spectrum that mimics recording on an actual spectrometer.​
+
+<br><br>
+
+1️⃣ <strong><u>Step 1 – User Interface and Experimental Parameters</u></strong>
+<br>At initialization, <strong>MoleMate™ RMNC13™ Spectrum</strong> builds an interactive ¹³C NMR interface.​
+It allows the user to select or emulate:​
+
+<div style="margin-left:50px"> 
+🧪 Spectrometer frequency (e.g. 75, 100, 125 MHz ¹³C domain) 
+<br>🧪 Line width / broadening (Hz) – peak broadening and resolution 
+<br>🧪 Chemical shift range (ppm) – typically ~0–220 ppm 
+<br>🧪 Noise level and baseline options – to control “equipment” realism 
+</div>
+These parameters directly influence the final spectrum: frequency sets the Hz↔ppm scaling, while line broadening, noise and baseline shape reproduce realistic experimental conditions.
+
+<br><br>
+2️⃣ <strong><u>Step 2 – Molecular Data Extraction</u> (Structure & Carbons)</strong>
+<strong>MoleMate™ </strong> receives or builds a molecular model from Mol.file: a list of atoms with types, connectivity and local environment flags.​
+From this, <strong>MoleMate™</strong> constructs for each carbon:​
+
+<div style="margin-left:50px"> 
+    ⚽ Atom identity (C atom index, element) 
+<br>➡️ Hybridization (sp, sp², sp³, carbonyl, aromatic) 
+<br>➡️ Neighbors (attached heteroatoms, rings, π-systems) </div>
+This connectivity layer is the basis for classifying each carbon (alkyl, aromatic, carbonyl, acetal, etc.) and for assigning chemically reasonable base shifts
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 46</span></div> 
+</template>
+
+
+<!-------------------------Page47--------->
+<template id="page-46">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+
+3️⃣ <strong><u>Step 3 – Ring and Environment Detection</u> (Chemical Intelligence)</strong>
+<br><strong>MoleMate™ </strong> scans the connectivity graph to detect:​
+<div style="margin-left:50px"> 
+    💬 Aromatic carbons and conjugated systems <br>💬 Ring systems and ring size (when applicable) 
+<br>💬 Carbonyl and heteroatom adjacency (C=O, C–O, C–N, C–X) 
+<br>💬 Quaternary vs protonated carbons (CH₃, CH₂, CH, Cq) 
+</div>
+These features trigger specific empirical correction rules: aromatic deshielding, carbonyl effects, α/β-substituent effects, and special treatment of quaternary carbons whose intensity is typically weaker.
+<br><br>
+4️⃣ <strong><u>Step 4 – Chemical Shift Prediction</u> (δ, ppm)</strong>
+<br>Each carbon atom is assigned a base chemical shift using ¹³C empirical reference tables (Pretsch, Kalinowski, Grant–Paul).​
+The script applies a layered correction model:​
+
+<div style="margin-left:50px"> 🗨️ Carbon class: aliphatic sp³, sp² (alkene, aromatic), sp (alkyne), carbonyl (ketone, ester, amide, acid, etc.) <br>🗨️ α/β/γ substituent effects from electronegative atoms and π-systems (O, N, X, C=O, Ar, CN…) <br>🗨️ Ring and aromaticity effects (ring current, conjugation, anisotropy) <br>🗨️ Optional global offsets for reference and solvent (e.g. relative to TMS / CDCl₃) </div>
+For each carbon, the result is a predicted δ value together with a qualitative attribution (“sp² aromatic C–O”, “sp³ α to carbonyl”, etc.), which is then formatted into the assignment table.
+
+<br><br>
+5️⃣ <strong><u>Step 5 – Carbon Typing and Relative Intensities</u></strong>
+<br>Because ¹³C spectra are typically acquired with broadband proton decoupling, each chemically distinct carbon appears as a singlet, but intensities vary by type.​
+The script groups carbons and assigns an effective intensity based on their environment:​
+
+<div style="margin-left:50px"> 🗨️ CH₃, CH₂, CH vs quaternary carbons (Cq) <br>🗨️ Duplicated equivalent carbons (symmetry) increase apparent intensity </div>
+These intensities are used as weights when constructing the spectrum, while the tabular view displays one line per carbon with δ (ppm), type, hybridization and environment description.
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 47</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-----------------RMN c Suite 2  --------Page48--------->
+<template id="page-47">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+6️⃣ <strong><u>Step 6 – Digital Spectrum Construction</u></strong>
+<br>From the list of predicted carbon lines (δᵢ, intensityᵢ), the script builds a continuous ¹³C spectrum:​
+
+<div style="margin-left:50px"> 
+    🗨️ A ppm axis is defined over the selected window (e.g. 0–220 ppm) with a fixed number of points (digital resolution). 
+<br>🗨️ Each carbon line is rendered as a Lorentzian or Gaussian peak centered at δᵢ. 
+<br>🗨️ Peak width is controlled by a line-broadening or FWHM parameter. </div>
+The contribution of each carbon is added point-by-point to the spectrum array; overlapping peaks naturally combine, reproducing realistic envelope and crowding at specific ppm regions.​
+<br><br>
+7️⃣ <strong><u>Final Spectrum + Equipment Effects</u> (Instrument Physics)</strong>
+<br>To transform the “ideal” line spectrum into a realistic recording, <strong>RMNC13™</strong> applies instrument-like effects to the simulated data.​
+
+<div style="margin-left:50px"> 
+    📈 <u>Line broadening & resolution</u>: global broadening mimics finite relaxation times and processing (exponential/Gaussian), merging close signals and reducing resolution. 
+<br>📈 <u>Baseline behavior</u>: optional baseline shaping introduces gentle curvature or offsets, matching typical processed spectra. 
+<br>📈 <u>Noise injection</u>: a controlled random noise term is added to the intensity array, reproducing realistic S/N and making weak carbons less visible. 
+<br>📈 <u>Instrument presets</u>: presets (e.g. “75 MHz routine”, “125 MHz high-field”) bundle frequency, broadening, noise and window parameters, so the same molecule can be viewed under different experimental-quality conditions. </div>
+
+<br><br>The final array (intensity vs ppm, after broadening, baseline and noise) is rendered as the displayed ¹³C NMR spectrum, while the assignment table keeps a clean, interpretable record of each simulated carbon signal.​
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 48</span></div> 
+</template>
+
+
+<!-------------------------Page49--------->
+<template id="page-48">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<img src="../images/Spectrum_TbC13.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:auto; padding:0;">
+<img src="../images/Spectrum_C13.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:auto; padding:0;">
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 49</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-----------------MS --------Page50--------->
+<template id="page-49">
+<h2>5.4 Mass Spectroscopy</h1><br>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<strong><u>5.4.1. Mass Spectroscopy Theory</strong></u><br>
+Mass spectrometry (MS) is an analytical technique based on the measurement of the mass-to-charge ratio (m/z) of ionized chemical species. 
+In a mass spectrometer, molecules are converted into ions through an ionization process, creating charged particles that can be manipulated and analyzed using electric and/or magnetic fields. 
+Only ions with specific m/z values reach the detector, generating the mass spectrum.
+<br><br>
+The position of each peak in the spectrum corresponds to a particular m/z value, while the intensity reflects the relative abundance and stability of the ion.
+The molecular ion (or quasi-molecular ion) provides direct information about the molecular weight of the compound. Additional peaks arise from fragment ions, 
+formed when the molecular ion undergoes characteristic bond cleavages during or after ionization. These fragmentation pathways are governed by molecular structure and ion stability,
+producing patterns that are highly informative for structural analysis.
+<br><br>
+<strong><u>5.4.2. Practical Aspects of Mass Spectrometry</strong></u><br>
+In practice, mass spectrometry can be performed using a variety of ionization techniques (such as electron ionization, electrospray ionization, or chemical ionization) 
+and mass analyzers (quadrupole, time-of-flight, ion trap, or orbitrap). The choice of technique depends on the nature of the sample and the level of structural information required.
+
+Key practical features of a mass spectrum include:
+<div style="margin-left:50px">
+    ✅ m/z values, indicating molecular and fragment ion masses
+<br>✅ Relative peak intensities, reflecting ion stability and abundance
+<br>✅ Isotopic patterns, providing information on elemental composition
+<br>✅ Fragmentation patterns, revealing structural subunits and bonding
+</div>
+Mass spectrometry can analyze very small sample quantities and is often coupled with separation techniques such as gas or liquid chromatography to handle complex mixtures.
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 50</span></div> 
+</template>
+
+
+<!-------------------------Page51--------->
+<template id="page-50">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<img src="../images/Spectrum_MS.png" alt="Illustration" style="width:100%; object-fit:contain; display:block; margin:auto; padding:0;">
+<br>
+<strong><u>5.4.3.Final Applications of Mass Spectrometry</strong></u><br>
+
+Mass spectrometry is a cornerstone analytical method across many scientific fields due to its sensitivity, speed, and structural insight. Its main applications include:
+<div style="margin-left:50px">
+    ✅Molecular weight determination and elemental composition analysis
+<br>✅Compound identification and structural elucidation
+<br>✅Detection of impurities and trace components
+<br>✅Complex mixtures analysis in environmental, pharmaceutical, and biological samples
+<br>✅Confirmation of synthetic products and reaction monitoring
+</div>
+By providing precise mass information and characteristic fragmentation data, mass spectrometry plays a critical role in modern chemical analysis, complementing spectroscopic techniques such as NMR and IR for comprehensive molecular characterization.
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 51</span></div> 
+</template>
+
+<!--=========================================================================================--->
+<!-----------------MS c Suite --------Page52-------->
+<template id="page-51">
+<strong><u>5.4.4. MoleMate™ - Mass Spectroscopy</strong></u>
+
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<strong>MoleMate™ Spectrum</strong> simulates a mass spectrum starting from a molecular structure and a set of instrument/ionisation parameters.​
+ It follows a hybrid, chemically informed approach, combining:​
+
+<div style="margin-left:50px"> 
+    ✅ In silico fragmentation models inspired by CFM‑ID, MetFrag, SIRIUS, NEIMS, etc. 
+<br>✅ Classical organic fragmentation rules (α‑cleavage, McLafferty, rearrangements) 
+<br>✅ Charge localisation and fragment annotation (formula, type, precursor) 
+<br>✅ Instrument‑dependent spectral effects (resolution, centroiding, noise) 
+</div>
+The goal is to simulate an MS or MS/MS spectrum, including prediction, interpretation (fragment table) and realistic acquisition effects.​
+<br><br>
+
+1️⃣ <strong><u>Step 1 – User Interface and Experimental Parameters</u></strong>
+<br>At initialization, <strong>MoleMate™ Spectrum</strong> builds an interactive  interface  with both a  table and a spectrum canvas.​
+The user can select or emulate:​
+<div style="margin-left:50px"> 
+     🧪 Ionisation mode (EI, ESI, positive/negative, MS/MS level) 
+<br>🧪 Collision energy / fragmentation “harshness” 
+<br>🧪 Mass analyser resolution (unit, low, high‑res) 
+<br>🧪 m/z range and intensity scaling (relative %, base peak = 100) </div>
+These parameters directly modulate the fragmentation depth, the number of peaks, their relative intensities and peak shapes, reproducing different experimental conditions.​
+
+<br><br>
+2️⃣ <strong><u>Step 2 – Molecular Parsing and Pre‑Ionisation</u></strong>
+<br><strong>MoleMate™ Spectrum</strong> starts from a molecular representation (SMILES/MOL‑derived atom–bond graph) and constructs an internal connectivity model.​
+From this model, it determines:​
+
+<div style="margin-left:50px"> 
+    ⚽ Exact monoisotopic mass and sum formula of the neutral molecule 
+<br>➡️ Potential ionised species: M⁺- , [M+H]⁺, [M–H]⁻, adducts depending on mode </div>
+The selected ionisation mode defines the precursor ion that will be propagated through the fragmentation engine (e.g. radical cation for EI, protonated molecule for ESI‑MS/MS).
+
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 52</span></div> 
+</template>
+
+
+<!-------------------------Page53--------->
+<template id="page-52">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+
+3️⃣ <strong><u>Step 3 – Fragmentation Tree and Rules</u></strong>
+<br><strong>MoleMate™ Spectrum</strong> then constructs a fragmentation tree in silico, guided by both heuristic rules and probabilistic scoring inspired by CFM‑ID, MetFrag and related tools.​
+For each possible bond cleavage or rearrangement, the engine evaluates:​
+
+<div style="margin-left:50px"> 
+    💬 Classical rules: α‑clivage à côté d’hétéroatomes, rupture d’allylique/benzyl, McLafferty, rétro‑Diels–Alder, pertes neutres typiques (H₂O, CO, CO₂, NH₃…) 
+<br>💬 Stability of resulting cations/radicals/anions (benzylic, allylic, acylium, iminium, etc.) 
+<br>💬 Stepwise MS/MS levels (fragmenting fragments again when energy is high) </div>
+Fragments are organised in a tree (precursor → 1<sup>st</sup>generation fragments → 2<sup>nd</sup> generation, etc.)​
+<br><br>
+4️⃣ <strong><u>Step 4 – m/z, Charge and Formula Assignment</u></strong>
+<br>For each fragment node, the <strong>MoleMate™ Spectrum</strong>  computes:​
+
+<div style="margin-left:50px"> 
+    🗨️ Exact mass and m/z = mass / |charge| (typically z = ±1) 
+<br>🗨️ Elemental formula of the fragment (C, H, N, O, X…) 
+<br>🗨️ Fragment type (molecular ion, isotope peak, neutral loss, backbone cleavage, diagnostic fragment…) </div>
+This information is then formatted into the MS fragment table.
+<br><br>
+5️⃣ <strong><u>Step 5 – Relative Intensity Modeling</u></strong>
+<br>Each candidate fragment is given a relative intensity that reflects its likelihood of formation and stability, following ideas from CFM‑ID, NEIMS, etc.​
+The script combines several factors:​
+<div style="margin-left:50px"> 
+    🗨️ Stability and resonance of the charged center 
+<br>🗨️ Competition between alternative fragmentation channels 
+<br>🗨️ Penalties for multi‑step, high‑energy pathways at low collision energy </div>
+The intensities are then normalised so that the most intense peak becomes the base peak (100%), and all others are scaled relatively, matching standard experimental representation.
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 53</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-----------------MS Suite 2--------Page54-------->
+<template id="page-53">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+6️⃣ <strong><u>Step 6 – Digital Spectrum Construction</u></strong>
+<br>From the list of (m/zᵢ, Iᵢ) values, <strong>MoleMate™ Spectrum</strong> constructs the stick spectrum.​
+
+<div style="margin-left:50px"> 
+    🗨️ A discrete m/z axis is defined over the chosen window (e.g. 0–800). 
+<br>🗨️ For each fragment, a vertical line (stick) is drawn at m/zᵢ with height proportional to W (%) = Iᵢ. 
+<br>🗨️ Resolution settings may broaden sticks into narrow profiles (Gaussian/Lorentzian) for high‑res simulation. </div>
+Isotopic patterns (M+1, M+2…) can be added as neighbouring peaks with intensities derived from elemental composition, yielding realistic envelopes for Cl/Br or high‑mass fragments.
+<br><br>
+7️⃣ <strong><u>Final Spectrum + Equipment Effects</u> (Acquisition Physics)</strong>
+To convert the ideal stick spectrum into a realistic MS acquisition, <strong>MS‑Mate™</strong> applies instrument‑like effects to the simulated data.​
+
+<div style="margin-left:50px"> 
+    📈 <u>Peak shape & resolution</u>: each discrete line can be convoluted with an instrument response (Gaussian) whose FWHM depends on the selected mass analyser, blurring close peaks at low resolution. 
+<br>📈 <u>Centroid vs profile mode</u>: at high resolution, the internal profile may be sampled then centroided to obtain final peak positions and intensities. 
+<br>📈 <u>Baseline & detector noise</u>: a combination of baseline offset and random noise is added to the intensity trace, mimicking electronic noise, chemical background and detector fluctuations. 
+<br>📈 <u>Instrument presets</u>: presets emulate typical platforms (quadrupole, ion trap, TOF, Orbitrap‑like) by tuning resolution, mass accuracy, noise and dynamic range, so the same theoretical fragmentation appears differently depending on the “equipment”. </div>
+
+
+<br><br>The final simulated spectrum (m/z vs intensity after peak shaping, baseline and noise) is rendered in the MS canvas, while the fragment table summarises each peak’s origin, formula, type and pathway, allowing interpretation comparable to real MS(/MS) experiments.​
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 52</span></div> 
+</template>
+
+
+<!-------------------------Page55--------->
+<template id="page-54">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<img src="../images/Spectrum_TbMS.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:auto; padding:0;">
+<img src="../images/Spectrum_MS.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:auto; padding:0;">
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 5</span><span>Page 55</span></div> 
+</template>
+
+
+
+<!------================================================================
+		Chapitre 6 ChemioInfo – Property Cluster Explorer
+=======================================================-Page56--------->
+
+<template id="page-55">
+<h1>Chapter 6 : MoleMate™ ChemioInfo: <br><i>The Property Cluster Explorer</i></h1>
+<div style="text-align:justify;font-size:1em;line-height:1.3em">
+<strong>MoleMate™  ChemioInfo </strong>– Property Cluster Explorer identifies groups of similar molecules by combining PubChem data, molecular properties, dimensionality reduction (PCA/UMAP) and clustering, to guide compound selection and library optimization.​
+</div>
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<img src="../images/Cluster_FrontPage.png" alt="Illustration" style="width:90%; object-fit:contain; display:block; margin:auto; padding:0;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Lead discovery and scaffold hopping</strong>: Find new chemotypes around a starting molecule, based on both structure and physicochemical properties.​
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Drug repurposing and analog search</strong>: Identify property‑matched analogs of known drugs or bioactive molecules that might share similar ADME or activity profiles.​
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Toxicity/ADME risk zoning</strong>: Use clusters in property space to spot molecules falling into “undesirable” regions (too lipophilic, too polar, highly complex, etc.).​
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Chemical library design and trimming:</strong> Reduce a large PubChem‑derived set to a smaller, diverse yet property‑balanced subset for screening or docking
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 56</span></div> 
+</template>
+
+
+<!-------------------------Page57--------->
+<template id="page-56">
+<div style="text-align:justify;font-size:0.75em;line-height:1.3em">
+
+<h2>6.1. Interest and purpose</h2>
+    👍 <strong>Smart similarity beyond structure only</strong>: The tool starts from a structural similarity search (Tanimoto on fingerprints) and then re‑evaluates similarity in property space (MW, XLogP, TPSA, HBD/HBA, rotatable bonds, complexity, etc.).​
+<br>👁️ <strong>Visual chemical space mapping</strong>: PCA/UMAP project molecules into 2D so you can visually see clusters of analogs and outliers, instead of reading long tables.​
+<br>📗 <strong>Better library and lead design</strong>: By grouping compounds with similar profiles, the program helps to select representative molecules, avoid redundancy, and identify interesting series for SAR, ADME or toxicity exploration.​
+
+<hr><h2>6.2. Tanimoto Selection Protocol<hr></h2>
+The Tanimoto selection protocol compares 2D molecular fingerprints (structural patterns, not physicochemical properties) between more than 1M compounds in the PubChem DataBase. 
+It computes a Tanimoto similarity score and selects molecules whose 2D structural features are most similar to the chosen reference.
+
+<h2><hr>6.3. Clustering Approach (PCA for Principal Component Analysis/UMAP for Uniform Manifold Approximation and Projection)<hr></h2>
+The clustering uses the properties (MW, XLogP, TPSA, complexity, etc.) to describe each compound numerically. <strong>PCA & UMAP</strong> reduces the multidimensional 
+property vectors into 2D space, allowing molecules with similar  profiles to group together. Clusters reveal families based on shared physicochemical features.<br>
+<strong>PCA</strong> is a linear dimensionality-reduction method that transforms molecular property data into a smaller set of components.
+It preserves the largest variance in the dataset and produces results that are easy to interpret.<br>
+<strong>UMAP</strong> is a non-linear dimensionality-reduction method that builds a graph based on local relationships between molecules.
+It preserves local structure, meaning it groups very similar molecules tightly together.
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 57</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!----------------CLustering suite----Page58--------->
+
+<template id="page-57">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<h2>6.4. How the MoleMate™  ChemioInfo – Property Cluster Explorer works? </h2>
+1️⃣ <strong><u>Step 1 – Input & structure retrieval</u></strong><br>
+
+You provide a starting molecule via name, SMILES, CID or by importing a MOL/SDF file.​
+
+PubChem is queried to retrieve candidate the molecule (if exist) and their basic information.​
+<br><br>
+2️⃣ <strong><u>Step 2 – Similarity scan with Tanimoto</u></strong>
+<br>The <strong>MoleMate™</strong> computes 2D fingerprints for molecules and uses the Tanimoto coefficient to measure structural similarity to the reference.​
+A user‑adjustable threshold (e.g. 70–98%) selects how close the analogs must be; higher thresholds give a smaller, tighter set.​
+ Scan the Tanimoto value from 70% to 98% to see how many similar molecules are available.
+
+<img src="../images/Cluster_Tanimoto.png" alt="Illustration" style="width:75%; object-fit:contain; display:block; margin:auto; padding:0;">
+
+3️⃣ <strong><u>Step 3 – Property extraction and descriptor matrix</u></strong>
+<br>
+For each selected molecule, the tool collects property descriptors such as MW, XLogP, TPSA, HBD, HBA, rotatable bonds, complexity.​
+
+These descriptors form a multidimensional numerical vector that quantitatively describes the molecule in “property space”.
+
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 58</span></div> 
+</template>
+
+
+<!-------------------------Page59--------->
+<template id="page-58">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+
+4️⃣  <strong><u>Launch clustering in property space</u></strong>
+
+<br>Choose the dimensionality‑reduction method: PCA (linear, interpretable) or UMAP (nonlinear, local structure‑preserving) and then 
+select the desired number of clusters K, then run the clustering to partition the molecules.
+
+<div>PCA and UMAP both take your property matrix (one row per molecule, one column per descriptor) and learn a new 2D coordinate system that preserves structure in the data,
+ but they do it with very different mathematics and have different behaviors.</div>
+
+<br><strong>📊 Data used for both methods : </strong>
+Each molecule is represented by a <span class="highlight">feature vector</span>: <code>[x₁, x₂, …, x_d]</code> 
+where <code>x_i</code> can be MW, XLogP, TPSA, HBD, HBA, rotatable bonds, complexity, etc.
+<br>These vectors form an <code>N×d</code> matrix (N molecules, d descriptors); dimensionality reduction replaces this by an <code>N×2</code>
+ matrix used for plotting.
+<div style="margin-left:50px">             
+<strong><u>🔵 PCA: Linear Variance-Maximizing Projection</u></strong>
+ The core Idea is to find  orthogonal directions (principal components) that capture as much variance as possible and then
+use the first two [PC1 & PC2]  as the 2D axes. The computation steps are :
+            <ol>
+                <li>Center (and often scale) each descriptor so that it has mean 0 (and possibly unit variance), which prevents high-magnitude features from dominating.</li>
+                <li>Compute the <span class="highlight">covariance matrix</span> <code>C = 1/(N−1) X⊤X</code>, which encodes how properties co-vary across molecules.</li>
+                <li><span class="highlight">Diagonalize C</span>: eigenvectors give directions in property space; eigenvalues give variance captured along each direction.</li>
+                <li>Sort eigenvectors by eigenvalue; the first principal component (PC1) is the direction of maximum variance, PC2 is orthogonal to PC1 and captures the next largest variance, etc.</li>
+                <li>Project each molecule onto PC1 and PC2, giving 2D coordinates; this is just a linear transformation (matrix multiplication).</span></li>
+            </ol>
+The <strong>[PC1]</strong>  is often a weighted combination of properties like MW, XLogP, TPSA, etc., and can sometimes be interpreted as a <strong>"size/lipophilicity" axis</strong>, 
+depending on loadings.
+<br>PCA  preserves distances far apart on the map generally correspond to large differences in the original property vectors, 
+but local neighborhoods are not always optimal.
+PCA is linear and deterministic thus stable & reproducible: same data give same 2D embedding.
+</div>
+
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 59</span></div> 
+</template>
+
+<!--=========================================================================================--->
+<!----------------CLustering suite2----Page60--------->
+
+<template id="page-59">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+<div style="margin-left:50px">
+<strong><u>🔴 UMAP: Nonlinear Manifold & Graph-Based Embedding</u></strong>
+<br>The core Idea is to assume molecules lie on a low-dimensional manifold embedded in high-dimensional property space; 
+approximate this manifold as a graph in high dimensions, then find a 2D layout that preserves the graph structure. <br><br> The  High-Dimensional Graph Construction is obtained : 
+<ul>
+                <li>🏡 Define a <strong>neighborhood size</strong> parameter (typically <i>n_neighbors</i>) that sets how many nearest neighbors 
+each molecule should consider as "local".</li>
+                <li>🗺️ Compute Euclidean distances between molecules in property space; build a weighted k-nearest-neighbor graph where edge weights 
+reflect how close two molecules are.</li>
+                <li>🔀 Convert neighbor relations into a <strong>fuzzy topological representation</strong>: for each pair of neighbors, 
+compute a membership strength (probability of being connected in the manifold).</li>
+     
+<li>🎲 Initialize 2D coordinates randomly (or using PCA as a warm start), then optimize them with stochastic gradient descent.</li>
+   </ul>
+<br>The optimization tries to ensure that molecules connected with high probability in high-D remain close in 2D, while non-neighbors are pushed apart;
+ this minimizes a cross-entropy-like objective between high-D and low-D neighbor graphs.</li>
+
+<br><br>UMAP preserves local structure better than PCA: very similar molecules (in property space) tend to form tight clusters in 2D, which is desirable for analog series and chemotype discovery.
+<br><br>Because it is nonlinear and graph-based, UMAP can reveal <strong>curved manifolds</strong> or <strong>non-linear relationships</strong> between properties that PCA cannot capture.
+<br><br>UMAP is more sensitive to hyperparameters and random seed; different runs can slightly reposition clusters, but local neighborhoods remain similar.
+
+
+</div>
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 60</span></div> 
+</template>
+
+
+<!-------------------------Page61--------->
+<template id="page-60">
+<div style="text-align:justify;font-size:0.8em;line-height:1.3em">
+        
+<div class="math">
+            <strong>In Practice for Chemical Space:</strong><br>
+            🔵 PCA gives a <strong>global overview</strong> and interpretable axes (e.g., PC1 correlating with MW/XLogP, PC2 with polarity or complexity).<br>
+            🔴 UMAP gives <strong>fine-grained neighborhoods</strong> and <strong>well-separated</strong> local clusters, helpful to identify close analogs and subtle subfamilies.</span>
+        </div>
+
+
+<img src="../images/Cluster_pcaumap.png" alt="Illustration" style="width:50%; object-fit:contain; display:block; margin:auto; padding:0;">
+
+5️⃣  <strong><u>Step 5: Select analogs and export</u></strong>
+
+<br>Within each cluster, identify the molecules closest to your reference or to the cluster centroid as lead analogs.​
+
+<br>Use the resulting subset to guide lead optimization, virtual screening, or library design, possibly exporting IDs/structures to other tools.​
+
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 6</span><span>Page 61</span></div> 
+</template>
+
+
+
+<!------================================================================
+		Chapitre 7 Litterature 
+=======================================================-Page62--------->
+
+<template id="page-61">
+
+<h1>Chapter 7 Literature</h1>
+<h2>7.1. Chemometry Review</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+[1} Massart, D. L., Vandeginste, B. G. M., Buydens, L. M. C., De Jong, S., Lewi, P. J., & Smeyers-Verbeke, J.
+Handbook of Chemometrics and Qualimetrics, Elsevier, 1997.<br>
+
+[2] Brereton, R. G.
+Chemometrics: Data Analysis for the Laboratory and Chemical Plant, Wiley, 2003.<br>
+
+[3] Wold, S., Esbensen, K., & Geladi, P.
+“Principal Component Analysis,” Chemometrics and Intelligent Laboratory Systems, 2(1–3), 1987.</br>
+
+[4] Geladi, P., & Kowalski, B. R.
+“Partial Least-Squares Regression: A Tutorial,” Analytica Chimica Acta, 185, 1986.</br>
+
+[5] Otto, M.
+Chemometrics: Statistics and Computer Application in Analytical Chemistry, Wiley-VCH, 2017.</br>
+
+[6] Bro, R., & Smilde, A. K.
+“Principal Component Analysis,” Analytical Methods, 6, 2014.</li></br>
+
+[7] Kim, S. et al.
+“PubChem 2023 update,” Nucleic Acids Research, Database Issue.<br>
+
+[8] Heller, S. R., McNaught, A., Stein, S., Tchekhovskoi, D., & Pletnev, I.
+“InChI – the worldwide chemical structure identifier standard,” Journal of Cheminformatics, 2015.<br>
+
+[9] Willett, P.
+“Similarity-based virtual screening using 2D fingerprints,” Drug Discovery Today, 2006.<br>
+
+[10] Bajorath, J.
+“Chemoinformatics and computational chemical biology,” Methods in Molecular Biology, 2011.<br>
+
+[11] Varnek, A., & Baskin, I.
+“Machine learning methods for property prediction in chemoinformatics,” Journal of Chemical Information and Modeling, 2012.
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 62</span></div> 
+</template>
+
+
+<!-------------------------Page62--------->
+<template id="page-63">
+<h2>7.2. Risk  Review</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+[12] Kim, S. et al.  
+“PubChem 2023 update,” <em>Nucleic Acids Research</em>, 2023.
+<br>
+[13] Kim, S., Thiessen, P. A., Bolton, E. E., et al.  
+“PubChem Substance and Compound databases,” <em>Nucleic Acids Research</em>, 2016.
+<br>
+[14] Heller, S. R., McNaught, A., Stein, S., Tchekhovskoi, D., & Pletnev, I.  
+“InChI – the worldwide chemical structure identifier standard,” <em>Journal of Cheminformatics</em>, 2015.
+<br>
+[15] United Nations.  
+“Globally Harmonized System of Classification and Labelling of Chemicals (GHS),” Purple Book, latest edition.
+<br>
+[16] National Research Council.  
+“Prudent Practices in the Laboratory: Handling and Management of Chemical Hazards,” National Academies Press, 2011.
+<br>
+[17] Judson, R. et al.  
+“ToxCast: A high-throughput program for assessing toxicity,” <em>Environmental Health Perspectives</em>, 2010.
+<br>
+[18] Fourches, D., Muratov, E., & Tropsha, A.  
+“Trust, but verify: On the importance of chemical structure curation in cheminformatics,” <em>Journal of Chemical Information and Modeling</em>, 2010.
+<br>
+[19] Willett, P.  
+“Similarity-based virtual screening using 2D fingerprints,” <em>Drug Discovery Today</em>, 2006.
+<br>
+[20] Varnek, A., & Baskin, I.  
+“Machine learning methods for property prediction in chemoinformatics,” <em>Journal of Chemical Information and Modeling</em>, 2012.
+<br>
+</div>
+<br>
+
+<h2>7.3. Properties Review</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+[21] Kim, S., Thiessen, P. A., Bolton, E. E., et al.  
+“PubChem Substance and Compound databases,” <em>Nucleic Acids Research</em>, 2016.
+<br>
+[22] Kim, S. et al.  
+“PubChem 2023 update,” <em>Nucleic Acids Research</em>, 2023.
+<br>
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue</span><span>Page 63</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+
+<!-- ====================suite biblio============================-Page64--------->
+
+<template id="page-63">
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+[23] Bolton, E. E., Wang, Y., Thiessen, P. A., & Bryant, S. H.  
+“PubChem: Integrated platform of small molecules and biological activities,” <em>Annual Reports in Computational Chemistry</em>, 2008.
+<br>
+
+[24] Wishart, D. S. et al.  
+“HMDB 5.0: The Human Metabolome Database,” <em>Nucleic Acids Research</em>, 2022.
+<br>
+
+[25] Tetko, I. V., Poda, G. I., Ostermann, C., & Mannhold, R.  
+“Accurate in silico logP predictions,” <em>Journal of Medicinal Chemistry</em>, 2009.
+<br>
+
+[26] Todeschini, R., & Consonni, V.  
+“Molecular Descriptors for Chemoinformatics,” <em>Wiley-VCH</em>, 2009.
+<br>
+
+[27] Yalkowsky, S. H., He, Y., & Jain, P.  
+“Handbook of Aqueous Solubility Data,” <em>CRC Press</em>, 2010.
+<br>
+
+[28] Lide, D. R.  
+“CRC Handbook of Chemistry and Physics,” <em>CRC Press</em>, latest edition.
+<br>
+
+[29] Mannhold, R., Poda, G. I., Ostermann, C., & Tetko, I. V.  
+“Calculation of molecular lipophilicity,” <em>Journal of Pharmaceutical Sciences</em>, 2009.
+<br>
+
+[30] Varnek, A., & Baskin, I.  
+“Chemoinformatics as a theoretical chemistry discipline,” <em>Journal of Chemical Information and Modeling</em>, 2011.
+<br>
+</div>
+<br>
+<h2>7.4. IR spectrum simulation</h2>
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+[31] Colthup, N. B., Daly, L. H., & Wiberley, S. E.  
+“Introduction to Infrared and Raman Spectroscopy,” <em>Academic Press</em>, 3rd ed., 1990.
+<br>
+
+[32] Socrates, G.  
+“Infrared and Raman Characteristic Group Frequencies: Tables and Charts,” <em>Wiley</em>, 3rd ed., 2001.
+<br>
+
+[33] Smith, B. C.  
+“Infrared Spectral Interpretation: A Systematic Approach,” <em>CRC Press</em>, 1999.
+<br>
+
+[34] Pavia, D. L., Lampman, G. M., Kriz, G. S., & Vyvyan, J. R.  
+“Introduction to Spectroscopy,” <em>Cengage Learning</em>, 5th ed., 2014.
+<br>
+
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 64</span></div> 
+</template>
+
+
+<!-------------------------Page65--------->
+<template id="page-64">
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+[35] Lambert, J. B., Shurvell, H. F., Lightner, D. A., & Cooks, R. G.  
+“Organic Structural Spectroscopy,” <em>Pearson</em>, 2nd ed., 2010.
+
+<br>
+[36] Chalmers, J. M., & Griffiths, P. R.  
+“Handbook of Vibrational Spectroscopy,” <em>Wiley</em>, 2002.
+<br>
+
+[37] Stuart, B.  
+“Infrared Spectroscopy: Fundamentals and Applications,” <em>Wiley</em>, 2004.
+<br>
+
+[38] Griffiths, P. R., & de Haseth, J. A.  
+“Fourier Transform Infrared Spectrometry,” <em>Wiley</em>, 2nd ed., 2007.
+<br>
+
+[39] Spectroscopy Online.  
+“The Carbonyl Group in Infrared Spectroscopy,” <em>Spectroscopy Online</em>, 2024.
+<br>
+
+[40] Harris, D. C.  
+“Quantitative Chemical Analysis,” <em>W. H. Freeman</em>, 9th ed., 2016.
+<br>
+</div>
+<br>
+<h2>7.5. RMN  Review</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+
+[41] Pretsch, E., Bühlmann, P., Badertscher, M. (2009)
+    "Structure Determination of Organic Compounds: Tables of Spectral Data"
+    4th Edition, Springer-Verlag, Berlin
+<br>
+
+[42] Silverstein, R.M., Webster, F.X., Kiemle, D.J., Bryce, D.L. (2014)
+    "Spectrometric Identification of Organic Compounds"
+    8th Edition, John Wiley & Sons
+<br>
+
+[43] Kalinowski, H.-O., Berger, S., Braun, S. (1988)
+    "Carbon-13 NMR Spectroscopy"
+    John Wiley & Sons, Chichester
+<br>
+
+[44] Breitmaier, E., Voelter, W. (1987)
+    "Carbon-13 NMR Spectroscopy: High-Resolution Methods and Applications"
+    3rd Edition, VCH Publishers, Weinheim
+<br>
+
+[45] Lambert, J.B., Shurvell, H.F., Lightner, D.A., Cooks, R.G. (1987)
+    "Organic Structural Spectroscopy"
+    Prentice Hall, New Jersey
+<br>
+
+[46] Grant, D.M., Paul, E.G. (1964)
+    "Carbon-13 Magnetic Resonance. II. Chemical Shift Data for the Alkanes"
+    Journal of the American Chemical Society, 86(15), 2984-2990
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue</span><span>Page 65</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-- ====================suite biblio2============================-Page66--------->
+
+<template id="page-65">
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+[47] Lindeman, L.P., Adams, J.Q. (1971)
+    "Carbon-13 Nuclear Magnetic Resonance Spectrometry"
+    Analytical Chemistry, 43(10), 1245-1252
+<br>
+
+[48] Levy, G.C., Nelson, G.L. (1972)
+    "Carbon-13 Nuclear Magnetic Resonance for Organic Chemists"
+    Wiley-Interscience, New York
+<br>
+
+[49] Stothers, J.B. (1972)
+    "Carbon-13 NMR Spectroscopy"
+    Academic Press, New York
+<br>
+
+[50] Ewing, D.F. (1979)
+     "Correlation of NMR Chemical Shifts with Hammett σ Values"
+     Organic Magnetic Resonance, 12(9), 499-524
+<br>
+
+[51] Barfield, M., Grant, D.M. (1963)
+     "Theory of Nuclear Spin-Spin Coupling"
+     Journal of Chemical Physics, 38, 2084-2092
+<br>
+
+[52] Roberts, J.D., Caserio, M.C. (1977)
+     "Basic Principles of Organic Chemistry"
+     2nd Edition, W.A. Benjamin, California
+<br>
+
+[53] Wehrli, F.W., Wirthlin, T. (1976)
+     "Interpretation of Carbon-13 NMR Spectra"
+     Heyden & Son Ltd., London
+<br>
+
+[54] Doddrell, D.M., Pegg, D.T., Bendall, M.R. (1982)
+     "Distortionless Enhancement of NMR Signals by Polarization Transfer"
+     Journal of Magnetic Resonance, 48(2), 323-327
+<br>
+
+[55] Bendall, M.R., Doddrell, D.M., Pegg, D.T. (1983)
+     "Pulse Sequences Utilizing the Attached Proton Test"
+     Journal of the American Chemical Society, 105(6), 1671-1672
+<br>
+
+[56] Hansen, P.E. (1988)
+     "Isotope Effects on Chemical Shifts"
+     Progress in Nuclear Magnetic Resonance Spectroscopy, 20, 207-255
+<br>
+
+[57] Berger, S., Braun, S., Kalinowski, H.-O. (1997)
+     "NMR Spectroscopy of the Non-Metallic Elements"
+     John Wiley & Sons, Chichester
+<br>
+
+[58] Olivieri, A.C., Fraga, S. (1988)
+     "Voigt Lineshapes in NMR Spectroscopy"
+     Journal of Magnetic Resonance, 75, 50-62
+<br>
+
+[59] Martin, G.E., Zektzer, A.S. (1988)
+     "Two-Dimensional NMR Methods for Establishing Molecular Connectivity"
+     VCH Publishers, New York
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 66</span></div> 
+</template>
+
+
+<!-------------------------Page67--------->
+<template id="page-66">
+
+<h2>7.6. MS spectrum simulation</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+
+[60] Rummens, F.H.A. (1975)
+     "Solvent Effects on ¹³C Chemical Shifts"
+     Organic Magnetic Resonance, 7(4), 174-177
+<br>
+
+[61] Pouchert, C.J., Behnke, J. (1993)
+     "The Aldrich Library of ¹³C and ¹H FT NMR Spectra"
+     Aldrich Chemical Company, Milwaukee
+<br>
+
+[62] SDBS - Spectral Database for Organic Compounds
+     National Institute of Advanced Industrial Science and Technology (AIST), Japan
+<br>
+
+[63] NMRShiftDB
+     URL: https://nmrshiftdb.nmr.uni-koeln.de
+<br>
+[64] Allen, F., Greiner, R., Wishart, D. (2015)
+    "Competitive Fragmentation Modeling of ESI-MS/MS spectra for metabolite identification"
+    Metabolomics, 11(1), 98-110
+<br>
+[65] Wang, F., et al. (2021)
+    "CFM-ID 4.0: More Accurate ESI-MS/MS Spectral Prediction and Compound Identification"
+    Analytical Chemistry, 93(34), 11692-11700
+<br>
+[66] Ruttkies, C., et al. (2016)
+    "MetFrag relaunched: incorporating strategies beyond in silico fragmentation"
+    Journal of Cheminformatics, 8, 3
+<br>
+[67] Dührkop, K., et al. (2019)
+    "SIRIUS 4: Turning tandem mass spectra into metabolite structure information"
+    Nature Methods, 16, 299-302
+<br>
+[68] Wei, J.N., et al. (2019)
+    "Rapid Prediction of Electron-Ionization Mass Spectrometry Using Neural Networks"
+    ACS Central Science, 5(4), 700-708
+<br>
+[69] Goldman, S., et al. (2023)
+    "Prefix-tree Decoding for Predicting Mass Spectra from Molecules"
+<br>
+[70] McLafferty, F.W., Turecek, F. (1993)
+    "Interpretation of Mass Spectra", 4th Edition
+    University Science Books
+<br>
+[71] Smith, R.M., Understanding Mass Spectra: A Basic Approach (2004)
+    Wiley-Interscience
+<br>
+[72] Gross, J.H. (2017)
+    "Mass Spectrometry: A Textbook", 3rd Edition
+    Springer
+</div>
+
+
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue</span><span>Page 67</span></div> 
+</template>
+
+
+
+<!--=========================================================================================--->
+<!-- ====================suite biblio3============================-Page68--------->
+
+<template id="page-67">
+
+<h2>7.7. PCA – Principal Component Analysis</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+[73] Jolliffe, I. T. & Cadima, J. “Principal component analysis: a review and recent developments.” Phil. Trans. R. Soc. A 374, 20150202 (2016).​<br>
+
+[74] Pearson, K. “On Lines and Planes of Closest Fit to Systems of Points in Space.” Philosophical Magazine 2, 559–572 (1901). Classic origin of PCA.​<br>
+
+[75] Ringnér, M. “What is principal component analysis?” Nature Biotechnology 26, 303–304 (2008). Short conceptual overview.​ <br>
+
+[76] IBM. “What Is Principal Component Analysis (PCA)?” (technical intro + applications).​<br>
+
+[77] Chem-specific: O’Haver, T. “Exploring the chemical space by Principal Component Analysis.” Chem-Workflows tutorial on PCA for compounds.
+</div>
+<br>
+
+<h2>7.8. UMAP – Uniform Manifold Approximation and Projection review</h2>
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+[78] McInnes, L., Healy, J. & Melville, J. “UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction.” arXiv:1802.03426 (original method paper).​ <br>
+
+[79] McInnes, L. & Healy, J. “UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction.” Journal of Open Source Software 3(29), 861 (2018). Software‑oriented description.​<br>
+
+[80] Easy overview: “Dimensionality Reduction: PCA, t‑SNE, UMAP.” Aurigait blog, 2024.​
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 68</span></div> 
+</template>
+
+
+<!-------------------------Page69--------->
+<template id="page-68">
+<h2>7.9. Dimensionality reduction in chemical space</h2
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+
+[81] Orlov, A. et al. “From High Dimensions to Human Insight: Exploring Dimensionality Reduction for Chemical Space Visualization.” 
+DRbench / ChemRxiv / related PMC article – systematic comparison of PCA, t‑SNE, UMAP for chemical libraries.​<br>
+
+[82] Wang, C. et al. “Dimensionality reduction by UMAP to visualize physical and chemical properties of materials.” npj Computational Materials 6, 18 (2020).​<br>
+
+[83] Comparison for catalysis: “Comparison of dimensionality reduction techniques for the visualisation of chemical space in organometallic catalysis.” University of Bristol (2024).​<br>
+
+[84] Wagen, C. “Dimensionality Reduction in Cheminformatics.” Blog/essay applying PCA, t‑SNE, UMAP to chemical datasets.​<br>
+
+[85] ChemPlot documentation – “Dimensionality Reduction” (PCA, t‑SNE, UMAP for chemical space plotting).​
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of the Ebook</span><span>Page 69</span></div> 
+</template>
+
+
+
+
+
+<!--=========================================================================================--->
+<!-----------------------------------fin des pages---------------------------------------------->
+<!--=========================================================================================--->
+
+<div class="book-container" aria-label="Livre avec page titre et page sans fond" role="region">
+  <div class="spine" aria-hidden="true"></div>
+
+
+  <div class="nav-btn nav-left" id="nav-left" role="button" tabindex="0" aria-label="Page précédente">&#9664;</div>
+
+  <div class="nav-btn nav-right" id="nav-right" role="button" tabindex="0" aria-label="Page suivante">&#9654;</div>
+</div>
+
+
+
+
+<!--=========================================================================================--->
+<!--				Programme						     --->
+<!--=========================================================================================--->
+<script>
+let tempo = 300;
+// On détecte toutes les pages via les templates (id commençant par "page-")
+const allTemplates = Array.from(document.querySelectorAll('template[id^="page-"]'));
+//===========================================================
+// Trier les templates par index numérique (extrait de l'id)
+//===========================================================
+allTemplates.sort((a, b) => {
+  const aNum = parseInt(a.id.replace('page-', ''), 10);
+  const bNum = parseInt(b.id.replace('page-', ''), 10);
+  return aNum - bNum;
+});
+//===========================================================
+// Crée un tableau des indexes disponibles
+//===========================================================
+const pagesIndexes = allTemplates.map(tpl => parseInt(tpl.id.replace('page-', ''), 10));
+// Pour la navigation, on utilise les indexes triés
+let currentLeftIndexPos = 0;  // position dans pagesIndexes pour page de gauche
+let currentRightIndexPos = 1; // position dans pagesIndexes pour page de droite
+const book = document.querySelector('.book-container');
+let leftPage = null;
+let rightPage = null;
+//===========================================================
+// Crée une page à partir d'un template cloné
+//===========================================================
+function createPage(pagePosInArray, side) {
+  const tpl = allTemplates[pagePosInArray];
+  const div = document.createElement('div');
+  div.classList.add('page', side);
+  // Si le template est celui de la page vide (-1), on ajoute classe transparent
+  if (pagesIndexes[pagePosInArray] === -1) div.classList.add('transparent');
+  div.setAttribute('aria-hidden', 'false');
+  div.appendChild(tpl.content.cloneNode(true));
+  // Interception des liens pour navigation fluide
+  div.querySelectorAll('a[data-page]').forEach(link => {
+    link.style.color = "#A52A2A";
+    link.addEventListener('click', function (e) {
+      const targetPage = parseInt(link.getAttribute('data-page'), 10);
+      if (pagesIndexes.includes(targetPage)) {
+        e.preventDefault();
+        gotoPage(targetPage);
+      }
+    });
+  });
+  return div;
+}
+//===========================================================
+//Efface la page
+//===========================================================
+function clearFlipClasses() {
+  if (leftPage) leftPage.classList.remove('flip-left');
+  if (rightPage) rightPage.classList.remove('flip-right');
+  if (leftPage) leftPage.style.zIndex = '';
+  if (rightPage) rightPage.style.zIndex = '';
+}
+//===========================================================
+// Affiche la page
+//===========================================================
+function render() {
+  clearFlipClasses();
+  if (leftPage) leftPage.remove();
+  if (rightPage) rightPage.remove();
+  // Clamp bornes
+  if (currentLeftIndexPos < 0) currentLeftIndexPos = 0;
+  if (currentRightIndexPos < 1) currentRightIndexPos = 1;
+  if (currentLeftIndexPos > allTemplates.length - 2) currentLeftIndexPos = allTemplates.length - 2;
+  if (currentRightIndexPos > allTemplates.length - 1) currentRightIndexPos = allTemplates.length - 1;
+  leftPage = createPage(currentLeftIndexPos, 'left');
+  rightPage = createPage(currentRightIndexPos, 'right');
+  book.appendChild(leftPage);
+  book.appendChild(rightPage);
+}
+//===========================================================
+//Tourne la page à droite
+//===========================================================
+function flipRight() {
+  if (currentRightIndexPos >= allTemplates.length - 2) return;
+  rightPage.classList.add('flip-right');
+  rightPage.style.zIndex = 100;
+  setTimeout(() => {
+    currentLeftIndexPos = currentRightIndexPos + 1;
+    currentRightIndexPos = currentRightIndexPos + 2;
+    render();
+  }, tempo);
+}
+//===========================================================
+//Tourne la page à gauche
+//===========================================================
+function flipLeft() {
+  if (currentLeftIndexPos <= 0) return;
+  leftPage.classList.add('flip-left');
+  leftPage.style.zIndex = 100;
+  setTimeout(() => {
+    currentRightIndexPos = currentLeftIndexPos - 1;
+    currentLeftIndexPos = currentLeftIndexPos - 2;
+    render();
+  }, tempo);
+}
+//===========================================================
+// Navigation "goto" vers n'importe quelle page
+//===========================================================
+function gotoPage(targetPageIndex) {
+  let idx = pagesIndexes.indexOf(targetPageIndex);
+  if (idx === -1) return;
+  // Book tourne dans le bon sens selon la destination
+  
+if (idx % 2 === 1) { // cible = page droite
+    if (currentRightIndexPos === idx) return;
+    rightPage.classList.add('flip-right');
+    rightPage.style.zIndex = 100;
+    setTimeout(() => {
+      currentLeftIndexPos = idx - 1;
+      currentRightIndexPos = idx;
+      render();
+    }, tempo);
+  } else { // gauche
+    if (currentLeftIndexPos === idx) return;
+    leftPage.classList.add('flip-left');
+    leftPage.style.zIndex = 100;
+    setTimeout(() => {
+      currentLeftIndexPos = idx;
+      currentRightIndexPos = idx + 1;
+      render();
+    }, tempo);
+  }
+}
+  const continues = document.querySelectorAll('.continue');
+
+  continues.forEach(el => {
+    el.addEventListener('click', flipRight);
+  });
+
+document.getElementById('nav-right').addEventListener('click', flipRight);
+document.getElementById('nav-left').addEventListener('click', flipLeft);
+['nav-left', 'nav-right'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      document.getElementById(id).click();
+    }
+  });
+});
+//===========================================================
+// Gestion des clicks
+//===========================================================
+ document.addEventListener('click', function handleClick(e) {
+  // Ignore clicks already inside the overlay (so overlay click closes it separately)
+  if (e.target.closest('.img-overlay')) return;
+
+  // Find nearest image clicked (works if clicking inside <a><img> or <figure><img> etc.)
+  const img = e.target.closest('img');
+  if (!img) return;
+
+  // OPTIONAL: ignore tiny icons (uncomment if needed)
+  // if (img.naturalWidth < 80 && img.naturalHeight < 80) return;
+
+  // Prevent link navigation if image is inside an <a>
+  const link = img.closest('a');
+  if (link) e.preventDefault();
+
+  openImageOverlay(img);
+});
+//===========================================================
+/* Create overlay once and reuse it */
+//===========================================================
+function createOverlay() {
+  const ov = document.createElement('div');
+  ov.className = 'img-overlay';
+  ov.innerHTML = '<div class="img-wrap"><img alt=""></div>';
+  document.body.appendChild(ov);
+
+  // clicking overlay (outside image) closes it
+  ov.addEventListener('click', (ev) => {
+    // if user clicked the image itself, also close (ev.target is the img) — both behaviours ok
+    closeOverlay();
+  });
+
+  // ESC closes
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') closeOverlay();
+  });
+
+  return ov;
+}
+
+let overlay = null;
+function ensureOverlay() {
+  if (!overlay) overlay = createOverlay();
+  return overlay;
+}
+
+function openImageOverlay(sourceImg) {
+  const ov = ensureOverlay();
+  const clonedImg = ov.querySelector('img');
+
+  // set src to currentSrc if available to handle responsive <img srcset>
+  clonedImg.src = sourceImg.currentSrc || sourceImg.src;
+  clonedImg.alt = sourceImg.alt || '';
+
+  // show overlay
+  ov.classList.add('open');
+
+  // prevent background scrolling
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+  if (!overlay) return;
+  overlay.classList.remove('open');
+
+  // restore scrolling after small timeout to allow opacity transition
+  setTimeout(() => {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }, 200);
+}
+
+//===========================================================
+// Affichage initial
+//===========================================================
+render();
+</script>
+
+</body>
+</html>
