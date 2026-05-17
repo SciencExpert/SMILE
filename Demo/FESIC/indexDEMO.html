@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--
+_______________________________________
+  	Process Com
+	Sub programm of SMILE
+---------------------------------------
+  Design by SciencExpert
+  Version 5-02 // May 2026
+ 	SMILE Project
+  SciencExpert Edition 2026
+  Author : Gérard Bacquet
+  Contact@sciencexpert.fr 
+---------------------------------------
+https://payhip.com/SciencExpert
+_______________________________________
+-->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="images/SE_favicon.ico">
+  <title>Index DEMO 🎬</title>
+
+  <!-- Feuille de style -->
+  <link rel="stylesheet" href="styleDEMO.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     BOUTON DEBUG (forcer victoire joueur 1)
+════════════════════════════════════════════════ -->
+<button id="forceWin" title="Debug : forcer la victoire du joueur 1">🎯 Force Win J1</button>
+
+<!-- ══════════════════════════════════════════════
+     EN-TÊTE
+════════════════════════════════════════════════ -->
+<div id="header">
+  <h1>CCNEPI — FESIC</h1>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BARRE SUPÉRIEURE (logo client + restart)
+════════════════════════════════════════════════ -->
+<div id="topBar">
+  <!-- Logo client (masqué par défaut, visible en jeu) -->
+  <img id="client" src="images/client.png" alt="Logo client" style="display:none"/>
+
+  <!-- Bouton redémarrer -->
+  <button id="restartGame" class="btn btn-ghost" style="display:none;">
+    🔄 Nouvelle partie
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ÉCRAN DE SETUP (accueil)
+════════════════════════════════════════════════ -->
+<div id="setupScreen">
+
+  <!-- Image d'accueil (optionnelle – remplacez le src par votre image) -->
+  <img id="imagaccueil"
+       src="images/client.png"
+       alt="" style="display:block"/>
+
+  <!-- Texte de bienvenue -->
+  <div id="welcomeText"></div>
+
+  <!-- Sélecteur nombre de joueurs -->
+  <select id="playerCount">
+    <option value="0" style="color:white">— Nombre de joueurs —</option>
+    <option value="2" style="color:black">2 joueurs</option>
+    <option value="3" style="color:black">3 joueurs</option>
+    <option value="4" style="color:black">4 joueurs</option>
+  </select>
+
+  <!-- Bouton démarrer (affiché après sélection) -->
+  <button id="startGame" class="btn btn-primary" style="display:none;">
+    🎲 JOUER !
+  </button>
+
+</div><!-- /setupScreen -->
+
+<!-- ══════════════════════════════════════════════
+     CONTENEUR PRINCIPAL (jeu en cours)
+════════════════════════════════════════════════ -->
+<div id="mainContainer">
+
+  <!-- Fiches joueurs (avatars + inputs noms) -->
+  <div id="PlayerTeam"></div>
+
+  <!-- Joueur actif -->
+  <div id="activePlayerDiv"></div>
+
+  <!-- Zone de jeu : plateau + colonne droite -->
+  <div id="gameArea">
+
+    <!-- Plateau 8×8 -->
+    <div id="board">
+
+</div>
+
+    <!-- Colonne droite : dé, scores, journal -->
+    <div id="rightColumn">
+      
+	<div id="diceWrapper">
+        	<div id="diceLabel"></div>
+        <!-- Dé CSS (les dots sont créés par style.css via classes show-N) -->
+        	<div id="dice" class="dice show-1" role="button" aria-label="Lancer le dé">
+          <span class="dot a"></span>
+          <span class="dot b"></span>
+          <span class="dot c"></span>
+          <span class="dot d"></span>
+          <span class="dot e"></span>
+          <span class="dot f"></span>
+          <span class="dot g"></span>
+        	</div>
+      </div>
+</div>
+      <!-- Graphiques scores -->
+      <div id="scoreGraphs" style="width:10%; position:absolute; top:15%; left:0%"></div>
+
+      <!-- Journal -->
+      <div id="log"></div>
+
+    </div><!-- /rightColumn -->
+
+  </div><!-- /gameArea -->
+
+  <!-- Carte question -->
+  <div id="questionBox" style="display:none;">
+    <div id="familleTitle"></div>
+    <div id="questionText"></div>
+    <div id="answers"></div>
+  </div>
+
+  <!-- Légende couleurs familles -->
+  <div id="legend"></div>
+
+
+    <!-- ============== Footer ============== -->
+    <div id="legal">
+     
+      Website designed and developed by 
+      <a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:white">
+        <img src="images/SE_favicon.ico" alt="Icône" style="height:16px; vertical-align:middle; margin-right:5px;">
+        SciencExpert™
+      </a>.
+      All rights reserved. Unauthorized use or reproduction is prohibited.
+    </div>
+
+
+
+</div><!-- /mainContainer -->
+<!-- ══════════════════════════════════════════════
+     SCRIPTS  (ordre important !)
+════════════════════════════════════════════════ -->
+<!-- 1. Les données questions (définit questionsPerFamily, familyNames, familiesColors) -->
+<script src="questionsDEMO.js"></script>
+
+<!-- 2. La logique du jeu -->
+<script src="scriptDEMO.js"></script>
+
+<!-- 3. Construction de la légende des couleurs (après que le DOM existe) -->
+<script>
+(function buildLegend() {
+  const legend = document.getElementById('legend');
+  if (!legend) return;
+  for (let f = 1; f <= 6; f++) {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    const swatch = document.createElement('div');
+    swatch.className = 'legend-swatch';
+    swatch.style.backgroundColor = familiesColors[f];
+    const label = document.createElement('span');
+    label.textContent = familyNames[f];
+    item.appendChild(swatch);
+    item.appendChild(label);
+    legend.appendChild(item);
+  }
+})();
+</script>
+
+</body>
+</html>
