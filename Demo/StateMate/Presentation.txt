@@ -1,1 +1,13 @@
+•        StatMate est une solution EdTech innovante de SciencExpert pour apprendre, explorer et décider à partir des données. 
+Elle intègre 8 modules interactifs :
+•	Statistique descriptive, 
+•	clustering, 
+•	dendrogrammes,
+•	corrélations/covariances, 
+•	ACP, 
+•	Plackett-Burman, 
+•	plans d’expériences
+•	plans de mélanges. 
+Pensé pour l’enseignement supérieur et la recherche, StatMate rend les méthodes avancées de Data Mining visuelles et accessibles. : https://payhip.com/b/0O3Ie Un ebook est à votre disposition pour entrer dans le monde du DataMining.
+Vous trouverez la version de démonstration (fonctionnalités limitées aux exemples) ici : 
 
