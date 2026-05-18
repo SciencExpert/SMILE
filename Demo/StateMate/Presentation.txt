@@ -10,4 +10,4 @@ Elle intègre 8 modules interactifs :
 •	plans de mélanges. 
 Pensé pour l’enseignement supérieur et la recherche, StatMate rend les méthodes avancées de Data Mining visuelles et accessibles. : https://payhip.com/b/0O3Ie Un ebook est à votre disposition pour entrer dans le monde du DataMining.
 Vous trouverez la version de démonstration (fonctionnalités limitées aux exemples) ici : 
-Demo/StateMate/00_Stat_Menu.html
+https://sciencexpert.github.io/SMILE/Demo/StateMate/00_Stat_Menu.html
