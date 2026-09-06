@@ -1,0 +1,1710 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+_______________________________________
+   RPG Educatif
+	RPG English//French
+---------------------------------------
+  Design by SciencExpert
+  Version 2.28 // September 2026
+ 	SMILE Project
+  SciencExpert Edition 2026
+  Author : Gérard Bacquet
+  Contact@sciencexpert.fr 
+---------------------------------------
+https://payhip.com/SciencExpert
+_______________________________________
+-->
+<html lang="fr">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="img/SE_favicon.ico">
+    <title>RPG</title>
+	<link rel="stylesheet" type="text/css" href="css/cssRPG.css">
+	<script src="statics/js/zonesFREN.js"></script>
+	<script src="statics/js/questionsFREN.js"></script>
+	<script src="statics/js/RPGUserManuel.js" defer></script>
+</head>
+
+<body>
+<h1 id="gameTitle">La quête de l'HEADHEALER</h1>
+
+<div id="game">
+    <img id="background" src="img/img1.png" alt="Décor">
+    <div id="target"></div>
+<div style="display:none">							<!--uniquement visible que pour la construction du site-->
+    <div id="prevTriangle" class="worldTriangle" title="Décor précédent"></div>
+    <div id="nextTriangle" class="worldTriangle" title="Décor suivant"></div>
+</div>
+
+<!-- ==========================================================================Gestion d'écran tablette & telephone -->
+<div id="rotateMessage">
+    <div class="rotateBox">
+        <div class="rotateIcon">📱 ↔️</div>
+        <div class="rotateTitle">Tournez votre appareil</div>
+        <div class="rotateText">
+            Pour jouer dans de bonnes conditions,<br>
+            veuillez mettre votre écran à l'horizontale.
+        </div>
+        <div class="rotateEnglish">
+            For the best experience,<br>
+            please turn your device horizontally.
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================Popup question affichée  -->
+    <div id="questionPopup">
+        <button id="questionClose" aria-label="Fermer">×</button>
+        <div id="questionFace">
+          <img src="img/face.png" alt="Visage" class="face-img">
+        </div>
+
+        <div id="questionContent">
+<div style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+">
+            <div id="questionTitle">QUESTION</div> <div id="questionTimer" style="font-size:1.5em;color:red">30</div>
+</div>
+          <div id="questionText"></div>
+
+            <div id="answerRow">
+                <input id="answerInput" type="text" placeholder="Votre réponse..." autocomplete="off">
+                <button id="answerButton">Répondre</button>
+                <span id="questionFeedback"></span>
+            </div>
+        </div>
+    </div>
+
+<!-- ===================================================================Popup "quiz" : comme question, mais QCM à 5 réponses -->
+    <div id="quizPopup">
+        <button id="quizClose" aria-label="Fermer">×</button>
+        <div id="quizFace">
+          <img src="img/face.png" alt="Visage" class="face-img">
+        </div>
+        <div id="quizContent">
+            <div id="quizTitle">QUIZ</div>
+            <div id="quizText"></div>
+            <div id="quizOptions"></div>
+            <div id="quizFeedback"></div>
+        </div>
+    </div>
+
+<!-- ================================================================Popup affichée quand le joueur tente de forcer une zone "lock" verrouillée -->
+<div id="lockPopup">
+    <button id="lockClose" aria-label="Fermer">×</button>
+    <div id="lockFace">
+      <img src="img/faceNON.gif" alt="Visage" class="face-img">
+    </div>
+    <div id="lockContent">
+        <div id="lockTitle">ZONE VERROUILLÉE</div>
+        <div id="lockRow">
+            <div id="lockText"></div>
+            <button id="lockOk">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- =================================================================Popup "info" : dialogue / explication générique avec image au choix -->
+<div id="infoPopup">
+    <button id="infoClose" aria-label="Fermer">×</button>
+    <div id="infoFace">
+        <img id="infoImage" src="" alt="Illustration">
+    </div>
+    <div id="infoContent">
+        <div id="infoTitle">INFO</div>
+        <div id="infoText"></div>
+        <button id="infoOk">OK</button>
+    </div>
+</div>
+
+<!-- ==================================================================Popup "item" : proposition de ramasser un objet -->
+<div id="itemPopup">
+    <button id="itemClose" aria-label="Fermer">×</button>
+    <div id="itemFace">
+        <img id="itemImage" src="" alt="Objet">
+        <!-- Bouton sous l'image, pour choisir les objets à garder/jeter -->
+        <button id="itemInventoryBtn">🎒 Inventaire</button>
+    </div>
+    <div id="itemContent">
+        <div id="itemTitle">OBJET TROUVÉ</div>
+        <div id="itemText"></div>
+        <div id="itemButtonsRow">
+            <button id="itemYes">Oui</button>
+            <button id="itemNo">Non</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================================Popup de gestion d'inventaire (garder / jeter des objets) -->
+<div id="inventoryPopup">
+    <button id="inventoryClose" aria-label="Fermer">×</button>
+    <div id="inventoryTitle">MON INVENTAIRE (<span id="inventoryCount">0</span>/10)</div>
+    <div id="inventoryList"></div>
+</div>
+
+    <!-- ============================================================================Audio -->
+<audio id="bgMusic" loop></audio>
+
+    <!-- ============================================================================Payer  -->
+
+    <div id="player">
+        <div class="hat"></div>
+        <div class="head"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="body"></div>
+    </div>
+</div>
+
+    <!-- ==================================================================HUB affichée quand le joueur tente de forcer une zone "lock" verrouillée -->
+<div id="hud">
+<div style="display:none">  							<!-- Ne rendre visible que pour la construction du jeu -->
+   	<div>🔑 <span id="indicatorsDisplay"></span></div>
+					<!-- Utile uniquement pour un jeu ou on perd des points de vie-->
+</div>
+    <div>❤️ <span id="hp">10</span></div> 	
+    <div>Zone : <span id="zoneName">Village</span></div>
+    <div>💰 <span id="score">0</span></div>
+
+    <div id="inventaire">🎒 <span id="itemCounterDisplay">0/10</span></div>
+	<span class="popup-toggle" onclick="toggleManualPopup(true)" title="Open the user manual" style="cursor: pointer; width:150px">
+          📘 User Manual
+        </span>
+<span class="popup-toggle" title="Read MoleMate's ebook" 
+      onclick="window.open('statics/RPG_ebook.html', '_blank')">
+   📕 Ebook
+      </span>
+<button id="languageButton" type="button">
+    🌐 English
+</button>
+
+<div id="soundToggle" title="Couper le son" style="cursor:pointer;">
+    🔊
+</div>
+</div>
+    <!-- ==================================================================Help -->
+<div id="help">
+<!-- outil de construction du jeu
+==================================================================================
+    🖱️ Clic gauche : déplacer le personnage — les zones rouges sont infranchissables.
+    &nbsp;|&nbsp; Atteignez le centre d'une zone bleue pour déclencher sa question.
+    &nbsp;|&nbsp; Une zone dorée (bordure claire) propose un quiz à choix multiples.
+    &nbsp;|&nbsp; Entrez dans une zone violette pour changer instantanément de décor.
+    &nbsp;|&nbsp; Une zone orange est verrouillée tant qu'une condition n'est pas remplie.
+    &nbsp;|&nbsp; Une zone rose affiche un message d'information/dialogue.
+    &nbsp;|&nbsp; Une zone dorée pleine propose de ramasser un objet (max 5 dans l'inventaire).
+    &nbsp;|&nbsp; Les triangles ◀ ▶ sur les bords changent aussi de décor.
+-->
+
+
+</div>
+
+<!--===================================================================================
+		Footer
+===================================================================================-->
+
+<div id="footer" style="position: fixed; bottom: 0; left: 0; width: 100%; height: 8%;padding: 0px 10px; font-size: 14px; border-top: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; gap:0px; flex-wrap: wrap; text-align: center;">
+
+  <div style="width: 100%; font-size:1.5em; color:var(--secondary-color); line-height: 1; margin: 0;">
+
+  </div>
+  
+ 	<div style="display: flex; align-items: center; gap: 15px;">
+
+  	<button style="background-color: var(--secondary-color); color:var(--primary-color); border-radius:10px; height:30px; width:100px; transition: background-color 0.3s ease, 
+	transform 0.2s ease; cursor: pointer;" 	onclick="loadWorld(20)">
+    	Credits
+  	</button>
+
+  	<span style="margin: 0; line-height: normal; display: flex; align-items: center;color:var(--secondary-color)">
+    	© 2025 SciencExpert. Website designed and developed by  
+    	<a href="https://payhip.com/SciencExpert/sciencexpert" target="_blank" rel="noopener noreferrer" style="color:var(--secondary-color); text-decoration:none; margin-left: 5px;">
+      	<img src="img/SE_favicon.ico" alt="Icône" style="height:16px; vertical-align:middle; margin-right:5px;">SciencExpert™
+    	</a>. All rights reserved. Unauthorized use or reproduction is prohibited.
+  	</span>
+
+  	<button style="background-color: var(--secondary-color); color:var(--primary-color); border-radius:10px; height:30px; width:100px;
+      	transition: background-color 0.3s ease, transform 0.2s ease; cursor: pointer;" onclick="location.reload();">
+    	♻️ Reset
+  	</button>
+	</div>
+
+</div>
+
+    <!-- ==================================================================
+				Programme
+ 	==================================================================-->
+<script>
+
+/* =========================================================================
+   Choix des langues : Francais ou Anglais
+La langue sera conservée après un changement de page grâce à localStorage
+   ========================================================================= */
+const SUPPORTED_LANGUAGES = ["fr", "en"];
+
+let currentLanguage =
+    localStorage.getItem("gameLanguage") || "fr";
+
+if (!SUPPORTED_LANGUAGES.includes(currentLanguage)) {
+    currentLanguage = "fr";
+}
+/* =========================================================================
+   Choix des langues : Francais ou Anglais
+		Dictionnaire général :
+   ========================================================================= */
+
+const TEXTS = {
+    fr: {
+        question: "QUESTION",
+        quiz: "QUIZ",
+        answer: "Répondre",
+        answerPlaceholder: "Votre réponse...",
+        lockedZone: "ZONE VERROUILLÉE",
+        information: "INFO",
+        foundItem: "OBJET TROUVÉ",
+        inventory: "MON INVENTAIRE",
+        emptyInventory: "Votre inventaire est vide.",
+        drop: "Jeter",
+        yes: "Oui",
+        no: "Non",
+        ok: "OK",
+        correct: "Bonne réponse !",
+        wrong: "Mauvaise réponse !",
+        gameOver: "Game Over !",
+        health: "Vies",
+        score: "Score",
+        timer: "Temps restant",
+        inventoryFull: "Inventaire plein",
+        missingItems: "Il vous manque encore",
+        previousWorld: "Décor précédent",
+        nextWorld: "Décor suivant",
+        reset: "Réinitialiser",
+        gameTitle: "La quête de l'HEADHEALER",
+
+    },
+
+    en: {
+        question: "QUESTION",
+        quiz: "QUIZ",
+        answer: "Answer",
+        answerPlaceholder: "Your answer...",
+        lockedZone: "LOCKED AREA",
+        information: "INFO",
+        foundItem: "ITEM FOUND",
+        inventory: "MY INVENTORY",
+        emptyInventory: "Your inventory is empty.",
+        drop: "Drop",
+        yes: "Yes",
+        no: "No",
+        ok: "OK",
+        correct: "Correct answer!",
+        wrong: "Incorrect answer!",
+        gameOver: "Game Over!",
+        health: "Health",
+        score: "Score",
+        timer: "Time remaining",
+        inventoryFull: "Inventory full",
+        missingItems: "You are still missing",
+        previousWorld: "Previous world",
+        nextWorld: "Next world",
+        reset: "Reset",
+	gameTitle: "HEADHEALER Quest",
+    }
+};
+
+function t(key) {
+    return TEXTS[currentLanguage][key] || key;
+}
+
+/* =========================================================================
+   Choix des langues : Francais ou Anglais
+		Bonton selecteur:
+   ========================================================================= */
+const languageButton = document.getElementById("languageButton");
+
+languageButton.addEventListener("click", () => {
+    currentLanguage = currentLanguage === "fr" ? "en" : "fr";
+
+    localStorage.setItem("gameLanguage", currentLanguage);
+
+    applyLanguage();
+});
+
+/* =========================================================================
+   Choix des langues : Francais ou Anglais
+		Actualisation des titles
+   ========================================================================= */
+function applyLanguage() {
+    document.documentElement.lang = currentLanguage;
+
+    document.getElementById("questionTitle").textContent =
+        t("question");
+
+    document.getElementById("quizTitle").textContent =
+        t("quiz");
+
+    document.getElementById("answerButton").textContent =
+        t("answer");
+
+    document.getElementById("answerInput").placeholder =
+        t("answerPlaceholder");
+
+    document.getElementById("lockTitle").textContent =
+        t("lockedZone");
+
+    document.getElementById("infoTitle").textContent =
+        t("information");
+
+    document.getElementById("itemTitle").textContent =
+        t("foundItem");
+
+    document.getElementById("itemYes").textContent =
+        t("yes");
+
+    document.getElementById("itemNo").textContent =
+        t("no");
+
+    document.getElementById("itemInventoryBtn").textContent =
+        "🎒 " + t("inventory");
+
+    document.getElementById("inventoryTitle").firstChild.textContent =
+        t("inventory") + " (";
+
+    document.getElementById("languageButton").textContent =
+        currentLanguage === "fr" ? "🌐English" : "🌐Français";
+
+    document.getElementById("gameTitle").textContent =
+       currentLanguage === "fr" ?  "La quête de l'HEADHEALER": "The HEADHEALER Quest";
+
+    updateHudLabels();
+    updateTriangleLabels();
+    createZones();
+}
+
+function updateHudLabels() {
+    const hud = document.getElementById("hud");
+
+    const hpContainer = document.getElementById("hp").parentElement;
+    hpContainer.firstChild.textContent = `❤️ ${t("health")} `;
+
+    const scoreContainer = document.getElementById("score").parentElement;
+    scoreContainer.firstChild.textContent = `💰 ${t("score")} `;
+
+    document.getElementById("inventaire").title =
+        t("inventory");
+}
+
+/* =========================================================================
+   INDICATEURS (k1, k2, k3...)
+   ========================================================================= */
+const indicators = {};
+
+Object.values(zonesByWorld).flat().forEach(zone => {
+    if ((zone[0] === 'question' || zone[0] === 'quiz') && zone[7]) {
+        indicators[zone[7]] = 0;
+    }
+});
+
+// Indicateur utilisé par les objets / RubiqueQ2
+if (!Object.prototype.hasOwnProperty.call(indicators, 'k2')) {
+    indicators.k2 = 0;
+}
+
+function renderIndicators() {
+    const indicatorsDisplay = document.getElementById('indicatorsDisplay');
+    indicatorsDisplay.textContent = Object.keys(indicators).sort()
+        .map(id => `${id}:${indicators[id]}`)
+        .join('  ');
+}
+
+
+
+/* Choisit, dans un jeu de questions, l'entrée adaptée aux indicateurs actuels. */
+function pickQuestion(setId, indicatorIdOverride) {
+    const set = QUESTION_SETS[setId];
+
+    if (!set || !set.length) {
+        return {
+            question: "?",
+            answer: ""
+        };
+    }
+
+    const indicatorId = indicatorIdOverride || SET_TO_INDICATOR[setId];
+    const indicatorValue = indicators[indicatorId] || 0;
+    const indicatorScore = indicatorValue + 1;
+
+    const sorted = [...set].sort(
+        (a, b) => a.condition - b.condition
+    );
+
+    let chosen = sorted[0];
+
+    for (const entry of sorted) {
+        if (indicatorScore >= entry.condition) {
+            chosen = entry;
+        }
+    }
+
+    return {
+        question:
+            typeof chosen.question === "object"
+                ? chosen.question[currentLanguage]
+                : chosen.question,
+
+        answer:
+            typeof chosen.answer === "object"
+                ? chosen.answer[currentLanguage]
+                : chosen.answer
+    };
+}
+/* Même logique que pickQuestion, mais pour un jeu de quiz (QCM). */
+function pickQuiz(setId, indicatorIdOverride) {
+    const set = QUIZ_SETS[setId];
+
+    if (!set || !set.length) {
+        return {
+            question: "?",
+            answers: ["", "", "", "", ""]
+        };
+    }
+
+    const indicatorId = indicatorIdOverride || SET_TO_INDICATOR[setId];
+    const indicatorValue = indicators[indicatorId] || 0;
+    const indicatorScore = indicatorValue + 1;
+
+    const sorted = [...set].sort(
+        (a, b) => a.condition - b.condition
+    );
+
+    let chosen = sorted[0];
+
+    for (const entry of sorted) {
+        if (indicatorScore >= entry.condition) {
+            chosen = entry;
+        }
+    }
+
+    return {
+        question:
+            typeof chosen.question === "object"
+                ? chosen.question[currentLanguage]
+                : chosen.question,
+
+        answers: chosen.answers.map(answer =>
+            typeof answer === "object"
+                ? answer[currentLanguage]
+                : answer
+        )
+    };
+}
+
+/* Mélange un tableau in-place (Fisher-Yates) et le renvoie, pour afficher les
+   5 réponses du quiz dans un ordre aléatoire à chaque ouverture du popup. */
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+/* =========================================================================
+   4) RÉFÉRENCES DOM ET ÉTAT DU JEU
+   ========================================================================= */
+const game = document.getElementById('game');
+const background = document.getElementById('background');
+const playerEl = document.getElementById('player');
+const targetEl = document.getElementById('target');
+const prevTriangle = document.getElementById('prevTriangle');
+const nextTriangle = document.getElementById('nextTriangle');
+const zoneNameEl = document.getElementById('zoneName');
+const scoreEl = document.getElementById('score');
+const hpEl = document.getElementById('hp');
+const popup = document.getElementById('questionPopup');
+const questionText = document.getElementById('questionText');
+const answerInput = document.getElementById('answerInput');
+const answerButton = document.getElementById('answerButton');
+const feedback = document.getElementById('questionFeedback');
+const questionClose = document.getElementById('questionClose');
+
+// Références pour la popup "quiz" (QCM à 5 réponses)
+const quizPopup = document.getElementById('quizPopup');
+const quizText = document.getElementById('quizText');
+const quizOptions = document.getElementById('quizOptions');
+const quizFeedback = document.getElementById('quizFeedback');
+const quizClose = document.getElementById('quizClose');
+
+// Références pour la popup des zones "lock"
+const lockPopup = document.getElementById('lockPopup');
+const lockText = document.getElementById('lockText');
+const lockOk = document.getElementById('lockOk');
+const lockClose = document.getElementById('lockClose');
+
+// Références pour la popup "info" (dialogue/explication avec image au choix)
+const infoPopup = document.getElementById('infoPopup');
+const infoImage = document.getElementById('infoImage');
+const infoText = document.getElementById('infoText');
+const infoOk = document.getElementById('infoOk');
+const infoClose = document.getElementById('infoClose');
+
+// Références pour la popup "item" (ramassage d'objet) et l'inventaire
+const itemPopup = document.getElementById('itemPopup');
+const itemImage = document.getElementById('itemImage');
+const itemText = document.getElementById('itemText');
+const itemYes = document.getElementById('itemYes');
+const itemNo = document.getElementById('itemNo');
+const itemClose = document.getElementById('itemClose');
+const itemInventoryBtn = document.getElementById('itemInventoryBtn');
+const itemCounterDisplay = document.getElementById('itemCounterDisplay');
+
+const inventoryPopup = document.getElementById('inventoryPopup');
+const inventoryList = document.getElementById('inventoryList');
+const inventoryCount = document.getElementById('inventoryCount');
+const inventoryClose = document.getElementById('inventoryClose');
+const inventaire = document.getElementById('inventaire');
+const solvedQuestions = new Set();
+
+const bgMusic = document.getElementById('bgMusic');
+let audioStarted = false;
+let soundEnabled = true;
+
+const player = { x: 500, y: 300, radius: 14, speed: 4 };
+
+let worldIndex = 0;		
+let target = null;
+let moving = false;
+let score = 0;
+let hp = 10;
+let activeQuestion = null;
+let activeAnswer = "";
+let activeQuiz = null;       // zone "quiz" dont le popup QCM est actuellement affiché
+let activeQuizAnswer = "";   // bonne réponse (texte) du quiz actuellement affiché
+let activeLock = null; // zone "lock" dont le message d'avertissement est actuellement affiché
+let activeInfo = null; // zone "info" dont le popup de dialogue est actuellement affiché
+let activeItem = null; // zone "item" dont le popup de ramassage est actuellement affiché
+let questionTimer = null;
+let questionTimeLeft = 30;
+
+// Inventaire du joueur : liste des noms d'objets mémorisés, limitée à MAX_ITEMS (kObjet).
+const inventory = [];
+const MAX_ITEMS = 10;
+
+/* =========================================================================
+   5) CREATION // GESTION DES MONDES ET DES ZONES
+   ========================================================================= */
+function createZones() {
+    document.querySelectorAll(".zone").forEach(zone => zone.remove());
+
+    const zones = zonesByWorld[worldIndex] || [];
+
+    zones.forEach(data => {
+        const [
+            type,
+            x,
+            y,
+            w,
+            h,
+            label,
+            arg1,
+            arg2,
+            arg3
+        ] = data;
+
+        const zone = document.createElement("div");
+
+        zone.className = `zone ${type}`;
+        zone.dataset.world = worldIndex;
+        zone.dataset.solved = "false";
+        zone.dataset.entered = "false";
+	zone.dataset.label = label;
+	zone.title = label;
+
+        /*
+         * Le repère logique est toujours 1000 x 600.
+         * Les dimensions sont converties en pourcentages du jeu.
+         */
+        zone.style.left = `${x / WIDTH * 100}%`;
+        zone.style.top = `${y / HEIGHT * 100}%`;
+        zone.style.width = `${w / WIDTH * 100}%`;
+        zone.style.height = `${h / HEIGHT * 100}%`;
+
+        const zoneLabel = document.createElement("div");
+        zoneLabel.className = "zone-label";
+const localizedLabel =
+    label && typeof label === "object"
+        ? label[currentLanguage] || label.fr || ""
+        : label;
+
+zoneLabel.textContent = localizedLabel;
+        zone.appendChild(zoneLabel);
+
+        if (type === "question" || type === "quiz") {
+            zone.dataset.setId = arg1;
+            zone.dataset.indicator = arg2;
+
+            // Ce test doit être fait UNIQUEMENT après avoir affecté setId/indicator,
+            // car getQuestionKey() se base dessus pour identifier la question de façon unique.
+            if (solvedQuestions.has(getQuestionKey(zone))) {
+                zone.dataset.solved = "true";
+                zone.style.display = "none";
+            }
+        }
+
+        else if (type === "transition") {
+            zone.dataset.target = arg1;
+        }
+
+ //==============================================lock area avec mot de passe     
+
+else if (type === "lock") {
+zone.title = label;
+
+    if (arg1 && typeof arg1 === "object") {
+        zone.dataset.requiredItems =
+            JSON.stringify(arg1.items || []);
+
+        zone.dataset.messageFr =
+            typeof arg2 === "object" ? arg2.fr || "" : arg2 || "";
+        zone.dataset.messageEn =
+            typeof arg2 === "object" ? arg2.en || "" : arg2 || "";
+        zone.dataset.message =
+            typeof arg2 === "object" ? arg2[currentLanguage] || "" : arg2 || "";
+
+    } else {
+        zone.dataset.indicator = arg1 || "";
+        zone.dataset.requiredValue =
+            arg2 !== undefined ? arg2 : 1;
+
+        zone.dataset.messageFr =
+            typeof arg3 === "object" ? arg3.fr || "" : arg3 || "";
+        zone.dataset.messageEn =
+            typeof arg3 === "object" ? arg3.en || "" : arg3 || "";
+        zone.dataset.message =
+            typeof arg3 === "object" ? arg3[currentLanguage] || "" : arg3 || "";
+    }
+}
+ //==============================================info area
+else if (type === "info") {
+zone.title = label;
+    zone.dataset.image = arg1 || "";
+
+    zone.dataset.messageFr =
+        typeof arg2 === "object" ? arg2.fr : arg2;
+
+    zone.dataset.messageEn =
+        typeof arg2 === "object" ? arg2.en : arg2;
+
+    zone.dataset.message =
+        typeof arg2 === "object"
+            ? arg2[currentLanguage]
+            : arg2;
+}
+ //==============================================item area
+
+        else if (type === "item") {
+            // L'identifiant unique de l'objet doit toujours être une chaîne stable,
+            // même si "label" est un objet {fr, en} — sinon la comparaison avec
+            // inventory.includes() échoue et la zone ne disparaît pas correctement.
+            const itemId =
+                label && typeof label === "object"
+                    ? (label.fr || label.en || JSON.stringify(label))
+                    : String(label);
+
+            zone.dataset.iditem = itemId;
+
+// Si l'objet est déjà dans l'inventaire, la zone est totalement désactivée
+if (inventory.includes(itemId)) {
+    zone.style.display = "none";
+    zone.dataset.collected = "true";
+} else {
+    zone.dataset.collected = "false";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            zone.dataset.itemName = JSON.stringify(arg1);
+            zone.dataset.itemDescription = JSON.stringify(arg2);
+            zone.dataset.image = arg3 || "";
+
+            zone.dataset.messageFr =
+                typeof arg2 === "object" ? arg2.fr || "" : arg2 || "";
+            zone.dataset.messageEn =
+                typeof arg2 === "object" ? arg2.en || "" : arg2 || "";
+            zone.dataset.message =
+                typeof arg2 === "object" ? arg2[currentLanguage] || "" : arg2 || "";
+        }
+
+        game.insertBefore(zone, targetEl);
+    });          // ← ferme le forEach (il manquait le ")")
+
+    refreshLockZones();
+    syncItemZonesVisibility();
+}                // ← ferme createZones()
+
+/* Cache toute zone "item" dont l'objet est déjà dans l'inventaire, et réaffiche
+   celles dont l'objet en a été retiré (ex: après un "Jeter" dans l'inventaire).
+   Centralisé ici pour que la visibilité des objets soit TOUJOURS synchronisée
+   avec le tableau `inventory`, qu'on vienne de charger un monde, de ramasser
+   un objet, ou d'en jeter un. */
+function syncItemZonesVisibility() {
+    document.querySelectorAll('.zone.item').forEach(zone => {
+
+        const isInInventory =
+            inventory.includes(zone.dataset.iditem);
+
+        if (isInInventory) {
+            zone.style.display = "none";
+            zone.dataset.collected = "true";
+            zone.dataset.entered = "false";
+        } else {
+            zone.style.display = "";
+            zone.dataset.collected = "false";
+        }
+    });
+}
+
+
+
+
+
+
+
+function updateTriangleLabels() {
+    const prevIndex = (worldIndex - 1 + WORLDS.length) % WORLDS.length;
+    const nextIndex = (worldIndex + 1) % WORLDS.length;
+    prevTriangle.title = "◀ " + WORLDS[prevIndex].name;
+    nextTriangle.title = WORLDS[nextIndex].name + " ▶";
+}
+
+
+/* =========================================================================
+    Gestion du son
+   ========================================================================= */
+
+function toggleSound() {
+
+    soundEnabled = !soundEnabled;
+
+    if (soundEnabled) {
+
+        soundToggle.textContent = "🔊";
+        soundToggle.title = "Couper le son";
+
+        // Relance la musique du monde actuel
+        if (bgMusic.src) {
+            bgMusic.play().catch(error => {
+                console.log("Lecture audio en attente d'une interaction :", error);
+            });
+        }
+
+    } else {
+
+        soundToggle.textContent = "🔇";
+        soundToggle.title = "Activer le son";
+
+        // Coupe immédiatement le son
+        bgMusic.pause();
+    }
+}
+
+soundToggle.addEventListener("click", e => {
+    e.stopPropagation();
+    toggleSound();
+});
+
+function loadWorld(index, entrySide = null) {
+    worldIndex = (index + WORLDS.length) % WORLDS.length;
+    moving = false;
+    target = null;
+    targetEl.style.display = 'none';
+    closeQuestion();
+    closeQuiz();
+    closeLockMessage();
+    closeInfoPopup();
+    closeItemPopup();
+    closeInventoryPopup();
+
+    background.src = WORLDS[worldIndex].image;
+    zoneNameEl.textContent = WORLDS[worldIndex].name;
+    createZones();
+    updateTriangleLabels();
+
+    // SON DU MONDE
+    if (WORLDS[worldIndex].sound) {
+        playWorldSound(WORLDS[worldIndex].sound);
+    }
+
+    if (entrySide === 'left') {
+        player.x = 30; player.y = HEIGHT / 2;
+    } else if (entrySide === 'right') {
+        player.x = WIDTH - 30; player.y = HEIGHT / 2;
+    } else {
+        player.x = WORLDS[worldIndex].start.x;
+        player.y = WORLDS[worldIndex].start.y;
+    }
+
+    updatePlayer();
+    game.classList.remove('transition');
+    void game.offsetWidth;
+    game.classList.add('transition');
+}
+
+/* Change la musique de fond, en évitant de la relancer si c'est déjà la même piste */
+function playWorldSound(src) {
+
+    if (!src) {
+        bgMusic.pause();
+        bgMusic.removeAttribute('src');
+        bgMusic.load();
+        return;
+    }
+
+    bgMusic.src = src;
+    bgMusic.volume = 0.6;
+    bgMusic.load();
+
+    // Si le son est coupé, on charge la musique
+    // mais on ne la joue pas.
+    if (!soundEnabled) {
+        bgMusic.pause();
+        return;
+    }
+
+    bgMusic.play().catch(error => {
+        console.log("Lecture audio en attente d'une interaction :", error);
+    });
+}
+
+/* =========================================================================
+   6) DÉPLACEMENT ET COLLISIONS
+   ========================================================================= */
+function getZoneLogicalRect(zone) {
+    return {
+        left: parseFloat(zone.style.left) * WIDTH / 100,
+        top: parseFloat(zone.style.top) * HEIGHT / 100,
+        width: parseFloat(zone.style.width) * WIDTH / 100,
+        height: parseFloat(zone.style.height) * HEIGHT / 100
+    };
+}
+
+function overlapsZone(zone, x, y) {
+    const p = {
+        left: x - player.radius,
+        right: x + player.radius,
+        top: y - player.radius,
+        bottom: y + player.radius
+    };
+
+    const rect = getZoneLogicalRect(zone);
+
+    const right = rect.left + rect.width;
+    const bottom = rect.top + rect.height;
+
+    return (
+        p.right > rect.left &&
+        p.left < right &&
+        p.bottom > rect.top &&
+        p.top < bottom
+    );
+}
+
+/* Une zone "lock" est verrouillée tant que l'indicateur associé n'a pas atteint la valeur requise. */
+function isZoneLocked(zone) {
+    // Condition sur un indicateur
+    const indicatorId = zone.dataset.indicator;
+    const requiredValue = parseFloat(zone.dataset.requiredValue);
+
+    if (indicatorId) {
+        const currentValue = indicators[indicatorId] || 0;
+
+        if (!Number.isNaN(requiredValue) && currentValue < requiredValue) {
+            return true;
+        }
+    }
+
+    // Condition sur une liste complète d'objets
+    const requiredItems = JSON.parse(zone.dataset.requiredItems || '[]');
+
+    if (requiredItems.length > 0) {
+        const hasAllItems = requiredItems.every(itemName =>
+            inventory.includes(itemName)
+        );
+
+        if (!hasAllItems) {
+            return true;
+        }
+    }
+
+    // Aucune condition non satisfaite
+    return false;
+}
+
+/* Met à jour l'apparence (verrouillée / déverrouillée) de toutes les zones "lock"
+   visibles à l'écran, en fonction des indicateurs actuels. À appeler chaque fois
+   qu'un indicateur change, pour que le passage s'ouvre immédiatement sans recharger le monde. */
+function refreshLockZones() {
+    document.querySelectorAll('.zone.lock').forEach(zone => {
+        zone.classList.toggle('unlocked', !isZoneLocked(zone));
+    });
+}
+
+function getBlockingZone(x, y) {
+    const selector = `.zone.block[data-world="${worldIndex}"], .zone.lock[data-world="${worldIndex}"]`;
+    for (const z of document.querySelectorAll(selector)) {
+        if (z.classList.contains('lock') && !isZoneLocked(z)) continue; // condition remplie : ne bloque plus
+        if (overlapsZone(z, x, y)) return z;
+    }
+    return null;
+}
+
+/* Réagit à une tentative de déplacement bloquée par une zone "lock" encore verrouillée
+   en affichant le message d'avertissement associé. */
+function handleBlockedZone(zone) {
+    if (zone.classList.contains('lock')) openLockMessage(zone);
+}
+
+function isAtZoneCenter(zone, x, y) {
+    const rect = getZoneLogicalRect(zone);
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const tolerance = Math.min(rect.width, rect.height) / 2;
+
+    return Math.hypot(x - centerX, y - centerY) <= tolerance;
+}
+
+function updateZoneTriggers() {
+const selector = `
+    .zone.question[data-world="${worldIndex}"]:not(.solved),
+    .zone.quiz[data-world="${worldIndex}"]:not(.solved),
+    .zone.transition[data-world="${worldIndex}"],
+    .zone.info[data-world="${worldIndex}"],
+    .zone.item[data-world="${worldIndex}"]:not([data-collected="true"])
+`;
+
+    document.querySelectorAll(selector).forEach(zone => {
+        const isCenterTriggered =
+            zone.classList.contains("question") ||
+            zone.classList.contains("quiz");
+
+        const isInside = isCenterTriggered
+            ? isAtZoneCenter(zone, player.x, player.y)
+            : overlapsZone(zone, player.x, player.y);
+
+        const wasInside = zone.dataset.entered === "true";
+
+        if (isInside && !wasInside) {
+            zone.dataset.entered = "true";
+            onZoneEnter(zone);
+        }
+
+        if (!isInside && wasInside) {
+            zone.dataset.entered = "false";
+        }
+    });
+}
+
+function onZoneEnter(zone) {
+    if (zone.dataset.solved === "true") {
+        return;
+    }
+
+    if (zone.classList.contains("question")) {
+        if (activeQuestion) return;
+        openQuestion(zone);
+
+    } else if (zone.classList.contains("quiz")) {
+        if (activeQuiz) return;
+        openQuiz(zone);
+
+    } else if (zone.classList.contains("transition")) {
+        loadWorld(parseInt(zone.dataset.target, 10));
+
+    } else if (zone.classList.contains("info")) {
+        openInfoPopup(zone);
+
+    } else if (zone.classList.contains("item")) {
+        if (inventory.includes(zone.dataset.iditem)) return;
+        openItemPopup(zone);
+    }
+}
+game.addEventListener("click", () => {
+
+    if (soundEnabled && bgMusic.paused && bgMusic.src) {
+
+        bgMusic.play().catch(error => {
+            console.log("Audio non démarré :", error);
+        });
+
+    }
+});
+
+game.addEventListener("click", e => {
+    const r = game.getBoundingClientRect();
+
+    target = {
+        x: (e.clientX - r.left) * WIDTH / r.width,
+        y: (e.clientY - r.top) * HEIGHT / r.height
+    };
+
+    target.x = Math.max(0, Math.min(WIDTH, target.x));
+    target.y = Math.max(0, Math.min(HEIGHT, target.y));
+
+    targetEl.style.left = `${target.x / WIDTH * 100}%`;
+    targetEl.style.top = `${target.y / HEIGHT * 100}%`;
+    targetEl.style.display = "block";
+
+    moving = true;
+});
+
+function checkBorders() {
+    const margin = player.radius;
+
+    if (player.x < margin) player.x = margin;
+    if (player.x > WIDTH - margin) player.x = WIDTH - margin;
+    if (player.y < margin) player.y = margin;
+    if (player.y > HEIGHT - margin) player.y = HEIGHT - margin;
+}
+
+function movePlayer() {
+    if (!moving || !target || activeQuestion || activeQuiz || activeLock || activeInfo || activeItem) return;
+
+    const dx = target.x - player.x;
+    const dy = target.y - player.y;
+    const dist = Math.hypot(dx, dy);
+    const arriving = dist <= player.speed;
+    const nextX = arriving ? target.x : player.x + (dx / dist) * player.speed;
+    const nextY = arriving ? target.y : player.y + (dy / dist) * player.speed;
+
+    let advanced = false;
+
+    const blockX = getBlockingZone(nextX, player.y);
+    if (!blockX) { player.x = nextX; advanced = true; }
+    else { handleBlockedZone(blockX); }
+
+    const blockY = getBlockingZone(player.x, nextY);
+    if (!blockY) { player.y = nextY; advanced = true; }
+    else { handleBlockedZone(blockY); }
+
+    if (!advanced) moving = false;
+
+    updatePlayer();
+    checkBorders();
+
+    if (!target) return;
+
+    if (arriving && Math.abs(target.x - player.x) < 1 && Math.abs(target.y - player.y) < 1) {
+        moving = false;
+    }
+}
+
+function updatePlayer() {
+    playerEl.style.left = (player.x / WIDTH * 100) + '%';
+    playerEl.style.top = (player.y / HEIGHT * 100) + '%';
+}
+
+/* =========================================================================
+   7) TRIANGLES DE NAVIGATION
+   ========================================================================= */
+prevTriangle.addEventListener('click', e => {
+    e.stopPropagation();
+    loadWorld(worldIndex - 1, 'right');
+});
+nextTriangle.addEventListener('click', e => {
+    e.stopPropagation();
+    loadWorld(worldIndex + 1, 'left');
+});
+
+/* =========================================================================
+   8) QUESTIONS (réponse libre à taper)
+   ========================================================================= */
+function openQuestion(zone) {
+    if (activeQuestion) return;
+
+    moving = false;
+    target = null;
+    targetEl.style.display = 'none';
+    activeQuestion = zone;
+
+    const q = pickQuestion(zone.dataset.setId, zone.dataset.indicator);
+    activeAnswer = q.answer.trim().toLowerCase();
+
+    questionText.innerHTML = q.question;
+    answerInput.value = '';
+    feedback.textContent = '';
+
+    // Affichage du chronomètre
+    questionTimeLeft = 30;
+
+    let timerDisplay = document.getElementById('questionTimer');
+
+    if (!timerDisplay) {
+        timerDisplay = document.createElement('div');
+        timerDisplay.id = 'questionTimer';
+        timerDisplay.style.fontSize = '24px';
+        timerDisplay.style.fontWeight = 'bold';
+        timerDisplay.style.margin = '10px 0';
+        timerDisplay.style.textAlign = 'center';
+
+        questionText.parentNode.insertBefore(
+            timerDisplay,
+            questionText
+        );
+    }
+
+    timerDisplay.textContent = `⏱️ ${questionTimeLeft} s`;
+
+    // Arrête un éventuel ancien timer
+    clearInterval(questionTimer);
+
+    questionTimer = setInterval(() => {
+        questionTimeLeft--;
+
+        timerDisplay.textContent = `⏱️ ${questionTimeLeft} s`;
+
+   if (questionTimeLeft <= 0) {
+    clearInterval(questionTimer);
+    questionTimer = null;
+
+    const currentZone = activeQuestion;
+    const indicatorId = currentZone.dataset.indicator;
+
+    // Passe à la question suivante
+    if (indicatorId && indicatorId in indicators) {
+        indicators[indicatorId] += 1;
+    }
+
+    feedback.textContent = "Temps écoulé ! Question suivante...";
+    feedback.style.color = "#ffaa00";
+
+    setTimeout(() => {
+        if (!activeQuestion) return;
+
+        // Réinitialise la question actuelle
+        activeQuestion = null;
+        activeAnswer = null;
+
+        // Affiche la nouvelle question
+        openQuestion(currentZone);
+
+    }, 700);
+}
+
+    }, 1000);
+
+    popup.style.display = 'grid';
+
+    setTimeout(() => answerInput.focus(), 50);
+}
+
+function closeQuestion() {
+    clearInterval(questionTimer);
+    questionTimer = null;
+
+    activeQuestion = null;
+    activeAnswer = null;
+    popup.style.display = "none";
+}
+
+function validateAnswer() {
+    if (!activeQuestion) return;
+
+    const given = answerInput.value.trim().toLowerCase();
+
+if (given === activeAnswer) {
+
+// =========================================================
+// OBJET : bonne réponse à la question
+// =========================================================
+if (activeQuestion.classList.contains("item")) {
+
+    const itemZone = activeQuestion;
+
+    // Arrête immédiatement le chronomètre
+    clearInterval(questionTimer);
+    questionTimer = null;
+
+    // Ajoute l'objet à l'inventaire
+inventory.push(itemZone.dataset.iditem);
+
+// Marque définitivement la zone comme récupérée
+itemZone.dataset.collected = "true";
+itemZone.dataset.entered = "false";
+
+// Cache complètement le div
+itemZone.style.display = "none";
+
+renderItemCounter();
+
+// Synchronise également les éventuelles autres occurrences
+syncItemZonesVisibility();
+
+    // Passe à la question suivante de RubiqueQ2
+    const indicatorId = "k2";
+
+    if (indicatorId in indicators) {
+        indicators[indicatorId] += 1;
+    }
+
+    renderIndicators();
+    refreshLockZones();
+
+    feedback.textContent = "Bonne réponse ! Objet récupéré !";
+    feedback.style.color = "#62e36f";
+
+    setTimeout(() => {
+        closeQuestion();
+    }, 700);
+
+    return;
+}
+
+
+    clearInterval(questionTimer);
+    questionTimer = null;
+
+    const solvedZone = activeQuestion;
+
+    solvedZone.dataset.solved = "true";
+    solvedZone.dataset.entered = "false";
+    solvedZone.classList.add("solved");
+
+    solvedQuestions.add(getQuestionKey(solvedZone));
+
+    solvedZone.style.display = "none";
+
+    score += 100;
+    scoreEl.textContent = score;
+
+feedback.textContent = t("correct");
+    feedback.style.color = "#62e36f";
+
+    const indicatorId = solvedZone.dataset.indicator;
+
+    if (indicatorId && indicatorId in indicators) {
+        indicators[indicatorId] += 1;
+        renderIndicators();
+        refreshLockZones();
+    }
+
+    setTimeout(closeQuestion, 700);
+} else {
+        hp = Math.max(0, hp - 1);
+        hpEl.textContent = hp;
+
+        feedback.textContent = t("wrong");
+        feedback.style.color = "#ff6868";
+
+        if (hp <= 0) {
+            setTimeout(() => {
+                alert("Game Over !");
+                score = 0;
+                hp = 5;
+                scoreEl.textContent = score;
+                hpEl.textContent = hp;
+                loadWorld(19);
+            }, 300);
+        }
+    }
+}
+
+
+function getQuestionKey(zone) {
+    return `${worldIndex}|${zone.dataset.setId}|${zone.dataset.indicator}|${zone.dataset.label}`;
+}
+
+answerButton.addEventListener('click', validateAnswer);
+answerInput.addEventListener('keydown', e => { if (e.key === 'Enter') validateAnswer(); });
+questionClose.addEventListener('click', e => { e.stopPropagation(); closeQuestion(); });
+
+/* =========================================================================
+   8bis) QUIZ (QCM à 5 réponses, la bonne étant toujours en position 0 dans
+   les données mais affichée à un endroit aléatoire parmi les boutons)
+   ========================================================================= */
+function openQuiz(zone) {
+    if (activeQuiz) return;
+
+    moving = false;
+    target = null;
+    targetEl.style.display = 'none';
+    activeQuiz = zone;
+
+    const q = pickQuiz(zone.dataset.setId, zone.dataset.indicator);
+
+    // La bonne réponse est toujours answers[0] dans les données...
+    activeQuizAnswer = (q.answers[0] || '').trim().toLowerCase();
+
+    quizText.textContent = q.question;
+    quizFeedback.textContent = '';
+    quizOptions.innerHTML = '';
+
+    // ...mais on mélange une COPIE du tableau pour l'affichage, afin que la bonne
+    // réponse n'apparaisse pas toujours au même endroit parmi les 5 boutons.
+    const shuffledAnswers = shuffleArray([...q.answers]);
+
+    shuffledAnswers.forEach(answerText => {
+        const btn = document.createElement('button');
+        btn.className = 'quizOptionBtn';
+        btn.textContent = answerText;
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            validateQuizAnswer(answerText, btn);
+        });
+        quizOptions.appendChild(btn);
+    });
+
+    quizPopup.style.display = 'grid';
+}
+//----------------------------------------------------------------------------Fermeture du quiz
+function closeQuiz() {
+    activeQuiz = null;
+    activeQuizAnswer = null;
+    quizPopup.style.display = "none";
+}
+//----------------------------------------------------------------------------le quiz est résolu
+function validateQuizAnswer(chosenText, chosenBtn) {
+    if (!activeQuiz) return;
+
+    const allBtns = quizOptions.querySelectorAll(".quizOptionBtn");
+    allBtns.forEach(btn => {
+        btn.disabled = true;
+    });
+
+    const given = chosenText.trim().toLowerCase();
+
+    if (given === activeQuizAnswer) {
+        const solvedZone = activeQuiz;
+
+        chosenBtn.classList.add("correct");
+
+        solvedZone.dataset.solved = "true";
+        solvedZone.dataset.entered = "false";
+        solvedZone.classList.add("solved");
+
+        // Mémorise le QCM comme résolu
+        solvedQuestions.add(getQuestionKey(solvedZone));
+
+        // Masque le QCM
+        solvedZone.style.display = "none";
+
+        score += 100;
+        scoreEl.textContent = score;
+
+        const indicatorId = solvedZone.dataset.indicator;
+
+        if (indicatorId && indicatorId in indicators) {
+            indicators[indicatorId] += 1;
+            renderIndicators();
+            refreshLockZones();
+        }
+
+    quizFeedback.textContent = t("correct");
+        quizFeedback.style.color = "#62e36f";
+
+        setTimeout(closeQuiz, 700);
+
+    } else {
+        chosenBtn.classList.add("wrong");
+
+        allBtns.forEach(btn => {
+            if (btn.textContent.trim().toLowerCase() === activeQuizAnswer) {
+                btn.classList.add("correct");
+            }
+        });
+
+        hp = Math.max(0, hp - 1);
+        hpEl.textContent = hp;
+
+quizFeedback.textContent = t("wrong");
+        quizFeedback.style.color = "#ff6868";
+
+        if (hp <= 0) {
+            setTimeout(() => {
+alert(t("gameOver"));
+                score = 0;
+                hp = 5;
+                scoreEl.textContent = score;
+                hpEl.textContent = hp;
+                loadWorld(0);
+            }, 300);
+        } else {
+            setTimeout(closeQuiz, 1200);
+        }
+    }
+}
+
+quizClose.addEventListener('click', e => { e.stopPropagation(); closeQuiz(); }
+
+);
+
+/* =========================================================================
+   9) ZONES "LOCK" (passages verrouillés)
+   ========================================================================= */
+function openLockMessage(zone) {
+    if (
+        activeQuestion ||
+        activeQuiz ||
+        activeLock ||
+        activeInfo ||
+        activeItem
+    ) {
+        return;
+    }
+
+    moving = false;
+    target = null;
+    targetEl.style.display = "none";
+    activeLock = zone;
+
+    let message =
+        currentLanguage === "fr"
+            ? zone.dataset.messageFr || ""
+            : zone.dataset.messageEn || "";
+
+    const missingItems = getMissingItems(zone);
+
+    if (missingItems.length > 0) {
+        message += `\n\n${t("missingItems")} ${missingItems.length} Item${
+            missingItems.length > 1 ? "s" : ""
+        }.`;
+    }
+
+    lockText.textContent = message || t("lockedZone");
+    lockPopup.style.display = "grid";
+}
+
+function closeLockMessage() {
+    activeLock = null;
+    lockPopup.style.display = 'none';
+}
+
+lockOk.addEventListener('click', e => { e.stopPropagation(); closeLockMessage(); });
+lockClose.addEventListener('click', e => { e.stopPropagation(); closeLockMessage(); });
+
+/* =========================================================================
+   10) ZONES "INFO" (dialogue / explication avec image au choix)
+   ========================================================================= */
+function openInfoPopup(zone) {
+    if (
+        activeQuestion ||
+        activeQuiz ||
+        activeLock ||
+        activeInfo ||
+        activeItem
+    ) {
+        return;
+    }
+
+    moving = false;
+    target = null;
+    targetEl.style.display = "none";
+    activeInfo = zone;
+
+    infoImage.src = zone.dataset.image || "";
+    infoText.innerHTML = zone.dataset.message || "";
+
+    infoPopup.style.display = "grid";
+}
+
+function closeInfoPopup() {
+    activeInfo = null;
+    infoPopup.style.display = 'none';
+}
+
+infoOk.addEventListener('click', e => { e.stopPropagation(); closeInfoPopup(); });
+infoClose.addEventListener('click', e => { e.stopPropagation(); closeInfoPopup(); });
+
+/* =========================================================================
+   11) ZONES "ITEM" (ramassage d'objet + inventaire limité à 10)
+   ========================================================================= */
+function renderItemCounter() {
+    itemCounterDisplay.textContent = `${inventory.length}/${MAX_ITEMS}`;
+}
+
+function openItemPopup(zone) {
+    if (
+        activeQuestion ||
+        activeQuiz ||
+        activeLock ||
+        activeInfo ||
+        activeItem
+    ) {
+        return;
+    }
+
+    if (inventory.includes(zone.dataset.iditem)) {
+        return;
+    }
+
+    moving = false;
+    target = null;
+    targetEl.style.display = "none";
+    activeItem = zone;
+
+    itemImage.src = zone.dataset.image || "";
+
+    itemText.textContent =
+        currentLanguage === "fr"
+            ? zone.dataset.messageFr
+            : zone.dataset.messageEn;
+
+    itemPopup.style.display = "grid";
+}
+function closeItemPopup() {
+    activeItem = null;
+    itemPopup.style.display = 'none';
+}
+
+itemYes.addEventListener('click', e => {
+    e.stopPropagation();
+
+    if (!activeItem) return;
+
+    if (inventory.length >= MAX_ITEMS) {
+        alert(
+            `Inventaire plein (${inventory.length}/${MAX_ITEMS}) ! ` +
+            `Jetez un objet avant d'en prendre un nouveau.`
+        );
+        return;
+    }
+
+    // Mémorise l'objet pendant que la question est posée
+    const itemZone = activeItem;
+
+    // IMPORTANT :
+    // on donne à l'objet les mêmes informations qu'une zone question
+    itemZone.dataset.setId = "RubiqueQ2";
+    itemZone.dataset.indicator = "k2";
+
+    // Ferme le popup de l'objet
+    closeItemPopup();
+
+    // Ouvre la question correspondant à k2
+    openQuestion(itemZone);
+});
+
+
+itemNo.addEventListener('click', e => { e.stopPropagation(); closeItemPopup(); });
+itemClose.addEventListener('click', e => { e.stopPropagation(); closeItemPopup(); });
+
+/* Bouton sous l'image du popup "item" : ouvre la liste des objets possédés
+   pour choisir ceux que l'on garde ou que l'on jette. */
+itemInventoryBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    openInventoryPopup();
+});
+
+
+
+inventaire.addEventListener('click', e => {
+    e.stopPropagation();
+    openInventoryPopup();
+});
+
+
+
+
+
+
+
+
+/*========================Ouverture de l'inventaire d'objet============*/
+
+function openInventoryPopup() {
+    inventoryCount.textContent = inventory.length;
+    inventoryList.innerHTML = "";
+
+    if (inventory.length === 0) {
+        const empty = document.createElement("div");
+
+        empty.id = "inventoryEmpty";
+        empty.textContent = t("emptyInventory");
+
+        inventoryList.appendChild(empty);
+    } else {
+ inventory.forEach((name, idx) => {
+    const row = document.createElement("div");
+    row.className = "inventoryItem";
+
+    const label = document.createElement("span");
+    label.textContent = name;          // ← correction
+
+    const dropBtn = document.createElement("button");
+    dropBtn.type = "button";
+    dropBtn.textContent = t("drop");
+
+    dropBtn.addEventListener("click", event => {
+        event.stopPropagation();
+        inventory.splice(idx, 1);
+        renderItemCounter();
+        refreshLockZones();
+        // L'objet jeté doit pouvoir réapparaître dans le monde où il se trouvait.
+        syncItemZonesVisibility();
+        openInventoryPopup();
+    });
+
+    row.appendChild(label);
+    row.appendChild(dropBtn);
+    inventoryList.appendChild(row);
+});
+    }
+
+    inventoryPopup.style.display = "block";
+}
+
+function closeInventoryPopup() {
+    inventoryPopup.style.display = 'none';
+}
+
+inventoryClose.addEventListener('click', e => { e.stopPropagation(); closeInventoryPopup(); });
+
+/*========================Gestion des objets manquants===================*/
+function getMissingItems(zone) {
+    const requiredItems =
+        JSON.parse(zone.dataset.requiredItems || "[]");
+
+    return requiredItems.filter(iditem =>
+        !inventory.includes(iditem)
+    );
+}
+
+
+/* =========================================================================
+   12) BOUCLE PRINCIPALE
+   ========================================================================= */
+function loop() {
+    movePlayer();
+    updateZoneTriggers();
+    requestAnimationFrame(loop);
+}
+
+applyLanguage();
+loadWorld(0);
+renderIndicators();
+renderItemCounter();
+loop();
+</script>
+
+
+</body>
+</html>
