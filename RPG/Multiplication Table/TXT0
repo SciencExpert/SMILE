@@ -1,1 +1,175 @@
+1. Overview
+HEADHEALER Quest is an educational exploration game. The player moves a character through several worlds and interacts with different zones displayed in the scenery.
 
+Interactions may consist of an open-answer question, a multiple-choice quiz, an explanatory dialogue, an item to collect or a locked passage.
+
+2. Starting the game
+Open the main HTML file in a recent web browser.
+Wait for the scenery and interface to load.
+The character appears automatically in the starting world.
+Click inside the game area to choose the character's destination.
+Explore the zones and complete the activities you encounter.
+Note: audio playback may require an initial interaction with the page. Click inside the game area if the music does not start automatically. If it bothers you, you can remove it by clicking the 🔊 icon.
+3. Moving the character
+Character movement is controlled with the mouse. The character automatically moves toward the location selected with a left click.
+
+🖱️ Left click
+Sets the character's destination.
+Movement can be blocked in certain areas, either temporarily by requiring a question to be answered, or permanently.
+
+A visual cue may appear at the location where the user clicks. The character stops when it reaches its destination or encounters an obstacle.
+
+4. Questions and quizzes
+Reach the centre of a question zone and type the answer before the 30-second timer expires.
+
+Quiz zones display five answer buttons. The answer order is shuffled each time the quiz opens.
+
+5. Locked passages
+Locked passage may require a progress indicator or one or more items in the inventory.
+
+6. Items and inventory
+When an item is found, choose Yes to collect it. The item is added to the inventory after the associated question has been answered correctly.
+
+The inventory can contain a maximum of 10 items. Use the Drop button to remove an item.
+
+7.Health points and incorrect answers
+The player starts the game with 10 health points. The remaining health is permanently displayed in the interface next to the ❤️ symbol.
+
+Each incorrect answer to a question or quiz removes 1 health point.
+
+Situation	Consequence
+Correct answer	The zone is completed and the score increases.
+Incorrect answer to a question	The player loses 1 health point.
+Incorrect answer to a quiz	The player loses 1 health point.
+Timer expires	The question is not completed and the program moves to the next scheduled question.
+0 health points	The game ends with a Game Over state.
+Warning: the player has 10 lives at the beginning of the game. After ten incorrect answers, health normally reaches zero and the game ends, unless a scenario rule changes this behaviour.
+After a Game Over, the score and health points are reset, and the player is returned to the starting world.
+
+8. The Worlds of the Adventure
+🏠 World 0 — Start
+The adventure begins on a mysterious platform. The traveller is invited to explore the different locations, solve the puzzles and find the way to the castle.
+
+🌳 World 1 — The Countryside
+The Countryside is the main crossroads of the adventure. It provides access to the village, the quarry, the fountain and the castle. Several questions must be solved in order to progress.
+
+🏘️ World 2 — Porge Village
+The village is the heart of the encounters with the inhabitants. The player can visit the houses of Aden, Gerhard, Lily, Yin and the guards. A key and many clues about the HeadHealer quest can be found here.
+
+⛏️ World 3 — The Quarry
+The quarry is guarded and requires permission to enter. Aden guards the entrance. The player must solve a question to obtain the password and can then explore the West and East quarries.
+
+⛲ World 4 — The Fountain
+The fountain is a key location in the adventure. The player can collect pure water and discover four menhirs: South, West, North and East. The first three contain puzzles that reveal the magic word needed to access the final menhir.
+
+🏰 World 5 — The Castle
+The castle is guarded by Hildebrand. The player must gather the required objects before being allowed to continue the adventure. The castle also provides access to the Honorable One's cave.
+
+🕯️ World 6 — Castle Cave
+Inside the cave, the player must solve two puzzles related to water and the book before being able to speak to the Honorable One. Once these challenges are completed, the adventure can continue.
+
+🗿 World 7 — The Honorable One
+The Honorable One is trapped by a powerful spell. Four menhirs — blue, purple, orange and green — have rebelled. To free him, the player must correctly answer the questions of all four menhirs and break their chains.
+
+🏡 World 8 — Gerhard's House
+Gerhard and Liva welcome the traveller. Gerhard explains that the quest is to discover the formula and ingredients of the HeadHealer. The player can collect several useful items, including bay leaves, flour and utensils.
+
+🌸 World 9 — Lily's House
+Lily collects sage flowers and prepares syrups enjoyed by the guards. She gives the player sage flowers. Lysandre also explains the use of wine vinegar and sage-stalk fibres for making filters.
+
+🍵 World 10 — Yin's House
+Madame Yin makes medicinal teas. The player discovers the importance of pure water and can collect a tea recipe and a mortar. Yang also provides mysterious information about the fountain water and the inscriptions on the menhirs.
+
+🛡️ World 11 — Guards' House
+The guards are searching for the Honorable One's lost grimoire, which was probably left in the quarries. The player finds a quarry map, books, weapons and a bottle of wine vinegar. The guards also provide the password needed to enter the quarry.
+
+⛏️ World 12 — West Quarry
+The West Quarry is a dangerous area. The player eventually discovers the Honorable One's encrypted grimoire, as well as mining tools. The grimoire is an essential element of the HeadHealer quest.
+
+⚗️ World 13 — East Quarry
+The East Quarry contains several important objects for the scientific quest: chemistry and extraction books, weapons and a jewellery box. The books introduce concepts such as extraction, solubility, grinding, filtration and purification.
+
+🗿 World 14 — South Menhir
+The player discovers the first of the four menhirs and must solve its puzzle. This stage provides an element needed to discover the magic word.
+
+🗿 World 15 — West Menhir
+The second menhir presents another puzzle. Its information, combined with the clues from the other menhirs, allows the player to progress towards discovering the magic word.
+
+🗿 World 16 — North Menhir
+The third menhir contains another puzzle. The clues gathered from the first three menhirs reveal the magic word that grants access to the East Menhir.
+
+🌿 World 17 — East Menhir
+The final menhir reveals the scientific secret of the adventure. The player learns that the treasure being sought is hidden in tree bark and that its extraction requires several elements, including bark, pure water, an acid derived from wine, a mortar and a filter.
+
+The message reminds the player that extracting a natural treasure is not the same as creating it: nature hid it, and the player simply learns how to reveal it.
+
+🏆 World 18 — Final
+After completing the different stages of the quest, the player reaches the end of the adventure.
+
+📜 World 20 — Credits
+The final area presents the game credits: author, illustration and web design, music and the SciencExpert / SMILE project.
+
+8. Game over and reset
+Incorrect answers remove health points. When health reaches zero, the program resets the game state.
+
+Click the ♻️ Reset button to reload the game manually.
+
+🗝️ Quest Solutions
+To discover the secret of HEADHEALER, the player must explore the village, the guards' house and the quarries in order to gather several essential objects.
+
+📜 1. The Grimoire
+What? The Honourable One's Grimoire is an ancient encrypted book. It apparently contains the secret recipe for HEADHEALER.
+
+Where? In the West Quarry.
+
+How do you get it? First, the player must obtain permission to enter the quarries. The guard explains that the password must be obtained from Aden. Once inside the West Quarry, the player finds the grimoire and can take it.
+
+🌿 2. Sage
+What? Sage is the plant at the heart of the scientific quest. Lily collects its flowers, while the final clue reveals that the bark contains the precious secret being sought.
+
+Where? In Lily's House, in the village.
+
+How do you get it? Lily allows the player to take the bouquet of sage flowers. The player simply enters the corresponding item zone and accepts the object.
+
+⚗️ 3. The Mortar
+What? The mortar is a tool used to grind plant material and help substances diffuse into water.
+
+Where? In Yin's House.
+
+How do you get it? The mortar is located inside Yin's house. The player enters the item zone and accepts the object. The game explains that it is used to grind leaves and enhance their diffusion in pure water.
+
+💧 4. Pure Water
+What? The pure water comes from the fountain. It is one of the essential elements of the quest.
+
+Where? At the Fountain, in World 4.
+
+How do you get it? The player must go to the fountain and collect the “Pure Water” item. The fountain is also connected to the four menhirs and the magical-word puzzle.
+
+🍷 5. Vinegar
+What? It is wine vinegar, presented in the game as the acid derived from wine. It provides the acidic element used in the extraction quest.
+
+Where? In the Guards' House, in the village.
+
+How do you get it? The player finds a bottle of wine vinegar. The guard explains that it was normally intended for the castle, but deliveries stopped after the Honourable One became ill. The player can then take the bottle.
+
+🧵 6. The Filter
+What? The filters are made from fibres obtained from sage stalks. In the scientific quest, they are used to separate the valuable extract from the remaining material.
+
+Where? In Lily's House.
+
+How do you get it? Lily offers the player filters made from sage-stalk fibres. The player enters the item zone and accepts them.
+
+🧩 Quest Summary
+Object	Where?	How to obtain it?
+📜 Grimoire	West Quarry	Explore the quarry and collect it
+🌿 Sage	Lily's House	Lily allows the player to take the bouquet
+⚗️ Mortar	Yin's House	Collect it inside the house
+💧 Pure Water	Fountain	Collect it at the fountain
+🍷 Vinegar	Guards' House	Take the bottle offered by the guard
+🧵 Filter	Lily's House	Collect the filters made from sage fibres
+🔬 The Final Secret
+When the clues have been gathered, the player understands that the quest combines several elements:
+
+🌿 Sage + 💧 Pure Water + 🍷 Vinegar + ⚗️ Mortar + 🧵 Filter
+
+The final menhir explains that the bark contains an invisible treasure and that water, acid, grinding and filtration reveal it. The game also emphasizes that extracting a treasure is not the same as creating it: the treasure was already hidden in nature; the player only learns how to reveal it.
