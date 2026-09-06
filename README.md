@@ -29,3 +29,4 @@ https://sciencexpert.github.io/SMILE/Hansen/Computer version/Menu - Copie.html
 https://sciencexpert.github.io/SMILE/MATE/StateMate/Ebook StatMate6.html
 https://sciencexpert.github.io/SMILE/image/Elanova/image001.jpg
 https://sciencexpert.github.io/SMILE/MATE/organo/pathway/retrosynthese4.html
+RPG educatif : https://sciencexpert.github.io/SMILE/RPG/Multiplication Table/IndexRPG.html
