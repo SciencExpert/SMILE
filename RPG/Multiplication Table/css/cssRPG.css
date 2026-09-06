@@ -1,0 +1,1802 @@
+/* ================================================================
+   RPG HEADHEALER
+   FEUILLE DE STYLE PRINCIPALE
+   ================================================================ */
+
+
+/* =================================================================
+   CHAPITRE 1 — RÉGLAGES GÉNÉRAUX
+   ================================================================= */
+
+/* Tous les éléments utilisent box-sizing:border-box */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-width: 0;
+}
+
+body {
+    background: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 100dvh;
+    padding: clamp(8px, 2vw, 20px);
+
+    /* Largeur maximale du jeu */
+    --game-width: min(
+        1000px,
+        calc(100vw - 2 * clamp(8px, 2vw, 20px)),
+        calc((100dvh - 150px) * 1000 / 600)
+    );
+}
+
+
+/* =================================================================
+   CHAPITRE 2 — AVERTISSEMENT ÉCRAN VERTICAL
+   Affiché sur téléphone/tablette en mode portrait
+   ================================================================= */
+
+#rotateMessage {
+    display: none;
+
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.92);
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.rotateBox {
+    padding: 30px;
+    max-width: 500px;
+
+    border-radius: 20px;
+    background: white;
+
+    box-shadow: 0 0 30px rgba(255,255,255,0.3);
+}
+
+.rotateIcon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.rotateTitle {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.rotateText {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.rotateEnglish {
+    font-size: 1em;
+    font-style: italic;
+}
+
+
+/* =================================================================
+   CHAPITRE 3 — TITRE ET ZONE DE JEU
+   ================================================================= */
+
+h1 {
+    width: 100%;
+    margin: 0 0 12px;
+
+    font-size: clamp(18px, 3vw, 24px);
+    text-align: center;
+}
+
+#game {
+    position: relative;
+
+    width: var(--game-width);
+    max-width: 100%;
+
+    aspect-ratio: 1000 / 600;
+
+    overflow: hidden;
+
+    border: clamp(2px, 0.5vw, 4px) solid #777;
+    background: #222;
+
+    user-select: none;
+    flex: 0 0 auto;
+}
+
+
+/* -----------------------------------------------------------------
+   Image de fond du monde
+   ----------------------------------------------------------------- */
+
+#background {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* =================================================================
+   CHAPITRE 4 — ZONES DU MONDE
+   ================================================================= */
+
+
+/* -----------------------------------------------------------------
+   4.1 — Zone générale
+   ----------------------------------------------------------------- */
+
+.zone {
+    position: absolute;
+    z-index: 5;
+
+    min-width: 0;
+    min-height: 0;
+
+    border: 0 solid red;
+    background: rgba(255, 0, 0, 0);
+
+    overflow: hidden;
+
+    cursor: not-allowed;
+}
+
+
+/* -----------------------------------------------------------------
+   4.2 — Nom de la zone
+   ----------------------------------------------------------------- */
+
+.zone-label {
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: rgba(0, 0, 0, 0);
+
+    color: #fff;
+
+    padding: 6px 8px;
+
+    font-size: clamp(10px, 1.4vw, 14px);
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* -----------------------------------------------------------------
+   4.3 — Zone BLOCK
+   ----------------------------------------------------------------- */
+
+.zone.block {
+    position: absolute;
+    z-index: 5;
+
+    min-width: 0;
+    min-height: 0;
+
+    border: 0 solid red;
+    background: rgba(255, 0, 0, 0);
+
+    overflow: hidden;
+
+    cursor: not-allowed;
+}
+
+.zone.block > .zone-label {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: rgba(0, 0, 0, 0);
+
+    color: transparent;
+
+    padding: 6px 8px;
+
+    font-size: 0.8em;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* -----------------------------------------------------------------
+   4.4 — Zone QUESTION
+   ----------------------------------------------------------------- */
+
+.zone.question {
+    border-color: #00e5ff;
+    background: rgba(0, 180, 255, 0);
+
+    cursor: help;
+}
+
+.zone.question > .zone-label {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: rgba(0, 0, 0, 0);
+
+    color: transparent;
+
+    padding: 6px 8px;
+
+    font-size: 0.8em;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+.zone.question.solved {
+    border-color: #39e66d;
+    background: rgba(0, 255, 80, 0);
+
+    cursor: default;
+}
+
+
+/* -----------------------------------------------------------------
+   4.5 — Zone QUIZ
+   ----------------------------------------------------------------- */
+
+.zone.quiz {
+    border-color: #f1d27a;
+    background: rgba(241, 210, 122, 0);
+
+    cursor: help;
+}
+
+.zone.quiz.solved {
+    display: none;
+
+    border-color: #39e66d;
+    background: rgba(0, 255, 80, 0.08);
+
+    cursor: pointer;
+}
+
+
+/* -----------------------------------------------------------------
+   4.6 — Zone TRANSITION
+   ----------------------------------------------------------------- */
+
+.zone.transition {
+    border-color: #b46dfc;
+    background: rgba(180, 109, 252, 0);
+
+    cursor: pointer;
+}
+
+.zone.transition > .zone-label {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: rgba(0, 0, 0, 0);
+
+    color: white;
+
+    padding: 6px 8px;
+
+    font-size: 0.8em;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* -----------------------------------------------------------------
+   4.7 — Zone LOCK
+   ----------------------------------------------------------------- */
+
+.zone.lock {
+    border-color: #ffb347;
+    background: rgba(255, 179, 71, 0.00);
+
+    cursor: help;
+}
+
+.zone.lock > .zone-label {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: rgba(0, 0, 0, 0);
+
+    color: transparent;
+
+    padding: 6px 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+.zone.lock.unlocked {
+    border-color: #39e66d;
+    background: rgba(0, 255, 80, 0.08);
+
+    cursor: pointer;
+
+    display: none;
+}
+
+
+/* -----------------------------------------------------------------
+   4.8 — Zone INFO
+   ----------------------------------------------------------------- */
+
+.zone.info {
+    border-color: #ff8fd8;
+    background: rgba(255, 143, 216, 0);
+
+    cursor: zoom-in;
+}
+
+.zone.info > .zone-label {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: rgba(0, 0, 0, 0);
+
+    color: transparent;
+
+    padding: 6px 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* -----------------------------------------------------------------
+   4.9 — Zone ITEM
+   ----------------------------------------------------------------- */
+
+.zone.item {
+    border-color: #ffd23f;
+    background: rgba(255, 210, 63, 0.00);
+
+    cursor: pointer;
+}
+
+.zone.item > .zone-label {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: rgba(0, 0, 0, 0);
+
+    color: transparent;
+
+    padding: 6px 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* =================================================================
+   CHAPITRE 5 — PERSONNAGE
+   ================================================================= */
+
+#player {
+    position: absolute;
+    z-index: 10;
+
+    width: 32px;
+    height: 40px;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+
+    animation: bounce 0.9s ease-in-out infinite;
+}
+
+
+/* -----------------------------------------------------------------
+   Tête
+   ----------------------------------------------------------------- */
+
+#player .head {
+    position: absolute;
+
+    left: 7px;
+    top: 3px;
+
+    width: 18px;
+    height: 18px;
+
+    background: #efbd86;
+
+    border: 2px solid #422;
+    border-radius: 45%;
+
+    z-index: 2;
+
+    animation: headBob 0.9s ease-in-out infinite;
+}
+
+
+/* -----------------------------------------------------------------
+   Corps
+   ----------------------------------------------------------------- */
+
+#player .body {
+    position: absolute;
+
+    left: 4px;
+    top: 18px;
+
+    width: 24px;
+    height: 18px;
+
+    background: #2e9b47;
+
+    border: 2px solid #174c23;
+    border-radius: 8px;
+
+    animation: breathe 0.9s ease-in-out infinite;
+}
+
+
+/* -----------------------------------------------------------------
+   Chapeau
+   ----------------------------------------------------------------- */
+
+#player .hat {
+    position: absolute;
+
+    left: 3px;
+    top: -2px;
+
+    width: 26px;
+    height: 10px;
+
+    background: #187b35;
+
+    border: 2px solid #0f4d22;
+    border-radius: 60% 60% 20% 20%;
+
+    z-index: 3;
+
+    box-shadow: 0 2px 0 #0f4d22 inset;
+
+    animation: hatWiggle 0.9s ease-in-out infinite;
+}
+
+
+/* -----------------------------------------------------------------
+   Yeux
+   ----------------------------------------------------------------- */
+
+#player .eye {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: #111;
+
+    top: 9px;
+    z-index: 3;
+
+    border-radius: 50%;
+
+    animation: blink 3.2s infinite;
+}
+
+#player .eye.left {
+    left: 10px;
+}
+
+#player .eye.right {
+    left: 18px;
+}
+
+
+/* =================================================================
+   CHAPITRE 6 — CIBLE ET NAVIGATION ENTRE LES WORLDS
+   ================================================================= */
+
+
+/* -----------------------------------------------------------------
+   Cible de déplacement
+   ----------------------------------------------------------------- */
+
+#target {
+    position: absolute;
+    z-index: 8;
+
+    width: 18px;
+    height: 18px;
+
+    border: 3px solid yellow;
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: none;
+
+    pointer-events: none;
+}
+
+
+/* -----------------------------------------------------------------
+   Flèches de changement de monde
+   ----------------------------------------------------------------- */
+
+.worldTriangle {
+    position: absolute;
+
+    top: 50%;
+    z-index: 15;
+
+    width: 0;
+    height: 0;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.8));
+
+    transition:
+        opacity .15s,
+        transform .15s;
+
+    opacity: 0.75;
+}
+
+.worldTriangle:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.15);
+}
+
+#prevTriangle {
+    left: 10px;
+
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-right: 24px solid #f1d27a;
+}
+
+#nextTriangle {
+    right: 10px;
+
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 24px solid #f1d27a;
+}
+
+
+/* =================================================================
+   CHAPITRE 7 — HUD ET AIDE
+   ================================================================= */
+
+#hud {
+    width: var(--game-width);
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px 16px;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    font-size: 16px;
+}
+
+#help {
+    width: var(--game-width);
+
+    margin-top: 8px;
+
+    color: #bbb;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* =================================================================
+   CHAPITRE 8 — EFFETS DE TRANSITION
+   ================================================================= */
+
+.transition {
+    animation: fade .35s;
+}
+
+@keyframes fade {
+    from {
+        opacity: .2;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =================================================================
+   CHAPITRE 9 — RÈGLES COMMUNES AUX POPUPS
+   ================================================================= */
+
+/*
+   Les cinq fenêtres utilisent la même structure :
+
+   ┌──────────────┬────────────────────────────┐
+   │              │                            │
+   │    IMAGE     │          CONTENU           │
+   │              │                            │
+   └──────────────┴────────────────────────────┘
+*/
+
+#questionPopup,
+#quizPopup,
+#lockPopup,
+#infoPopup,
+#itemPopup {
+    position: absolute;
+
+    z-index: 50;
+
+    left: clamp(8px, 4%, 40px);
+    right: clamp(8px, 4%, 40px);
+    top: clamp(8px, 3%, 24px);
+
+    width: auto;
+    max-width: calc(100% - 16px);
+
+    min-width: 0;
+    min-height: 0;
+
+    max-height: calc(100% - 16px);
+
+    display: none;
+
+    grid-template-columns:
+        minmax(82px, 115px)
+        minmax(0, 1fr);
+
+    background: rgba(18, 22, 30, 0.97);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 6px 25px rgba(0, 0, 0, 0.75);
+
+    overflow: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+}
+
+
+/* -----------------------------------------------------------------
+   Contenu des popups
+   ----------------------------------------------------------------- */
+
+#questionContent,
+#quizContent,
+#lockContent,
+#infoContent,
+#itemContent {
+    min-width: 0;
+
+    width: 100%;
+
+    padding: clamp(10px, 2vw, 20px);
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+
+/* -----------------------------------------------------------------
+   Textes des popups
+   ----------------------------------------------------------------- */
+
+#questionText,
+#quizText,
+#lockText,
+#infoText,
+#itemText {
+    max-width: 100%;
+
+    overflow-wrap: anywhere;
+
+    white-space: pre-line;
+}
+
+
+/* -----------------------------------------------------------------
+   Images des popups
+   ----------------------------------------------------------------- */
+
+#questionFace,
+#quizFace,
+#lockFace,
+#infoFace,
+#itemFace {
+    width: auto;
+
+    min-width: 0;
+    min-height: 110px;
+
+    height: auto;
+
+    align-self: stretch;
+}
+
+.face-img,
+#infoFace img,
+#itemFace img {
+    display: block;
+
+    max-width: 100%;
+    max-height: 150px;
+
+    object-fit: contain;
+}
+
+
+/* -----------------------------------------------------------------
+   Boutons de fermeture
+   ----------------------------------------------------------------- */
+
+#questionClose,
+#quizClose,
+#lockClose,
+#infoClose,
+#itemClose,
+#inventoryClose {
+    position: absolute;
+
+    top: 6px;
+    right: 8px;
+
+    width: 26px;
+    height: 26px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.12);
+
+    color: #fff;
+
+    font-size: 16px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 5;
+}
+
+#questionClose:hover,
+#quizClose:hover,
+#lockClose:hover,
+#infoClose:hover,
+#itemClose:hover,
+#inventoryClose:hover {
+    background: rgba(255,255,255,0.28);
+}
+
+
+/* =================================================================
+   CHAPITRE 10 — POPUP QUESTION
+   ================================================================= */
+
+#questionPopup {
+    border: 4px solid #f1d27a;
+}
+
+#questionFace {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-right: 3px solid #f1d27a;
+
+    background: #303848;
+
+    width: 115px;
+    height: 150px;
+}
+
+#questionContent {
+    padding: 14px 20px;
+}
+
+#questionTitle {
+    color: #f1d27a;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    margin-bottom: 7px;
+}
+
+#questionText {
+    font-size: 19px;
+    line-height: 1.3;
+
+    margin-bottom: 10px;
+}
+
+#answerRow {
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+#answerInput {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 8px 10px;
+
+    font-size: 16px;
+
+    border-radius: 5px;
+    border: 1px solid #999;
+}
+
+#answerButton {
+    padding: 8px 18px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#questionFeedback {
+    margin-left: 4px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+/* =================================================================
+   CHAPITRE 11 — POPUP QUIZ / QCM
+   ================================================================= */
+
+#quizPopup {
+    border: 4px solid #f1d27a;
+}
+
+#quizFace {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-right: 3px solid #f1d27a;
+
+    background: #303848;
+
+    width: 115px;
+    height: 150px;
+}
+
+#quizContent {
+    padding: 14px 20px;
+}
+
+#quizTitle {
+    color: #f1d27a;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    margin-bottom: 7px;
+}
+
+#quizText {
+    margin-bottom: 12px;
+
+    font-size: clamp(15px, 2vw, 19px);
+    line-height: 1.35;
+}
+
+#quizOptions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    width: 100%;
+    min-width: 0;
+}
+
+.quizOptionBtn {
+    width: 100%;
+    min-width: 0;
+
+    text-align: left;
+
+    padding: 8px 12px;
+
+    font-size: clamp(12px, 1.7vw, 15px);
+    line-height: 1.25;
+
+    border-radius: 6px;
+    border: 1px solid #f1d27a;
+
+    background: rgba(241, 210, 122, 0.08);
+
+    color: #fff;
+
+    cursor: pointer;
+
+    white-space: normal;
+
+    overflow-wrap: anywhere;
+}
+
+.quizOptionBtn:hover {
+    background: rgba(241, 210, 122, 0.22);
+}
+
+.quizOptionBtn:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+.quizOptionBtn.correct {
+    background: rgba(57, 230, 109, 0.35);
+    border-color: #39e66d;
+}
+
+.quizOptionBtn.wrong {
+    background: rgba(255, 104, 104, 0.35);
+    border-color: #ff6868;
+}
+
+#quizFeedback {
+    font-weight: bold;
+    min-height: 18px;
+}
+
+
+/* =================================================================
+   CHAPITRE 12 — POPUP LOCK
+   ================================================================= */
+
+#lockPopup {
+    border: 4px solid #ffb347;
+}
+
+#lockFace {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-right: 3px solid #f1d27a;
+
+    background: #303848;
+
+    width: 115px;
+    height: 150px;
+}
+
+#lockContent {
+    padding: 14px 20px;
+}
+
+#lockTitle {
+    color: #f1d27a;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    margin-bottom: 7px;
+}
+
+#lockRow {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+#lockText {
+    min-width: 0;
+
+    font-size: clamp(14px, 2vw, 19px);
+    line-height: 1.35;
+
+    margin: 0;
+
+    white-space: pre-line;
+
+    overflow-wrap: anywhere;
+}
+
+#lockOk {
+    align-self: flex-start;
+
+    padding: 8px 18px;
+
+    font-size: clamp(13px, 1.8vw, 15px);
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =================================================================
+   CHAPITRE 13 — POPUP INFO
+   ================================================================= */
+
+#infoPopup {
+    border: 4px solid #ff8fd8;
+}
+
+#infoFace {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-right: 3px solid #ff8fd8;
+
+    background: #303848;
+
+    width: 115px;
+    height: 150px;
+}
+
+#infoFace img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+#infoContent {
+    padding: 14px 20px;
+}
+
+#infoTitle {
+    color: #ff8fd8;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    margin-bottom: 7px;
+}
+
+#infoText {
+    margin: 0 0 12px;
+
+    font-size: clamp(14px, 1.8vw, 17px);
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+#infoOk {
+    padding: 8px 18px;
+
+    font-size: clamp(13px, 1.8vw, 15px);
+
+    cursor: pointer;
+}
+
+
+/* =================================================================
+   CHAPITRE 14 — POPUP ITEM
+   ================================================================= */
+
+#itemPopup {
+    grid-template-columns: 115px 1fr;
+
+    border: 4px solid #ffd23f;
+}
+
+
+/* -----------------------------------------------------------------
+   Image / objet
+   ----------------------------------------------------------------- */
+
+#itemFace {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 0;
+
+    padding: 10px 6px;
+}
+
+#itemFace img {
+    width: 100%;
+
+    max-width: 90px;
+
+    height: auto;
+    max-height: 90px;
+
+    object-fit: contain;
+}
+
+
+/* -----------------------------------------------------------------
+   Contenu
+   ----------------------------------------------------------------- */
+
+#itemContent {
+    padding: 14px 20px;
+}
+
+#itemTitle {
+    color: #ffd23f;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    margin-bottom: 7px;
+}
+
+#itemText {
+    margin: 0 0 12px;
+
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+
+/* -----------------------------------------------------------------
+   Boutons OUI / NON
+   ----------------------------------------------------------------- */
+
+#itemButtonsRow {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+#itemYes,
+#itemNo {
+    padding: 8px 18px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 6px;
+}
+
+#itemYes {
+    background: #39e66d;
+    color: #06331a;
+}
+
+#itemYes:hover {
+    background: #4dfb84;
+}
+
+#itemNo {
+    background: #555;
+    color: #fff;
+}
+
+#itemNo:hover {
+    background: #6b6b6b;
+}
+
+
+/* -----------------------------------------------------------------
+   Bouton INVENTAIRE
+   ----------------------------------------------------------------- */
+
+#itemInventoryBtn {
+    font-size: 11px;
+
+    padding: 5px 8px;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+    border: 1px solid #ffd23f;
+
+    background: transparent;
+
+    color: #ffd23f;
+
+    white-space: nowrap;
+}
+
+#itemInventoryBtn:hover {
+    background: rgba(255, 210, 63, 0.18);
+}
+
+
+/* =================================================================
+   CHAPITRE 15 — INVENTAIRE
+   ================================================================= */
+
+#inventoryPopup {
+    position: absolute;
+
+    z-index: 55;
+
+    left: clamp(8px, 8%, 80px);
+    right: clamp(8px, 8%, 80px);
+
+    top: clamp(8px, 7%, 40px);
+
+    max-width: calc(100% - 16px);
+    max-height: calc(100% - 16px);
+
+    min-width: 0;
+
+    display: none;
+
+    background: rgba(18, 22, 30, 0.98);
+
+    border: 3px solid #ffd23f;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 6px 25px rgba(0, 0, 0, 0.8);
+
+    padding: 18px 20px;
+
+    overflow: auto;
+}
+
+
+/* -----------------------------------------------------------------
+   Liste des objets
+   ----------------------------------------------------------------- */
+
+#inventoryList {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    max-height: min(220px, 45vh);
+
+    overflow-y: auto;
+
+    min-width: 0;
+}
+
+
+/* -----------------------------------------------------------------
+   Objet de l'inventaire
+   ----------------------------------------------------------------- */
+
+.inventoryItem {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 0;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    padding: 7px 12px;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+}
+
+.inventoryItem span {
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+}
+
+.inventoryItem button {
+    padding: 4px 10px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #ff6868;
+
+    color: #fff;
+}
+
+.inventoryItem button:hover {
+    background: #ff8a8a;
+}
+
+
+/* -----------------------------------------------------------------
+   Titre / inventaire vide
+   ----------------------------------------------------------------- */
+
+#inventoryTitle {
+    color: #ffd23f;
+
+    font-weight: bold;
+    font-size: 16px;
+
+    margin-bottom: 12px;
+
+    text-align: center;
+}
+
+#inventoryEmpty {
+    color: #999;
+
+    text-align: center;
+
+    padding: 10px 0;
+}
+
+
+/* =================================================================
+   CHAPITRE 16 — BOUTON DE LANGUE
+   ================================================================= */
+
+#languageButton {
+    font-size: 1em;
+
+    font-weight: bold;
+
+    padding: 2px 4px;
+
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+#languageButton:hover {
+    transform: scale(1.08);
+
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* =================================================================
+   CHAPITRE 17 — ANIMATIONS DU PERSONNAGE
+   ================================================================= */
+
+@keyframes bounce {
+
+    0%, 100% {
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateY(-2px);
+    }
+}
+
+
+@keyframes breathe {
+
+    0%, 100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.06);
+    }
+}
+
+
+@keyframes headBob {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-1px);
+    }
+}
+
+
+@keyframes hatWiggle {
+
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-2deg);
+    }
+
+    75% {
+        transform: rotate(2deg);
+    }
+}
+
+
+@keyframes blink {
+
+    0%, 96%, 100% {
+        transform: scaleY(1);
+    }
+
+    98% {
+        transform: scaleY(0.1);
+    }
+}
+
+
+/* =================================================================
+   CHAPITRE 18 — PETITS ÉCRANS
+   ================================================================= */
+
+
+/* -----------------------------------------------------------------
+   Écrans jusqu'à 600 px
+   ----------------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    body {
+        --game-width: calc(100vw - 16px);
+    }
+
+    #hud {
+        width: var(--game-width);
+
+        gap: 5px 10px;
+
+        justify-content: center;
+
+        font-size: 13px;
+    }
+
+    #help {
+        width: var(--game-width);
+
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+
+    /* -------------------------------------------------------------
+       Popups
+       ------------------------------------------------------------- */
+
+    #questionPopup,
+    #quizPopup,
+    #lockPopup,
+    #infoPopup,
+    #itemPopup {
+
+        left: 8px;
+        right: 8px;
+        top: 8px;
+
+        max-width: calc(100% - 16px);
+
+        grid-template-columns:
+            72px minmax(0, 1fr);
+
+        border-width: 2px;
+        border-radius: 9px;
+    }
+
+
+    #questionFace,
+    #quizFace,
+    #lockFace,
+    #infoFace,
+    #itemFace {
+
+        min-height: 90px;
+
+        border-right-width: 2px;
+    }
+
+
+    #questionContent,
+    #quizContent,
+    #lockContent,
+    #infoContent,
+    #itemContent {
+
+        padding: 10px;
+    }
+
+
+    #questionText,
+    #quizText,
+    #lockText,
+    #infoText,
+    #itemText {
+
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+
+    /* -------------------------------------------------------------
+       Réponse à une question
+       ------------------------------------------------------------- */
+
+    #answerRow {
+        flex-wrap: wrap;
+    }
+
+    #answerInput {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    #answerButton {
+        flex: 0 0 auto;
+    }
+
+    #questionFeedback {
+        flex: 1 1 100%;
+
+        margin: 0;
+
+        white-space: normal;
+    }
+
+
+    /* -------------------------------------------------------------
+       Boutons ITEM / LOCK / INFO
+       ------------------------------------------------------------- */
+
+    #itemButtonsRow {
+        gap: 6px;
+    }
+
+    #itemYes,
+    #itemNo,
+    #infoOk,
+    #lockOk {
+
+        padding: 7px 12px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* -----------------------------------------------------------------
+   Téléphone / petite tablette en PORTRAIT
+   ----------------------------------------------------------------- */
+
+@media screen and (orientation: portrait) and (max-width: 700px) {
+
+    #rotateMessage {
+        display: flex;
+    }
+}
+
+
+/* -----------------------------------------------------------------
+   Très petits écrans : 360 px
+   ----------------------------------------------------------------- */
+
+@media (max-width: 360px) {
+
+    #questionPopup,
+    #quizPopup,
+    #lockPopup,
+    #infoPopup,
+    #itemPopup {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    #questionFace,
+    #quizFace,
+    #lockFace,
+    #infoFace,
+    #itemFace {
+
+        min-height: 70px;
+        max-height: 90px;
+
+        border-right: none;
+
+        border-bottom: 2px solid currentColor;
+    }
+
+
+    #questionFace .face-img,
+    #quizFace .face-img,
+    #lockFace .face-img {
+
+        max-height: 70px;
+    }
+
+
+    #itemFace {
+        flex-direction: row;
+
+        justify-content: center;
+    }
+}
+
+
+/* -----------------------------------------------------------------
+   Écrans jusqu'à 480 px
+   ----------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    #help {
+        font-size: 12px;
+    }
+
+    #hud {
+        font-size: 14px;
+    }
+
+    #questionText {
+        font-size: 15px;
+    }
+
+    #answerInput,
+    #answerButton {
+        font-size: 14px;
+    }
+
+    #quizText {
+        font-size: 15px;
+    }
+
+    .quizOptionBtn {
+        font-size: 13px;
+        padding: 7px 10px;
+    }
+
+    #infoText {
+        font-size: 15px;
+    }
+
+    #infoOk {
+        font-size: 14px;
+    }
+
+    #itemText {
+        font-size: 15px;
+    }
+
+    #itemYes,
+    #itemNo {
+        font-size: 13px;
+        padding: 7px 12px;
+    }
+
+    .inventoryItem {
+        font-size: 13px;
+    }
+}
