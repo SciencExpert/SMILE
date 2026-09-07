@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<!--
+_______________________________________
+  	RPG Ebook The HEADHEALER Quest
+---------------------------------------
+ 	RPG Multiplication table
+  SciencExpert Edition 2026
+  Author : Gérard Bacquet
+  Contact@sciencexpert.fr 
+---------------------------------------
+https://payhip.com/SciencExpert
+_______________________________________
+-->
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SciencExpert - The HEADHEALER Quest ebokk</title>
+<link rel="icon" href="../img/SE_favicon.ico" />
+<style>
+
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0; padding: 0;
+    height: 100%; width: 100%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    font-family: Arial, sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+
+  }
+  .book-container {
+    position: relative;
+    top:-10px;
+    width: 100vw;
+    max-width: 90%;
+    height: 90%;
+    perspective: 2200px;
+    border-radius: 18px;
+    user-select: none;
+background: linear-gradient(to right, white 20%, #CCCC 50%, white 80%);
+  }
+  .spine {
+    position: absolute;
+    width: 5px;
+    height: 90%;
+    background:#cccc;
+    border-radius: 3px;
+    top: 5%;
+    left: 51%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+    z-index: 30;
+  }
+  .page {
+    width: 50%;
+    height: 100%;
+    border-radius: 18px;
+    border: solid 1px #cccc;
+    padding: 16px 16px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0%;
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    cursor: default;
+    background: white;
+  }
+  .cover {
+    left: 10;
+    transform-origin: right;
+    z-index: 20;
+    box-shadow: inset -10px 0 15px -10px rgba(0,0,0,0.2), 
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.left {
+    left: 0;
+    transform-origin: right center;
+    z-index: 20;
+    box-shadow: inset -10px 0 15px -10px rgba(0,0,0,0.2), 
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.right {
+    right: 0;
+    transform-origin: left center;
+    z-index: 40;
+    box-shadow: inset 10px 0 15px -10px rgba(0,0,0,0.2),
+                0 0 10px 0 rgba(165,42,42,0.08);
+  }
+  .page.transparent {
+	width:60%;
+    background: linear-gradient(135deg, #faf3e0 0%, #f0e6d2 100%);
+    box-shadow: none;
+    border: solid 0px black;
+  border-radius: 0px;
+  }
+  @keyframes flipRightForward {
+    0%   { transform: rotateY(0) translateX(0); box-shadow: 0 5px 18px rgba(0,0,0,0.25);}
+    40%  { transform: rotateY(-110deg) translateX(-10%); box-shadow: inset 8px 0 20px rgba(0,0,0,0.6);}
+    100% { transform: rotateY(-180deg) translateX(-20%); box-shadow: inset 12px 0 30px rgba(0,0,0,0.7);}
+  }
+  @keyframes flipLeftForward {
+    0%   { transform: rotateY(0) translateX(0); box-shadow: 0 5px 18px rgba(0,0,0,0.25);}
+    40%  { transform: rotateY(110deg) translateX(10%); box-shadow: inset -8px 0 20px rgba(0,0,0,0.6);}
+    100% { transform: rotateY(180deg) translateX(20%); box-shadow: inset -12px 0 30px rgba(0,0,0,0.7);}
+  }
+  .flip-right {
+    animation: flipRightForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+  .flip-left {
+    animation: flipLeftForward 1s ease forwards;
+    z-index: 100 !important;
+  }
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: #a52a2a;
+    color: white;
+    font-size: 2.2em;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    user-select: none;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+    z-index: 110;
+  }
+  .nav-btn:hover {
+    background-color: #d97474;
+  }
+  .nav-left {
+    left: -80px;
+  }
+  .nav-right {
+    right: -80px;
+  }
+  .page h1 {
+    margin: 0 0 20px;
+    color: #a52a2a;
+    font-size:1.2em;
+  }
+  .page h2 {
+    margin: 0 0 0px;
+    color: #a52a2a;
+    font-size:1em;
+  }
+  .page p {
+    margin: 0 0 20px;
+    color: black;
+    font-size:0.8em;
+text-align:justify;
+line-height:1.3em;
+  }
+  .page ul {
+    margin: 0px;
+padding:0px;
+    color: black;
+    font-size:1em;
+text-align:justify;
+line-height:1.3em;
+  }
+  .page li {
+    margin-left: 30px;
+padding:0px;
+    color: black;
+text-align:justify;
+    font-size:1em;
+line-height:1.1em;
+  }
+
+.book-container {
+  display: flex;  /* Ajoute flex pour que l'img enfant prenne 100% height */
+  align-items: stretch;  /* Force les enfants à s'étirer en hauteur */
+  /* tes autres styles... */
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 0.9em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #333;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 -1px 0 #bbb;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   TABLES DE MULTIPLICATION
+   ========================================================= */
+
+.multiplication-table {
+    width: 94%;
+    margin: 15px auto;
+    border-collapse: separate;
+    border-spacing: 4px;
+    text-align: center;
+    font-size: 1em;
+}
+
+/* En-têtes */
+.multiplication-table th {
+    padding: 6px;
+    border: 1px solid #888;
+    border-radius: 6px;
+}
+
+/* Cellules */
+.multiplication-table td {
+    padding: 5px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+
+/* Résultats */
+.multiplication-table td.result {
+    font-weight: normal;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0;
+}
+
+table th,
+table td{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+
+.header-line {
+  display: flex;
+  align-items: center;   /* verticalement centré */
+  justify-content: space-between; /* titre à gauche, lien à droite */
+  gap: 16px;
+  padding: 0 8px;
+}
+
+
+
+.header-line {
+  display: flex;
+  align-items: center;   /* verticalement centré */
+  justify-content: space-between; /* titre à gauche, lien à droite */
+  gap: 16px;
+  padding: 0 8px;
+}
+
+/* Optionnel : pour éviter que le titre soit trop large et empêche la page d'être lisible */
+.header-line h2 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: normal;
+  text-align: left;
+  flex: 1 0 auto;
+}
+
+/* Pour aligner le lien à droite */
+.header-line span {
+  margin-left: auto;
+}
+
+/* Pour styliser le lien éventuellement */
+.header-line a {
+  text-decoration: none;
+  color: #A52A2A;
+  font-weight: bold;
+  font-size: .95em;
+}
+
+.continue {
+
+background-color:transparent;
+  text-align: center;
+  margin: 0px 0;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #ccc;
+    z-index: 110;
+    cursor: pointer;
+}
+
+.continue span {
+  padding: 0 10px;
+  background: #fff;
+  color: #ccc;
+    cursor: pointer;
+}
+
+/* overlay full-screen (hidden by default) */
+  .img-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.65);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+  }
+  .img-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* wrapper to limit image size */
+  .img-overlay .img-wrap {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  /* cloned image styling */
+  .img-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border-radius: 6px;
+    cursor: zoom-out;
+    transition: transform .25s ease;
+    transform: scale(1);
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* small vignette: original images keep cursor */
+  img {
+    cursor: zoom-in;
+  }
+
+  /* optional: when overlay open, slightly scale image for subtle effect */
+  .img-overlay.open img {
+    transform: scale(1);
+  }
+
+
+
+.footer {
+
+font-size:0.8em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;                  /* occupe toute la largeur */
+  display: flex;
+  justify-content: space-between; /* titre à gauche, page à droite */
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  background: transparent;             /* fond blanc pour masquer le contenu derrière */
+  border-top: 2px solid #ccc;    /* petite bordure au-dessus */
+}
+
+.footer h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.footer span {
+  font-weight: bold;
+}
+
+
+</style>
+</head>
+<body>
+
+
+<!-------------------------------------------------------------------------------------------
+			Cover
+--------------------------------------------------------------------------------------------->
+<template id="page--1">
+<img
+  src="../img/face2.png"
+  alt="Illustration"
+  style="
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+  "
+>
+</template>
+
+
+<!-------------------------------------------------------------------------------------------
+			Introduction et table of content
+--------------------------------------------------------------------------------------------->
+<template id="page-0">
+<div style="text-align:center">
+<h1 style="
+  font-style: italic;
+  font-family: 'Georgia'; 
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: #2c2c2c;
+  margin: 20px 0;margin-left:60px;line-height:0.5em
+">
+HEADHEALER<span style="font-size : 0.8em">&trade;</span>
+</h1>
+<span style="  font-style: italic;
+  font-family: 'Georgia'; ">
+La Quête des Nombres Magiques<br>The Quest for the Magic Numbers</span><br>
+<img src="../img/face2.png" alt="Illustration" style=" width:55%;"> <br>
+
+ <hr><span style="  font-style: italic;
+  font-family: 'Georgia'; "
+<span>SciencExpert Ed.</span>
+<span style="  font-style: italic; font-family: 'Georgia'; ">2026</span>
+</span>
+</div>
+
+
+</template>
+
+
+
+<!--=========================================================================================--->
+<!--			Chapter 01 :  CopyRight et menu					     --->
+<!--=========================================================================================--->
+
+
+<template id="page-1">
+        <h1>Copyright</h1>
+      
+<p>Cover illustration by SciencExpert™<br>
+This eBook is distributed in the online edition of SciencExpert™ <br>
+Registration date : June 2026<br>
+
+Correspondence contact-at-sciencexpert.fr<br>
+© SciencExpert - 2026</p>
+
+<p>The use of general descriptive names, trademarks, etc., in this eBook, even if the former are not especially identified, is not to be taken as a sign that such names, as understood by the Trade Marks and Merchandise Marks Act in various countries, may accordingly be used freely by anyone.</p>
+<p>While the advice and information in this eBook are believed to be true and accurate at the date of going to edition, neither the authors nor the editor nor the publisher can accept any legal responsibility for any errors or omissions that may be made. SciencExpert™ makes no warranty, express or implied, with respect to the material contained herein.</p>
+<p>This research, publication and edition received no external funding. Data are available upon request from SciencExpert™ correspondence address. The author declare no conflict of interest.</p>
+<p>All rights reserved. No part of this eBook may be reproduced or transmitted in any form or by any means, electronic or mechanical, including photocopying or by any information storage and retrieval system; without permission in writing from the publisher</p>
+
+<div class="footer"><h2><a href="#page-0" data-page="-0"> </a></h2><span>Page 2</span></div>
+</template>
+
+<!-------------------------Page3--------->
+
+<template id="page-2">
+      <div style="font-size:0.8em;line-height:1.5em">
+<!-- ===================================================================================== -->
+<!-- ===========================Table of content========================================== -->
+<!-- ===================================================================================== -->
+
+<h1>Table of content</h1>
+
+<div class="header-line"><h2 style="color:black">La Quête des Nombres Magiques- The Quest for the Magic Numbers</h2>    <span><a href="#page-4" data-page="4">Page<span style="display:inline-block; width:3ch; text-align:right;">4</span></a></span></div>
+	<div  style="font-size:1.2em;padding-left:100px;line-height:1.2em;">
+	<div  style=";border-left:5px solid black;border-radius:10px;">
+		<div class="header-line"><h2>Table de 2 - The 2 Times Table</h2><span><a href="#page-4" data-page="4">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">4</span></a></span></div>
+		<div class="header-line"><h2>Table de 3 - The 3 Times Table</h2><span><a href="#page-6" data-page="6">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">6</span></a></span></div>
+		<div class="header-line"><h2>Table de 4 - The 4 Times Table</h2><span><a href="#page-8" data-page="8">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">8</span></a></span></div>
+		<div class="header-line"><h2>Table de 5 - The 5 Times Table</h2><span><a href="#page-10" data-page="10">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">10</span></a></span></div>
+		<div class="header-line"><h2>Table de 6 - The 6 Times Table</h2><span><a href="#page-12" data-page="12">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">12</span></a></span></div>
+		<div class="header-line"><h2>Table de 7 - The 7 Times Table</h2><span><a href="#page-14" data-page="14">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">14</span></a></span></div>	
+		<div class="header-line"><h2>Table de 8 - The 8 Times Table</h2><span><a href="#page-16" data-page="16">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">16</span></a></span></div>
+		<div class="header-line"><h2>Table de 9 - The 9 Times Table</h2><span><a href="#page-18" data-page="18">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">18</span></a></span></div>
+		<div class="header-line"><h2>Table de 10 - The 10 Times Table</h2><span><a href="#page-20" data-page="20">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">20</span></a></span></div>
+		<div class="header-line"><h2>Table de 11 - The 11 Times Table</h2><span><a href="#page-22" data-page="22">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">22</span></a></span></div>
+		<div class="header-line"><h2>Table de 12 - The 12 Times Table</h2><span><a href="#page-24" data-page="24">................<span style="display:inline-block; width:3ch; text-align:right;font-size:1em;">24</span></a></span></div>
+</div>
+
+</div>	
+	</div>
+
+
+
+<div class="header-line"><h2>La quête de l'HEADHEALER</h2><span><a  href="../IndexRPG.html"><span style="display:inline-block; width:10ch; text-align:right;">Le Jeu</span></a></span></div>
+
+<div class="header-line"><h2>The HEADHEALER Quest</h2><span><a  href="../IndexRPG.html"><span style="display:inline-block; width:10ch; text-align:right;">The Game</span></a></span></div>
+
+<div class="header-line"><h2>About the author</h2><span><a href="https://www.linkedin.com/in/bacquetgerard/"  target="_blank"><span style="display:inline-block; width:10ch; text-align:right;">Linkedin</span></a></span></div>
+<div class="header-line"><h2>About SciencExpert</h2><span><a href="https://payhip.com/SciencExpert/accueil"  target="_blank">Page<span style="display:inline-block; width:3ch; text-align:right;">Web</span></a></span></div>
+</div>
+
+
+<div class="footer"><h2><a href="#page-3" data-page="-0"> </a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 3</span></div>
+</template>
+
+
+
+<!--=========================================================================================--->
+<!--==============================   Chapitre 1     ==========Page 4=========================--->
+<!--=========================================================================================--->
+
+<template id="page-3">
+
+<div style="text-align:center;font-size:1em;line-height:1.5em"> 
+
+
+<table class="multiplication-table">
+
+<tr>
+    <th >
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>2 × 1</td>
+    <td>2</td>
+</tr>
+
+<tr>
+    <td>2 × 2</td>
+    <td>4</td>
+</tr>
+
+<tr>
+    <td>2 × 3</td>
+    <td>6</td>
+</tr>
+
+<tr>
+    <td>2 × 4</td>
+    <td>8</td>
+</tr>
+
+<tr>
+    <td>2 × 5</td>
+    <td>10</td>
+</tr>
+
+<tr>
+    <td>2 × 6</td>
+    <td>12</td>
+</tr>
+
+<tr>
+    <td>2 × 7</td>
+    <td>14</td>
+</tr>
+
+<tr>
+    <td>2 × 8</td>
+    <td>16</td>
+</tr>
+
+<tr>
+    <td>2 × 9</td>
+    <td>18</td>
+</tr>
+
+<tr>
+    <td>2 × 10</td>
+    <td>20</td>
+</tr>
+<tr>
+    <td>2 × 11</td>
+    <td>22</td>
+</tr>
+<tr>
+    <td>2 × 12</td>
+    <td>24</td>
+</tr>
+
+</table>
+
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2></h2><span>Page 4</span></div>
+</template>
+<!-------------------------Page5--------->
+
+<template id="page-4">  
+<div style="text-align:justify;font-size:1.3em;line-height:1.3em">
+
+  <h2>La table de 2</h2>
+
+  <p lang="fr">
+    La table de 2 est souvent la première que les enfants apprennent, car elle
+    repose sur un principe très simple : <strong>doubler</strong> un nombre.
+    Compter de 2 en 2 (2, 4, 6, 8...) correspond exactement à la suite des
+    <b>nombres pairs</b>, ce qui en fait la table la plus intuitive à mémoriser.
+    Les tables de multiplication telles que nous les connaissons trouvent
+    leurs racines dans les civilisations babylonienne et égyptienne
+    antiques, où les scribes utilisaient déjà des tables numériques
+    gravées sur des tablettes d'argile pour faciliter les calculs
+    commerciaux et administratifs. Le principe du doublement, à la base
+    de la table de 2, était d'ailleurs une technique de calcul à part
+    entière chez les Égyptiens, qui multipliaient de grands nombres en
+    additionnant des doublements successifs.
+  </p>
+  <h2>The 2 Times Table</h2>
+  <p lang="en">
+    The 2 times table is often the first one children learn, since it
+    relies on a very simple idea: <strong>doubling</strong> a number.
+    Counting by twos (2, 4, 6, 8...) matches exactly the sequence of <b>even
+    numbers</b>, making it the most intuitive table to memorize. Multiplication
+    tables as we know them trace back to ancient Babylonian and Egyptian
+    civilizations, where scribes already used numerical tables carved
+    into clay tablets to ease trade and administrative calculations.
+    Doubling, the very principle behind the 2 times table, was in fact a
+    full calculation method used by the Egyptians, who multiplied large
+    numbers by adding up successive doublings.
+  </p>
+
+
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 5</span></div>
+
+</template>
+
+<!-------------------------------------------------------------------------------------------
+			Table de 3
+---------------------------------------------------------------------------------Page6------>
+
+<template id="page-5"> 
+
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>3 × 1</td>
+    <td>3</td>
+</tr>
+
+<tr>
+    <td>3 × 2</td>
+    <td>6</td>
+</tr>
+
+<tr>
+    <td>3 × 3</td>
+    <td>9</td>
+</tr>
+
+<tr>
+    <td>3 × 4</td>
+    <td>12</td>
+</tr>
+
+<tr>
+    <td>3 × 5</td>
+    <td>15</td>
+</tr>
+
+<tr>
+    <td>3 × 6</td>
+    <td>18</td>
+</tr>
+
+<tr>
+    <td>3 × 7</td>
+    <td>21</td>
+</tr>
+
+<tr>
+    <td>3 × 8</td>
+    <td>24</td>
+</tr>
+
+<tr>
+    <td>3 × 9</td>
+    <td>27</td>
+</tr>
+
+<tr>
+    <td>3 × 10</td>
+    <td>30</td>
+</tr>
+
+<tr>
+    <td>3 × 11</td>
+    <td>33</td>
+</tr>
+
+<tr>
+    <td>3 × 12</td>
+    <td>36</td>
+</tr>
+
+</table>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 6</span></div> 
+</template>
+
+<!------------------------------>
+<template id="page-6">
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 3</h2>
+
+  <p lang="fr">
+    La table de 3 marque souvent un cap dans l'apprentissage : elle demande
+    un vrai effort de mémorisation, contrairement à la table de 2 qui suit
+    une logique de doublement évidente. On y retrouve toutefois une astuce
+    bien connue pour vérifier si un nombre est divisible par 3 : il suffit
+    d'additionner ses chiffres, et si le résultat est un multiple de 3
+    (3, 6, 9...), alors le nombre l'est aussi. Cette propriété fascinait déjà
+    les mathématiciens de la Grèce antique, notamment les pythagoriciens,
+    pour qui le nombre 3 possédait une valeur symbolique forte, représentant
+    l'harmonie et l'équilibre (le triangle, figure la plus simple avec trois
+    côtés, en est un exemple direct). Dans de nombreuses cultures, le chiffre
+    3 est également associé à des structures narratives ou religieuses
+    (le début, le milieu, la fin ; les trinités), ce qui en a fait un nombre
+    particulièrement chargé de sens bien au-delà des mathématiques.
+  </p>
+  <h2>The 3 Times Table</h2>
+  <p lang="en">
+    The 3 times table often marks a turning point in learning: it requires
+    real memorization effort, unlike the 2 times table, which follows an
+    obvious doubling pattern. It does come with a well-known trick for
+    checking divisibility by 3: simply add up a number's digits, and if the
+    result is a multiple of 3 (3, 6, 9...), then the number itself is
+    divisible by 3 as well. This property already fascinated mathematicians
+    in ancient Greece, particularly the Pythagoreans, for whom the number 3
+    held strong symbolic value, representing harmony and balance (the
+    triangle, the simplest shape with three sides, is a direct example).
+    In many cultures, the number 3 is also tied to storytelling or religious
+    structures (beginning, middle, end; trinities), making it a number
+    loaded with meaning well beyond mathematics.
+  </p>
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 7</span></div> 
+</template>
+<!-------------------------------------------------------------------------------------------
+			Table de 4
+----------------------------------------------------------------------------page8 ------------->
+
+<template id="page-7"> 
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>4 × 1</td>
+    <td>4</td>
+</tr>
+
+<tr>
+    <td>4 × 2</td>
+    <td>8</td>
+</tr>
+
+<tr>
+    <td>4 × 3</td>
+    <td>12</td>
+</tr>
+
+<tr>
+    <td>4 × 4</td>
+    <td>16</td>
+</tr>
+
+<tr>
+    <td>4 × 5</td>
+    <td>20</td>
+</tr>
+
+<tr>
+    <td>4 × 6</td>
+    <td>24</td>
+</tr>
+
+<tr>
+    <td>4 × 7</td>
+    <td>28</td>
+</tr>
+
+<tr>
+    <td>4 × 8</td>
+    <td>32</td>
+</tr>
+
+<tr>
+    <td>4 × 9</td>
+    <td>36</td>
+</tr>
+
+<tr>
+    <td>4 × 10</td>
+    <td>40</td>
+</tr>
+
+<tr>
+    <td>4 × 11</td>
+    <td>44</td>
+</tr>
+
+<tr>
+    <td>4 × 12</td>
+    <td>48</td>
+</tr>
+
+</table>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 8</span></div> 
+</template>
+
+<!-------------------------Page9--------->
+
+<template id="page-8">
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 4</h2>
+  <p lang="fr">
+    La table de 4 possède une particularité intéressante : elle correspond
+    exactement au double de la table de 2. Ainsi, pour retrouver rapidement
+    un résultat, il suffit de doubler deux fois le nombre de départ (par
+    exemple, 4 x 3 = 3 doublé, puis doublé à nouveau, soit 6 puis 12). Cette
+    logique de doublements successifs en fait une table plus accessible
+    qu'il n'y paraît, à condition de bien maîtriser la table de 2 au
+    préalable. Sur le plan historique, le nombre 4 occupe une place à part
+    dans de nombreuses civilisations anciennes : les Égyptiens l'associaient
+    aux quatre points cardinaux, tandis que les Grecs le reliaient aux
+    quatre éléments fondamentaux (terre, eau, air, feu). Cette symbolique du
+    carré et de la stabilité, portée par le chiffre 4, se retrouve jusque
+    dans l'architecture et les structures géométriques les plus anciennes.
+  </p>
+  <h2>The 4 Times Table</h2>
+  <p lang="en">
+    The 4 times table has an interesting feature: it is exactly double the
+    2 times table. This means that to quickly find a result, one simply has
+    to double the starting number twice (for example, 4 x 3 = 3 doubled,
+    then doubled again, giving 6 then 12). This pattern of successive
+    doublings makes it more approachable than it might seem, as long as the
+    2 times table is already well mastered. Historically, the number 4 held
+    a special place in many ancient civilizations: the Egyptians linked it
+    to the four cardinal directions, while the Greeks connected it to the
+    four classical elements (earth, water, air, fire). This symbolism of
+    the square and of stability, carried by the number 4, can still be
+    seen today in architecture and in some of the oldest geometric
+    structures.
+  </p>
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 9</span></div> 
+</template>
+
+<!-------------------------------------------------------------------------------------------
+			table 5
+----------------------------------------------------------------------------------------page10--->
+
+<template id="page-9">
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>5 × 1</td>
+    <td>5</td>
+</tr>
+
+<tr>
+    <td>5 × 2</td>
+    <td>10</td>
+</tr>
+
+<tr>
+    <td>5 × 3</td>
+    <td>15</td>
+</tr>
+
+<tr>
+    <td>5 × 4</td>
+    <td>20</td>
+</tr>
+
+<tr>
+    <td>5 × 5</td>
+    <td>25</td>
+</tr>
+
+<tr>
+    <td>5 × 6</td>
+    <td>30</td>
+</tr>
+
+<tr>
+    <td>5 × 7</td>
+    <td>35</td>
+</tr>
+
+<tr>
+    <td>5 × 8</td>
+    <td>40</td>
+</tr>
+
+<tr>
+    <td>5 × 9</td>
+    <td>45</td>
+</tr>
+
+<tr>
+    <td>5 × 10</td>
+    <td>50</td>
+</tr>
+
+<tr>
+    <td>5 × 11</td>
+    <td>55</td>
+</tr>
+
+<tr>
+    <td>5 × 12</td>
+    <td>60</td>
+</tr>
+
+</table>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 10</span></div> 
+</template>
+
+
+
+<!-------------------------------------page-11--->
+<template id="page-10">
+
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 5</h2>
+  <p lang="fr">
+    La table de 5 est réputée pour sa grande facilité d'apprentissage : tous
+    ses résultats se terminent soit par 0, soit par 5, ce qui permet de les
+    reconnaître instantanément et de vérifier ses calculs d'un simple coup
+    d'œil. Cette régularité s'explique par le lien étroit entre le chiffre 5
+    et notre système décimal, puisque 5 est exactement la moitié de 10. Le
+    choix même de la base 10 pour compter n'est d'ailleurs pas un hasard :
+    il trouve son origine dans le nombre de doigts des deux mains, et le
+    chiffre 5 correspondait naturellement au nombre de doigts d'une seule
+    main chez de nombreuses civilisations antiques. On retrouve cette trace
+    dans le mot latin "quincunx" ou dans les systèmes de numération
+    romains, où le chiffre V symbolisait précisément une main ouverte.
+  </p>
+  <h2>The 5 Times Table</h2>
+  <p lang="en">
+    The 5 times table is well known for being especially easy to learn:
+    every result ends in either 0 or 5, which makes them instantly
+    recognizable and easy to check at a glance. This regularity comes from
+    the close relationship between the number 5 and our decimal system,
+    since 5 is exactly half of 10. The very choice of base 10 for counting
+    is no coincidence either: it originates from the number of fingers on
+    both hands, and the number 5 naturally corresponded to the fingers of
+    a single hand in many ancient civilizations. Traces of this can still
+    be found in Roman numerals, where the symbol V represented precisely
+    an open hand.
+  </p>
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 1</span><span>Page 11</span></div> 
+</template>
+
+<!-------------------------------------------------------------------------------------------
+			table 6
+---------------------------------------------------------------------------------------page12 ------>
+<template id="page-11"> 
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>6 × 1</td>
+    <td>6</td>
+</tr>
+
+<tr>
+    <td>6 × 2</td>
+    <td>12</td>
+</tr>
+
+<tr>
+    <td>6 × 3</td>
+    <td>18</td>
+</tr>
+
+<tr>
+    <td>6 × 4</td>
+    <td>24</td>
+</tr>
+
+<tr>
+    <td>6 × 5</td>
+    <td>30</td>
+</tr>
+
+<tr>
+    <td>6 × 6</td>
+    <td>36</td>
+</tr>
+
+<tr>
+    <td>6 × 7</td>
+    <td>42</td>
+</tr>
+
+<tr>
+    <td>6 × 8</td>
+    <td>48</td>
+</tr>
+
+<tr>
+    <td>6 × 9</td>
+    <td>54</td>
+</tr>
+
+<tr>
+    <td>6 × 10</td>
+    <td>60</td>
+</tr>
+
+<tr>
+    <td>6 × 11</td>
+    <td>66</td>
+</tr>
+
+<tr>
+    <td>6 × 12</td>
+    <td>72</td>
+</tr>
+
+</table>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 12</span></div> 
+</template>
+
+<!-------------------------Page13--------->
+
+<template id="page-12">
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 6</h2>
+  <p lang="fr">
+    La table de 6 marque le passage vers des tables considérées comme plus
+    difficiles à mémoriser, car elle ne bénéficie plus d'astuce aussi simple
+    que le doublement ou la terminaison régulière. Elle offre cependant une
+    particularité amusante : lorsqu'on multiplie 6 par un nombre pair, le
+    résultat se termine toujours par le même chiffre que ce nombre (6 x 2 =
+    12, 6 x 4 = 24, 6 x 8 = 48). Sur le plan historique, le nombre 6 occupe
+    une place particulière depuis l'Antiquité : les mathématiciens grecs le
+    considéraient comme un "nombre parfait", c'est-à-dire un nombre égal à
+    la somme de ses diviseurs (1 + 2 + 3 = 6). Les Babyloniens, quant à eux,
+    utilisaient un système de numération en base 60 (un multiple de 6), ce
+    qui explique encore aujourd'hui pourquoi une heure compte 60 minutes et
+    un cercle 360 degrés.
+  </p>
+  <h2>The 6 Times Table</h2>
+  <p lang="en">
+    The 6 times table marks a shift toward tables generally seen as harder
+    to memorize, since it no longer benefits from a simple trick like
+    doubling or a regular last digit. It does offer one fun feature though:
+    when 6 is multiplied by an even number, the result always ends in the
+    same digit as that number (6 x 2 = 12, 6 x 4 = 24, 6 x 8 = 48).
+    Historically, the number 6 has held a special place since antiquity:
+    Greek mathematicians regarded it as a "perfect number," meaning a
+    number equal to the sum of its divisors (1 + 2 + 3 = 6). The
+    Babylonians, for their part, used a base-60 numeral system (a multiple
+    of 6), which is still the reason today why an hour has 60 minutes and
+    a circle has 360 degrees.
+  </p>
+</div>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 2</span><span>Page 13</span></div> 
+</template>
+
+
+
+<!-------------------------Page14 FrontPage--------->
+<template id="page-13">
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>7 × 1</td>
+    <td>7</td>
+</tr>
+
+<tr>
+    <td>7 × 2</td>
+    <td>14</td>
+</tr>
+
+<tr>
+    <td>7 × 3</td>
+    <td>21</td>
+</tr>
+
+<tr>
+    <td>7 × 4</td>
+    <td>28</td>
+</tr>
+
+<tr>
+    <td>7 × 5</td>
+    <td>35</td>
+</tr>
+
+<tr>
+    <td>7 × 6</td>
+    <td>42</td>
+</tr>
+
+<tr>
+    <td>7 × 7</td>
+    <td>49</td>
+</tr>
+
+<tr>
+    <td>7 × 8</td>
+    <td>56</td>
+</tr>
+
+<tr>
+    <td>7 × 9</td>
+    <td>63</td>
+</tr>
+
+<tr>
+    <td>7 × 10</td>
+    <td>70</td>
+</tr>
+
+<tr>
+    <td>7 × 11</td>
+    <td>77</td>
+</tr>
+
+<tr>
+    <td>7 × 12</td>
+    <td>84</td>
+</tr>
+
+</table>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 14</span></div> 
+</template>
+
+
+
+<!--=========================================================================================--->
+<!-- 			Table de 7			page 14	    --->
+<!--=========================================================================================--->
+<template id="page-14">
+      
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 7</h2>
+  <p lang="fr">
+    La table de 7 est souvent considérée comme la plus difficile à
+    mémoriser parmi toutes les tables de multiplication, car elle ne suit
+    aucune régularité évidente dans la terminaison de ses résultats, et
+    elle ne peut pas non plus se déduire facilement d'une autre table déjà
+    connue. Elle demande donc un véritable travail de mémorisation pure.
+    Le nombre 7 occupe pourtant une place à part dans l'histoire des
+    civilisations : il est considéré depuis l'Antiquité comme un chiffre
+    chargé de symbolique et de mystère, en partie parce qu'il s'agit d'un
+    nombre premier, indivisible par tout autre nombre que 1 et lui-même. On
+    le retrouve dans de très nombreuses traditions culturelles et
+    religieuses : les sept jours de la semaine, les sept couleurs de
+    l'arc-en-ciel, ou encore les sept merveilles du monde antique. Cette
+    omniprésence du 7 dans les repères humains explique en partie pourquoi
+    cette table, bien que difficile, reste l'une des plus marquantes.
+  </p>
+  <h2>The 7 Times Table</h2>
+  <p lang="en">
+    The 7 times table is often seen as the hardest to memorize among all
+    the multiplication tables, since it does not follow any obvious
+    pattern in its last digits, nor can it easily be derived from another
+    table already known. It therefore requires genuine rote memorization.
+    The number 7, however, holds a special place throughout the history of
+    civilizations: since antiquity it has been regarded as a number full
+    of symbolism and mystery, partly because it is a prime number,
+    divisible only by 1 and itself. It appears across countless cultural
+    and religious traditions: the seven days of the week, the seven colors
+    of the rainbow, or the seven wonders of the ancient world. This
+    widespread presence of the number 7 in human reference points partly
+    explains why this table, despite being difficult, remains one of the
+    most memorable.
+  </p>
+</div>
+
+
+
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 15</span></div> 
+</template>
+
+<!-------------------------Page16 Measurement & Interface-------->
+<template id="page-15"> 
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>8 × 1</td>
+    <td>8</td>
+</tr>
+
+<tr>
+    <td>8 × 2</td>
+    <td>16</td>
+</tr>
+
+<tr>
+    <td>8 × 3</td>
+    <td>24</td>
+</tr>
+
+<tr>
+    <td>8 × 4</td>
+    <td>32</td>
+</tr>
+
+<tr>
+    <td>8 × 5</td>
+    <td>40</td>
+</tr>
+
+<tr>
+    <td>8 × 6</td>
+    <td>48</td>
+</tr>
+
+<tr>
+    <td>8 × 7</td>
+    <td>56</td>
+</tr>
+
+<tr>
+    <td>8 × 8</td>
+    <td>64</td>
+</tr>
+
+<tr>
+    <td>8 × 9</td>
+    <td>72</td>
+</tr>
+
+<tr>
+    <td>8 × 10</td>
+    <td>80</td>
+</tr>
+
+<tr>
+    <td>8 × 11</td>
+    <td>88</td>
+</tr>
+
+<tr>
+    <td>8 × 12</td>
+    <td>96</td>
+</tr>
+
+</table>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 16</span></div> 
+</template>
+
+<!-------------------------Page17--------->
+
+<template id="page-16">
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 8</h2>
+  <p lang="fr">
+    La table de 8 peut sembler intimidante au premier abord, mais elle
+    cache en réalité une logique simple : il suffit de doubler trois fois
+    de suite le nombre de départ, puisque 8 est égal à 2 x 2 x 2 (par
+    exemple, 8 x 3 = 3 doublé trois fois, soit 6, puis 12, puis 24). Cette
+    propriété en fait, tout comme la table de 4, une table finalement plus
+    accessible qu'elle n'y paraît pour qui maîtrise bien les doublements.
+    Le nombre 8 possède également une forte charge symbolique à travers
+    l'histoire : dans de nombreuses cultures asiatiques, notamment en
+    Chine, il est considéré comme un chiffre porte-bonheur associé à la
+    prospérité, en raison de sa prononciation proche du mot signifiant
+    "richesse". Sur le plan géométrique, le nombre 8 évoque aussi l'octogone,
+    forme que l'on retrouve dans de nombreux édifices historiques, comme
+    symbole de transition entre le carré et le cercle.
+  </p>
+  <h2>The 8 Times Table</h2>
+  <p lang="en">
+    The 8 times table might seem intimidating at first, but it actually
+    hides a simple logic: one just needs to double the starting number
+    three times in a row, since 8 equals 2 x 2 x 2 (for example, 8 x 3 = 3
+    doubled three times, giving 6, then 12, then 24). This property, much
+    like with the 4 times table, makes it more approachable than it looks
+    for anyone comfortable with doubling. The number 8 also carries strong
+    symbolic weight throughout history: in many Asian cultures, especially
+    in China, it is considered a lucky number associated with prosperity,
+    due to its pronunciation being close to the word for "wealth."
+    Geometrically, the number 8 also evokes the octagon, a shape found in
+    many historic buildings as a symbol of transition between the square
+    and the circle.
+  </p>
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 17</span></div> 
+</template>
+
+
+<!--------------------------------------------------------Page18---------->
+
+<template id="page-17">
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>9 × 1</td>
+    <td>9</td>
+</tr>
+
+<tr>
+    <td>9 × 2</td>
+    <td>18</td>
+</tr>
+
+<tr>
+    <td>9 × 3</td>
+    <td>27</td>
+</tr>
+
+<tr>
+    <td>9 × 4</td>
+    <td>36</td>
+</tr>
+
+<tr>
+    <td>9 × 5</td>
+    <td>45</td>
+</tr>
+
+<tr>
+    <td>9 × 6</td>
+    <td>54</td>
+</tr>
+
+<tr>
+    <td>9 × 7</td>
+    <td>63</td>
+</tr>
+
+<tr>
+    <td>9 × 8</td>
+    <td>72</td>
+</tr>
+
+<tr>
+    <td>9 × 9</td>
+    <td>81</td>
+</tr>
+
+<tr>
+    <td>9 × 10</td>
+    <td>90</td>
+</tr>
+
+<tr>
+    <td>9 × 11</td>
+    <td>99</td>
+</tr>
+
+<tr>
+    <td>9 × 12</td>
+    <td>108</td>
+</tr>
+
+</table>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 18</span></div> 
+</template>
+
+
+
+<!--=========================================================================================--->
+<!-- 					page 19   --->
+<!--=========================================================================================--->
+
+
+<template id="page-18">
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 9</h2>
+  <p lang="fr">
+    La table de 9 est célèbre pour ses nombreuses astuces de calcul, qui en
+    font l'une des plus fascinantes à découvrir. La plus connue repose sur
+    les doigts des mains : en repliant le doigt correspondant au chiffre
+    multiplié, le nombre de doigts restants avant et après indique
+    directement les deux chiffres du résultat. Une autre régularité
+    remarquable concerne la somme des chiffres de chaque résultat, qui
+    donne toujours 9 (9 x 4 = 36, et 3 + 6 = 9 ; 9 x 7 = 63, et 6 + 3 = 9).
+    On observe également que le chiffre des dizaines augmente d'une unité
+    tandis que celui des unités diminue d'une unité à chaque étape de la
+    table. Le nombre 9, dernier chiffre avant le passage à la dizaine
+    suivante, a longtemps été associé à l'idée d'achèvement et de cycle
+    complet dans de nombreuses traditions numériques anciennes.
+  </p>
+  <h2>The 9 Times Table</h2>
+  <p lang="en">
+    The 9 times table is famous for its many calculation tricks, making it
+    one of the most fascinating to explore. The best known relies on the
+    fingers: by folding down the finger corresponding to the number being
+    multiplied, the fingers remaining on either side directly give the two
+    digits of the result. Another remarkable pattern is that the digits of
+    each result always add up to 9 (9 x 4 = 36, and 3 + 6 = 9; 9 x 7 = 63,
+    and 6 + 3 = 9). It can also be observed that the tens digit increases
+    by one while the units digit decreases by one at each step of the
+    table. The number 9, the last digit before moving to the next ten, has
+    long been associated with the idea of completion and a full cycle in
+    many ancient numerical traditions.
+  </p>
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 19</span></div> 
+</template>
+
+
+<!-------------------------Page20--------->
+
+<template id="page-19">
+
+ <table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>10 × 1</td>
+    <td>10</td>
+</tr>
+
+<tr>
+    <td>10 × 2</td>
+    <td>20</td>
+</tr>
+
+<tr>
+    <td>10 × 3</td>
+    <td>30</td>
+</tr>
+
+<tr>
+    <td>10 × 4</td>
+    <td>40</td>
+</tr>
+
+<tr>
+    <td>10 × 5</td>
+    <td>50</td>
+</tr>
+
+<tr>
+    <td>10 × 6</td>
+    <td>60</td>
+</tr>
+
+<tr>
+    <td>10 × 7</td>
+    <td>70</td>
+</tr>
+
+<tr>
+    <td>10 × 8</td>
+    <td>80</td>
+</tr>
+
+<tr>
+    <td>10 × 9</td>
+    <td>90</td>
+</tr>
+
+<tr>
+    <td>10 × 10</td>
+    <td>100</td>
+</tr>
+
+<tr>
+    <td>10 × 11</td>
+    <td>110</td>
+</tr>
+
+<tr>
+    <td>10 × 12</td>
+    <td>120</td>
+</tr>
+
+</table>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 20</span></div> 
+</template>
+
+<!-------------------------Page21--------->
+
+<template id="page-20">
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 10</h2>
+  <p lang="fr">
+    La table de 10 est sans doute la plus simple de toutes : il suffit
+    d'ajouter un zéro au nombre multiplié pour obtenir instantanément le
+    résultat. Cette simplicité n'est pas un hasard, elle découle directement
+    de notre système de numération décimal, construit précisément autour de
+    la base 10. Ce choix du 10 comme fondement de notre façon de compter
+    remonte à l'usage naturel des dix doigts des mains, une méthode de
+    calcul universelle adoptée par de très nombreuses civilisations à
+    travers l'histoire. Le nombre 10 a également une forte portée
+    symbolique : chez les pythagoriciens, il représentait la perfection
+    absolue, en tant que somme des quatre premiers nombres (1 + 2 + 3 + 4 =
+    10), une figure qu'ils appelaient la "tétraktys" et considéraient comme
+    sacrée. Apprendre la table de 10 marque ainsi souvent, pour les élèves,
+    la confirmation intuitive de la logique même de notre système de
+    numération.
+  </p>
+  <h2>The 10 Times Table</h2>
+  <p lang="en">
+    The 10 times table is arguably the simplest of them all: simply adding
+    a zero to the multiplied number instantly gives the result. This
+    simplicity is no accident, it comes directly from our decimal numeral
+    system, built precisely around base 10. This choice of 10 as the
+    foundation of how we count traces back to the natural use of the ten
+    fingers on our hands, a universal calculation method adopted by
+    countless civilizations throughout history. The number 10 also carries
+    strong symbolic weight: for the Pythagoreans, it represented absolute
+    perfection, as the sum of the first four numbers (1 + 2 + 3 + 4 = 10),
+    a figure they called the "tetraktys" and considered sacred. Learning
+    the 10 times table therefore often serves, for students, as an
+    intuitive confirmation of the very logic behind our numeral system.
+  </p>
+</div>
+
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 21</span></div> 
+</template>
+
+<!--=========================================================================================--->
+<!---------------------------------------------Page22---------->
+
+<template id="page-21">
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>11 × 1</td>
+    <td>11</td>
+</tr>
+
+<tr>
+    <td>11 × 2</td>
+    <td>22</td>
+</tr>
+
+<tr>
+    <td>11 × 3</td>
+    <td>33</td>
+</tr>
+
+<tr>
+    <td>11 × 4</td>
+    <td>44</td>
+</tr>
+
+<tr>
+    <td>11 × 5</td>
+    <td>55</td>
+</tr>
+
+<tr>
+    <td>11 × 6</td>
+    <td>66</td>
+</tr>
+
+<tr>
+    <td>11 × 7</td>
+    <td>77</td>
+</tr>
+
+<tr>
+    <td>11 × 8</td>
+    <td>88</td>
+</tr>
+
+<tr>
+    <td>11 × 9</td>
+    <td>99</td>
+</tr>
+
+<tr>
+    <td>11 × 10</td>
+    <td>110</td>
+</tr>
+
+<tr>
+    <td>11 × 11</td>
+    <td>121</td>
+</tr>
+
+<tr>
+    <td>11 × 12</td>
+    <td>132</td>
+</tr>
+
+</table>
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 22</span></div> 
+</template>
+
+<!-------------------------Page23--------->
+<template id="page-22">
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 11</h2>
+  <p lang="fr">
+    La table de 11 surprend souvent par sa facilité, du moins pour ses
+    premiers résultats : de 11 x 1 à 11 x 9, il suffit de répéter deux fois
+    le chiffre multiplié pour obtenir directement le résultat (11 x 3 = 33,
+    11 x 7 = 77). Cette régularité s'explique simplement par le fait que 11
+    est égal à 10 + 1, ce qui revient à additionner le nombre à lui-même
+    décalé d'un rang. Au-delà de 11 x 9, une autre astuce existe : pour
+    multiplier 11 par un nombre à deux chiffres, il suffit d'additionner
+    ces deux chiffres et de glisser le résultat entre eux (11 x 23 : 2 + 3 =
+    5, donc 253). Sur le plan historique, le nombre 11 n'a pas la charge
+    symbolique de ses voisins 10 ou 12, mais il occupe une place
+    particulière dans certains sports et traditions, notamment au football
+    où chaque équipe aligne onze joueurs sur le terrain.
+  </p>
+  <h2>The 11 Times Table</h2>
+  <p lang="en">
+    The 11 times table is often surprisingly easy, at least for its first
+    results: from 11 x 1 to 11 x 9, simply repeating the multiplied digit
+    twice gives the result directly (11 x 3 = 33, 11 x 7 = 77). This
+    regularity comes from the fact that 11 equals 10 + 1, which amounts to
+    adding the number to itself shifted by one place. Beyond 11 x 9,
+    another trick applies: to multiply 11 by a two-digit number, simply add
+    those two digits together and slot the result between them (11 x 23:
+    2 + 3 = 5, so 253). Historically, the number 11 does not carry the
+    same symbolic weight as its neighbors 10 or 12, but it holds a
+    notable place in certain sports and traditions, most famously in
+    football, where each team fields eleven players on the pitch.
+  </p>
+</div>
+
+
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue →</span><span>Page 23</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+<!-- 			Table de 11			page 24  --->
+<!-----------------Link--Page24--------->
+<template id="page-23">
+
+<table class="multiplication-table">
+
+<tr>
+    <th>
+        Multiplication
+    </th>
+
+    <th>
+        Result
+    </th>
+</tr>
+
+<tr>
+    <td>12 × 1</td>
+    <td>12</td>
+</tr>
+
+<tr>
+    <td>12 × 2</td>
+    <td>24</td>
+</tr>
+
+<tr>
+    <td>12 × 3</td>
+    <td>36</td>
+</tr>
+
+<tr>
+    <td>12 × 4</td>
+    <td>48</td>
+</tr>
+
+<tr>
+    <td>12 × 5</td>
+    <td>60</td>
+</tr>
+
+<tr>
+    <td>12 × 6</td>
+    <td>72</td>
+</tr>
+
+<tr>
+    <td>12 × 7</td>
+    <td>84</td>
+</tr>
+
+<tr>
+    <td>12 × 8</td>
+    <td>96</td>
+</tr>
+
+<tr>
+    <td>12 × 9</td>
+    <td>108</td>
+</tr>
+
+<tr>
+    <td>12 × 10</td>
+    <td>120</td>
+</tr>
+
+<tr>
+    <td>12 × 11</td>
+    <td>132</td>
+</tr>
+
+<tr>
+    <td>12 × 12</td>
+    <td>144</td>
+</tr>
+
+</table>
+
+
+
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 24</span></div> 
+</template>
+<!-------------------------Page25--------->
+
+<template id="page-24">
+
+<div style="text-align:justify;font-size:1.2em;line-height:1.3em">
+  <h2>La table de 12</h2>
+  <p lang="fr">
+    La table de 12 clôture traditionnellement l'apprentissage des tables de
+    multiplication, et elle possède une richesse historique particulière.
+    Contrairement au 10, le nombre 12 n'est pas lié à notre système
+    décimal, mais à un système duodécimal (en base 12), qui a longtemps
+    coexisté avec celui en base 10 dans de nombreuses civilisations. Cette
+    influence est encore bien visible aujourd'hui : une année compte 12
+    mois, une journée se divise en deux fois 12 heures, et de nombreuses
+    unités de mesure ancestrales utilisaient le 12 comme référence, comme
+    la douzaine, encore employée couramment pour compter les œufs. Cette
+    popularité du 12 s'explique en partie par sa grande divisibilité : il
+    peut être divisé exactement par 1, 2, 3, 4 et 6, ce qui en faisait un
+    nombre particulièrement pratique pour les échanges commerciaux et le
+    partage de quantités dans les sociétés anciennes.
+  </p>
+  <h2>The 12 Times Table</h2>
+  <p lang="en">
+    The 12 times table traditionally closes out the learning of
+    multiplication tables, and it carries a particularly rich history.
+    Unlike 10, the number 12 is not tied to our decimal system but to a
+    duodecimal system (base 12), which coexisted for a long time alongside
+    the base-10 system in many civilizations. This influence is still
+    clearly visible today: a year has 12 months, a day is split into two
+    sets of 12 hours, and many ancestral units of measurement used 12 as a
+    reference, such as the dozen, still commonly used to count eggs. This
+    popularity of 12 partly comes from its high divisibility: it can be
+    evenly divided by 1, 2, 3, 4, and 6, which made it a particularly
+    practical number for trade and for sharing quantities in ancient
+    societies.
+  </p>
+</div>
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of Chapter 3</span><span>Page 25</span></div> 
+</template>
+
+<!-------------------------Page26--------->
+<template id="page-25">
+
+
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 26</span></div> 
+</template>
+
+
+
+<!-------------------------Page27 FrontPage--------->
+<template id="page-26">
+
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span>Page 27</span></div> 
+</template>
+
+<!------================================================================
+		 Litterature 
+=======================================================-Page28--------->
+
+<template id="page-27">
+
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 27</span></div> 
+</template>
+
+
+<!-------------------------Page28--------->
+<template id="page-28">
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue</span><span>Page 29</span></div> 
+</template>
+
+
+<!--=========================================================================================--->
+
+<!-- ====================suite biblio============================-Page64--------->
+
+<template id="page-29">
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()"></span><span>Page 30</span></div> 
+</template>
+
+
+<!-------------------------Page30--------->
+<template id="page-30">
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">Continue</span><span>Page 31</span></div> 
+</template>
+
+
+
+
+
+<!-------------------------Page69--------->
+<template id="page-32">
+
+<div style="text-align:justify;font-size:0.9em;line-height:1.3em">
+
+
+
+
+</div>
+<div class="footer"><h2><a href="#page-2" data-page="2">Menu</a></h2><span class="continue" onclick="flipRight()">End of the Ebook</span><span>Page 33</span></div> 
+</template>
+
+
+
+
+
+<!--=========================================================================================--->
+<!-----------------------------------fin des pages---------------------------------------------->
+<!--=========================================================================================--->
+
+<div class="book-container" aria-label="Livre avec page titre et page sans fond" role="region">
+  <div class="spine" aria-hidden="true"></div>
+
+
+  <div class="nav-btn nav-left" id="nav-left" role="button" tabindex="0" aria-label="Page précédente">&#9664;</div>
+
+  <div class="nav-btn nav-right" id="nav-right" role="button" tabindex="0" aria-label="Page suivante">&#9654;</div>
+</div>
+
+
+
+
+<!--=========================================================================================--->
+<!--				Programme						     --->
+<!--=========================================================================================--->
+<script>
+let tempo = 300;
+// On détecte toutes les pages via les templates (id commençant par "page-")
+const allTemplates = Array.from(document.querySelectorAll('template[id^="page-"]'));
+//===========================================================
+// Trier les templates par index numérique (extrait de l'id)
+//===========================================================
+allTemplates.sort((a, b) => {
+  const aNum = parseInt(a.id.replace('page-', ''), 10);
+  const bNum = parseInt(b.id.replace('page-', ''), 10);
+  return aNum - bNum;
+});
+//===========================================================
+// Crée un tableau des indexes disponibles
+//===========================================================
+const pagesIndexes = allTemplates.map(tpl => parseInt(tpl.id.replace('page-', ''), 10));
+// Pour la navigation, on utilise les indexes triés
+let currentLeftIndexPos = 0;  // position dans pagesIndexes pour page de gauche
+let currentRightIndexPos = 1; // position dans pagesIndexes pour page de droite
+const book = document.querySelector('.book-container');
+let leftPage = null;
+let rightPage = null;
+//===========================================================
+// Crée une page à partir d'un template cloné
+//===========================================================
+function createPage(pagePosInArray, side) {
+  const tpl = allTemplates[pagePosInArray];
+  const div = document.createElement('div');
+  div.classList.add('page', side);
+  // Si le template est celui de la page vide (-1), on ajoute classe transparent
+  if (pagesIndexes[pagePosInArray] === -1) div.classList.add('transparent');
+  div.setAttribute('aria-hidden', 'false');
+  div.appendChild(tpl.content.cloneNode(true));
+  // Interception des liens pour navigation fluide
+  div.querySelectorAll('a[data-page]').forEach(link => {
+    link.style.color = "#A52A2A";
+    link.addEventListener('click', function (e) {
+      const targetPage = parseInt(link.getAttribute('data-page'), 10);
+      if (pagesIndexes.includes(targetPage)) {
+        e.preventDefault();
+        gotoPage(targetPage);
+      }
+    });
+  });
+  return div;
+}
+//===========================================================
+//Efface la page
+//===========================================================
+function clearFlipClasses() {
+  if (leftPage) leftPage.classList.remove('flip-left');
+  if (rightPage) rightPage.classList.remove('flip-right');
+  if (leftPage) leftPage.style.zIndex = '';
+  if (rightPage) rightPage.style.zIndex = '';
+}
+//===========================================================
+// Affiche la page
+//===========================================================
+function render() {
+  clearFlipClasses();
+  if (leftPage) leftPage.remove();
+  if (rightPage) rightPage.remove();
+  // Clamp bornes
+  if (currentLeftIndexPos < 0) currentLeftIndexPos = 0;
+  if (currentRightIndexPos < 1) currentRightIndexPos = 1;
+  if (currentLeftIndexPos > allTemplates.length - 2) currentLeftIndexPos = allTemplates.length - 2;
+  if (currentRightIndexPos > allTemplates.length - 1) currentRightIndexPos = allTemplates.length - 1;
+  leftPage = createPage(currentLeftIndexPos, 'left');
+  rightPage = createPage(currentRightIndexPos, 'right');
+  book.appendChild(leftPage);
+  book.appendChild(rightPage);
+}
+//===========================================================
+//Tourne la page à droite
+//===========================================================
+function flipRight() {
+  if (currentRightIndexPos >= allTemplates.length - 2) return;
+  rightPage.classList.add('flip-right');
+  rightPage.style.zIndex = 100;
+  setTimeout(() => {
+    currentLeftIndexPos = currentRightIndexPos + 1;
+    currentRightIndexPos = currentRightIndexPos + 2;
+    render();
+  }, tempo);
+}
+//===========================================================
+//Tourne la page à gauche
+//===========================================================
+function flipLeft() {
+  if (currentLeftIndexPos <= 0) return;
+  leftPage.classList.add('flip-left');
+  leftPage.style.zIndex = 100;
+  setTimeout(() => {
+    currentRightIndexPos = currentLeftIndexPos - 1;
+    currentLeftIndexPos = currentLeftIndexPos - 2;
+    render();
+  }, tempo);
+}
+//===========================================================
+// Navigation "goto" vers n'importe quelle page
+//===========================================================
+function gotoPage(targetPageIndex) {
+  let idx = pagesIndexes.indexOf(targetPageIndex);
+  if (idx === -1) return;
+  // Book tourne dans le bon sens selon la destination
+  
+if (idx % 2 === 1) { // cible = page droite
+    if (currentRightIndexPos === idx) return;
+    rightPage.classList.add('flip-right');
+    rightPage.style.zIndex = 100;
+    setTimeout(() => {
+      currentLeftIndexPos = idx - 1;
+      currentRightIndexPos = idx;
+      render();
+    }, tempo);
+  } else { // gauche
+    if (currentLeftIndexPos === idx) return;
+    leftPage.classList.add('flip-left');
+    leftPage.style.zIndex = 100;
+    setTimeout(() => {
+      currentLeftIndexPos = idx;
+      currentRightIndexPos = idx + 1;
+      render();
+    }, tempo);
+  }
+}
+  const continues = document.querySelectorAll('.continue');
+
+  continues.forEach(el => {
+    el.addEventListener('click', flipRight);
+  });
+
+document.getElementById('nav-right').addEventListener('click', flipRight);
+document.getElementById('nav-left').addEventListener('click', flipLeft);
+['nav-left', 'nav-right'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      document.getElementById(id).click();
+    }
+  });
+});
+//===========================================================
+// Gestion des clicks
+//===========================================================
+ document.addEventListener('click', function handleClick(e) {
+  // Ignore clicks already inside the overlay (so overlay click closes it separately)
+  if (e.target.closest('.img-overlay')) return;
+
+  // Find nearest image clicked (works if clicking inside <a><img> or <figure><img> etc.)
+  const img = e.target.closest('img');
+  if (!img) return;
+
+  // OPTIONAL: ignore tiny icons (uncomment if needed)
+  // if (img.naturalWidth < 80 && img.naturalHeight < 80) return;
+
+  // Prevent link navigation if image is inside an <a>
+  const link = img.closest('a');
+  if (link) e.preventDefault();
+
+  openImageOverlay(img);
+});
+//===========================================================
+/* Create overlay once and reuse it */
+//===========================================================
+function createOverlay() {
+  const ov = document.createElement('div');
+  ov.className = 'img-overlay';
+  ov.innerHTML = '<div class="img-wrap"><img alt=""></div>';
+  document.body.appendChild(ov);
+
+  // clicking overlay (outside image) closes it
+  ov.addEventListener('click', (ev) => {
+    // if user clicked the image itself, also close (ev.target is the img) — both behaviours ok
+    closeOverlay();
+  });
+
+  // ESC closes
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') closeOverlay();
+  });
+
+  return ov;
+}
+
+let overlay = null;
+function ensureOverlay() {
+  if (!overlay) overlay = createOverlay();
+  return overlay;
+}
+
+function openImageOverlay(sourceImg) {
+  const ov = ensureOverlay();
+  const clonedImg = ov.querySelector('img');
+
+  // set src to currentSrc if available to handle responsive <img srcset>
+  clonedImg.src = sourceImg.currentSrc || sourceImg.src;
+  clonedImg.alt = sourceImg.alt || '';
+
+  // show overlay
+  ov.classList.add('open');
+
+  // prevent background scrolling
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOverlay() {
+  if (!overlay) return;
+  overlay.classList.remove('open');
+
+  // restore scrolling after small timeout to allow opacity transition
+  setTimeout(() => {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }, 200);
+}
+
+//===========================================================
+// Affichage initial
+//===========================================================
+render();
+</script>
+
+</body>
+</html>
