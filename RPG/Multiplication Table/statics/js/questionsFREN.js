@@ -778,8 +778,8 @@ const QUESTION_SETS = {
     {
       condition: 1,
       question: {
-        fr: "Avez vous le mot de passe donné par les gardes ?",
-        en: "Do you have the password given by the guards?"
+        fr: "Hello, Je suis Aden. Avez vous le mot de passe donné par les gardes ?",
+        en: "Hello, I am Aden. I am pleased to meet you. Do you have the password given by the guards?"
       },
       answer: {
         fr: "23",
