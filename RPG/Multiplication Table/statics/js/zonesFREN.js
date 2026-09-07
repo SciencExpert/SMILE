@@ -32,7 +32,7 @@ const WORLDS = [
     { image: "img/img17.gif", 	name: "Menhir de l'Est/East Menhir",		sound: "sound/water.mp3",		start: { x: 500,  y: 500 } },
     { image: "img/img18.gif", 	name: "Final",					sound: "sound/victory.mp3",		start: { x: 500,  y: 500 } },
     { image: "img/game_over.gif", name: "Final",				sound: "sound/souffrance.mp3",		start: { x: 500,  y: 500 } },
-    { image: "img/img20.png", 	name: "Credit",					sound: "Keyboard.mp3",			start: { x: 500,  y: 300 } },
+    { image: "img/Img20.png", 	name: "Credit",					sound: "Keyboard.mp3",			start: { x: 500,  y: 300 } },
 ];
 
 const WIDTH = 1000, HEIGHT = 600;
