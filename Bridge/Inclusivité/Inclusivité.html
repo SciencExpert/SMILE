@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge - Inclusivité</title>
+
+    <link rel="icon" type="image/x-icon" href="image/SE_favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/cssBridge.css">
+ <script src="static/js/chapterTitles.js"></script>		
+
+    <!--
+        Styles autonomes pour les boutons superposés sur le diaporama
+        (lecture/pause au centre, muet en bas à droite). Définis ici plutôt
+        que dans cssBridge.css pour ne rien casser si ce fichier externe
+        est absent ou différent d'un poste à l'autre.
+    -->
+
+    <!--
+        ============================================================
+        NOUVEAU : Style pour l'overlay de transition entre chapitres
+        (sablier + message "Prochain chapitre : ...") affiché pendant
+        les 4 secondes précédant le passage automatique au chapitre
+        suivant. Placé ici (et non dans cssBridge.css) pour la même
+        raison que ci-dessus : autonomie du fichier.
+        ============================================================
+    -->
+    
+
+</head>
+<body>
+<!--=================================================================
+    CONTENEUR PRINCIPAL DU LECTEUR
+=================================================================-->
+<div class="player-container" style="position: relative;">
+<div id="topNavigation">
+
+    <button id="menuToggleBtn">
+        <span>☰</span>
+        <span id="menuToggleText">Menu</span>
+        <span id="menuLangBadge"
+              style="background:#4a90e2;color:white;padding:2px 8px;border-radius:4px;font-size:0.8em;margin-left:8px;">
+            FR
+        </span>
+    </button>
+
+    <div id="chapterSelector">
+        <select id="videoSelect"></select>
+    </div>
+
+</div>
+
+
+    <!--=================================================================
+        1. LA BARRE DE CONTRÔLES ET MENUS
+        Masquée au départ via style="display: none;"
+    =================================================================-->
+    <div class="controls" id="mainControls" style="display: none;">
+
+        <!-- BOUTON LECTURE / PAUSE -->
+        <button id="playPauseBtn">
+            <span id="playPauseIcon">▶</span>
+            <span id="playPauseText">Lecture</span>
+        </button>
+
+
+        <!-- TEMPS -->
+        <div class="time-display" id="timeDisplay">
+            00:00 / 00:00
+        </div>
+
+
+        <!-- LE SÉLECTEUR DE LANGUE -->
+        <div class="control-group language-control">
+
+            <label for="languageSelect"
+                   id="subtitleLabel"
+                   style="display:none">
+                Sous-titres
+            </label>
+
+            <select id="languageSelect">
+                <option value="none">Aucun</option>
+            </select>
+
+        </div>
+
+
+        <!-- ACCESSIBILITÉ -->
+        <button id="settingsBtn">
+            <span>⚙</span>
+            <span id="accessibilityText">Accessibilité</span>
+        </button>
+
+
+        <!-- TRANSCRIPTION -->
+        <button id="transcriptBtn">
+            <span>📄</span>
+            <span id="transcriptText">Transcription</span>
+        </button>
+
+    </div>
+
+
+    <!--=================================================================
+        2. LES PANNEAUX ESCAMOTABLES
+    =================================================================-->
+
+    <!-- Contrôles de l'accessibilité -->
+    <div class="settings-panel"
+         id="settingsPanel"
+         style="display: none; position: absolute; width: 100%; z-index: 150;">
+
+        <div class="settings-grid">
+
+            <!-- Taille des sous-titres -->
+            <div class="control-group">
+
+                <label id="subtitleSizeLabel">
+                    Taille des sous-titres
+                </label>
+
+                <select id="subtitleSize">
+
+                    <option id="smallSize"
+                            value="small">
+                        DYS
+                    </option>
+
+                    <option id="normalSize"
+                            value="normal"
+                            selected>
+                        Normale
+                    </option>
+
+                    <option id="largeSize"
+                            value="large">
+                        Grande
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Contraste -->
+            <div class="control-group">
+
+                <label id="contrastLabel">
+                    Contraste
+                </label>
+
+                <select id="contrastMode">
+
+                    <option id="normalContrast"
+                            value="normal"
+                            selected>
+                        Normal
+                    </option>
+
+                    <option id="highContrast"
+                            value="high">
+                        Élevé
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Vitesse de lecture -->
+            <div class="control-group">
+
+                <label id="speedLabel">
+                    Vitesse de lecture
+                </label>
+
+                <div class="speed-buttons">
+
+                    <button class="speed-btn"
+                            data-speed="0.75">
+                        0,75×
+                    </button>
+
+                    <button class="speed-btn active"
+                            data-speed="1">
+                        1×
+                    </button>
+
+                    <button class="speed-btn"
+                            data-speed="1.25">
+                        1,25×
+                    </button>
+
+                    <button class="speed-btn"
+                            data-speed="1.5">
+                        1,5×
+                    </button>
+
+                    <button class="speed-btn"
+                            data-speed="2">
+                        2×
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Panneau de transcription -->
+    <div class="transcript-panel"
+         id="transcriptPanel"
+         style="display: none; position: absolute; width: 100%; z-index: 150;">
+
+        <h3 id="fullTranscript"
+            style="margin-bottom: 15px; color: #4a90e2;">
+            Transcription complète
+        </h3>
+
+        <div id="transcriptContent"></div>
+
+    </div>
+
+
+    <!--=================================================================
+        3. LA BARRE DE PROGRESSION
+    =================================================================-->
+    <div class="progress-bar" id="progressBar">
+
+        <div class="progress-filled"
+             id="progressFilled">
+        </div>
+
+    </div>
+
+
+    <!--=================================================================
+        4. LE DIAPORAMA
+    =================================================================-->
+    <div class="video-wrapper" style="position: relative;">
+
+        <!-- IMAGE -->
+        <img id="slideImage"
+             src=""
+             alt=""
+             style="width:100%; height:100%; object-fit:contain; display:block; background:#000; cursor:pointer;">
+
+
+        <!--=================================================================
+            CLIC SUR LE CENTRE DE L'IMAGE = LECTURE / PAUSE
+        =================================================================-->
+        <button id="centerPlayOverlay"
+                class="overlay-btn center-play-btn"
+                aria-label="Lecture / Pause"
+                title="Lecture / Pause">
+
+            <span id="centerPlayIcon">
+                ▶
+            </span>
+
+        </button>
+
+
+        <!--=================================================================
+            BOUTON SON
+        =================================================================-->
+        <button id="muteToggleBtn"
+                class="overlay-btn mute-btn"
+                aria-label="Couper le son"
+                title="Couper / rétablir le son">
+
+            <span id="muteIcon">
+                🔊
+            </span>
+
+        </button>
+
+
+        <!--=================================================================
+            AUDIO
+        =================================================================-->
+        <audio id="audioPlayer"
+               preload="metadata"
+               style="display:none;">
+
+            Votre navigateur ne supporte pas la lecture audio.
+
+        </audio>
+
+
+        <!--=================================================================
+            SOUS-TITRES
+        =================================================================-->
+        <div class="subtitle-track"
+             id="subtitleTrack"
+             style="display: none;">
+
+            <div class="subtitle-text normal"
+                 id="subtitleText">
+            </div>
+
+        </div>
+
+
+        <!--=================================================================
+            OVERLAY DE TRANSITION ENTRE CHAPITRES
+        =================================================================-->
+        <div id="chapterTransitionOverlay"
+             class="chapter-transition-overlay">
+
+            <div class="chapter-transition-content">
+
+                <span class="chapter-transition-hourglass">
+                    ⏳
+                </span>
+
+                <span class="chapter-transition-text"
+                      id="chapterTransitionText">
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+
+<div id="footer">
+
+    <!-- Controls Row -->
+    <div class="footer-controls">
+
+
+        <!-- StatMate Button -->
+        <button class="footer-btn"
+                onclick="window.location.href='00_ShapeMate_Menu.html'">
+
+            ShapeMate&trade;
+
+        </button>
+
+
+        <!-- Copyright Notice -->
+        <span class="footer-copyright">
+
+            © 2026 SciencExpert. Website designed and developed by
+
+            <a href="https://payhip.com/SciencExpert/sciencexpert"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <img src="image/SE_favicon.ico"
+                     alt="Icône"
+                     class="footer-icon">
+
+                SciencExpert™
+
+            </a>.
+
+            All rights reserved.
+            Unauthorized use or reproduction is prohibited.
+
+        </span>
+
+
+        <!-- Reset Button -->
+        <button class="footer-btn"
+                onclick="location.reload();">
+
+            ♻️ Reset
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+// =====================================================================
+// ===================  CONFIGURATION CENTRALE  ======================
+// =====================================================================
+// C'EST ICI, ET UNIQUEMENT ICI, QU'ON AJOUTE UNE LANGUE OU UN CHAPITRE.
+// Tout le reste (menus, traductions, chargement des fichiers) est
+// généré automatiquement à partir de ces deux tableaux.
+// =====================================================================
+
+// ---------------------------------------------------------------------
+// LANGUES DISPONIBLES
+// Pour ajouter une langue (ex. l'allemand) :
+//   1. Ajoutez un objet ci-dessous avec son "code" (ex. 'de') et ses
+//      traductions d'interface.
+//   2. Pour CHAQUE chapitre existant, ajoutez les fichiers de contenu
+//      correspondants en respectant la convention de nommage :
+//        - Sous-titres : SUBTITLES_DE_CH1, SUBTITLES_DE_CH2, ...
+//        - Images de diapo : NomDeBase-DE.JPG
+//        - Son : Chapter1-son-DE.mp3, Chapter2-son-DE.mp3, ...
+// C'est tout : les radios, les traductions et le chargement des
+// sous-titres se mettent à jour tout seuls.
+// ---------------------------------------------------------------------
+const LANGUAGES = [
+    {
+        code: 'fr',
+        label: 'Français',
+        ui: {
+            chapter: "Chapitre", play: "Lecture", pause: "Pause",
+            subtitles: "Sous-titres", none: "Aucun",
+            accessibility: "Accessibilité", transcript: "Transcription",
+            fullTranscript: "Transcription complète",
+            subtitleSize: "Taille des sous-titres", small: "DYS",
+            normal: "Normale", large: "Zoom Visuel",
+            contrast: "Contraste", high: "Élevé",
+            playbackSpeed: "Vitesse de lecture",
+            mute: "Couper le son", unmute: "Rétablir le son",
+            nextChapter: "Prochain chapitre"
+        }
+    },
+    {
+        code: 'en',
+        label: 'English',
+        ui: {
+            chapter: "Chapter", play: "Play", pause: "Pause",
+            subtitles: "Subtitles", none: "None",
+            accessibility: "Accessibility", transcript: "Transcript",
+            fullTranscript: "Full transcript",
+            subtitleSize: "Subtitle size", small: "SpLD",
+            normal: "Normal", large: "Visual Zoom",
+            contrast: "Contrast", high: "High",
+            playbackSpeed: "Playback speed",
+            mute: "Mute", unmute: "Unmute",
+            nextChapter: "Next chapter"
+        }
+    },
+    {
+        code: 'es',
+        label: 'Español',
+        ui: {
+            chapter: "Capítulo", play: "Reproducir", pause: "Pausa",
+            subtitles: "Subtítulos", none: "Ninguno",
+            accessibility: "Accesibilidad", transcript: "Transcripción",
+            fullTranscript: "Transcripción completa",
+            subtitleSize: "Tamaño de los subtítulos", small: "DEA",
+            normal: "Normal", large: "Zoom Visual",
+            contrast: "Contraste", high: "Alto",
+            playbackSpeed: "Velocidad de reproducción",
+            mute: "Silenciar", unmute: "Activar sonido",
+            nextChapter: "Próximo capítulo"
+        }
+    },
+    {
+        code: 'it',
+        label: 'Italiano',
+        ui: {
+            chapter: "Capitolo", play: "Riproduci", pause: "Pausa",
+            subtitles: "Sottotitoli", none: "Nessuno",
+            accessibility: "Accessibilità", transcript: "Trascrizione",
+            fullTranscript: "Trascrizione completa",
+            subtitleSize: "Dimensione dei sottotitoli", small: "DSA",
+            normal: "Normale", large: "Zoom Visivo",
+            contrast: "Contrasto", high: "Alto",
+            playbackSpeed: "Velocità di riproduzione",
+            mute: "Disattiva audio", unmute: "Riattiva audio",
+            nextChapter: "Prossimo capitolo"
+        }
+    },
+    {
+        code: 'de',
+        label: 'Deutsch  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Kapitel", play: "Wiedergabe", pause: "Pause",
+            subtitles: "Untertitel", none: "Keine",
+            accessibility: "Barrierefreiheit", transcript: "Transkript",
+            fullTranscript: "Vollständiges Transkript",
+            subtitleSize: "Untertitelgröße", small: "LRS",
+            normal: "Normal", large: "Visueller Zoom",
+            contrast: "Kontrast", high: "Hoch",
+            playbackSpeed: "Wiedergabegeschwindigkeit",
+            mute: "Ton ausschalten", unmute: "Ton einschalten",
+            nextChapter: "Nächstes Kapitel"
+        }
+    },
+    {
+        code: 'pt',
+        label: 'Português  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Capítulo", play: "Reproduzir", pause: "Pausa",
+            subtitles: "Legendas", none: "Nenhuma",
+            accessibility: "Acessibilidade", transcript: "Transcrição",
+            fullTranscript: "Transcrição completa",
+            subtitleSize: "Tamanho das legendas", small: "Dificuldades de aprendizagem",
+            normal: "Normal", large: "Zoom visual",
+            contrast: "Contraste", high: "Elevado",
+            playbackSpeed: "Velocidade de reprodução",
+            mute: "Silenciar", unmute: "Ativar som",
+            nextChapter: "Próximo capítulo"
+        }
+    },
+    {
+        code: 'nl',
+        label: 'Nederlands  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Hoofdstuk", play: "Afspelen", pause: "Pauze",
+            subtitles: "Ondertitels", none: "Geen",
+            accessibility: "Toegankelijkheid", transcript: "Transcriptie",
+            fullTranscript: "Volledige transcriptie",
+            subtitleSize: "Ondertitelgrootte", small: "Dyslexie",
+            normal: "Normaal", large: "Visuele zoom",
+            contrast: "Contrast", high: "Hoog",
+            playbackSpeed: "Afspeelsnelheid",
+            mute: "Geluid uitschakelen", unmute: "Geluid inschakelen",
+            nextChapter: "Volgend hoofdstuk"
+        }
+    },
+    {
+        code: 'pl',
+        label: 'Polski (🔒 👉 Fr)',
+        ui: {
+            chapter: "Rozdział", play: "Odtwórz", pause: "Pauza",
+            subtitles: "Napisy", none: "Brak",
+            accessibility: "Dostępność", transcript: "Transkrypt",
+            fullTranscript: "Pełny transkrypt",
+            subtitleSize: "Rozmiar napisów", small: "Dysleksja",
+            normal: "Normalny", large: "Powiększenie",
+            contrast: "Kontrast", high: "Wysoki",
+            playbackSpeed: "Prędkość odtwarzania",
+            mute: "Wycisz", unmute: "Włącz dźwięk",
+            nextChapter: "Następny rozdział"
+        }
+    },
+    {
+        code: 'ru',
+        label: 'Русский  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Глава", play: "Воспроизвести", pause: "Пауза",
+            subtitles: "Субтитры", none: "Нет",
+            accessibility: "Доступность", transcript: "Транскрипт",
+            fullTranscript: "Полный транскрипт",
+            subtitleSize: "Размер субтитров", small: "Дислексия",
+            normal: "Обычный", large: "Визуальное увеличение",
+            contrast: "Контраст", high: "Высокий",
+            playbackSpeed: "Скорость воспроизведения",
+            mute: "Отключить звук", unmute: "Включить звук",
+            nextChapter: "Следующая глава"
+        }
+    },
+    {
+        code: 'zh',
+        label: '中文  (🔒 👉 Fr)',
+        ui: {
+            chapter: "章节", play: "播放", pause: "暂停",
+            subtitles: "字幕", none: "无",
+            accessibility: "无障碍", transcript: "转录",
+            fullTranscript: "完整转录",
+            subtitleSize: "字幕大小", small: "阅读障碍",
+            normal: "正常", large: "视觉放大",
+            contrast: "对比度", high: "高",
+            playbackSpeed: "播放速度",
+            mute: "静音", unmute: "取消静音",
+            nextChapter: "下一章"
+        }
+    },
+    {
+        code: 'ja',
+        label: '日本語  (🔒 👉 Fr)',
+        ui: {
+            chapter: "チャプター", play: "再生", pause: "一時停止",
+            subtitles: "字幕", none: "なし",
+            accessibility: "アクセシビリティ", transcript: "文字起こし",
+            fullTranscript: "完全な文字起こし",
+            subtitleSize: "字幕サイズ", small: "読書障害",
+            normal: "通常", large: "視覚ズーム",
+            contrast: "コントラスト", high: "高",
+            playbackSpeed: "再生速度",
+            mute: "ミュート", unmute: "ミュート解除",
+            nextChapter: "次のチャプター"
+        }
+    },
+    {
+        code: 'ar',
+        label: 'العربية (🔒 👉 Fr)',
+        ui: {
+            chapter: "الفصل", play: "تشغيل", pause: "إيقاف مؤقت",
+            subtitles: "الترجمة", none: "بدون",
+            accessibility: "إمكانية الوصول", transcript: "النص",
+            fullTranscript: "النص الكامل",
+            subtitleSize: "حجم الترجمة", small: "عسر القراءة",
+            normal: "عادي", large: "تكبير مرئي",
+            contrast: "التباين", high: "مرتفع",
+            playbackSpeed: "سرعة التشغيل",
+            mute: "كتم الصوت", unmute: "إلغاء كتم الصوت",
+            nextChapter: "الفصل التالي"
+        }
+    },
+    {
+        code: 'tr',
+        label: 'Türkçe  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Bölüm", play: "Oynat", pause: "Duraklat",
+            subtitles: "Altyazılar", none: "Yok",
+            accessibility: "Erişilebilirlik", transcript: "Transkript",
+            fullTranscript: "Tam transkript",
+            subtitleSize: "Altyazı boyutu", small: "Disleksi",
+            normal: "Normal", large: "Görsel yakınlaştırma",
+            contrast: "Kontrast", high: "Yüksek",
+            playbackSpeed: "Oynatma hızı",
+            mute: "Sesi kapat", unmute: "Sesi aç",
+            nextChapter: "Sonraki bölüm"
+        }
+    },
+    {
+        code: 'ko',
+        label: '한국어  (🔒 👉 Fr)',
+        ui: {
+            chapter: "챕터", play: "재생", pause: "일시정지",
+            subtitles: "자막", none: "없음",
+            accessibility: "접근성", transcript: "대본",
+            fullTranscript: "전체 대본",
+            subtitleSize: "자막 크기", small: "읽기 장애",
+            normal: "보통", large: "시각 확대",
+            contrast: "대비", high: "높음",
+            playbackSpeed: "재생 속도",
+            mute: "음소거", unmute: "음소거 해제",
+            nextChapter: "다음 챕터"
+        }
+    }
+];
+
+// ---------------------------------------------------------------------
+// CHAPITRES DISPONIBLES
+// Pour ajouter un chapitre (ex. le chapitre 4) :
+//   1. Ajoutez un objet ci-dessous avec son "num" (4) et son libellé
+//      dans chaque langue.
+//   2. Déposez les fichiers correspondants avec la convention :
+//        - slide/slidesChapter4-slides.js   → doit définir SLIDES_CH4
+//        - subtitle/subtitleChapter4-subtitles.js
+//            → doit définir SUBTITLES_FR_CH4, SUBTITLES_EN_CH4, ...
+//        - Son : son/Chapter4-son-FR.mp3, son/Chapter4-son-EN.mp3, ...
+// C'est tout : le menu déroulant, le chargement des fichiers ET
+// l'enchaînement automatique vers le chapitre suivant se mettent à
+// jour tout seuls, dans l'ordre où les chapitres apparaissent ici.
+// ---------------------------------------------------------------------
+const CHAPTERS_CONFIG = [
+    { key: 'Chapter0', num: 0, baseLabel: 'Introduction' },
+    { key: 'Chapter1', num: 1, baseLabel: 'Chapter' },
+    { key: 'Chapter2', num: 2, baseLabel: 'Chapter' },
+    { key: 'Chapter3', num: 3, baseLabel: 'Chapter' },
+    { key: 'Chapter4', num: 4, baseLabel: 'Chapter' },
+    { key: 'Chapter5', num: 5, baseLabel: 'Chapter' },
+];
+
+// Fonction utilitaire pour générer les labels
+function generateChapterLabels() {
+
+    CHAPTERS_CONFIG.forEach(chapter => {
+
+        // ---------------------------------------------------------
+        // Recherche du chapitre dans chapterTitles.js
+        // ---------------------------------------------------------
+        const titleConfig =
+            (typeof CHAPTER_TITLES !== 'undefined')
+                ? CHAPTER_TITLES.find(item => item.key === chapter.key)
+                : null;
+
+        chapter.label = {};
+
+        LANGUAGES.forEach(lang => {
+
+            const langCode = lang.code;
+
+            // =====================================================
+            // PRIORITÉ 1 : titre provenant de chapterTitles.js
+            // =====================================================
+            if (
+                titleConfig &&
+                titleConfig.label &&
+                titleConfig.label[langCode]
+            ) {
+                chapter.label[langCode] =
+                    titleConfig.label[langCode];
+
+                return;
+            }
+
+            // =====================================================
+            // PRIORITÉ 2 : fonctionnement actuel en BACKUP
+            // =====================================================
+            const translations = {
+                fr: 'Chapitre',
+                en: 'Chapter',
+                es: 'Capítulo',
+                it: 'Capitolo',
+                de: 'Kapitel',
+                pt: 'Capítulo',
+                nl: 'Hoofdstuk',
+                pl: 'Rozdział',
+                ru: 'Глава',
+                zh: '章节',
+                ja: 'チャプター',
+                ar: 'الفصل',
+                tr: 'Bölüm',
+                ko: '챕터'
+            };
+
+            const translated =
+                translations[langCode] || chapter.baseLabel;
+
+            chapter.label[langCode] =
+                `${translated} ${chapter.num}`;
+        });
+    });
+}
+// Appelez cette fonction au démarrage
+generateChapterLabels();
+
+
+// =====================================================================
+// ===================  FIN DE LA CONFIGURATION  =====================
+// À partir d'ici, le code est générique : il ne devrait plus avoir
+// besoin d'être modifié quand vous ajoutez une langue ou un chapitre.
+// =====================================================================
+
+
+// Textes d'interface qui ne dépendent pas de la langue par un tableau,
+// juste id d'élément → clé de traduction. Un seul endroit à modifier si
+// vous ajoutez un nouveau libellé d'interface statique.
+const TEXT_BINDINGS = {
+    chapterLabel: 'chapter',
+    subtitleLabel: 'subtitles',
+    accessibilityText: 'accessibility',
+    transcriptText: 'transcript',
+    subtitleSizeLabel: 'subtitleSize',
+    smallSize: 'small',
+    normalSize: 'normal',
+    largeSize: 'large',
+    contrastLabel: 'contrast',
+    normalContrast: 'normal',
+    highContrast: 'high',
+    speedLabel: 'playbackSpeed',
+    fullTranscript: 'fullTranscript'
+};
+
+// ===================================================================
+// ÉLÉMENTS DOM
+// ===================================================================
+const videoSelect = document.getElementById('videoSelect');
+const languageSelect = document.getElementById('languageSelect');
+const audio = document.getElementById('audioPlayer');
+const slideImage = document.getElementById('slideImage');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const playPauseIcon = document.getElementById('playPauseIcon');
+const playPauseText = document.getElementById('playPauseText');
+const progressBar = document.getElementById('progressBar');
+const progressFilled = document.getElementById('progressFilled');
+const timeDisplay = document.getElementById('timeDisplay');
+const subtitleTrack = document.getElementById('subtitleTrack');
+const subtitleText = document.getElementById('subtitleText');
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsPanel = document.getElementById('settingsPanel');
+const transcriptBtn = document.getElementById('transcriptBtn');
+const transcriptPanel = document.getElementById('transcriptPanel');
+const transcriptContent = document.getElementById('transcriptContent');
+const subtitleSizeSelect = document.getElementById('subtitleSize');
+const contrastSelect = document.getElementById('contrastMode');
+const speedButtons = document.querySelectorAll('.speed-btn');
+const centerPlayOverlay = document.getElementById('centerPlayOverlay');
+const centerPlayIcon = document.getElementById('centerPlayIcon');
+const muteToggleBtn = document.getElementById('muteToggleBtn');
+const muteIcon = document.getElementById('muteIcon');
+const menuToggleBtn = document.getElementById('menuToggleBtn');
+const menuToggleText = document.getElementById('menuToggleText');
+const menuLangBadge = document.getElementById('menuLangBadge');
+
+// NOUVEAU : éléments de l'overlay de transition entre chapitres
+const chapterTransitionOverlay = document.getElementById('chapterTransitionOverlay');
+const chapterTransitionText = document.getElementById('chapterTransitionText');
+
+// ===================================================================
+// ÉTAT
+// ===================================================================
+let CHAPTERS = {};               // construit dynamiquement après chargement des fichiers
+let currentChapter = CHAPTERS_CONFIG[0].key;
+let currentSlides = [];
+let currentSubtitles = [];
+let currentLang = LANGUAGES[0].code;   // langue par défaut = la première du tableau
+let isPlaying = false;
+let currentSlideImageSrc = '';
+let currentSlideBaseImage = ''; // chemin non localisé de la diapo actuelle (ex: "image/Chapter1/Diapositive1.jpg"), utilisé pour le repli si l'image manque
+
+// NOUVEAU : identifiant du timer de transition automatique vers le
+// chapitre suivant, pour pouvoir l'annuler si l'utilisateur intervient
+// manuellement (changement de chapitre, etc.) pendant le décompte.
+let chapterTransitionTimeout = null;
+
+// ===================================================================
+// HELPERS langue
+// ===================================================================
+
+// Ramène toute valeur de langue (y compris "none") vers un code de
+// LANGUAGES valide, utilisé pour l'interface / le son / les images.
+// Seule la sélection des sous-titres eux-mêmes respecte "none" tel quel.
+function effectiveLang(lang) {
+    const known = LANGUAGES.some(l => l.code === lang);
+    return known ? lang : LANGUAGES[0].code;
+}
+
+function getUI(lang) {
+    const found = LANGUAGES.find(l => l.code === effectiveLang(lang));
+    return found ? found.ui : LANGUAGES[0].ui;
+}
+
+// ===================================================================
+// PERSISTANCE DES PRÉFÉRENCES (localStorage)
+// ===================================================================
+// Mémorise langue des sous-titres, taille, contraste, vitesse et état
+// muet, pour que l'étudiant retrouve son confort de lecture d'une
+// visite à l'autre sans tout reconfigurer.
+const SETTINGS_STORAGE_KEY = 'bridgePlayerSettings';
+
+function loadSavedSettings() {
+    try {
+        const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+        console.warn('⚠️ Impossible de lire les préférences enregistrées :', e);
+        return null;
+    }
+}
+
+function saveSettings() {
+    try {
+        const settings = {
+            lang: currentLang,
+            subtitleSize: subtitleSizeSelect.value,
+            contrast: contrastSelect.value,
+            speed: audio.playbackRate,
+            muted: audio.muted
+        };
+        localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
+    } catch (e) {
+        console.warn("⚠️ Impossible d'enregistrer les préférences :", e);
+    }
+}
+
+// Applique les préférences sauvegardées (si présentes) avant le premier
+// rendu de l'interface. Chaque valeur est vérifiée avant d'être utilisée,
+// pour ne jamais planter si le fichier de préférences est corrompu ou
+// périmé (ex. une langue qui n'existe plus dans LANGUAGES).
+function applySavedSettings() {
+    const saved = loadSavedSettings();
+    if (!saved) return;
+
+    if (saved.lang === 'none' || LANGUAGES.some(l => l.code === saved.lang)) {
+        currentLang = saved.lang;
+    }
+
+    if (['small', 'normal', 'large'].includes(saved.subtitleSize)) {
+        subtitleSizeSelect.value = saved.subtitleSize;
+        subtitleText.className = `subtitle-text ${saved.subtitleSize}`;
+    }
+
+    if (['normal', 'high'].includes(saved.contrast)) {
+        contrastSelect.value = saved.contrast;
+        if (saved.contrast === 'high') subtitleText.classList.add('high-contrast');
+    }
+
+    if (typeof saved.speed === 'number' && saved.speed > 0) {
+        audio.playbackRate = saved.speed;
+        speedButtons.forEach(b => {
+            b.classList.toggle('active', parseFloat(b.dataset.speed) === saved.speed);
+        });
+    }
+
+    if (typeof saved.muted === 'boolean') {
+        audio.muted = saved.muted;
+    }
+}
+
+// ===================================================================
+// CHARGEMENT DYNAMIQUE DES FICHIERS DE CHAPITRES
+// ===================================================================
+function loadScript(src) {
+    return new Promise((resolve) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = () => resolve(true);
+        s.onerror = () => {
+            console.warn(`⚠️ Fichier introuvable : ${src}`);
+            resolve(false);
+        };
+        document.head.appendChild(s);
+    });
+}
+
+async function loadAllChapterFiles() {
+    const files = [];
+    CHAPTERS_CONFIG.forEach(({ num }) => {
+        files.push(`slide/slidesChapter${num}-slides.js`);
+        files.push(`subtitle/subtitleChapter${num}-subtitles.js`);
+    });
+    await Promise.all(files.map(loadScript));
+}
+
+// Construit l'objet CHAPTERS à partir des variables globales définies
+// par les fichiers chargés ci-dessus. Convention de nommage attendue :
+//   - Diapositives : SLIDES_CH<numéro>            ex: SLIDES_CH1
+//   - Sous-titres  : SUBTITLES_<CODE_LANGUE>_CH<numéro>  ex: SUBTITLES_FR_CH1
+function buildChaptersData() {
+    const chapters = {};
+    CHAPTERS_CONFIG.forEach(({ key, num }) => {
+        const slidesVarName = `SLIDES_CH${num}`;
+        const subtitles = {};
+
+        const defaultLangCode = LANGUAGES[0].code; // langue de repli = la première de LANGUAGES (FR par défaut)
+
+        LANGUAGES.forEach(({ code }) => {
+            const subVarName = `SUBTITLES_${code.toUpperCase()}_CH${num}`;
+            let value = window[subVarName];
+
+            if (!value) {
+                const fallbackVarName = `SUBTITLES_${defaultLangCode.toUpperCase()}_CH${num}`;
+                console.warn(`⚠️ Variable manquante : ${subVarName} (chapitre "${key}", langue "${code}") — repli sur "${defaultLangCode}"`);
+                value = window[fallbackVarName] || [];
+            }
+
+            subtitles[code] = value;
+        });
+
+        if (!window[slidesVarName]) {
+            console.warn(`⚠️ Variable manquante : ${slidesVarName} (chapitre "${key}")`);
+        }
+
+        chapters[key] = {
+            slides: window[slidesVarName] || [],
+            subtitles
+        };
+    });
+    return chapters;
+}
+// ===================================================================
+// GÉNÉRATION DYNAMIQUE DU MENU (Langue dans le bouton)
+// ===================================================================
+function updateInterfaceLanguage() {
+    const t = getUI(currentLang);
+
+    Object.entries(TEXT_BINDINGS).forEach(([id, key]) => {
+        const el = document.getElementById(id);
+        if (el && t[key] !== undefined) {
+            el.textContent = t[key];
+        }
+    });
+
+    renderChapterOptions();
+    renderLanguageSelect();
+    updatePlayPauseButton();
+    
+    // Mettre à jour le badge de langue
+    if (menuLangBadge) {
+        menuLangBadge.textContent = currentLang.toUpperCase();
+    }
+}
+
+// ===================================================================
+// GÉNÉRATION DYNAMIQUE DU MENU (chapitres + langues)
+// ===================================================================
+
+function renderChapterOptions() {
+    const lang = effectiveLang(currentLang);
+    const previousValue = currentChapter;
+
+    videoSelect.innerHTML = '';
+
+    CHAPTERS_CONFIG.forEach(chapter => {
+        const option = document.createElement('option');
+
+        option.value = chapter.key;
+        option.textContent =
+            chapter.label[lang] ||
+            chapter.label[LANGUAGES[0].code] ||
+            chapter.key;
+
+        videoSelect.appendChild(option);
+    });
+
+    if (CHAPTERS_CONFIG.some(chapter => chapter.key === previousValue)) {
+        videoSelect.value = previousValue;
+    }
+}
+
+
+function renderLanguageSelect() {
+    const t = getUI(currentLang);
+
+    languageSelect.innerHTML = '';
+
+    const noneOption = document.createElement('option');
+    noneOption.value = 'none';
+    noneOption.textContent = t.none || 'Aucun';
+    languageSelect.appendChild(noneOption);
+
+    LANGUAGES.forEach(language => {
+        const option = document.createElement('option');
+
+        option.value = language.code;
+        option.textContent = language.label;
+
+        languageSelect.appendChild(option);
+    });
+
+    const languageExists = LANGUAGES.some(
+        language => language.code === currentLang
+    );
+
+    languageSelect.value = languageExists
+        ? currentLang
+        : LANGUAGES[0].code;
+}
+// ===================================================================
+// INTERFACE LINGUISTIQUE
+// ===================================================================
+function updateInterfaceLanguage() {
+    const t = getUI(currentLang);
+
+    Object.entries(TEXT_BINDINGS).forEach(([id, key]) => {
+        const el = document.getElementById(id);
+
+        if (el && t[key] !== undefined) {
+            el.textContent = t[key];
+        }
+    });
+
+    renderChapterOptions();
+    renderLanguageSelect();
+    updatePlayPauseButton();
+    // Mettre à jour le badge de langue dans le bouton Menu
+    if (menuLangBadge) {
+        menuLangBadge.textContent = currentLang.toUpperCase();
+    }
+}
+
+// ===================================================================
+// FONCTIONS time line
+// ===================================================================
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '00:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+// ===================================================================
+// FONCTIONS Subtitles a charger
+// ===================================================================
+function loadTranscript(subtitles) {
+    transcriptContent.innerHTML = '';
+    subtitles.forEach(sub => {
+        const entry = document.createElement('div');
+        entry.className = 'transcript-entry';
+        const plainText = sub.text.replace(/<[^>]*>/g, '');
+        entry.innerHTML = `
+            <div class="transcript-time">${formatTime(sub.start)} - ${formatTime(sub.end)}</div>
+            <div class="transcript-text">${plainText}</div>
+        `;
+        entry.addEventListener('click', () => {
+            audio.currentTime = sub.start;
+            if (!isPlaying) {
+                audio.play();
+                updatePlayPauseButton();
+            }
+        });
+        transcriptContent.appendChild(entry);
+    });
+}
+
+// Affiche le sous-titre actif au temps courant
+function updateSubtitles() {
+    if (currentSubtitles.length === 0) {
+        subtitleTrack.style.display = 'none';
+        return;
+    }
+
+    const currentTime = audio.currentTime;
+    const activeSub = currentSubtitles.find(sub =>
+        currentTime >= sub.start && currentTime <= sub.end
+    );
+
+    if (activeSub) {
+        subtitleText.innerHTML = activeSub.text;
+        subtitleTrack.style.display = 'block';
+    } else {
+        subtitleTrack.style.display = 'none';
+    }
+}
+
+// ===================================================================
+// FONCTION : obtenir la diapositive dans la bonne langue
+// Diapositive1.JPG  →  Diapositive1-FR.JPG
+// Diapositive2.gif  →  Diapositive2-FR.gif   (fonctionne aussi pour les GIF animés)
+// Diapositive3.PNG  →  Diapositive3-FR.PNG
+//
+// L'extension n'est plus imposée : elle est reprise telle qu'écrite
+// dans le fichier slidesChapterX-slides.js (champ "image"). Vous pouvez
+// donc mélanger les formats d'une diapo à l'autre (jpg, png, gif, webp...).
+// ===================================================================
+function getLocalizedSlideImage(imagePath, lang) {
+    const langCode = effectiveLang(lang).toUpperCase();
+    const lastDot = imagePath.lastIndexOf('.');
+
+    if (lastDot === -1) {
+        console.warn(`⚠️ Chemin d'image sans extension : "${imagePath}"`);
+        return imagePath;
+    }
+
+    const baseName = imagePath.substring(0, lastDot);
+    const extension = imagePath.substring(lastDot + 1);
+
+    // Vérifie si l'image a déjà un code langue
+    const lastDash = baseName.lastIndexOf('-');
+    
+    let baseImagePath;
+    
+    if (lastDash !== -1) {
+        const suffix = baseName.substring(lastDash + 1);
+        
+        // Si le suffix est un code langue, on l'enlève pour avoir la base
+        if (/^[A-Z]{2,3}$/.test(suffix)) {
+            baseImagePath = `${baseName.substring(0, lastDash)}.${extension}`;
+        } else {
+            baseImagePath = imagePath;
+        }
+    } else {
+        baseImagePath = imagePath;
+    }
+
+    // Retourne le chemin avec la langue demandée
+    return `${baseName}-${langCode}.${extension}`;
+}
+
+// ===================================================================
+// FONCTIONS Gestion des diapositives
+// ===================================================================
+
+function getLocalizedSlideImage(imagePath, lang) {
+    const langCode = effectiveLang(lang).toUpperCase();
+    const lastDot = imagePath.lastIndexOf('.');
+
+    if (lastDot === -1) {
+        return imagePath;
+    }
+
+    const baseName = imagePath.substring(0, lastDot);
+    const extension = imagePath.substring(lastDot + 1);
+
+    // Vérifie si l'image a déjà un code langue (ex: Bridge-FR.png)
+    const lastDash = baseName.lastIndexOf('-');
+    
+    if (lastDash !== -1) {
+        const suffix = baseName.substring(lastDash + 1);
+        
+        // Si c'est un code langue, on le remplace
+        if (/^[A-Z]{2,3}$/.test(suffix)) {
+            const baseWithoutLang = baseName.substring(0, lastDash);
+            return `${baseWithoutLang}-${langCode}.${extension}`;
+        }
+    }
+
+    // Pas de code langue → on l'ajoute
+    return `${baseName}-${langCode}.${extension}`;
+}
+
+
+
+
+function updateSlideImage() {
+    if (currentSlides.length === 0) return;
+
+    const currentTime = audio.currentTime;
+    const activeSlide = currentSlides.find(slide =>
+        currentTime >= slide.start && currentTime <= slide.end
+    );
+
+    if (activeSlide) {
+        const localizedImage = getLocalizedSlideImage(activeSlide.image, currentLang);
+        
+        // Stocke le chemin de base SANS la langue
+        const lastDot = activeSlide.image.lastIndexOf('.');
+        const baseName = activeSlide.image.substring(0, lastDot);
+        const extension = activeSlide.image.substring(lastDot + 1);
+        const lastDash = baseName.lastIndexOf('-');
+        
+        if (lastDash !== -1) {
+            const suffix = baseName.substring(lastDash + 1);
+            if (/^[A-Z]{2,3}$/.test(suffix)) {
+                currentSlideBaseImage = `${baseName.substring(0, lastDash)}.${extension}`;
+            } else {
+                currentSlideBaseImage = activeSlide.image;
+            }
+        } else {
+            currentSlideBaseImage = activeSlide.image;
+        }
+        
+        if (localizedImage !== currentSlideImageSrc) {
+            currentSlideImageSrc = localizedImage;
+            slideImage.src = localizedImage;
+        }
+    }
+}
+
+
+// Si l'image demandée pour la langue courante n'existe pas, on retente
+// automatiquement avec la langue par défaut (la première de LANGUAGES).
+slideImage.addEventListener('error', function() {
+    const failedSrc = slideImage.getAttribute('src');
+    
+    if (!failedSrc) return;
+
+    // Langue par défaut = première langue de LANGUAGES (FR)
+    const defaultLangCode = LANGUAGES[0].code.toUpperCase();
+    
+    // Extrait le nom de base sans langue
+    let baseImage = currentSlideBaseImage;
+    
+    if (!baseImage) {
+        // Si on n'a pas de baseImage, on l'extrait du src actuel
+        const lastDot = failedSrc.lastIndexOf('.');
+        if (lastDot !== -1) {
+            const baseName = failedSrc.substring(0, lastDot);
+            const extension = failedSrc.substring(lastDot + 1);
+            const lastDash = baseName.lastIndexOf('-');
+            
+            if (lastDash !== -1) {
+                const suffix = baseName.substring(lastDash + 1);
+                if (/^[A-Z]{2,3}$/.test(suffix)) {
+                    baseImage = `${baseName.substring(0, lastDash)}.${extension}`;
+                }
+            }
+        }
+    }
+    
+    if (!baseImage) return;
+
+    // Construit le fallback en FR
+    const lastDotBase = baseImage.lastIndexOf('.');
+    const baseNameNoExt = baseImage.substring(0, lastDotBase);
+    const extension = baseImage.substring(lastDotBase + 1);
+    const fallbackSrc = `${baseNameNoExt}-${defaultLangCode}.${extension}`;
+
+    if (failedSrc === fallbackSrc) {
+        console.warn(`⚠️ Image introuvable : ${failedSrc}`);
+        return;
+    }
+
+    console.warn(`⚠️ Repli sur : ${fallbackSrc}`);
+    currentSlideImageSrc = fallbackSrc;
+    slideImage.src = fallbackSrc;
+});
+
+// ===================================================================
+// FONCTIONS du bouton Pause/Play
+// ===================================================================
+function updatePlayPauseButton() {
+    const t = getUI(currentLang);
+    if (audio.paused) {
+        playPauseIcon.textContent = '▶';
+        playPauseText.textContent = t.play;
+        isPlaying = false;
+    } else {
+        playPauseIcon.textContent = '⏸';
+        playPauseText.textContent = t.pause;
+        isPlaying = true;
+    }
+}
+
+// Icône affichée au centre de l'image (grand play/pause semi-transparent)
+function updateCenterPlayIcon() {
+    centerPlayIcon.textContent = audio.paused ? '▶' : '⏸';
+    const t = getUI(currentLang);
+    centerPlayOverlay.setAttribute('aria-label', audio.paused ? t.play : t.pause);
+}
+
+// Point d'entrée unique pour lecture/pause : bouton dédié, clic sur
+// l'image, bouton central superposé et raccourci clavier passent tous
+// par ici, pour rester synchronisés quelle que soit l'origine du clic.
+function togglePlayPause() {
+    if (audio.paused) audio.play();
+    else audio.pause();
+}
+
+// Coupe/rétablit le son indépendamment de la lecture
+function updateMuteButton() {
+    muteIcon.textContent = audio.muted ? '🔇' : '🔊';
+    const t = getUI(currentLang);
+    muteToggleBtn.setAttribute('aria-label', audio.muted ? t.unmute : t.mute);
+}
+
+function toggleMute() {
+    audio.muted = !audio.muted;
+    updateMuteButton();
+    saveSettings();
+}
+
+// ===================================================================
+// FONCTIONS de la barre de progression
+// ===================================================================
+function updateProgressBar() {
+    if (isNaN(audio.duration)) return;
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progressFilled.style.width = `${percent}%`;
+    timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+}
+
+// ===================================================================
+// FONCTIONS du son (paroles en plusieurs langues)
+// ===================================================================
+function getSonUrl(chapter, lang) {
+    const langCode = effectiveLang(lang).toUpperCase();
+    return `son/${chapter}-son-${langCode}.mp3`;
+}
+
+// ===================================================================
+// ENCHAÎNEMENT AUTOMATIQUE VERS LE CHAPITRE SUIVANT
+// ===================================================================
+
+// Renvoie la clé du chapitre suivant selon l'ordre de CHAPTERS_CONFIG,
+// ou null si le chapitre donné est le dernier de la liste.
+function getNextChapterKey(chapterKey) {
+    const idx = CHAPTERS_CONFIG.findIndex(c => c.key === chapterKey);
+    if (idx === -1 || idx === CHAPTERS_CONFIG.length - 1) return null;
+    return CHAPTERS_CONFIG[idx + 1].key;
+}
+
+// Annule un enchaînement automatique en attente (ex. si l'utilisateur
+// change manuellement de chapitre pendant le décompte de 6 secondes)
+// et masque l'overlay du sablier.
+function cancelChapterTransition() {
+    if (chapterTransitionTimeout !== null) {
+        clearTimeout(chapterTransitionTimeout);
+        chapterTransitionTimeout = null;
+    }
+    if (chapterTransitionOverlay) {
+        chapterTransitionOverlay.style.display = 'none';
+    }
+}
+
+// Déclenchée à la fin de la lecture audio d'un chapitre. Si c'est le
+// dernier chapitre, ne fait rien. Sinon, affiche le sablier avec le
+// message "Prochain chapitre : <nom>" dans la langue courante, puis
+// bascule automatiquement sur le chapitre suivant après 4 secondes.
+function handleChapterEnded() {
+    const nextKey = getNextChapterKey(currentChapter);
+
+    // Dernier chapitre : on ne fait rien, comme demandé.
+    if (!nextKey) return;
+
+    const nextChapterConfig = CHAPTERS_CONFIG.find(c => c.key === nextKey);
+    const lang = effectiveLang(currentLang);
+    const t = getUI(currentLang);
+    const nextLabel = (nextChapterConfig && nextChapterConfig.label[lang])
+        || (nextChapterConfig && nextChapterConfig.label[LANGUAGES[0].code])
+        || nextKey;
+
+    if (chapterTransitionText) {
+        const prefix = t.nextChapter || 'Prochain chapitre';
+        chapterTransitionText.textContent = `${prefix} : ${nextLabel}`;
+    }
+
+    if (chapterTransitionOverlay) {
+        chapterTransitionOverlay.style.display = 'flex';
+    }
+
+    chapterTransitionTimeout = setTimeout(() => {
+        chapterTransitionTimeout = null;
+        if (chapterTransitionOverlay) {
+            chapterTransitionOverlay.style.display = 'none';
+        }
+        loadChapter(nextKey);
+        videoSelect.value = nextKey;
+        audio.play();
+    }, 6000);
+}
+
+// ===================================================================
+// FONCTIONS du telechargement du bon chapitre
+// ===================================================================
+function loadChapter(chapterKey) {
+    // Toute demande explicite de chargement de chapitre (manuelle ou
+    // automatique) annule un éventuel décompte de transition en cours.
+    cancelChapterTransition();
+
+    currentChapter = chapterKey;
+    const chapter = CHAPTERS[chapterKey];
+
+    audio.src = getSonUrl(chapterKey, currentLang);
+
+    currentSlides = (chapter && chapter.slides) ? chapter.slides : [];
+
+    currentSlideImageSrc = '';
+    slideImage.removeAttribute('src'); // jamais src = '' : le navigateur rechargerait la page elle-même
+
+    if (currentSlides.length > 0) {
+        const localizedImage = getLocalizedSlideImage(currentSlides[0].image, currentLang);
+        slideImage.src = localizedImage;
+        currentSlideImageSrc = localizedImage;
+    }
+
+    const subs = chapter ? chapter.subtitles : null;
+    if (subs && subs[currentLang]) {
+        currentSubtitles = subs[currentLang];
+        loadTranscript(currentSubtitles);
+        updateSubtitles();
+        console.log(`✅ Chapitre chargé: ${chapterKey} (${currentSubtitles.length} sous-titres, ${currentSlides.length} images)`);
+    } else {
+        currentSubtitles = [];
+        transcriptContent.innerHTML = '';
+        subtitleTrack.style.display = 'none';
+    }
+
+    audio.load();
+    updatePlayPauseButton();
+    updateProgressBar();
+}
+
+// ===================================================================
+// Changement de langue (sous-titres + interface + son + diapo)
+// ===================================================================
+function onSubtitleLangChange(e) {
+    currentLang = e.target.value;
+
+    updateInterfaceLanguage();
+
+    currentSlideImageSrc = '';
+    updateSlideImage();
+
+    const chapter = CHAPTERS[currentChapter];
+    const subs = chapter ? chapter.subtitles : null;
+
+    if (subs && subs[currentLang]) {
+        currentSubtitles = subs[currentLang];
+        loadTranscript(currentSubtitles);
+        updateSubtitles();
+    } else {
+        currentSubtitles = [];
+        transcriptContent.innerHTML = '';
+        subtitleTrack.style.display = 'none';
+    }
+
+    const wasPlaying = !audio.paused;
+    const currentTime = audio.currentTime;
+
+    audio.src = getSonUrl(currentChapter, currentLang);
+    audio.load();
+
+    audio.addEventListener('loadedmetadata', function resumeAudio() {
+        audio.currentTime = currentTime;
+        if (wasPlaying) audio.play();
+        audio.removeEventListener('loadedmetadata', resumeAudio);
+    });
+
+    updateCenterPlayIcon();
+    updateMuteButton();
+    saveSettings();
+}
+
+// ===================================================================
+// Gestion du menu (afficher/masquer les panneaux)
+// ===================================================================
+function setupMenu() {
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const menuToggleText = document.getElementById('menuToggleText');
+    const mainControls = document.getElementById('mainControls');
+
+
+
+
+
+
+    menuToggleText.textContent = "Menu Off";
+
+   // Initialiser le badge de langue
+    if (menuLangBadge) {
+        menuLangBadge.textContent = currentLang.toUpperCase();
+    }
+
+    function toggleDisplay(element, displayType = 'block') {
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = displayType;
+            return true;
+        } else {
+            element.style.display = 'none';
+            return false;
+        }
+    }
+
+    menuToggleBtn.addEventListener('click', () => {
+        const isOpened = toggleDisplay(mainControls, 'flex');
+        if (isOpened) {
+            menuToggleText.textContent = "Menu On";
+        } else {
+            menuToggleText.textContent = "Menu Off";
+            settingsPanel.style.display = 'none';
+            transcriptPanel.style.display = 'none';
+            settingsBtn.classList.remove('active');
+            transcriptBtn.classList.remove('active');
+        }
+    });
+
+    settingsBtn.addEventListener('click', () => {
+        toggleDisplay(settingsPanel, 'block');
+        settingsBtn.classList.toggle('active');
+        if (settingsPanel.style.display === 'block') {
+            transcriptPanel.style.display = 'none';
+            transcriptBtn.classList.remove('active');
+        }
+    });
+
+    transcriptBtn.addEventListener('click', () => {
+        toggleDisplay(transcriptPanel, 'block');
+        transcriptBtn.classList.toggle('active');
+        if (transcriptPanel.style.display === 'block') {
+            settingsPanel.style.display = 'none';
+            settingsBtn.classList.remove('active');
+        }
+    });
+}
+
+// ===================================================================
+// AUTRES ÉVÉNEMENTS (lecture, timeline, réglages)
+// ===================================================================
+function setupPlayerEvents() {
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    centerPlayOverlay.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePlayPause();
+    });
+    // Clic sur l'image elle-même = lecture/pause (en plus du bouton dédié
+    // et du bouton central, pour un accès direct et intuitif)
+    slideImage.addEventListener('click', togglePlayPause);
+
+    muteToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMute();
+    });
+
+    // Les icônes restent synchronisées quelle que soit l'origine du
+    // changement (bouton, image, clavier, fin de piste...)
+    audio.addEventListener('play', () => {
+        updatePlayPauseButton();
+        updateCenterPlayIcon();
+    });
+    audio.addEventListener('pause', () => {
+        updatePlayPauseButton();
+        updateCenterPlayIcon();
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        updateProgressBar();
+        updateSubtitles();
+        updateSlideImage();
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+        updateProgressBar();
+    });
+
+    // NOUVEAU : à la fin du chapitre, on lance (sauf si c'est le
+    // dernier chapitre) le décompte de 4 secondes avant d'enchaîner
+    // automatiquement sur le chapitre suivant.
+    audio.addEventListener('ended', handleChapterEnded);
+
+    // Si le fichier audio de la langue courante est introuvable, on retente
+    // automatiquement avec la langue par défaut (la première de LANGUAGES),
+    // en conservant la position de lecture et l'état pause/lecture.
+    audio.addEventListener('error', () => {
+        const defaultLangCode = LANGUAGES[0].code;
+        const expectedFallbackSrc = getSonUrl(currentChapter, defaultLangCode);
+        const failedSrc = audio.getAttribute('src') || '';
+
+        if (!failedSrc || failedSrc === expectedFallbackSrc) {
+            if (failedSrc) console.warn(`⚠️ Fichier audio introuvable même avec la langue par défaut : ${failedSrc}`);
+            return;
+        }
+
+        console.warn(`⚠️ Fichier audio introuvable : ${failedSrc} — repli sur la langue par défaut (${defaultLangCode})`);
+
+        const wasPlaying = !audio.paused;
+        const currentTime = audio.currentTime;
+
+        audio.src = expectedFallbackSrc;
+        audio.load();
+
+        audio.addEventListener('loadedmetadata', function resumeAudio() {
+            audio.currentTime = currentTime;
+            if (wasPlaying) audio.play();
+            audio.removeEventListener('loadedmetadata', resumeAudio);
+        }, { once: true });
+    });
+
+    progressBar.addEventListener('click', (e) => {
+        // Un clic manuel dans la timeline annule une éventuelle
+        // transition automatique en cours (l'utilisateur reprend la main).
+        cancelChapterTransition();
+        const rect = progressBar.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+    });
+
+    videoSelect.addEventListener('change', (e) => {
+        loadChapter(e.target.value);
+    });
+
+    subtitleSizeSelect.addEventListener('change', (e) => {
+        subtitleText.className = `subtitle-text ${e.target.value}`;
+        if (contrastSelect.value === 'high') {
+            subtitleText.classList.add('high-contrast');
+        }
+        saveSettings();
+    });
+
+    contrastSelect.addEventListener('change', (e) => {
+        if (e.target.value === 'high') {
+            subtitleText.classList.add('high-contrast');
+        } else {
+            subtitleText.classList.remove('high-contrast');
+        }
+        saveSettings();
+    });
+
+languageSelect.addEventListener(
+    'change',
+    onSubtitleLangChange
+);
+
+    speedButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const speed = parseFloat(btn.dataset.speed);
+            audio.playbackRate = speed;
+            speedButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            saveSettings();
+        });
+    });
+}
+
+// ===================================================================
+// NAVIGATION CLAVIER
+// ===================================================================
+// Espace : lecture/pause · Flèches ←/→ : reculer/avancer de 5s
+// M : couper/rétablir le son
+// Désactivé quand le focus est sur un champ natif (select, radio...)
+// pour ne pas interférer avec leur propre navigation au clavier.
+function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        const activeTag = document.activeElement ? document.activeElement.tagName : '';
+        if (['INPUT', 'SELECT', 'TEXTAREA'].includes(activeTag)) return;
+
+        switch (e.key) {
+            case ' ':
+            case 'Spacebar':
+                e.preventDefault(); // empêche le défilement de la page
+                togglePlayPause();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                audio.currentTime = Math.min(audio.currentTime + 5, audio.duration || audio.currentTime);
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                audio.currentTime = Math.max(audio.currentTime - 5, 0);
+                break;
+            case 'm':
+            case 'M':
+                toggleMute();
+                break;
+            default:
+                break; // toutes les autres touches gardent leur comportement normal
+        }
+    });
+}
+
+// ===================================================================
+// INITIALISATION
+// ===================================================================
+document.addEventListener('DOMContentLoaded', async () => {
+    setupMenu();
+
+    // 1. Applique les préférences enregistrées lors d'une visite précédente
+    //    (langue, taille, contraste, vitesse, muet) avant tout rendu.
+    applySavedSettings();
+
+    // 2. Charge dynamiquement les fichiers de tous les chapitres déclarés
+    //    dans CHAPTERS_CONFIG (slides + sous-titres).
+    await loadAllChapterFiles();
+
+    // 3. Construit CHAPTERS à partir des variables globales chargées.
+    CHAPTERS = buildChaptersData();
+
+    // 4. Génère le menu (chapitres + langues), branche les événements
+    //    et active les raccourcis clavier.
+    setupPlayerEvents();
+    setupKeyboardShortcuts();
+
+    // 5. Charge le premier chapitre et affiche l'interface dans la
+    //    langue par défaut (ou celle restaurée depuis localStorage).
+    loadChapter(CHAPTERS_CONFIG[0].key);
+    updateInterfaceLanguage();
+    updateCenterPlayIcon();
+    updateMuteButton();
+});
+</script>
+</body>
+</html>
