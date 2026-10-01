@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bridge - Inclusivité</title>
+    <title>Bridge - LATEX</title>
 
     <link rel="icon" type="image/x-icon" href="image/SE_favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/cssBridge.css">
@@ -25,7 +25,73 @@
         raison que ci-dessus : autonomie du fichier.
         ============================================================
     -->
-    
+
+    <!-- Curseur + repères de changement d'image sur la barre de progression -->
+    <style>
+        /* La position (absolute, bottom: 50px) vient de cssBridge.css :
+           on ne la redéfinit surtout pas ici. */
+        #progressBar {
+            overflow: visible;
+            cursor: pointer;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        /* Repères : un trait à chaque changement d'image */
+        #chapterMarkers { position: absolute; inset: 0; pointer-events: none; }
+        .slide-marker {
+            position: absolute;
+            top: -4px; bottom: -4px;
+            width: 14px;                    /* zone de clic confortable */
+            margin-left: -7px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .slide-marker::before {
+            content: "";
+            position: absolute;
+            left: 50%; top: 0; bottom: 0;
+            width: 3px; margin-left: -1.5px;
+            border-radius: 2px;
+            background: #ffffff;
+            box-shadow: 0 0 0 1px rgba(0,0,0,.55);
+            transition: transform .12s ease, background .12s ease;
+        }
+        .slide-marker:hover::before { background: #ffd54a; transform: scaleX(1.6); }
+        /* Curseur (poignée) */
+        #progressThumb {
+            position: absolute;
+            top: 50%; left: 0;
+            width: 18px; height: 18px;
+            margin: -9px 0 0 -9px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #4a90e2;
+            box-shadow: 0 1px 4px rgba(0,0,0,.45);
+            pointer-events: none;
+            z-index: 3;
+            transition: transform .12s ease;
+        }
+        #progressBar:hover #progressThumb,
+        #progressBar.dragging #progressThumb { transform: scale(1.25); }
+        /* Info-bulle */
+        #progressTooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 0;
+            transform: translateX(-50%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(0,0,0,.85);
+            color: #fff;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            display: none;
+            z-index: 4;
+        }
+    </style>
+
 
 </head>
 <body>
@@ -229,11 +295,20 @@
     <!--=================================================================
         3. LA BARRE DE PROGRESSION
     =================================================================-->
-    <div class="progress-bar" id="progressBar">
+    <div class="progress-bar" id="progressBar" role="slider" aria-valuemin="0" aria-valuenow="0">
 
         <div class="progress-filled"
              id="progressFilled">
         </div>
+
+        <!-- Repères de changement d'image (générés en JS) -->
+        <div id="chapterMarkers"></div>
+
+        <!-- Curseur -->
+        <div id="progressThumb"></div>
+
+        <!-- Info-bulle -->
+        <div id="progressTooltip"></div>
 
     </div>
 
@@ -340,12 +415,12 @@
 
 
         <!-- StatMate Button -->
-        <button class="footer-btn"
-                onclick="window.location.href='00_ShapeMate_Menu.html'">
+<button class="footer-btn"
+        onclick="window.location.href='https://payhip.com/SciencExpert/bridge';">
 
-            ShapeMate&trade;
+    BRIDGE&trade;
 
-        </button>
+</button>
 
 
         <!-- Copyright Notice -->
@@ -384,7 +459,12 @@
 
 </div>
 
-
+<!-- Animation d'incitation à tourner le téléphone (paysage) -->
+<div class="orientation-warning" id="orientationWarning">
+    <div class="orientation-icon">📱</div>
+    <div class="orientation-text">Tournez votre téléphone</div>
+    <div class="orientation-subtext">Pour une meilleure expérience, utilisez l'appareil en position verticale</div>
+</div>
 
 <script>
 
@@ -762,6 +842,10 @@ const playPauseIcon = document.getElementById('playPauseIcon');
 const playPauseText = document.getElementById('playPauseText');
 const progressBar = document.getElementById('progressBar');
 const progressFilled = document.getElementById('progressFilled');
+const progressThumb = document.getElementById('progressThumb');
+const chapterMarkers = document.getElementById('chapterMarkers');
+const progressTooltip = document.getElementById('progressTooltip');
+let isDraggingProgress = false;
 const timeDisplay = document.getElementById('timeDisplay');
 const subtitleTrack = document.getElementById('subtitleTrack');
 const subtitleText = document.getElementById('subtitleText');
@@ -1316,7 +1400,84 @@ function updateProgressBar() {
     if (isNaN(audio.duration)) return;
     const percent = (audio.currentTime / audio.duration) * 100;
     progressFilled.style.width = `${percent}%`;
+    progressThumb.style.left = `${percent}%`;
+    progressBar.setAttribute('aria-valuemax', Math.round(audio.duration));
+    progressBar.setAttribute('aria-valuenow', Math.round(audio.currentTime));
     timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+}
+
+
+// ===================================================================
+// REPÈRES de changement d'image + curseur + info-bulle
+// ===================================================================
+// Points de changement d'image : on ne garde une entrée de
+// currentSlides que si son image est DIFFÉRENTE de la précédente
+// (plusieurs entrées consécutives avec la même image = pas de repère).
+let imageChangePoints = [];   // [{ time, image }]
+
+function computeImageChangePoints() {
+    imageChangePoints = [];
+    let lastImage = null;
+    currentSlides.forEach(slide => {
+        const img = getLocalizedSlideImage(slide.image, currentLang);
+        if (img !== lastImage) {
+            imageChangePoints.push({ time: slide.start, image: img });
+            lastImage = img;
+        }
+    });
+}
+
+function renderSlideMarkers() {
+    chapterMarkers.innerHTML = '';
+    computeImageChangePoints();
+    if (!audio.duration || isNaN(audio.duration) || imageChangePoints.length < 2) return;
+
+    imageChangePoints.forEach((pt, i) => {
+        // Pas de repère pour la 1re image (début de la piste)
+        if (i === 0 || pt.time <= 0 || pt.time >= audio.duration) return;
+        const marker = document.createElement('div');
+        marker.className = 'slide-marker';
+        marker.style.left = `${(pt.time / audio.duration) * 100}%`;
+        marker.dataset.time = pt.time;
+        marker.dataset.index = i;
+        chapterMarkers.appendChild(marker);
+    });
+}
+
+function getSlideIndexAt(time) {
+    let idx = 0;
+    imageChangePoints.forEach((pt, i) => { if (time >= pt.time) idx = i; });
+    return idx;
+}
+
+function getProgressPercent(e) {
+    const rect = progressBar.getBoundingClientRect();
+    return Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+}
+
+function showProgressTooltip(e) {
+    if (!audio.duration || isNaN(audio.duration)) return;
+    const marker = e.target.closest ? e.target.closest('.slide-marker') : null;
+    const percent = getProgressPercent(e);
+    const time = marker ? parseFloat(marker.dataset.time) : percent * audio.duration;
+    const idx = getSlideIndexAt(time);
+    const left = marker ? (time / audio.duration) * 100 : percent * 100;
+
+    progressTooltip.textContent = imageChangePoints.length
+        ? `${idx + 1}/${imageChangePoints.length} · ${formatTime(time)}`
+        : formatTime(time);
+    progressTooltip.style.left = `${left}%`;
+    progressTooltip.style.display = 'block';
+}
+
+function seekFromEvent(e) {
+    if (!audio.duration || isNaN(audio.duration)) return;
+    const marker = e.target.closest ? e.target.closest('.slide-marker') : null;
+    // Clic sur un repère = saut exact au début de l'image
+    audio.currentTime = (marker && !isDraggingProgress)
+        ? parseFloat(marker.dataset.time)
+        : getProgressPercent(e) * audio.duration;
+    updateProgressBar();
 }
 
 // ===================================================================
@@ -1425,6 +1586,7 @@ function loadChapter(chapterKey) {
         subtitleTrack.style.display = 'none';
     }
 
+    chapterMarkers.innerHTML = '';
     audio.load();
     updatePlayPauseButton();
     updateProgressBar();
@@ -1570,6 +1732,7 @@ function setupPlayerEvents() {
 
     audio.addEventListener('loadedmetadata', () => {
         updateProgressBar();
+        renderSlideMarkers();
     });
 
     // NOUVEAU : à la fin du chapitre, on lance (sauf si c'est le
@@ -1605,13 +1768,30 @@ function setupPlayerEvents() {
         }, { once: true });
     });
 
-    progressBar.addEventListener('click', (e) => {
-        // Un clic manuel dans la timeline annule une éventuelle
-        // transition automatique en cours (l'utilisateur reprend la main).
+    // Barre de progression : clic, glisser du curseur, clic sur un repère
+    progressBar.addEventListener('pointerdown', (e) => {
+        // L'utilisateur reprend la main : on annule une transition auto.
         cancelChapterTransition();
-        const rect = progressBar.getBoundingClientRect();
-        const percent = (e.clientX - rect.left) / rect.width;
-        audio.currentTime = percent * audio.duration;
+        seekFromEvent(e);                       // saut exact si repère
+        isDraggingProgress = true;
+        progressBar.classList.add('dragging');
+        progressBar.setPointerCapture(e.pointerId);
+    });
+    progressBar.addEventListener('pointermove', (e) => {
+        showProgressTooltip(e);
+        if (isDraggingProgress) seekFromEvent(e);
+    });
+    const endDrag = (e) => {
+        isDraggingProgress = false;
+        progressBar.classList.remove('dragging');
+        if (progressBar.hasPointerCapture(e.pointerId)) {
+            progressBar.releasePointerCapture(e.pointerId);
+        }
+    };
+    progressBar.addEventListener('pointerup', endDrag);
+    progressBar.addEventListener('pointercancel', endDrag);
+    progressBar.addEventListener('pointerleave', () => {
+        if (!isDraggingProgress) progressTooltip.style.display = 'none';
     });
 
     videoSelect.addEventListener('change', (e) => {
@@ -1716,6 +1896,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateCenterPlayIcon();
     updateMuteButton();
 });
+</script>
+<script>
+(function() {
+    const warning = document.getElementById('orientationWarning');
+    
+    function checkOrientation() {
+        const isLandscape = window.matchMedia('(orientation: landscape)').matches;
+        const isSmallHeight = window.innerHeight < 450;
+        const isTouch = window.matchMedia('(pointer: coarse)').matches;
+        
+        if (isLandscape && isSmallHeight && isTouch) {
+            warning.classList.add('show');
+        } else {
+            warning.classList.remove('show');
+        }
+    }
+    
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    
+    // Vérification initiale
+    checkOrientation();
+})();
 </script>
 </body>
 </html>
