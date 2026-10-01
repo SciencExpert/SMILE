@@ -3,33 +3,24 @@
    =============================================================================
 
    SOMMAIRE
-     1.  Variables (couleurs, dimensions) .......... à modifier ici en priorité
+     1.  Variables (couleurs, dimensions)
      2.  Page et conteneur principal
-     3.  Éléments génériques (boutons, listes déroulantes, focus)
-     4.  Navigation du haut (menu, badge de langue, sélecteur de chapitre)
+     3.  Éléments génériques
+     4.  Navigation du haut
      5.  Barre de contrôles
-     6.  Panneaux (accessibilité, transcription)
-     7.  Barre de progression (curseur, repères d'image, info-bulle)
-     8.  Diaporama (image, boutons superposés)
+     6.  Panneaux
+     7.  Barre de progression
+     8.  Diaporama
      9.  Sous-titres
     10.  Transition entre chapitres
     11.  Pied de page
-    12.  Composants facultatifs (non utilisés par LATEX.html)
+    12.  Composants facultatifs
     13.  RESPONSIVE
-           13.1  Écrans moyens  (≤ 1180 px) : le pied de page passe sous le lecteur
-           13.2  Tablettes     (≤  768 px)
-           13.3  Mobiles       (≤  600 px) : textes des boutons masqués
-           13.4  Petits mobiles (≤ 480 px)
-           13.5  Paysage à faible hauteur + animation orientation
-           13.6  Écrans tactiles
-           13.7  Mouvement réduit
 
    PRINCIPE DU RESPONSIVE
-     - Au-dessus de 1180 px : mise en page d'origine (pied de page fixe,
-       superposé au bas du lecteur).
-     - À 1180 px et moins : le pied de page n'est plus superposé, il prend sa
-       place sous le lecteur. Le lecteur occupe tout l'espace restant, quelle
-       que soit la hauteur du pied de page (qui peut passer sur 2 ou 3 lignes).
+     - Au-dessus de 1180 px : pied de page fixe en bas
+     - À 1180 px et moins : pied de page sous le lecteur
+     - En paysage mobile : pied de page TOUJOURS en bas (fixed)
    ============================================================================= */
 
 
@@ -38,25 +29,22 @@
    ============================================================================= */
 
 :root {
-    /* --- Couleurs --- */
-    --accent:        #4a90e2;                  /* bleu principal            */
-    --accent-hover:  #357abd;                  /* bleu au survol            */
-    --success:       #2ecc71;                  /* bouton actif (vert)       */
-    --focus:         #ffd447;                  /* contour au clavier        */
-    --field-bg:      #2c3e50;                  /* fond des listes           */
-    --field-border:  #34495e;                  /* bordure des listes        */
-    --panel-bg:      rgba(16, 22, 34, 0.98);   /* fond des panneaux         */
+    --accent:        #4a90e2;
+    --accent-hover:  #357abd;
+    --success:       #2ecc71;
+    --focus:         #ffd447;
+    --field-bg:      #2c3e50;
+    --field-border:  #34495e;
+    --panel-bg:      rgba(16, 22, 34, 0.98);
 
-    /* --- Dimensions : mise en page « grand écran » --- */
-    --footer-h:      50px;                     /* hauteur réservée au pied de page */
-    --bar-bottom:    var(--footer-h);          /* barre de progression : distance au bas  */
-    --subtitle-bottom: var(--footer-h);        /* sous-titres : distance au bas           */
-    --wrapper-gap:   0px;                      /* marge sous le diaporama (mode « pied de page sous le lecteur ») */
-    --image-max-h:   calc(100vh - var(--footer-h) - 6px);   /* hauteur maxi de l'image */
+    --footer-h:      50px;
+    --bar-bottom:    var(--footer-h);
+    --subtitle-bottom: var(--footer-h);
+    --wrapper-gap:   0px;
+    --image-max-h:   calc(100vh - var(--footer-h) - 6px);
 
-    /* --- Barre de contrôles et panneaux --- */
-    --controls-pad-left: 410px;                /* place laissée au menu + sélecteur de chapitre */
-    --panel-top:     60px;                     /* position verticale des panneaux */
+    --controls-pad-left: 410px;
+    --panel-top:     60px;
 }
 
 
@@ -69,7 +57,7 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100vh;
-    height: 100dvh;            /* tient compte des barres du navigateur mobile */
+    height: 100dvh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #111;
@@ -83,7 +71,6 @@ html, body {
     background: #000;
 }
 
-/* Élément audio : jamais affiché (le son est piloté par les boutons) */
 audio {
     display: none;
 }
@@ -125,7 +112,6 @@ select {
     cursor: pointer;
 }
 
-/* Contour visible lors de la navigation au clavier */
 button:focus-visible,
 select:focus-visible,
 input:focus-visible {
@@ -151,16 +137,13 @@ input:focus-visible {
    4. NAVIGATION DU HAUT
    ============================================================================= */
 
-/* --- Bouton Menu (haut à gauche) --- */
 #menuToggleBtn {
     position: absolute;
     top: 10px;
     left: 5px;
     z-index: 200;
-
     height: 42px;
     box-sizing: border-box;
-
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
@@ -170,7 +153,6 @@ input:focus-visible {
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-
     display: flex;
     align-items: center;
     gap: 8px;
@@ -180,7 +162,6 @@ input:focus-visible {
     background: rgba(0, 0, 0, 0.9);
 }
 
-/* --- Badge de langue dans le bouton Menu (FR, EN…) --- */
 #menuLangBadge {
     background: var(--accent);
     color: white;
@@ -190,7 +171,6 @@ input:focus-visible {
     margin-left: 8px;
 }
 
-/* --- Sélecteur de chapitre (toujours visible) --- */
 #chapterSelector {
     position: absolute;
     top: 10px;
@@ -203,7 +183,6 @@ input:focus-visible {
     width: 150px;
     height: 42px;
     box-sizing: border-box;
-
     background: var(--field-bg);
     color: white;
     border: 1px solid var(--field-border);
@@ -216,7 +195,6 @@ input:focus-visible {
 
 /* =============================================================================
    5. BARRE DE CONTRÔLES
-   (masquée au départ ; le bouton Menu l'affiche en lui donnant display:flex)
    ============================================================================= */
 
 .controls {
@@ -228,9 +206,7 @@ input:focus-visible {
     backdrop-filter: blur(15px);
     border-bottom: 3px solid var(--accent);
     z-index: 100;
-
     padding: 15px 25px 15px var(--controls-pad-left);
-
     display: none;
     box-sizing: border-box;
     flex-wrap: wrap;
@@ -249,7 +225,6 @@ input:focus-visible {
     white-space: nowrap;
 }
 
-/* --- Sélecteur de langue des sous-titres --- */
 .language-control {
     min-width: 180px;
     max-width: 260px;
@@ -262,15 +237,13 @@ input:focus-visible {
     box-sizing: border-box;
 }
 
-/* L'étiquette « Sous-titres » est volontairement cachée */
 #subtitleLabel {
     display: none;
 }
 
 
 /* =============================================================================
-   6. PANNEAUX (ACCESSIBILITÉ ET TRANSCRIPTION)
-   (masqués au départ ; les boutons les affichent en leur donnant display:block)
+   6. PANNEAUX
    ============================================================================= */
 
 .settings-panel,
@@ -296,7 +269,6 @@ input:focus-visible {
     display: block;
 }
 
-/* --- Accessibilité : grille de réglages --- */
 .settings-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -314,7 +286,6 @@ input:focus-visible {
     font-size: 0.75rem;
 }
 
-/* --- Transcription --- */
 .transcript-panel h3 {
     margin-top: 0;
     margin-bottom: 15px;
@@ -355,14 +326,12 @@ input:focus-visible {
     background: rgba(255, 255, 255, 0.2);
     cursor: pointer;
     z-index: 100;
-
-    overflow: visible;          /* le curseur dépasse de la barre */
-    touch-action: none;         /* le glisser au doigt ne fait pas défiler la page */
+    overflow: visible;
+    touch-action: none;
     user-select: none;
     -webkit-user-select: none;
 }
 
-/* Zone de capture agrandie : plus facile à viser, sans changer l'aspect */
 .progress-bar::before {
     content: "";
     position: absolute;
@@ -372,7 +341,6 @@ input:focus-visible {
     bottom: -8px;
 }
 
-/* --- Partie déjà lue --- */
 .progress-filled {
     height: 100%;
     background: var(--accent);
@@ -381,10 +349,9 @@ input:focus-visible {
 }
 
 .progress-bar.dragging .progress-filled {
-    transition: none;           /* pas de décalage pendant le glisser */
+    transition: none;
 }
 
-/* --- Repères : un trait à chaque changement d'image (créés par le script) --- */
 .progress-markers {
     position: absolute;
     inset: 0;
@@ -395,7 +362,7 @@ input:focus-visible {
     position: absolute;
     top: -4px;
     bottom: -4px;
-    width: 14px;               /* zone de clic confortable */
+    width: 14px;
     margin-left: -7px;
     pointer-events: auto;
     cursor: pointer;
@@ -420,7 +387,6 @@ input:focus-visible {
     transform: scaleX(1.6);
 }
 
-/* --- Curseur (poignée) --- */
 .progress-thumb {
     position: absolute;
     top: 50%;
@@ -443,7 +409,6 @@ input:focus-visible {
     transform: scale(1.25);
 }
 
-/* --- Info-bulle (n° d'image + temps) --- */
 .progress-tooltip {
     position: absolute;
     bottom: calc(100% + 12px);
@@ -487,7 +452,6 @@ input:focus-visible {
     cursor: pointer;
 }
 
-/* --- Boutons ronds superposés à l'image --- */
 .overlay-btn {
     position: absolute;
     z-index: 50;
@@ -513,7 +477,6 @@ input:focus-visible {
     outline-offset: 2px;
 }
 
-/* --- Lecture / pause au centre --- */
 .center-play-btn {
     top: 50%;
     left: 50%;
@@ -529,7 +492,6 @@ input:focus-visible {
     opacity: 1;
 }
 
-/* --- Son (en haut à droite) --- */
 .mute-btn {
     top: 14px;
     right: 14px;
@@ -560,7 +522,6 @@ input:focus-visible {
 
 /* =============================================================================
    9. SOUS-TITRES
-   (masqués au départ ; le script les affiche quand il y a un texte à lire)
    ============================================================================= */
 
 .subtitle-track {
@@ -587,7 +548,6 @@ input:focus-visible {
     line-height: 1.4;
 }
 
-/* DYS */
 .subtitle-text.small {
     font-family: Arial, Helvetica, Verdana, sans-serif;
     font-size: clamp(1.3rem, 2.5vw, 1.8rem);
@@ -596,12 +556,10 @@ input:focus-visible {
     word-spacing: 0.16em;
 }
 
-/* Normale */
 .subtitle-text.normal {
     font-size: clamp(1rem, 1.8vw, 1.3rem);
 }
 
-/* Zoom visuel */
 .subtitle-text.large {
     font-family: Arial, Helvetica, sans-serif;
     font-size: clamp(1.6rem, 4vw, 2.4rem);
@@ -611,7 +569,6 @@ input:focus-visible {
     background-color: #000;
 }
 
-/* Contraste élevé */
 .subtitle-text.high-contrast {
     background: #000;
     color: #ff0;
@@ -622,7 +579,6 @@ input:focus-visible {
 
 /* =============================================================================
    10. TRANSITION ENTRE CHAPITRES
-   (sablier + « Prochain chapitre : … » pendant les 4 s avant le passage auto)
    ============================================================================= */
 
 .chapter-transition-overlay {
@@ -671,8 +627,6 @@ input:focus-visible {
 
 /* =============================================================================
    11. PIED DE PAGE
-   (les variables --primary-color / --secondary-color peuvent être définies
-    par le site ; à défaut, les valeurs de repli ci-dessous s'appliquent)
    ============================================================================= */
 
 #footer {
@@ -742,8 +696,6 @@ input:focus-visible {
 
 /* =============================================================================
    12. COMPOSANTS FACULTATIFS
-   Non utilisés par LATEX.html, conservés pour les autres pages Bridge
-   qui partageraient cette feuille de style.
    ============================================================================= */
 
 .radio-group {
@@ -776,9 +728,6 @@ input:focus-visible {
 
 /* -----------------------------------------------------------------------------
    13.1  ÉCRANS MOYENS (≤ 1180 px)
-   Le pied de page quitte sa position fixe et se place SOUS le lecteur.
-   Le lecteur (image, barre, sous-titres) occupe tout l'espace restant :
-   plus aucun risque de chevauchement, quelle que soit la hauteur du pied.
    ----------------------------------------------------------------------------- */
 @media (max-width: 1180px) {
 
@@ -801,7 +750,6 @@ input:focus-visible {
         height: auto;
     }
 
-    /* Le diaporama remplit le lecteur, au-dessus de la barre de progression */
     .video-wrapper {
         position: absolute;
         top: 0;
@@ -840,10 +788,9 @@ input:focus-visible {
 
     :root {
         --controls-pad-left: 12px;
-        --panel-top: 158px;          /* juste sous la barre de contrôles compacte */
+        --panel-top: 158px;
     }
 
-    /* --- Navigation du haut --- */
     #menuToggleBtn {
         font-size: 0.9rem;
     }
@@ -852,9 +799,6 @@ input:focus-visible {
         width: min(150px, calc(100vw - 185px));
     }
 
-    /* --- Barre de contrôles : 2 lignes compactes sous le menu ---
-       ligne 1 : lecture · temps · accessibilité · transcription
-       ligne 2 : sous-titres                                          */
     .controls {
         padding: 62px 12px 10px;
         gap: 8px;
@@ -887,7 +831,6 @@ input:focus-visible {
         font-size: 1rem;
     }
 
-    /* --- Panneaux --- */
     .settings-panel,
     .transcript-panel {
         padding: 15px;
@@ -897,7 +840,6 @@ input:focus-visible {
         grid-template-columns: 1fr;
     }
 
-    /* --- Boutons superposés --- */
     .center-play-btn {
         width: 56px;
         height: 56px;
@@ -912,7 +854,6 @@ input:focus-visible {
         right: 10px;
     }
 
-    /* --- Pied de page : boutons sur une ligne, texte dessous --- */
     #footer {
         padding: 6px 8px;
         font-size: 12px;
@@ -942,7 +883,6 @@ input:focus-visible {
         line-height: 1.35;
     }
 
-    /* Anciennes règles conservées pour les pages qui utilisent ces classes */
     .radio-group {
         flex-direction: column;
         gap: 8px;
@@ -951,7 +891,7 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.3  MOBILES (≤ 600 px) : textes des boutons masqués, icônes seules
+   13.3  MOBILES (≤ 600 px)
    ----------------------------------------------------------------------------- */
 @media (max-width: 600px) {
 
@@ -1015,12 +955,9 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.5  PAYSAGE À FAIBLE HAUTEUR + ANIMATION D'ORIENTATION
-   Téléphone tenu à l'horizontale : on gagne de la place verticale pour l'image
-   et on affiche une incitation à tourner l'appareil.
+   13.5  ANIMATION D'ORIENTATION
    ----------------------------------------------------------------------------- */
 
-/* --- Animation d'incitation à tourner le téléphone --- */
 .orientation-warning {
     position: fixed;
     inset: 0;
@@ -1065,39 +1002,44 @@ input:focus-visible {
     75%        { transform: rotate(90deg); }
 }
 
-/* --- Déclenchement automatique en paysage basse hauteur --- */
+
+/* -----------------------------------------------------------------------------
+   13.6  PAYSAGE À FAIBLE HAUTEUR (≤ 450 px) - FOOTER EN BAS
+   ----------------------------------------------------------------------------- */
 @media (max-height: 450px) and (orientation: landscape) and (pointer: coarse) {
-    
+
     .orientation-warning.show {
         display: flex;
     }
-    
-    /* Empêche l'image de dépasser */
+
     :root {
-        --image-max-h: calc(100vh - 80px);
+        --image-max-h: calc(100vh - 60px);
     }
-    
+
     .video-wrapper {
-        height: calc(100vh - 80px);
+        height: calc(100vh - 60px);
     }
-    
+
     #slideImage {
-        max-height: calc(100vh - 80px);
+        max-height: calc(100vh - 60px);
         object-fit: contain;
     }
-    
-    /* Footer compact en paysage */
+
     #footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
         padding: 4px 6px;
         min-height: auto;
+        z-index: 1000;
     }
-    
+
     .footer-controls {
         flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
     }
-    
+
     .footer-btn {
         height: 28px;
         width: auto;
@@ -1106,7 +1048,7 @@ input:focus-visible {
         font-size: 11px;
         flex: 0 1 auto;
     }
-    
+
     .footer-copyright {
         order: 3;
         flex: 1 1 100%;
@@ -1117,7 +1059,10 @@ input:focus-visible {
     }
 }
 
-/* --- Paysage à faible hauteur (sans condition tactile) --- */
+
+/* -----------------------------------------------------------------------------
+   13.7  PAYSAGE À FAIBLE HAUTEUR (≤ 500 px) - SANS CONDITION TACTILE
+   ----------------------------------------------------------------------------- */
 @media (max-height: 500px) and (orientation: landscape) {
 
     :root {
@@ -1125,7 +1070,11 @@ input:focus-visible {
     }
 
     #footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
         padding: 3px 8px;
+        z-index: 1000;
     }
 
     .footer-btn {
@@ -1146,7 +1095,7 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.6  ÉCRANS TACTILES : cibles plus grandes pour le doigt
+   13.8  ÉCRANS TACTILES
    ----------------------------------------------------------------------------- */
 @media (pointer: coarse) {
 
@@ -1169,7 +1118,7 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.7  MOUVEMENT RÉDUIT (réglage d'accessibilité du système)
+   13.9  MOUVEMENT RÉDUIT
    ----------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
 
