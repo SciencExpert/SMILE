@@ -1897,6 +1897,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateMuteButton();
 });
 </script>
+/*==============================================================mode vertical
 <script>
 (function() {
     const warning = document.getElementById('orientationWarning');
@@ -1907,6 +1908,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         const isTouch = window.matchMedia('(pointer: coarse)').matches;
         
         if (isLandscape && isSmallHeight && isTouch) {
+            warning.classList.add('show');
+        } else {
+            warning.classList.remove('show');
+        }
+    }
+    
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    
+    // Vérification initiale
+    checkOrientation();
+})();
+</script>
+===============================================================================*/
+/*==============================================================mode horizontal */
+<script>
+(function() {
+    const warning = document.getElementById('orientationWarning');
+    
+    function checkOrientation() {
+        const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+        const isSmallWidth = window.innerWidth < 500;
+        const isTouch = window.matchMedia('(pointer: coarse)').matches;
+        
+        if (isPortrait && isSmallWidth && isTouch) {
             warning.classList.add('show');
         } else {
             warning.classList.remove('show');
