@@ -1,5 +1,5 @@
 /* =============================================================================
-   BRIDGE — FEUILLE DE STYLE UNIFIÉE DU LECTEUR                    Version 7
+   BRIDGE — FEUILLE DE STYLE UNIFIÉE DU LECTEUR                    Version 8
    =============================================================================
 
    SOMMAIRE
@@ -18,10 +18,11 @@
     13.  RESPONSIVE
            13.1  Écrans moyens  (≤ 1180 px) : le pied de page passe sous le lecteur
            13.2  Tablettes     (≤  768 px)
-           13.3  Mobiles       (≤  480 px)
-           13.4  Paysage à faible hauteur
-           13.5  Écrans tactiles
-           13.6  Mouvement réduit
+           13.3  Mobiles       (≤  600 px) : textes des boutons masqués
+           13.4  Petits mobiles (≤ 480 px)
+           13.5  Paysage à faible hauteur + animation orientation
+           13.6  Écrans tactiles
+           13.7  Mouvement réduit
 
    PRINCIPE DU RESPONSIVE
      - Au-dessus de 1180 px : mise en page d'origine (pied de page fixe,
@@ -919,18 +920,25 @@ input:focus-visible {
 
     .footer-controls {
         gap: 6px 10px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .footer-btn {
-        height: 28px;
-        width: 90px;
+        height: 32px;
+        width: auto;
+        min-width: 90px;
+        padding: 0 14px;
         font-size: 12px;
+        flex: 0 1 auto;
     }
 
     .footer-copyright {
-        order: 1;
+        order: 3;
         flex: 1 1 100%;
         font-size: 11px;
+        margin-top: 6px;
+        white-space: normal;
         line-height: 1.35;
     }
 
@@ -956,7 +964,7 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.3 bis  PETITS MOBILES (≤ 480 px)
+   13.4  PETITS MOBILES (≤ 480 px)
    ----------------------------------------------------------------------------- */
 @media (max-width: 480px) {
 
@@ -980,17 +988,24 @@ input:focus-visible {
         padding: 5px 6px;
     }
 
+    .footer-controls {
+        gap: 6px 10px;
+    }
+
     .footer-btn {
         height: 30px;
         width: auto;
         flex: 1 1 0;
         max-width: 170px;
         font-size: 13px;
+        min-width: 70px;
+        padding: 0 10px;
     }
 
     .footer-copyright {
         font-size: 10px;
-        line-height: 1.4;
+        line-height: 1.35;
+        margin-top: 4px;
     }
 
     .footer-icon {
@@ -1000,9 +1015,109 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.4  PAYSAGE À FAIBLE HAUTEUR (téléphone tenu à l'horizontale)
-   On gagne de la place verticale pour l'image.
+   13.5  PAYSAGE À FAIBLE HAUTEUR + ANIMATION D'ORIENTATION
+   Téléphone tenu à l'horizontale : on gagne de la place verticale pour l'image
+   et on affiche une incitation à tourner l'appareil.
    ----------------------------------------------------------------------------- */
+
+/* --- Animation d'incitation à tourner le téléphone --- */
+.orientation-warning {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.orientation-warning.show {
+    display: flex;
+}
+
+.orientation-icon {
+    font-size: 4em;
+    animation: rotate-phone 2s ease-in-out infinite;
+    display: inline-block;
+}
+
+.orientation-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    max-width: 400px;
+    line-height: 1.4;
+}
+
+.orientation-subtext {
+    font-size: 1rem;
+    color: #aaa;
+    max-width: 350px;
+}
+
+@keyframes rotate-phone {
+    0%, 100%   { transform: rotate(0deg); }
+    25%        { transform: rotate(-90deg); }
+    75%        { transform: rotate(90deg); }
+}
+
+/* --- Déclenchement automatique en paysage basse hauteur --- */
+@media (max-height: 450px) and (orientation: landscape) and (pointer: coarse) {
+    
+    .orientation-warning.show {
+        display: flex;
+    }
+    
+    /* Empêche l'image de dépasser */
+    :root {
+        --image-max-h: calc(100vh - 80px);
+    }
+    
+    .video-wrapper {
+        height: calc(100vh - 80px);
+    }
+    
+    #slideImage {
+        max-height: calc(100vh - 80px);
+        object-fit: contain;
+    }
+    
+    /* Footer compact en paysage */
+    #footer {
+        padding: 4px 6px;
+        min-height: auto;
+    }
+    
+    .footer-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .footer-btn {
+        height: 28px;
+        width: auto;
+        min-width: 80px;
+        padding: 0 12px;
+        font-size: 11px;
+        flex: 0 1 auto;
+    }
+    
+    .footer-copyright {
+        order: 3;
+        flex: 1 1 100%;
+        font-size: 10px;
+        margin-top: 4px;
+        white-space: normal;
+        line-height: 1.3;
+    }
+}
+
+/* --- Paysage à faible hauteur (sans condition tactile) --- */
 @media (max-height: 500px) and (orientation: landscape) {
 
     :root {
@@ -1031,7 +1146,7 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.5  ÉCRANS TACTILES : cibles plus grandes pour le doigt
+   13.6  ÉCRANS TACTILES : cibles plus grandes pour le doigt
    ----------------------------------------------------------------------------- */
 @media (pointer: coarse) {
 
@@ -1054,12 +1169,13 @@ input:focus-visible {
 
 
 /* -----------------------------------------------------------------------------
-   13.6  MOUVEMENT RÉDUIT (réglage d'accessibilité du système)
+   13.7  MOUVEMENT RÉDUIT (réglage d'accessibilité du système)
    ----------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
 
     .mute-btn,
-    .chapter-transition-hourglass {
+    .chapter-transition-hourglass,
+    .orientation-icon {
         animation: none;
     }
 
