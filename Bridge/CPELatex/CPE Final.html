@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge - CPE LATEX</title>
+
+    <link rel="icon" type="image/x-icon" href="image/SE_favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/cssBridge.css">
+
+
+
+    <!--
+        Styles autonomes pour les boutons superposés sur le diaporama
+        (lecture/pause au centre, muet en bas à droite). Définis ici plutôt
+        que dans cssBridge.css pour ne rien casser si ce fichier externe
+        est absent ou différent d'un poste à l'autre.
+    -->
+
+    <!--
+        ============================================================
+        NOUVEAU : Style pour l'overlay de transition entre chapitres
+        (sablier + message "Prochain chapitre : ...") affiché pendant
+        les 4 secondes précédant le passage automatique au chapitre
+        suivant. Placé ici (et non dans cssBridge.css) pour la même
+        raison que ci-dessus : autonomie du fichier.
+        ============================================================
+    -->
+
+    <!-- Curseur + repères de changement d'image sur la barre de progression -->
+    <style>
+        /* La position (absolute, bottom: 50px) vient de cssBridge.css :
+           on ne la redéfinit surtout pas ici. */
+        #progressBar {
+            overflow: visible;
+            cursor: pointer;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        /* Repères : un trait à chaque changement d'image */
+        #chapterMarkers { position: absolute; inset: 0; pointer-events: none; }
+        .slide-marker {
+            position: absolute;
+            top: -4px; bottom: -4px;
+            width: 14px;                    /* zone de clic confortable */
+            margin-left: -7px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .slide-marker::before {
+            content: "";
+            position: absolute;
+            left: 50%; top: 0; bottom: 0;
+            width: 3px; margin-left: -1.5px;
+            border-radius: 2px;
+            background: #ffffff;
+            box-shadow: 0 0 0 1px rgba(0,0,0,.55);
+            transition: transform .12s ease, background .12s ease;
+        }
+        .slide-marker:hover::before { background: #ffd54a; transform: scaleX(1.6); }
+        /* Curseur (poignée) */
+        #progressThumb {
+            position: absolute;
+            top: 50%; left: 0;
+            width: 18px; height: 18px;
+            margin: -9px 0 0 -9px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #4a90e2;
+            box-shadow: 0 1px 4px rgba(0,0,0,.45);
+            pointer-events: none;
+            z-index: 3;
+            transition: transform .12s ease;
+        }
+        #progressBar:hover #progressThumb,
+        #progressBar.dragging #progressThumb { transform: scale(1.25); }
+        /* Info-bulle */
+        #progressTooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 0;
+            transform: translateX(-50%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(0,0,0,.85);
+            color: #fff;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            display: none;
+            z-index: 4;
+        }
+    </style>
+
+
+</head>
+<body>
+<!--=================================================================
+    CONTENEUR PRINCIPAL DU LECTEUR
+=================================================================-->
+<div class="player-container" style="position: relative;">
+<div id="topNavigation">
+
+    <button id="menuToggleBtn">
+        <span>☰</span>
+        <span id="menuToggleText">Menu</span>
+        <span id="menuLangBadge"
+              style="background:#4a90e2;color:white;padding:2px 8px;border-radius:4px;font-size:0.8em;margin-left:8px;">
+            FR
+        </span>
+    </button>
+
+    <div id="chapterSelector">
+        <select id="videoSelect"></select>
+    </div>
+
+</div>
+
+
+    <!--=================================================================
+        1. LA BARRE DE CONTRÔLES ET MENUS
+        Masquée au départ via style="display: none;"
+    =================================================================-->
+    <div class="controls" id="mainControls" style="display: none;">
+
+        <!-- BOUTON LECTURE / PAUSE -->
+        <button id="playPauseBtn">
+            <span id="playPauseIcon">▶</span>
+            <span id="playPauseText">Lecture</span>
+        </button>
+
+
+        <!-- TEMPS -->
+        <div class="time-display" id="timeDisplay">
+            00:00 / 00:00
+        </div>
+
+
+        <!-- LE SÉLECTEUR DE LANGUE -->
+        <div class="control-group language-control">
+
+            <label for="languageSelect"
+                   id="subtitleLabel"
+                   style="display:none">
+                Sous-titres
+            </label>
+
+            <select id="languageSelect">
+                <option value="none">Aucun</option>
+            </select>
+
+        </div>
+
+
+        <!-- ACCESSIBILITÉ -->
+        <button id="settingsBtn">
+            <span>⚙</span>
+            <span id="accessibilityText">Accessibilité</span>
+        </button>
+
+
+        <!-- TRANSCRIPTION -->
+        <button id="transcriptBtn">
+            <span>📄</span>
+            <span id="transcriptText">Transcription</span>
+        </button>
+
+    </div>
+
+
+    <!--=================================================================
+        2. LES PANNEAUX ESCAMOTABLES
+    =================================================================-->
+
+    <!-- Contrôles de l'accessibilité -->
+    <div class="settings-panel"
+         id="settingsPanel"
+         style="display: none; position: absolute; width: 100%; z-index: 150;">
+
+        <div class="settings-grid">
+
+            <!-- Taille des sous-titres -->
+            <div class="control-group">
+
+                <label id="subtitleSizeLabel">
+                    Taille des sous-titres
+                </label>
+
+                <select id="subtitleSize">
+
+                    <option id="smallSize"
+                            value="small">
+                        DYS
+                    </option>
+
+                    <option id="normalSize"
+                            value="normal"
+                            selected>
+                        Normale
+                    </option>
+
+                    <option id="largeSize"
+                            value="large">
+                        Grande
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Contraste -->
+            <div class="control-group">
+
+                <label id="contrastLabel">
+                    Contraste
+                </label>
+
+                <select id="contrastMode">
+
+                    <option id="normalContrast"
+                            value="normal"
+                            selected>
+                        Normal
+                    </option>
+
+                    <option id="highContrast"
+                            value="high">
+                        Élevé
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Vitesse de lecture -->
+            <div class="control-group">
+
+                <label id="speedLabel">
+                    Vitesse de lecture
+                </label>
+
+                <div class="speed-buttons">
+
+                    <button class="speed-btn"
+                            data-speed="0.75">
+                        0,75×
+                    </button>
+
+                    <button class="speed-btn active"
+                            data-speed="1">
+                        1×
+                    </button>
+
+                    <button class="speed-btn"
+                            data-speed="1.25">
+                        1,25×
+                    </button>
+
+                    <button class="speed-btn"
+                            data-speed="1.5">
+                        1,5×
+                    </button>
+
+                    <button class="speed-btn"
+                            data-speed="2">
+                        2×
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Panneau de transcription -->
+    <div class="transcript-panel"
+         id="transcriptPanel"
+         style="display: none; position: absolute; width: 100%; z-index: 150;">
+
+        <h3 id="fullTranscript"
+            style="margin-bottom: 15px; color: #4a90e2;">
+            Transcription complète
+        </h3>
+
+        <div id="transcriptContent"></div>
+
+    </div>
+
+
+    <!--=================================================================
+        3. LA BARRE DE PROGRESSION
+    =================================================================-->
+    <div class="progress-bar" id="progressBar" role="slider" aria-valuemin="0" aria-valuenow="0">
+
+        <div class="progress-filled"
+             id="progressFilled">
+        </div>
+
+        <!-- Repères de changement d'image (générés en JS) -->
+        <div id="chapterMarkers"></div>
+
+        <!-- Curseur -->
+        <div id="progressThumb"></div>
+
+        <!-- Info-bulle -->
+        <div id="progressTooltip"></div>
+
+    </div>
+
+
+    <!--=================================================================
+        4. LE DIAPORAMA
+    =================================================================-->
+    <div class="video-wrapper" style="position: relative;">
+
+        <!-- IMAGE -->
+        <img id="slideImage"
+             src=""
+             alt=""
+             style="width:100%; height:100%; object-fit:contain; display:block; background:#000; cursor:pointer;">
+
+
+        <!--=================================================================
+            CLIC SUR LE CENTRE DE L'IMAGE = LECTURE / PAUSE
+        =================================================================-->
+        <button id="centerPlayOverlay"
+                class="overlay-btn center-play-btn"
+                aria-label="Lecture / Pause"
+                title="Lecture / Pause">
+
+            <span id="centerPlayIcon">
+                ▶
+            </span>
+
+        </button>
+
+
+        <!--=================================================================
+            BOUTON SON
+        =================================================================-->
+        <button id="muteToggleBtn"
+                class="overlay-btn mute-btn"
+                aria-label="Couper le son"
+                title="Couper / rétablir le son">
+
+            <span id="muteIcon">
+                🔊
+            </span>
+
+        </button>
+
+
+        <!--=================================================================
+            AUDIO
+        =================================================================-->
+        <audio id="audioPlayer"
+               preload="metadata"
+               style="display:none;">
+
+            Votre navigateur ne supporte pas la lecture audio.
+
+        </audio>
+
+
+        <!--=================================================================
+            SOUS-TITRES
+        =================================================================-->
+        <div class="subtitle-track"
+             id="subtitleTrack"
+             style="display: none;">
+
+            <div class="subtitle-text normal"
+                 id="subtitleText">
+            </div>
+
+        </div>
+
+
+        <!--=================================================================
+            OVERLAY DE TRANSITION ENTRE CHAPITRES
+        =================================================================-->
+        <div id="chapterTransitionOverlay"
+             class="chapter-transition-overlay">
+
+            <div class="chapter-transition-content">
+
+                <span class="chapter-transition-hourglass">
+                    ⏳
+                </span>
+
+                <span class="chapter-transition-text"
+                      id="chapterTransitionText">
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+
+<div id="footer">
+
+    <!-- Controls Row -->
+    <div class="footer-controls">
+
+
+        <!-- StatMate Button -->
+<button class="footer-btn"
+        onclick="window.location.href='https://payhip.com/SciencExpert/bridge';">
+
+    BRIDGE&trade;
+
+</button>
+
+
+        <!-- Copyright Notice -->
+        <span class="footer-copyright">
+
+            © 2026 SciencExpert. Website designed and developed by
+
+            <a href="https://payhip.com/SciencExpert/sciencexpert"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <img src="image/SE_favicon.ico"
+                     alt="Icône"
+                     class="footer-icon">
+
+                SciencExpert™
+
+            </a>.
+
+            All rights reserved.
+            Unauthorized use or reproduction is prohibited.
+
+        </span>
+
+
+        <!-- Reset Button -->
+        <button class="footer-btn"
+                onclick="location.reload();">
+
+            ♻️ Reset
+
+        </button>
+
+
+    </div>
+
+</div>
+
+<!-- Animation d'incitation à tourner le téléphone (paysage) -->
+<div class="orientation-warning" id="orientationWarning">
+    <div class="orientation-icon">📱</div>
+    <div class="orientation-text">Tournez votre téléphone</div>
+    <div class="orientation-subtext">Pour une meilleure expérience, utilisez l'appareil en position verticale</div>
+</div>
+
+<script>
+
+
+// ---------------------------------------------------------------------
+// CHAPITRES DISPONIBLES
+// Pour ajouter un chapitre (ex. le chapitre 4) :
+//   1. Ajoutez un objet ci-dessous avec son "num" (4) et son libellé
+//      dans chaque langue.
+//   2. Déposez les fichiers correspondants avec la convention :
+//        - slide/slidesChapter4-slides.js   → doit définir SLIDES_CH4
+//        - subtitle/subtitleChapter4-subtitles.js
+//            → doit définir SUBTITLES_FR_CH4, SUBTITLES_EN_CH4, ...
+//        - Son : son/Chapter4-son-FR.mp3, son/Chapter4-son-EN.mp3, ...
+// C'est tout : le menu déroulant, le chargement des fichiers ET
+// l'enchaînement automatique vers le chapitre suivant se mettent à
+// jour tout seuls, dans l'ordre où les chapitres apparaissent ici.
+// ---------------------------------------------------------------------
+const CHAPTERS_CONFIG = [
+    { key: 'Chapter0', num: 0, baseLabel: 'Introduction' },
+    { key: 'Chapter1', num: 1, baseLabel: 'Chapter' },
+    { key: 'Chapter2', num: 2, baseLabel: 'Chapter' },
+    { key: 'Chapter3', num: 3, baseLabel: 'Chapter' },
+
+];
+</script>
+
+
+
+ <script src="static/js/chapterTitles.js"></script>	
+ <script src="static/js/BridgeProgrm.js"></script>
+ <script src="static/js/Horizontal.js"></script>	
+</body>
+</html>
