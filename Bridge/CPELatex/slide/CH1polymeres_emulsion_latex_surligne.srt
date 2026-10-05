@@ -1,0 +1,754 @@
+1
+00:00:04,000 --> 00:00:09,983
+Bienvenue dans cette présentation consacrée aux <font color="#FFFF00">polymères en
+émulsion</font> et aux <font color="#FFFF00">latex</font>.
+
+2
+00:00:10,103 --> 00:00:17,687
+Ce premier module est une introduction générale abordant les
+généralités et les <font color="#FFFF00">marchés</font> de cette industrie.
+
+3
+00:00:17,807 --> 00:00:23,390
+Cette formation et cette présentation vous sont proposées par Gérard
+Bacquet.
+
+4
+00:00:23,510 --> 00:00:28,293
+Commençons par le principe même de la <font color="#FFFF00">polymérisation en émulsion</font>.
+
+5
+00:00:28,413 --> 00:00:36,463
+La <font color="#FFFF00">polymérisation en émulsion radicalaire</font> repose sur la formation de
+<font color="#FFFF00">particules de polymère</font> dispersées dans l'eau.
+
+6
+00:00:36,583 --> 00:00:45,080
+Au centre, une image de microscopie montre une <font color="#FFFF00">dispersion</font> de
+<font color="#FFFF00">particules sphériques</font> de <font color="#FFFF00">polymère</font> relativement uniformes.
+
+7
+00:00:45,200 --> 00:00:51,743
+Le <font color="#FFFF00">diamètre moyen des particules</font> est généralement compris entre 0,1
+et 0,3 micromètre.
+
+8
+00:00:51,863 --> 00:01:00,627
+Il existe des <font color="#FFFF00">nanolatex</font> en dessous de 0,1 micromètre et des
+dispersions d'<font color="#FFFF00">acétate</font> pouvant atteindre de 1 à 10 micromètres.
+
+9
+00:01:00,747 --> 00:01:06,263
+La teneur volumique en <font color="#FFFF00">extrait sec</font> se situe habituellement entre 30
+et 50 %.
+
+10
+00:01:06,383 --> 00:01:17,040
+La chimie interne est très polyvalente et s'appuie sur divers
+<font color="#FFFF00">monomères</font> comme le <font color="#FFFF00">styrène</font>, le <font color="#FFFF00">butadiène</font>, les <font color="#FFFF00">acrylates</font>, l'<font color="#FFFF00">acétate</font>
+ou le <font color="#FFFF00">versatate</font>.
+
+11
+00:01:17,160 --> 00:01:25,143
+La <font color="#FFFF00">chimie de surface</font> est sélectionnée spécifiquement selon les
+fonctionnalités et propriétés finales recherchées.
+
+12
+00:01:25,263 --> 00:01:26,930
+Changement de diapositive
+
+13
+00:01:27,050 --> 00:01:34,413
+Enfin, la <font color="#FFFF00">structure physique interne des particules</font> peut être
+adaptée sur mesure lors de la synthèse.
+
+14
+00:01:34,533 --> 00:01:40,697
+Pour comprendre les matériaux d'aujourd'hui, revenons maintenant sur
+leur histoire.
+
+15
+00:01:40,817 --> 00:01:46,400
+Les premiers produits commerciaux issus de ce procédé datent des
+années 1930.
+
+16
+00:01:46,520 --> 00:01:52,103
+Les premiers produits commerciaux issus de ce procédé datent des
+années 1930.
+
+17
+00:01:52,223 --> 00:02:01,453
+Une forte expansion industrielle a eu lieu pendant et après la
+Seconde Guerre mondiale, notamment pour le <font color="#FFFF00">caoutchouc synthétique</font>.
+
+18
+00:02:01,573 --> 00:02:09,870
+Aujourd'hui, plusieurs millions de tonnes de <font color="#FFFF00">polymères</font> sont vendus
+sous forme liquide de <font color="#FFFF00">latex</font> ou sous forme sèche.
+
+19
+00:02:09,990 --> 00:02:20,847
+Enfin, les premières études académiques sur les <font color="#FFFF00">mécanismes de
+polymérisation</font> remontent aux années 1940, avec les travaux de
+Harkins, Smith et Ewart.
+
+20
+00:02:20,967 --> 00:02:27,483
+Cette histoire se poursuit avec de nouveaux progrès qui vont
+relancer fortement le domaine.
+
+21
+00:02:27,603 --> 00:02:35,900
+Depuis 1975, on observe un regain d'intérêt majeur grâce à une
+meilleure compréhension des <font color="#FFFF00">mécanismes réactionnels</font>.
+
+22
+00:02:36,020 --> 00:02:44,047
+On observe un regain d'intérêt majeur depuis 1975, grâce à une
+meilleure compréhension des <font color="#FFFF00">mécanismes réactionnels</font>,
+
+23
+00:02:44,167 --> 00:02:49,460
+des progrès en <font color="#FFFF00">modélisation</font>, en physico-chimie de la <font color="#FFFF00">stabilité
+colloïdale</font>,
+
+24
+00:02:49,580 --> 00:02:56,697
+ainsi que des avancées dans le <font color="#FFFF00">contrôle des procédés</font> et les
+nouvelles techniques de <font color="#FFFF00">caractérisation</font>.
+
+25
+00:02:56,817 --> 00:03:08,827
+Aujourd'hui, la demande est en forte hausse sous l'effet des
+<font color="#FFFF00">contraintes environnementales</font>, qui favorisent la transition des
+<font color="#FFFF00">systèmes solvants</font> vers les <font color="#FFFF00">systèmes aqueux</font>.
+
+26
+00:03:08,947 --> 00:03:16,777
+Mais le <font color="#FFFF00">latex</font> n'est pas uniquement une invention de la chimie
+industrielle : la nature en produit elle-même.
+
+27
+00:03:16,897 --> 00:03:24,660
+Parmi les <font color="#FFFF00">latex naturels</font>, les <font color="#FFFF00">Euphorbiacées</font> constituent une première
+famille particulièrement intéressante.
+
+28
+00:03:24,780 --> 00:03:35,210
+Plusieurs photographies illustrent des plantes telles que <font color="#FFFF00">Euphorbia
+tirucalli</font> et <font color="#FFFF00">Euphorbia resinifera</font>, laissant s'écouler un liquide
+blanc laiteux.
+
+29
+00:03:35,330 --> 00:03:43,807
+Ces substances végétales ont historiquement été utilisées comme
+antalgiques, désinfectants, purgatifs ou émétiques.
+
+30
+00:03:43,927 --> 00:03:52,110
+Il convient toutefois de noter que ces <font color="#FFFF00">latex naturels</font> présentent
+également des propriétés toxiques et allergisantes.
+
+31
+00:03:52,230 --> 00:03:58,860
+Parmi ces ressources végétales, une autre plante suscite aujourd'hui
+un intérêt croissant.
+
+32
+00:03:58,980 --> 00:04:05,657
+Le <font color="#FFFF00">pissenlit russe</font>, <font color="#FFFF00">Taraxacum kok-saghyz</font>, constitue une autre source
+naturelle de <font color="#FFFF00">latex</font>.
+
+33
+00:04:05,777 --> 00:04:15,967
+À gauche, des photos montrent la plante, ses fleurs jaunes et ses
+racines, ainsi qu'une coupe microscopique montrant les <font color="#FFFF00">cellules à
+latex</font>.
+
+34
+00:04:16,087 --> 00:04:24,403
+Des travaux de recherche très actifs sont menés à l'Université
+d'État de l'Ohio et à l'Institut Fraunhofer de Münster.
+
+35
+00:04:24,523 --> 00:04:32,353
+Cette culture s'adapte au climat continental et peut être développée
+en Europe, aux États-Unis et au Canada.
+
+36
+00:04:32,473 --> 00:04:42,017
+La production actuelle reste encore confidentielle, à moins de 2
+tonnes par an, avec une récolte mécanique des racines après un an.
+
+37
+00:04:42,137 --> 00:04:47,387
+Le <font color="#FFFF00">rendement</font> estimé se situe entre 350 et 1500 kg par hectare et par
+an.
+
+38
+00:04:47,507 --> 00:04:53,983
+Autre ressource prometteuse : le <font color="#FFFF00">Guayule</font>, particulièrement adapté
+aux régions sèches.
+
+39
+00:04:54,103 --> 00:05:01,713
+Le <font color="#FFFF00">Guayule</font>, <font color="#FFFF00">Parthenium argentatum</font>, constitue une autre source
+naturelle particulièrement intéressante.
+
+40
+00:05:01,833 --> 00:05:03,500
+Changement de diapositive
+
+41
+00:05:03,620 --> 00:05:15,477
+Les visuels montrent des champs de culture, la microstructure des
+cellules contenant des particules de <font color="#FFFF00">polyisoprène</font>, ainsi que Michel
+Dorget, président de GuaTecs.
+
+42
+00:05:15,597 --> 00:05:20,780
+Cette plante s'épanouit dans les climats semi-arides et
+méditerranéens.
+
+43
+00:05:20,900 --> 00:05:27,377
+Son développement concerne l'Europe, les États-Unis, l'Australie et
+l'Afrique du Sud.
+
+44
+00:05:27,497 --> 00:05:35,127
+La production actuelle reste inférieure à 1 000 tonnes par an,
+extraite de la tige par récolte mécanique.
+
+45
+00:05:35,247 --> 00:05:44,943
+Le <font color="#FFFF00">rendement</font> estimé est de 500 à 1 000 kg par hectare et par an,
+avec des récoltes possibles tous les 1 à 2 ans sur une durée de 10
+ans.
+
+46
+00:05:45,063 --> 00:05:54,360
+Pour terminer ce panorama des <font color="#FFFF00">sources naturelles</font>, intéressons-nous
+aux deux espèces qui dominent largement la production mondiale.
+
+47
+00:05:54,480 --> 00:06:00,997
+Les principales formes naturelles de <font color="#FFFF00">latex</font> proviennent de l'<font color="#FFFF00">Hevea</font> et
+du <font color="#FFFF00">Castilloa elastica</font>.
+
+48
+00:06:01,117 --> 00:06:13,463
+Ces deux arbres appartiennent à la famille des <font color="#FFFF00">Euphorbiacées</font>. Le
+<font color="#FFFF00">Castilloa elastica</font> est originaire d'Amérique centrale et du Sud,
+tandis que l'<font color="#FFFF00">Hevea</font> provient d'Amazonie.
+
+49
+00:06:13,583 --> 00:06:21,417
+Ces espèces nécessitent un climat tropical. L'Asie concentre
+aujourd'hui 93 % de la production mondiale.
+
+50
+00:06:21,537 --> 00:06:26,987
+La production actuelle s'élève à environ 10 à 15 millions de tonnes
+par an.
+
+51
+00:06:27,107 --> 00:06:31,757
+L'extraction se fait par <font color="#FFFF00">saignée</font> manuelle de l'écorce du tronc.
+
+52
+00:06:31,877 --> 00:06:41,487
+Le <font color="#FFFF00">rendement</font> est de 800 à 2 000 kg par hectare et par an, avec une
+première récolte après 6 à 8 ans, utilisable pendant 30 à 40 ans.
+
+53
+00:06:41,607 --> 00:06:49,123
+Ces chiffres permettent maintenant de replacer le <font color="#FFFF00">caoutchouc naturel</font>
+dans son contexte économique mondial.
+
+54
+00:06:49,243 --> 00:06:57,560
+Les volumes de production et de consommation permettent de mieux
+comprendre le poids économique du <font color="#FFFF00">caoutchouc naturel</font>.
+
+55
+00:06:57,680 --> 00:07:11,870
+La carte mondiale montre que la production est concentrée en Asie du
+Sud-Est, notamment en Thaïlande et en Indonésie, tandis que la
+consommation est dominée par la Chine, les États-Unis et l'Europe.
+
+56
+00:07:11,990 --> 00:07:27,400
+Les diagrammes circulaires confirment cette répartition : la
+Thaïlande et l'Indonésie fournissent plus de la moitié de l'offre
+mondiale, et la Chine absorbe à elle seule près de quarante pour
+cent de la demande globale.
+
+57
+00:07:27,520 --> 00:07:41,350
+Le graphique temporel illustre une hausse constante de la production
+de cinq à plus de treize millions de tonnes entre 1990 et 2020,
+accompagnée d'une forte accumulation des <font color="#FFFF00">stocks</font> à partir de 2012.
+
+58
+00:07:41,470 --> 00:07:56,013
+Enfin, le graphique du <font color="#FFFF00">cours SMR 20</font> montre un sommet historique à
+plus de six mille dollars la tonne en 2011, suivi d'une nette chute
+et d'une stabilisation autour de mille cinq cents dollars la tonne.
+
+59
+00:07:56,133 --> 00:07:57,800
+Changement de diapositive
+
+60
+00:07:57,920 --> 00:08:05,597
+Au-delà des volumes, une autre question devient essentielle : celle
+de la <font color="#FFFF00">sécurité d'approvisionnement</font>.
+
+61
+00:08:05,717 --> 00:08:16,500
+Le <font color="#FFFF00">caoutchouc naturel</font> est notamment considéré comme le seul matériau
+biologique figurant parmi les <font color="#FFFF00">matières premières critiques</font> pour
+l'économie européenne.
+
+62
+00:08:16,620 --> 00:08:29,383
+La carte mondiale répertorie les sources d'approvisionnement
+majeures pour les <font color="#FFFF00">matériaux stratégiques</font> de l'Union européenne,
+principalement constitués de minéraux et de métaux rares.
+
+63
+00:08:29,503 --> 00:08:39,420
+L'Indonésie y est mise en évidence en rouge car elle fournit à elle
+seule trente-un pour cent de la production mondiale de <font color="#FFFF00">caoutchouc
+naturel</font>.
+
+64
+00:08:39,540 --> 00:08:52,550
+À titre de comparaison, la Chine fournit la quasi-totalité des
+terres rares et du magnésium, tandis que d'autres pays fournissent
+des métaux spécifiques comme le lithium ou le cobalt.
+
+65
+00:08:52,670 --> 00:09:04,120
+La présence du <font color="#FFFF00">caoutchouc naturel</font> dans cette liste montre la
+vulnérabilité des chaînes d'approvisionnement industrielles
+européennes face aux importations végétales.
+
+66
+00:09:04,240 --> 00:09:12,757
+Une référence au portail de la Commission européenne sur les
+<font color="#FFFF00">matières premières critiques</font> est indiquée au bas de la page.
+
+67
+00:09:12,877 --> 00:09:18,460
+Voyons maintenant comment cette notion de <font color="#FFFF00">criticité</font> est évaluée
+concrètement.
+
+68
+00:09:18,580 --> 00:09:27,763
+La matrice européenne de 2020 positionne chaque matière première
+selon son <font color="#FFFF00">importance économique</font> et son <font color="#FFFF00">risque d'approvisionnement</font>.
+
+69
+00:09:27,883 --> 00:09:38,847
+Le graphique positionne chaque matériau selon deux axes :
+l'<font color="#FFFF00">importance économique</font> sur l'axe horizontal et le <font color="#FFFF00">risque
+d'approvisionnement</font> sur l'axe vertical.
+
+70
+00:09:38,967 --> 00:09:48,997
+Les points rouges représentent les <font color="#FFFF00">matières premières critiques</font>, qui
+dépassent les seuils minimaux définis par les lignes pointillées
+rouges.
+
+71
+00:09:49,117 --> 00:09:57,747
+Une flèche rouge pointe directement sur le <font color="#FFFF00">caoutchouc naturel</font>, situé
+très à droite sur l'axe de l'<font color="#FFFF00">importance économique</font>.
+
+72
+00:09:57,867 --> 00:10:10,830
+Bien que son <font color="#FFFF00">risque d'approvisionnement</font> soit modéré par rapport à
+des métaux comme le magnésium ou le scandium, son impact économique
+majeur le maintient parmi les substances critiques.
+
+73
+00:10:10,950 --> 00:10:18,133
+Deux liens vers les rapports officiels de la Commission européenne
+sont référencés au bas de l'image.
+
+74
+00:10:18,253 --> 00:10:23,817
+Une fois cet enjeu posé, intéressons-nous aux <font color="#FFFF00">marchés</font> et aux
+<font color="#FFFF00">applications</font>.
+
+75
+00:10:23,937 --> 00:10:31,367
+Les <font color="#FFFF00">marchés du caoutchouc naturel</font> sont très diversifiés, avec une
+place majeure pour les <font color="#FFFF00">pneumatiques</font>.
+
+76
+00:10:31,487 --> 00:10:40,937
+Le premier graphique circulaire montre que soixante-cinq pour cent
+du <font color="#FFFF00">caoutchouc naturel</font> est destiné à la fabrication des <font color="#FFFF00">pneumatiques</font>.
+
+77
+00:10:41,057 --> 00:10:53,333
+Le reste du marché se divise entre d'autres applications à dix-neuf
+pour cent, les <font color="#FFFF00">adhésifs</font> à cinq pour cent, les chaussures à cinq pour
+cent et les <font color="#FFFF00">latex</font> à huit pour cent.
+
+78
+00:10:53,453 --> 00:10:55,120
+Changement de diapositive
+
+79
+00:10:55,240 --> 00:11:04,937
+Un second graphique détaille le segment spécifique des <font color="#FFFF00">latex</font> : les
+<font color="#FFFF00">gants</font> en représentent près de la moitié avec quarante-neuf pour
+cent.
+
+80
+00:11:05,057 --> 00:11:20,580
+Les autres applications sous forme de <font color="#FFFF00">latex</font> incluent les fils
+élastiques à dix pour cent, la <font color="#FFFF00">mousse</font> à huit pour cent, les
+préservatifs à huit pour cent, le textile à cinq pour cent et divers
+produits à vingt pour cent.
+
+81
+00:11:20,700 --> 00:11:32,443
+En bas de page, les données chiffrées indiquent une production
+actuelle d'environ quinze millions de tonnes par an, pour un prix
+moyen d'un euro cinquante par kilo.
+
+82
+00:11:32,563 --> 00:11:43,573
+À titre de comparaison, le <font color="#FFFF00">caoutchouc synthétique</font> représente environ
+vingt millions de tonnes par an, principalement destinées à
+l'industrie <font color="#FFFF00">pneumatique</font>.
+
+83
+00:11:43,693 --> 00:11:49,543
+Les <font color="#FFFF00">latex synthétiques</font> ouvrent ensuite un champ d'applications
+encore plus large.
+
+84
+00:11:49,663 --> 00:11:58,313
+Les applications des <font color="#FFFF00">latex synthétiques</font> peuvent être regroupées en
+quatre grandes familles selon le devenir des <font color="#FFFF00">particules</font>.
+
+85
+00:11:58,433 --> 00:12:05,617
+La partie gauche rassemble les usages où la <font color="#FFFF00">forme sphérique</font> de la
+<font color="#FFFF00">particule colloïdale</font> reste intacte.
+
+86
+00:12:05,737 --> 00:12:16,947
+Dans le cadre vert en haut à gauche, les <font color="#FFFF00">particules</font> servent de
+<font color="#FFFF00">pigments opacifiants</font> ou de brillantage pour le <font color="#FFFF00">papier</font>, les <font color="#FFFF00">peintures</font>
+et les soins personnels.
+
+87
+00:12:17,067 --> 00:12:27,097
+Dans le cadre bleu foncé en bas à gauche, elles sont utilisées comme
+<font color="#FFFF00">biomarqueurs</font> et supports de <font color="#FFFF00">diagnostic médical</font> en biologie et
+pharmacie.
+
+88
+00:12:27,217 --> 00:12:37,067
+La partie droite regroupe les applications où la structure
+particulaire d'origine est détruite pour former un <font color="#FFFF00">réseau continu</font> ou
+une solution.
+
+89
+00:12:37,187 --> 00:12:47,557
+En haut à droite, le cadre rouge décrit la formation de <font color="#FFFF00">films liants</font>
+pour le <font color="#FFFF00">papier</font>, la <font color="#FFFF00">peinture</font>, le <font color="#FFFF00">textile</font>, les <font color="#FFFF00">adhésifs</font> et le
+<font color="#FFFF00">bâtiment</font>.
+
+90
+00:12:47,677 --> 00:13:01,180
+Enfin, en bas à droite, le cadre bleu clair concerne les
+<font color="#FFFF00">hydrocolloïdes</font> et <font color="#FFFF00">épaississants</font> solubles en milieu alcalin, comme
+les <font color="#FFFF00">résines HASE</font> pour le papier, la peinture et la cosmétique.
+
+91
+00:13:01,300 --> 00:13:06,997
+Commençons par l'une des applications les plus spécialisées : le
+<font color="#FFFF00">diagnostic</font>.
+
+92
+00:13:07,117 --> 00:13:14,233
+Le <font color="#FFFF00">diagnostic médical</font> constitue l'une des applications les plus
+spécialisées des <font color="#FFFF00">latex synthétiques</font>.
+
+93
+00:13:14,353 --> 00:13:25,697
+L'unité de consommation est très faible, de l'ordre du gramme et
+généralement inférieure à un kilogramme, pour un prix estimé à
+environ cent euros par gramme.
+
+94
+00:13:25,817 --> 00:13:27,483
+Changement de diapositive
+
+95
+00:13:27,603 --> 00:13:36,653
+Ces latex possèdent une <font color="#FFFF00">surface fonctionnalisée</font> et une <font color="#FFFF00">distribution
+de taille de particule</font> particulièrement étroite et contrôlée.
+
+96
+00:13:36,773 --> 00:13:45,623
+Ils sont conçus pour adsorber spécifiquement des <font color="#FFFF00">biomolécules</font> et
+s'intégrer dans des dispositifs de type <font color="#FFFF00">laboratoire sur puce</font>.
+
+97
+00:13:45,743 --> 00:13:53,927
+Un encadré en bas à gauche rappelle la catégorie des <font color="#FFFF00">biomarqueurs</font> et
+du <font color="#FFFF00">diagnostic</font> pour la biologie et la pharmacie.
+
+98
+00:13:54,047 --> 00:14:01,697
+Une illustration montre la brochure des <font color="#FFFF00">microsphères</font> Bio-Estapor
+développées par la société Merck Santé SAS.
+
+99
+00:14:01,817 --> 00:14:09,000
+L'adresse du site industriel de Merck Santé à Meyzieu est indiquée
+en bas à droite de la diapositive.
+
+100
+00:14:09,120 --> 00:14:15,437
+Passons maintenant des principes généraux à quelques exemples
+biomédicaux très concrets.
+
+101
+00:14:15,557 --> 00:14:23,140
+Les <font color="#FFFF00">particules de latex fonctionnalisées</font> trouvent aujourd'hui des
+applications biomédicales très concrètes.
+
+102
+00:14:23,260 --> 00:14:35,607
+En haut à gauche, un cliché de microscopie électronique à un
+agrandissement de douze mille cinq cents fois montre des bactéries
+E. Coli attachées à des billes <font color="#FFFF00">Dynabeads</font>.
+
+103
+00:14:35,727 --> 00:14:45,110
+La légende associée précise que ces billes permettent la capture et
+la séparation spécifique de micro-organismes en milieu biologique.
+
+104
+00:14:45,230 --> 00:14:52,393
+En bas, un schéma explicatif détaille le principe d'un <font color="#FFFF00">test
+d'agglutination</font> sous champ magnétique.
+
+105
+00:14:52,513 --> 00:15:02,363
+Des <font color="#FFFF00">particules magnétiques</font> greffées avec des anticorps s'organisent
+sous forme de chaînes lorsqu'elles sont soumises à un champ
+magnétique B.
+
+106
+00:15:02,483 --> 00:15:13,493
+En présence d'antigènes spécifiques, l'assemblage sous forme de
+chaînes persiste même après l'annulation du champ magnétique,
+confirmant le test positif.
+
+107
+00:15:13,613 --> 00:15:21,243
+En l'absence d'antigènes, les <font color="#FFFF00">particules</font> se redispersent librement
+dès que le champ magnétique est coupé.
+
+108
+00:15:21,363 --> 00:15:26,880
+Changeons de domaine et intéressons-nous maintenant aux <font color="#FFFF00">pigments
+plastiques</font>.
+
+109
+00:15:27,000 --> 00:15:34,317
+Les <font color="#FFFF00">pigments plastiques</font> utilisent des <font color="#FFFF00">latex synthétiques</font> pour
+apporter de la brillance et de l'opacité.
+
+110
+00:15:34,437 --> 00:15:45,180
+Ces <font color="#FFFF00">polymères</font>, tels que le <font color="#FFFF00">polyméthacrylate de méthyle</font> ou le
+<font color="#FFFF00">polystyrène</font>, nécessitent une grande <font color="#FFFF00">stabilité</font> dans les formulations
+sans former de film.
+
+111
+00:15:45,300 --> 00:15:58,510
+Ils constituent des alternatives prêtes à l'emploi aux <font color="#FFFF00">pigments
+minéraux</font> traditionnels comme le <font color="#FFFF00">dioxyde de titane</font> et l'<font color="#FFFF00">argile</font>,
+notamment dans le <font color="#FFFF00">papier</font>, les <font color="#FFFF00">peintures</font> et les cosmétiques.
+
+112
+00:15:58,630 --> 00:16:07,947
+Des images de microscopie illustrent la structure sphérique
+régulière de ces <font color="#FFFF00">particules</font> ainsi que leur forme creuse en
+<font color="#FFFF00">nano-capsules</font>.
+
+113
+00:16:08,067 --> 00:16:13,850
+L'effet de ces particules apparaît très clairement dans les
+applications <font color="#FFFF00">papier</font>.
+
+114
+00:16:13,970 --> 00:16:20,267
+Dans le <font color="#FFFF00">papier couché</font>, cet effet devient particulièrement visible
+lors du <font color="#FFFF00">calandrage</font>.
+
+115
+00:16:20,387 --> 00:16:31,303
+Ces pigments ont une densité proche de un virgule zéro trois et des
+<font color="#FFFF00">particules sphériques</font> d'un diamètre compris entre cinquante et cent
+cinquante nanomètres.
+
+116
+00:16:31,423 --> 00:16:33,090
+Changement de diapositive
+
+117
+00:16:33,210 --> 00:16:42,327
+Des clichés de microscopie montrent la surface du papier avant et
+après passage entre les rouleaux d'une <font color="#FFFF00">calandreuse</font> industrielle.
+
+118
+00:16:42,447 --> 00:16:53,390
+Sous l'action de la pression et de la chaleur du <font color="#FFFF00">calandrage</font>, les
+<font color="#FFFF00">particules de polymère</font> se déforment pour former une surface fermée,
+lisse et brillante.
+
+119
+00:16:53,510 --> 00:16:59,427
+Les <font color="#FFFF00">latex</font> peuvent aussi être utilisés pour modifier la <font color="#FFFF00">rhéologie</font>
+des formulations.
+
+120
+00:16:59,547 --> 00:17:09,823
+Les <font color="#FFFF00">latex synthétiques</font> peuvent également agir comme des
+<font color="#FFFF00">épaississants intelligents</font> dans le papier, la peinture, le textile
+et les cosmétiques.
+
+121
+00:17:09,943 --> 00:17:17,307
+Ces applications nécessitent une bonne <font color="#FFFF00">stabilité de formulation</font>,
+sans recherche de <font color="#FFFF00">formation de film</font>.
+
+122
+00:17:17,427 --> 00:17:31,417
+Le premier mécanisme, représenté à gauche pour les <font color="#FFFF00">polymères ASE</font>,
+repose sur l'<font color="#FFFF00">ionisation des groupements acides</font> à pH basique,
+provoquant le déploiement des chaînes par <font color="#FFFF00">répulsion électrostatique</font>.
+
+123
+00:17:31,537 --> 00:17:42,813
+Le second mécanisme, à droite pour les <font color="#FFFF00">polymères HASE</font>, ajoute des
+<font color="#FFFF00">motifs hydrophobes</font> greffés qui s'associent entre eux pour augmenter
+fortement la <font color="#FFFF00">viscosité</font>.
+
+124
+00:17:42,933 --> 00:17:49,230
+Pour comprendre ce comportement, regardons de plus près les
+<font color="#FFFF00">mécanismes d'association</font>.
+
+125
+00:17:49,350 --> 00:17:57,713
+Le comportement de ces polymères dépend notamment du <font color="#FFFF00">pH</font>, de leur
+concentration et de leurs <font color="#FFFF00">mécanismes d'association</font>.
+
+126
+00:17:57,833 --> 00:18:09,730
+Un graphique à gauche montre l'augmentation de la <font color="#FFFF00">viscosité</font> en
+fonction du <font color="#FFFF00">pH</font>, distinguant la <font color="#FFFF00">solubilisation</font> complète des chaînes
+et le simple <font color="#FFFF00">gonflement des particules</font>.
+
+127
+00:18:09,850 --> 00:18:22,080
+Les schémas de droite illustrent l'<font color="#FFFF00">auto-assemblage</font> des <font color="#FFFF00">segments
+hydrophobes</font> au-delà d'une <font color="#FFFF00">concentration critique</font>, formant des fleurs
+puis un <font color="#FFFF00">réseau supramoléculaire</font> complexe.
+
+128
+00:18:22,200 --> 00:18:32,517
+Ce <font color="#FFFF00">réseau transitoire</font> d'agrégats permet un contrôle précis de la
+<font color="#FFFF00">viscosité</font> de la formulation sous l'effet du <font color="#FFFF00">pH</font> et de la
+concentration en <font color="#FFFF00">polymères</font>.
+
+129
+00:18:32,637 --> 00:18:38,667
+Autre fonction majeure des <font color="#FFFF00">latex</font> : assurer la cohésion et former un
+<font color="#FFFF00">film continu</font>.
+
+130
+00:18:38,787 --> 00:18:48,217
+Les <font color="#FFFF00">latex synthétiques</font> jouent enfin un rôle majeur comme <font color="#FFFF00">liants
+industriels</font> en phase aqueuse, lorsqu'il faut former un <font color="#FFFF00">film continu</font>.
+
+131
+00:18:48,337 --> 00:18:57,853
+Ce domaine exige à la fois une bonne <font color="#FFFF00">stabilité colloïdale</font> et une
+capacité à former un <font color="#FFFF00">film continu</font> garantissant le pouvoir liant
+requis.
+
+132
+00:18:57,973 --> 00:19:09,143
+Les chimies employées, telles que les <font color="#FFFF00">acétates</font>, le <font color="#FFFF00">butadiène</font>, le
+<font color="#FFFF00">styrène</font> ou les <font color="#FFFF00">acrylates</font>, sont adaptées aux contraintes de chaque
+application finale.
+
+133
+00:19:09,263 --> 00:19:17,960
+Un diagramme circulaire détaille la répartition du marché, qui
+représente environ deux millions et demi de tonnes par an.
+
+134
+00:19:18,080 --> 00:19:29,890
+Le <font color="#FFFF00">papier</font> domine ce marché avec trente-deux pour cent, suivi du
+<font color="#FFFF00">textile</font> à dix-neuf pour cent, de la <font color="#FFFF00">peinture</font> à dix-sept pour cent et
+des <font color="#FFFF00">adhésifs</font> à quinze pour cent.
+
+135
+00:19:30,010 --> 00:19:39,420
+Le reste de la production se partage entre le <font color="#FFFF00">BTP</font> à neuf pour cent,
+les <font color="#FFFF00">encres</font>, les <font color="#FFFF00">mousses</font> et d'autres applications secondaires.
+
+136
+00:19:39,540 --> 00:19:46,037
+Pour terminer, regardons les <font color="#FFFF00">défis</font> qui vont conditionner l'évolution
+de cette industrie.
+
+137
+00:19:46,157 --> 00:19:54,540
+Les principaux défis concernent aujourd'hui à la fois les
+performances techniques et les <font color="#FFFF00">contraintes environnementales</font>.
+
+138
+00:19:54,660 --> 00:19:56,327
+Changement de diapositive
+
+139
+00:19:56,447 --> 00:20:08,877
+Les premiers objectifs concernent la réduction des émissions de
+<font color="#FFFF00">composés organiques volatils</font> et des odeurs dans les peintures, ainsi
+que la diminution de la <font color="#FFFF00">sensibilité à l'eau</font>.
+
+140
+00:20:08,997 --> 00:20:23,160
+Sur le plan de la formulation, les défis portent sur l'augmentation
+de la teneur en <font color="#FFFF00">extrait sec</font> jusqu'à soixante-dix pour cent en volume
+et le développement de <font color="#FFFF00">nanolatex</font> de moins de cinquante nanomètres.
+
+141
+00:20:23,280 --> 00:20:36,110
+L'industrie cherche également à améliorer la <font color="#FFFF00">stabilité des
+dispersions</font> dans des conditions extrêmes de température et de force
+ionique, tout en accélérant la <font color="#FFFF00">vitesse de filmification</font>.
+
+142
+00:20:36,230 --> 00:20:49,173
+Enfin, les travaux s'orientent vers le <font color="#FFFF00">durcissement de surface</font> des
+vernis, la conception de <font color="#FFFF00">particules structurées cœur-écorce</font> et la
+<font color="#FFFF00">libération contrôlée</font> d'actifs en toute innocuité.

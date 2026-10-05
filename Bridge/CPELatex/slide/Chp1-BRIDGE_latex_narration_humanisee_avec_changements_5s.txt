@@ -1,0 +1,756 @@
+1
+00:00:00,000 --> 00:00:06,438
+Bienvenue dans cette présentation consacrée aux polymères en
+émulsion et aux latex.
+
+2
+00:00:06,888 --> 00:00:15,144
+Ce premier module est une introduction générale abordant les
+généralités et les marchés de cette industrie.
+
+3
+00:00:15,594 --> 00:00:21,577
+Cette formation et cette présentation vous sont proposées par Gérard
+Bacquet.
+
+4
+00:00:22,027 --> 00:00:27,102
+Commençons par le principe même de la polymérisation en émulsion.
+
+5
+00:00:27,902 --> 00:00:36,688
+La polymérisation en émulsion radicalaire repose sur la formation de
+particules de polymère dispersées dans l'eau.
+
+6
+00:00:37,138 --> 00:00:46,407
+Au centre, une image de microscopie montre une dispersion de
+particules sphériques de polymère relativement uniformes.
+
+7
+00:00:46,857 --> 00:00:53,882
+Le diamètre moyen des particules est généralement compris entre 0,1
+et 0,3 micromètre.
+
+8
+00:00:54,332 --> 00:01:03,905
+Il existe des nanolatex en dessous de 0,1 micromètre et des
+dispersions d'acétate pouvant atteindre de 1 à 10 micromètres.
+
+9
+00:01:04,355 --> 00:01:10,262
+La teneur volumique en extrait sec se situe habituellement entre 30
+et 50 %.
+
+10
+00:01:10,712 --> 00:01:22,387
+La chimie interne est très polyvalente et s'appuie sur divers
+monomères comme le styrène, le butadiène, les acrylates, l'acétate
+ou le versatate.
+
+11
+00:01:22,837 --> 00:01:31,548
+La chimie de surface est sélectionnée spécifiquement selon les
+fonctionnalités et propriétés finales recherchées.
+
+12
+00:01:31,548 --> 00:01:36,548
+Changement de diapositive
+
+13
+00:01:36,998 --> 00:01:44,979
+Enfin, la structure physique interne des particules peut être
+adaptée sur mesure lors de la synthèse.
+
+14
+00:01:45,429 --> 00:01:51,929
+Pour comprendre les matériaux d'aujourd'hui, revenons maintenant sur
+leur histoire.
+
+15
+00:01:52,729 --> 00:01:58,713
+Les premiers produits commerciaux issus de ce procédé datent des
+années 1930.
+
+16
+00:01:59,163 --> 00:02:05,146
+Les premiers produits commerciaux issus de ce procédé datent des
+années 1930.
+
+17
+00:02:05,596 --> 00:02:15,699
+Une forte expansion industrielle a eu lieu pendant et après la
+Seconde Guerre mondiale, notamment pour le caoutchouc synthétique.
+
+18
+00:02:16,149 --> 00:02:25,191
+Aujourd'hui, plusieurs millions de tonnes de polymères sont vendus
+sous forme liquide de latex ou sous forme sèche.
+
+19
+00:02:25,641 --> 00:02:37,543
+Enfin, les premières études académiques sur les mécanismes de
+polymérisation remontent aux années 1940, avec les travaux de
+Harkins, Smith et Ewart.
+
+20
+00:02:37,993 --> 00:02:44,493
+Cette histoire se poursuit avec de nouveaux progrès qui vont
+relancer fortement le domaine.
+
+21
+00:02:45,293 --> 00:02:54,335
+Depuis 1975, on observe un regain d'intérêt majeur grâce à une
+meilleure compréhension des mécanismes réactionnels.
+
+22
+00:02:54,785 --> 00:03:03,857
+On observe un regain d'intérêt majeur depuis 1975, grâce à une
+meilleure compréhension des mécanismes réactionnels,
+
+23
+00:03:04,307 --> 00:03:10,273
+des progrès en modélisation, en physico-chimie de la stabilité
+colloïdale,
+
+24
+00:03:10,723 --> 00:03:18,449
+ainsi que des avancées dans le contrôle des procédés et les
+nouvelles techniques de caractérisation.
+
+25
+00:03:18,899 --> 00:03:32,136
+Aujourd'hui, la demande est en forte hausse sous l'effet des
+contraintes environnementales, qui favorisent la transition des
+systèmes solvants vers les systèmes aqueux.
+
+26
+00:03:32,586 --> 00:03:39,086
+Mais le latex n'est pas uniquement une invention de la chimie
+industrielle : la nature en produit elle-même.
+
+27
+00:03:39,886 --> 00:03:48,322
+Parmi les latex naturels, les Euphorbiacées constituent une première
+famille particulièrement intéressante.
+
+28
+00:03:48,772 --> 00:04:00,239
+Plusieurs photographies illustrent des plantes telles que Euphorbia
+tirucalli et Euphorbia resinifera, laissant s'écouler un liquide
+blanc laiteux.
+
+29
+00:04:00,689 --> 00:04:09,911
+Ces substances végétales ont historiquement été utilisées comme
+antalgiques, désinfectants, purgatifs ou émétiques.
+
+30
+00:04:10,361 --> 00:04:19,299
+Il convient toutefois de noter que ces latex naturels présentent
+également des propriétés toxiques et allergisantes.
+
+31
+00:04:19,749 --> 00:04:26,249
+Parmi ces ressources végétales, une autre plante suscite aujourd'hui
+un intérêt croissant.
+
+32
+00:04:27,049 --> 00:04:34,225
+Le pissenlit russe, Taraxacum kok-saghyz, constitue une autre source
+naturelle de latex.
+
+33
+00:04:34,675 --> 00:04:45,820
+À gauche, des photos montrent la plante, ses fleurs jaunes et ses
+racines, ainsi qu'une coupe microscopique montrant les cellules à
+latex.
+
+34
+00:04:46,270 --> 00:04:55,359
+Des travaux de recherche très actifs sont menés à l'Université
+d'État de l'Ohio et à l'Institut Fraunhofer de Münster.
+
+35
+00:04:55,809 --> 00:05:04,321
+Cette culture s'adapte au climat continental et peut être développée
+en Europe, aux États-Unis et au Canada.
+
+36
+00:05:04,771 --> 00:05:15,205
+La production actuelle reste encore confidentielle, à moins de 2
+tonnes par an, avec une récolte mécanique des racines après un an.
+
+37
+00:05:15,655 --> 00:05:21,260
+Le rendement estimé se situe entre 350 et 1500 kg par hectare et par
+an.
+
+38
+00:05:21,710 --> 00:05:28,210
+Autre ressource prometteuse : le Guayule, particulièrement adapté
+aux régions sèches.
+
+39
+00:05:29,010 --> 00:05:37,247
+Le Guayule, Parthenium argentatum, constitue une autre source
+naturelle particulièrement intéressante.
+
+40
+00:05:37,247 --> 00:05:42,247
+Changement de diapositive
+
+41
+00:05:42,697 --> 00:05:55,736
+Les visuels montrent des champs de culture, la microstructure des
+cellules contenant des particules de polyisoprène, ainsi que Michel
+Dorget, président de GuaTecs.
+
+42
+00:05:56,186 --> 00:06:01,715
+Cette plante s'épanouit dans les climats semi-arides et
+méditerranéens.
+
+43
+00:06:02,165 --> 00:06:09,114
+Son développement concerne l'Europe, les États-Unis, l'Australie et
+l'Afrique du Sud.
+
+44
+00:06:09,564 --> 00:06:17,848
+La production actuelle reste inférieure à 1 000 tonnes par an,
+extraite de la tige par récolte mécanique.
+
+45
+00:06:18,298 --> 00:06:28,932
+Le rendement estimé est de 500 à 1 000 kg par hectare et par an,
+avec des récoltes possibles tous les 1 à 2 ans sur une durée de 10
+ans.
+
+46
+00:06:29,382 --> 00:06:35,882
+Pour terminer ce panorama des sources naturelles, intéressons-nous
+aux deux espèces qui dominent largement la production mondiale.
+
+47
+00:06:36,682 --> 00:06:43,725
+Les principales formes naturelles de latex proviennent de l'Hevea et
+du Castilloa elastica.
+
+48
+00:06:44,175 --> 00:06:57,458
+Ces deux arbres appartiennent à la famille des Euphorbiacées. Le
+Castilloa elastica est originaire d'Amérique centrale et du Sud,
+tandis que l'Hevea provient d'Amazonie.
+
+49
+00:06:57,908 --> 00:07:06,087
+Ces espèces nécessitent un climat tropical. L'Asie concentre
+aujourd'hui 93 % de la production mondiale.
+
+50
+00:07:06,537 --> 00:07:12,369
+La production actuelle s'élève à environ 10 à 15 millions de tonnes
+par an.
+
+51
+00:07:12,819 --> 00:07:17,742
+L'extraction se fait par saignée manuelle de l'écorce du tronc.
+
+52
+00:07:18,192 --> 00:07:28,702
+Le rendement est de 800 à 2 000 kg par hectare et par an, avec une
+première récolte après 6 à 8 ans, utilisable pendant 30 à 40 ans.
+
+53
+00:07:29,152 --> 00:07:35,652
+Ces chiffres permettent maintenant de replacer le caoutchouc naturel
+dans son contexte économique mondial.
+
+54
+00:07:36,452 --> 00:07:45,541
+Les volumes de production et de consommation permettent de mieux
+comprendre le poids économique du caoutchouc naturel.
+
+55
+00:07:45,991 --> 00:08:00,991
+La carte mondiale montre que la production est concentrée en Asie du
+Sud-Est, notamment en Thaïlande et en Indonésie, tandis que la
+consommation est dominée par la Chine, les États-Unis et l'Europe.
+
+56
+00:08:01,441 --> 00:08:16,441
+Les diagrammes circulaires confirment cette répartition : la
+Thaïlande et l'Indonésie fournissent plus de la moitié de l'offre
+mondiale, et la Chine absorbe à elle seule près de quarante pour
+cent de la demande globale.
+
+57
+00:08:16,891 --> 00:08:31,891
+Le graphique temporel illustre une hausse constante de la production
+de cinq à plus de treize millions de tonnes entre 1990 et 2020,
+accompagnée d'une forte accumulation des stocks à partir de 2012.
+
+58
+00:08:32,341 --> 00:08:47,341
+Enfin, le graphique du cours SMR 20 montre un sommet historique à
+plus de six mille dollars la tonne en 2011, suivi d'une nette chute
+et d'une stabilisation autour de mille cinq cents dollars la tonne.
+----
+
+59
+00:08:47,341 --> 00:08:52,341
+Changement de diapositive
+
+60
+00:08:52,791 --> 00:08:59,291
+Au-delà des volumes, une autre question devient essentielle : celle
+de la sécurité d'approvisionnement.
+
+61
+00:09:00,091 --> 00:09:11,984
+Le caoutchouc naturel est notamment considéré comme le seul matériau
+biologique figurant parmi les matières premières critiques pour
+l'économie européenne.
+
+62
+00:09:12,434 --> 00:09:26,552
+La carte mondiale répertorie les sources d'approvisionnement
+majeures pour les matériaux stratégiques de l'Union européenne,
+principalement constitués de minéraux et de métaux rares.
+
+63
+00:09:27,002 --> 00:09:37,909
+L'Indonésie y est mise en évidence en rouge car elle fournit à elle
+seule trente-un pour cent de la production mondiale de caoutchouc
+naturel.
+
+64
+00:09:38,359 --> 00:09:52,733
+À titre de comparaison, la Chine fournit la quasi-totalité des
+terres rares et du magnésium, tandis que d'autres pays fournissent
+des métaux spécifiques comme le lithium ou le cobalt.
+
+65
+00:09:53,183 --> 00:10:05,833
+La présence du caoutchouc naturel dans cette liste montre la
+vulnérabilité des chaînes d'approvisionnement industrielles
+européennes face aux importations végétales.
+
+66
+00:10:06,283 --> 00:10:15,599
+Une référence au portail de la Commission européenne sur les
+matières premières critiques est indiquée au bas de la page.
+
+67
+00:10:16,049 --> 00:10:22,033
+Voyons maintenant comment cette notion de criticité est évaluée
+concrètement.
+
+68
+00:10:22,833 --> 00:10:32,907
+La matrice européenne de 2020 positionne chaque matière première
+selon son importance économique et son risque d'approvisionnement.
+
+69
+00:10:33,357 --> 00:10:45,249
+Le graphique positionne chaque matériau selon deux axes :
+l'importance économique sur l'axe horizontal et le risque
+d'approvisionnement sur l'axe vertical.
+
+70
+00:10:45,699 --> 00:10:56,711
+Les points rouges représentent les matières premières critiques, qui
+dépassent les seuils minimaux définis par les lignes pointillées
+rouges.
+
+71
+00:10:57,161 --> 00:11:06,582
+Une flèche rouge pointe directement sur le caoutchouc naturel, situé
+très à droite sur l'axe de l'importance économique.
+
+72
+00:11:07,032 --> 00:11:21,377
+Bien que son risque d'approvisionnement soit modéré par rapport à
+des métaux comme le magnésium ou le scandium, son impact économique
+majeur le maintient parmi les substances critiques.
+
+73
+00:11:21,827 --> 00:11:29,629
+Deux liens vers les rapports officiels de la Commission européenne
+sont référencés au bas de l'image.
+
+74
+00:11:30,079 --> 00:11:36,015
+Une fois cet enjeu posé, intéressons-nous aux marchés et aux
+applications.
+
+75
+00:11:36,815 --> 00:11:44,872
+Les marchés du caoutchouc naturel sont très diversifiés, avec une
+place majeure pour les pneumatiques.
+
+76
+00:11:45,322 --> 00:11:55,699
+Le premier graphique circulaire montre que soixante-cinq pour cent
+du caoutchouc naturel est destiné à la fabrication des pneumatiques.
+
+77
+00:11:56,149 --> 00:12:09,690
+Le reste du marché se divise entre d'autres applications à dix-neuf
+pour cent, les adhésifs à cinq pour cent, les chaussures à cinq pour
+cent et les latex à huit pour cent.
+
+78
+00:12:09,690 --> 00:12:14,690
+Changement de diapositive
+
+79
+00:12:15,140 --> 00:12:25,593
+Un second graphique détaille le segment spécifique des latex : les
+gants en représentent près de la moitié avec quarante-neuf pour
+cent.
+
+80
+00:12:26,043 --> 00:12:41,043
+Les autres applications sous forme de latex incluent les fils
+élastiques à dix pour cent, la mousse à huit pour cent, les
+préservatifs à huit pour cent, le textile à cinq pour cent et divers
+produits à vingt pour cent.
+
+81
+00:12:41,493 --> 00:12:54,427
+En bas de page, les données chiffrées indiquent une production
+actuelle d'environ quinze millions de tonnes par an, pour un prix
+moyen d'un euro cinquante par kilo.
+
+82
+00:12:54,877 --> 00:13:06,978
+À titre de comparaison, le caoutchouc synthétique représente environ
+vingt millions de tonnes par an, principalement destinées à
+l'industrie pneumatique.
+
+83
+00:13:07,428 --> 00:13:13,714
+Les latex synthétiques ouvrent ensuite un champ d'applications
+encore plus large.
+
+84
+00:13:14,514 --> 00:13:23,982
+Les applications des latex synthétiques peuvent être regroupées en
+quatre grandes familles selon le devenir des particules.
+
+85
+00:13:24,432 --> 00:13:32,234
+La partie gauche rassemble les usages où la forme sphérique de la
+particule colloïdale reste intacte.
+
+86
+00:13:32,684 --> 00:13:45,012
+Dans le cadre vert en haut à gauche, les particules servent de
+pigments opacifiants ou de brillantage pour le papier, les peintures
+et les soins personnels.
+
+87
+00:13:45,462 --> 00:13:56,474
+Dans le cadre bleu foncé en bas à gauche, elles sont utilisées comme
+biomarqueurs et supports de diagnostic médical en biologie et
+pharmacie.
+
+88
+00:13:56,924 --> 00:14:07,756
+La partie droite regroupe les applications où la structure
+particulaire d'origine est détruite pour former un réseau continu ou
+une solution.
+
+89
+00:14:08,206 --> 00:14:19,530
+En haut à droite, le cadre rouge décrit la formation de films liants
+pour le papier, la peinture, le textile, les adhésifs et le
+bâtiment.
+
+90
+00:14:19,980 --> 00:14:34,865
+Enfin, en bas à droite, le cadre bleu clair concerne les
+hydrocolloïdes et épaississants solubles en milieu alcalin, comme
+les résines HASE pour le papier, la peinture et la cosmétique.
+
+91
+00:14:35,315 --> 00:14:41,223
+Commençons par l'une des applications les plus spécialisées : le
+diagnostic.
+
+92
+00:14:42,023 --> 00:14:49,749
+Le diagnostic médical constitue l'une des applications les plus
+spécialisées des latex synthétiques.
+
+93
+00:14:50,199 --> 00:15:02,678
+L'unité de consommation est très faible, de l'ordre du gramme et
+généralement inférieure à un kilogramme, pour un prix estimé à
+environ cent euros par gramme.
+
+94
+00:15:02,678 --> 00:15:07,678
+Changement de diapositive
+
+95
+00:15:08,128 --> 00:15:18,051
+Ces latex possèdent une surface fonctionnalisée et une distribution
+de taille de particule particulièrement étroite et contrôlée.
+
+96
+00:15:18,501 --> 00:15:28,197
+Ils sont conçus pour adsorber spécifiquement des biomolécules et
+s'intégrer dans des dispositifs de type laboratoire sur puce.
+
+97
+00:15:28,647 --> 00:15:37,585
+Un encadré en bas à gauche rappelle la catégorie des biomarqueurs et
+du diagnostic pour la biologie et la pharmacie.
+
+98
+00:15:38,035 --> 00:15:46,366
+Une illustration montre la brochure des microsphères Bio-Estapor
+développées par la société Merck Santé SAS.
+
+99
+00:15:46,816 --> 00:15:54,618
+L'adresse du site industriel de Merck Santé à Meyzieu est indiquée
+en bas à droite de la diapositive.
+
+100
+00:15:55,068 --> 00:16:01,568
+Passons maintenant des principes généraux à quelques exemples
+biomédicaux très concrets.
+
+101
+00:16:02,368 --> 00:16:10,624
+Les particules de latex fonctionnalisées trouvent aujourd'hui des
+applications biomédicales très concrètes.
+
+102
+00:16:11,074 --> 00:16:24,357
+En haut à gauche, un cliché de microscopie électronique à un
+agrandissement de douze mille cinq cents fois montre des bactéries
+E. Coli attachées à des billes Dynabeads.
+
+103
+00:16:24,807 --> 00:16:35,108
+La légende associée précise que ces billes permettent la capture et
+la séparation spécifique de micro-organismes en milieu biologique.
+
+104
+00:16:35,558 --> 00:16:43,313
+En bas, un schéma explicatif détaille le principe d'un test
+d'agglutination sous champ magnétique.
+
+105
+00:16:43,763 --> 00:16:54,595
+Des particules magnétiques greffées avec des anticorps s'organisent
+sous forme de chaînes lorsqu'elles sont soumises à un champ
+magnétique B.
+
+106
+00:16:55,045 --> 00:17:07,145
+En présence d'antigènes spécifiques, l'assemblage sous forme de
+chaînes persiste même après l'annulation du champ magnétique,
+confirmant le test positif.
+
+107
+00:17:07,595 --> 00:17:15,880
+En l'absence d'antigènes, les particules se redispersent librement
+dès que le champ magnétique est coupé.
+
+108
+00:17:16,330 --> 00:17:22,238
+Changeons de domaine et intéressons-nous maintenant aux pigments
+plastiques.
+
+109
+00:17:23,038 --> 00:17:30,991
+Les pigments plastiques utilisent des latex synthétiques pour
+apporter de la brillance et de l'opacité.
+
+110
+00:17:31,441 --> 00:17:43,238
+Ces polymères, tels que le polyméthacrylate de méthyle ou le
+polystyrène, nécessitent une grande stabilité dans les formulations
+sans former de film.
+
+111
+00:17:43,688 --> 00:17:58,289
+Ils constituent des alternatives prêtes à l'emploi aux pigments
+minéraux traditionnels comme le dioxyde de titane et l'argile,
+notamment dans le papier, les peintures et les cosmétiques.
+
+112
+00:17:58,739 --> 00:18:08,965
+Des images de microscopie illustrent la structure sphérique
+régulière de ces particules ainsi que leur forme creuse en
+nano-capsules.
+
+113
+00:18:09,415 --> 00:18:15,626
+L'effet de ces particules apparaît très clairement dans les
+applications papier.
+
+114
+00:18:16,426 --> 00:18:23,195
+Dans le papier couché, cet effet devient particulièrement visible
+lors du calandrage.
+
+115
+00:18:23,645 --> 00:18:35,689
+Ces pigments ont une densité proche de un virgule zéro trois et des
+particules sphériques d'un diamètre compris entre cinquante et cent
+cinquante nanomètres.
+
+116
+00:18:35,689 --> 00:18:40,689
+Changement de diapositive
+
+117
+00:18:41,139 --> 00:18:51,138
+Des clichés de microscopie montrent la surface du papier avant et
+après passage entre les rouleaux d'une calandreuse industrielle.
+
+118
+00:18:51,588 --> 00:19:03,613
+Sous l'action de la pression et de la chaleur du calandrage, les
+particules de polymère se déforment pour former une surface fermée,
+lisse et brillante.
+
+119
+00:19:04,063 --> 00:19:10,425
+Les latex peuvent aussi être utilisés pour modifier la rhéologie des
+formulations.
+
+120
+00:19:11,225 --> 00:19:22,492
+Les latex synthétiques peuvent également agir comme des
+épaississants intelligents dans le papier, la peinture, le textile
+et les cosmétiques.
+
+121
+00:19:22,942 --> 00:19:30,924
+Ces applications nécessitent une bonne stabilité de formulation,
+sans recherche de formation de film.
+
+122
+00:19:31,374 --> 00:19:46,374
+Le premier mécanisme, représenté à gauche pour les polymères ASE,
+repose sur l'ionisation des groupements acides à pH basique,
+provoquant le déploiement des chaînes par répulsion électrostatique.
+
+123
+00:19:46,824 --> 00:19:59,228
+Le second mécanisme, à droite pour les polymères HASE, ajoute des
+motifs hydrophobes greffés qui s'associent entre eux pour augmenter
+fortement la viscosité.
+
+124
+00:19:59,678 --> 00:20:06,178
+Pour comprendre ce comportement, regardons de plus près les
+mécanismes d'association.
+
+125
+00:20:06,978 --> 00:20:16,096
+Le comportement de ces polymères dépend notamment du pH, de leur
+concentration et de leurs mécanismes d'association.
+
+126
+00:20:16,546 --> 00:20:29,679
+Un graphique à gauche montre l'augmentation de la viscosité en
+fonction du pH, distinguant la solubilisation complète des chaînes
+et le simple gonflement des particules.
+
+127
+00:20:30,129 --> 00:20:43,641
+Les schémas de droite illustrent l'auto-assemblage des segments
+hydrophobes au-delà d'une concentration critique, formant des fleurs
+puis un réseau supramoléculaire complexe.
+
+128
+00:20:44,091 --> 00:20:55,453
+Ce réseau transitoire d'agrégats permet un contrôle précis de la
+viscosité de la formulation sous l'effet du pH et de la
+concentration en polymères.
+
+129
+00:20:55,903 --> 00:21:02,189
+Autre fonction majeure des latex : assurer la cohésion et former un
+film continu.
+
+130
+00:21:02,989 --> 00:21:13,319
+Les latex synthétiques jouent enfin un rôle majeur comme liants
+industriels en phase aqueuse, lorsqu'il faut former un film continu.
+
+131
+00:21:13,769 --> 00:21:24,222
+Ce domaine exige à la fois une bonne stabilité colloïdale et une
+capacité à former un film continu garantissant le pouvoir liant
+requis.
+
+132
+00:21:24,672 --> 00:21:36,906
+Les chimies employées, telles que les acétates, le butadiène, le
+styrène ou les acrylates, sont adaptées aux contraintes de chaque
+application finale.
+
+133
+00:21:37,356 --> 00:21:46,852
+Un diagramme circulaire détaille la répartition du marché, qui
+représente environ deux millions et demi de tonnes par an.
+
+134
+00:21:47,302 --> 00:22:00,312
+Le papier domine ce marché avec trente-deux pour cent, suivi du
+textile à dix-neuf pour cent, de la peinture à dix-sept pour cent et
+des adhésifs à quinze pour cent.
+
+135
+00:22:00,762 --> 00:22:11,045
+Le reste de la production se partage entre le BTP à neuf pour cent,
+les encres, les mousses et d'autres applications secondaires.
+
+136
+00:22:11,495 --> 00:22:17,995
+Pour terminer, regardons les défis qui vont conditionner l'évolution
+de cette industrie.
+
+137
+00:22:18,795 --> 00:22:27,960
+Les principaux défis concernent aujourd'hui à la fois les
+performances techniques et les contraintes environnementales.
+
+138
+00:22:27,960 --> 00:22:32,960
+Changement de diapositive
+
+139
+00:22:33,410 --> 00:22:47,149
+Les premiers objectifs concernent la réduction des émissions de
+composés organiques volatils et des odeurs dans les peintures, ainsi
+que la diminution de la sensibilité à l'eau.
+
+140
+00:22:47,599 --> 00:23:02,599
+Sur le plan de la formulation, les défis portent sur l'augmentation
+de la teneur en extrait sec jusqu'à soixante-dix pour cent en volume
+et le développement de nanolatex de moins de cinquante nanomètres.
+
+141
+00:23:03,049 --> 00:23:17,243
+L'industrie cherche également à améliorer la stabilité des
+dispersions dans des conditions extrêmes de température et de force
+ionique, tout en accélérant la vitesse de filmification.
+
+142
+00:23:17,693 --> 00:23:31,991
+Enfin, les travaux s'orientent vers le durcissement de surface des
+vernis, la conception de particules structurées cœur-écorce et la
+libération contrôlée d'actifs en toute innocuité.
+
