@@ -19,7 +19,232 @@
 // C'est tout : les radios, les traductions et le chargement des
 // sous-titres se mettent à jour tout seuls.
 // ---------------------------------------------------------------------
-
+const LANGUAGES = [
+    {
+        code: 'fr',
+        label: 'Français',
+        ui: {
+            chapter: "Chapitre", play: "Lecture", pause: "Pause",
+            subtitles: "Sous-titres", none: "Aucun",
+            accessibility: "Accessibilité", transcript: "Transcription",
+            fullTranscript: "Transcription complète",
+            subtitleSize: "Taille des sous-titres", small: "DYS",
+            normal: "Normale", large: "Zoom Visuel",
+            contrast: "Contraste", high: "Élevé",
+            playbackSpeed: "Vitesse de lecture",
+            mute: "Couper le son", unmute: "Rétablir le son",
+            nextChapter: "Prochain chapitre"
+        }
+    },
+    {
+        code: 'en',
+        label: 'English',
+        ui: {
+            chapter: "Chapter", play: "Play", pause: "Pause",
+            subtitles: "Subtitles", none: "None",
+            accessibility: "Accessibility", transcript: "Transcript",
+            fullTranscript: "Full transcript",
+            subtitleSize: "Subtitle size", small: "SpLD",
+            normal: "Normal", large: "Visual Zoom",
+            contrast: "Contrast", high: "High",
+            playbackSpeed: "Playback speed",
+            mute: "Mute", unmute: "Unmute",
+            nextChapter: "Next chapter"
+        }
+    },
+    {
+        code: 'es',
+        label: 'Español',
+        ui: {
+            chapter: "Capítulo", play: "Reproducir", pause: "Pausa",
+            subtitles: "Subtítulos", none: "Ninguno",
+            accessibility: "Accesibilidad", transcript: "Transcripción",
+            fullTranscript: "Transcripción completa",
+            subtitleSize: "Tamaño de los subtítulos", small: "DEA",
+            normal: "Normal", large: "Zoom Visual",
+            contrast: "Contraste", high: "Alto",
+            playbackSpeed: "Velocidad de reproducción",
+            mute: "Silenciar", unmute: "Activar sonido",
+            nextChapter: "Próximo capítulo"
+        }
+    },
+    {
+        code: 'it',
+        label: 'Italiano',
+        ui: {
+            chapter: "Capitolo", play: "Riproduci", pause: "Pausa",
+            subtitles: "Sottotitoli", none: "Nessuno",
+            accessibility: "Accessibilità", transcript: "Trascrizione",
+            fullTranscript: "Trascrizione completa",
+            subtitleSize: "Dimensione dei sottotitoli", small: "DSA",
+            normal: "Normale", large: "Zoom Visivo",
+            contrast: "Contrasto", high: "Alto",
+            playbackSpeed: "Velocità di riproduzione",
+            mute: "Disattiva audio", unmute: "Riattiva audio",
+            nextChapter: "Prossimo capitolo"
+        }
+    },
+    {
+        code: 'de',
+        label: 'Deutsch  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Kapitel", play: "Wiedergabe", pause: "Pause",
+            subtitles: "Untertitel", none: "Keine",
+            accessibility: "Barrierefreiheit", transcript: "Transkript",
+            fullTranscript: "Vollständiges Transkript",
+            subtitleSize: "Untertitelgröße", small: "LRS",
+            normal: "Normal", large: "Visueller Zoom",
+            contrast: "Kontrast", high: "Hoch",
+            playbackSpeed: "Wiedergabegeschwindigkeit",
+            mute: "Ton ausschalten", unmute: "Ton einschalten",
+            nextChapter: "Nächstes Kapitel"
+        }
+    },
+    {
+        code: 'pt',
+        label: 'Português  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Capítulo", play: "Reproduzir", pause: "Pausa",
+            subtitles: "Legendas", none: "Nenhuma",
+            accessibility: "Acessibilidade", transcript: "Transcrição",
+            fullTranscript: "Transcrição completa",
+            subtitleSize: "Tamanho das legendas", small: "Dificuldades de aprendizagem",
+            normal: "Normal", large: "Zoom visual",
+            contrast: "Contraste", high: "Elevado",
+            playbackSpeed: "Velocidade de reprodução",
+            mute: "Silenciar", unmute: "Ativar som",
+            nextChapter: "Próximo capítulo"
+        }
+    },
+    {
+        code: 'nl',
+        label: 'Nederlands  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Hoofdstuk", play: "Afspelen", pause: "Pauze",
+            subtitles: "Ondertitels", none: "Geen",
+            accessibility: "Toegankelijkheid", transcript: "Transcriptie",
+            fullTranscript: "Volledige transcriptie",
+            subtitleSize: "Ondertitelgrootte", small: "Dyslexie",
+            normal: "Normaal", large: "Visuele zoom",
+            contrast: "Contrast", high: "Hoog",
+            playbackSpeed: "Afspeelsnelheid",
+            mute: "Geluid uitschakelen", unmute: "Geluid inschakelen",
+            nextChapter: "Volgend hoofdstuk"
+        }
+    },
+    {
+        code: 'pl',
+        label: 'Polski (🔒 👉 Fr)',
+        ui: {
+            chapter: "Rozdział", play: "Odtwórz", pause: "Pauza",
+            subtitles: "Napisy", none: "Brak",
+            accessibility: "Dostępność", transcript: "Transkrypt",
+            fullTranscript: "Pełny transkrypt",
+            subtitleSize: "Rozmiar napisów", small: "Dysleksja",
+            normal: "Normalny", large: "Powiększenie",
+            contrast: "Kontrast", high: "Wysoki",
+            playbackSpeed: "Prędkość odtwarzania",
+            mute: "Wycisz", unmute: "Włącz dźwięk",
+            nextChapter: "Następny rozdział"
+        }
+    },
+    {
+        code: 'ru',
+        label: 'Русский  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Глава", play: "Воспроизвести", pause: "Пауза",
+            subtitles: "Субтитры", none: "Нет",
+            accessibility: "Доступность", transcript: "Транскрипт",
+            fullTranscript: "Полный транскрипт",
+            subtitleSize: "Размер субтитров", small: "Дислексия",
+            normal: "Обычный", large: "Визуальное увеличение",
+            contrast: "Контраст", high: "Высокий",
+            playbackSpeed: "Скорость воспроизведения",
+            mute: "Отключить звук", unmute: "Включить звук",
+            nextChapter: "Следующая глава"
+        }
+    },
+    {
+        code: 'zh',
+        label: '中文  (🔒 👉 Fr)',
+        ui: {
+            chapter: "章节", play: "播放", pause: "暂停",
+            subtitles: "字幕", none: "无",
+            accessibility: "无障碍", transcript: "转录",
+            fullTranscript: "完整转录",
+            subtitleSize: "字幕大小", small: "阅读障碍",
+            normal: "正常", large: "视觉放大",
+            contrast: "对比度", high: "高",
+            playbackSpeed: "播放速度",
+            mute: "静音", unmute: "取消静音",
+            nextChapter: "下一章"
+        }
+    },
+    {
+        code: 'ja',
+        label: '日本語  (🔒 👉 Fr)',
+        ui: {
+            chapter: "チャプター", play: "再生", pause: "一時停止",
+            subtitles: "字幕", none: "なし",
+            accessibility: "アクセシビリティ", transcript: "文字起こし",
+            fullTranscript: "完全な文字起こし",
+            subtitleSize: "字幕サイズ", small: "読書障害",
+            normal: "通常", large: "視覚ズーム",
+            contrast: "コントラスト", high: "高",
+            playbackSpeed: "再生速度",
+            mute: "ミュート", unmute: "ミュート解除",
+            nextChapter: "次のチャプター"
+        }
+    },
+    {
+        code: 'ar',
+        label: 'العربية (🔒 👉 Fr)',
+        ui: {
+            chapter: "الفصل", play: "تشغيل", pause: "إيقاف مؤقت",
+            subtitles: "الترجمة", none: "بدون",
+            accessibility: "إمكانية الوصول", transcript: "النص",
+            fullTranscript: "النص الكامل",
+            subtitleSize: "حجم الترجمة", small: "عسر القراءة",
+            normal: "عادي", large: "تكبير مرئي",
+            contrast: "التباين", high: "مرتفع",
+            playbackSpeed: "سرعة التشغيل",
+            mute: "كتم الصوت", unmute: "إلغاء كتم الصوت",
+            nextChapter: "الفصل التالي"
+        }
+    },
+    {
+        code: 'tr',
+        label: 'Türkçe  (🔒 👉 Fr)',
+        ui: {
+            chapter: "Bölüm", play: "Oynat", pause: "Duraklat",
+            subtitles: "Altyazılar", none: "Yok",
+            accessibility: "Erişilebilirlik", transcript: "Transkript",
+            fullTranscript: "Tam transkript",
+            subtitleSize: "Altyazı boyutu", small: "Disleksi",
+            normal: "Normal", large: "Görsel yakınlaştırma",
+            contrast: "Kontrast", high: "Yüksek",
+            playbackSpeed: "Oynatma hızı",
+            mute: "Sesi kapat", unmute: "Sesi aç",
+            nextChapter: "Sonraki bölüm"
+        }
+    },
+    {
+        code: 'ko',
+        label: '한국어  (🔒 👉 Fr)',
+        ui: {
+            chapter: "챕터", play: "재생", pause: "일시정지",
+            subtitles: "자막", none: "없음",
+            accessibility: "접근성", transcript: "대본",
+            fullTranscript: "전체 대본",
+            subtitleSize: "자막 크기", small: "읽기 장애",
+            normal: "보통", large: "시각 확대",
+            contrast: "대비", high: "높음",
+            playbackSpeed: "재생 속도",
+            mute: "음소거", unmute: "음소거 해제",
+            nextChapter: "다음 챕터"
+        }
+    }
+];
 
 
 // Fonction utilitaire pour générer les labels
