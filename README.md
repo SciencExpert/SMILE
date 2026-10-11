@@ -7,7 +7,7 @@ Happy Familly : https://sciencexpert.github.io/SMILE/7 Familles/Happy_Family_Rub
 
 Space Invader : https://sciencexpert.github.io/SMILE/Programme Space Invader Final.html
 
-Trivial Cinema : https://sciencexpert.github.io/SMILE/Trivial_Cinema/Trivial_Cinema.html
+Trivial Cinema : https://sciencexpert.github.io/SMILE/Trivial%20Cinema/Trivial%20Cinema.html
 
 Bataille navale : https://sciencexpert.github.io/SMILE/Bataille Navale/Quiz Bataille Navale.html
 
