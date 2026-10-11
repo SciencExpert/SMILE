@@ -25,7 +25,7 @@ Demo Escape Game Silicone : https://sciencexpert.github.io/SMILE/Demo%20EscapeGa
 Data solvant : https://sciencexpert.github.io/SMILE/Data/solvents.json
 https://sciencexpert.github.io/SMILE/Data/graphcode.js
 https://sciencexpert.github.io/SMILE/Hansen/Solubility%20Sphere%20Finder%20mobile.html
-https://sciencexpert.github.io/SMILE/Hansen/Computer version/Menu - Copie.html
+https://sciencexpert.github.io/SMILE/Hansen/Computer%20version/Menu%20-%20Copie.html
 https://sciencexpert.github.io/SMILE/MATE/StateMate/Ebook%20StatMate6.html
 https://sciencexpert.github.io/SMILE/image/Elanova/image001.jpg
 https://sciencexpert.github.io/SMILE/MATE/organo/pathway/retrosynthese4.html
